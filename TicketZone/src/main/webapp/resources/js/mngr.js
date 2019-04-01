@@ -23,9 +23,8 @@ $(document).ready(function(){
 				data : query,
 				url : "/login.do",
 				success : function(data){
-					if(data == "success"){
-						alert(data);
-						window.location.href = "/success";
+					if(data == "mngrOnly"){
+						window.location.href = "/mngrOnly";
 					}else{
 						document.getElementById("loginfail").innerHTML = "아이디 또는 비밀번호가 틀렸습니다.";
 					}

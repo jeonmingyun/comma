@@ -4,12 +4,13 @@
 
 <mapper namespace="com.org.ticketzone.mapper.OwnerMapper">
 <select id="login" resultType="com.org.ticketzone.domain.OwnerVO">
-	select owner_password from owner where owner_id = #{id}
+	select owner_id,owner_password from owner where owner_id = #{id}
 </select>
 
 <insert id="insertOwner" parameterType="com.org.ticketzone.domain.OwnerVO">
 	insert into owner
 	values(#{owner_id}, #{owner_password}, #{owner_name}, #{owner_tel}, #{email})
 </insert>
+
 
 </mapper>

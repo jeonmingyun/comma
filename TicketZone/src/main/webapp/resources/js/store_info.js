@@ -14,7 +14,7 @@ $(function() {
 	// 주소-좌표 변환 객체를 생성합니다
 	var geocoder = new daum.maps.services.Geocoder();
 	var add = $("#store_info").attr('name');
-	var store_name = $("#store_name").attr('name');
+	var store_name = $("#store_name").text();
 	
 	// 주소로 좌표를 검색합니다
 	geocoder.addressSearch(add,
@@ -34,8 +34,7 @@ $(function() {
 				// 인포윈도우로 장소에 대한 설명을 표시합니다
 				var infowindow = new daum.maps.InfoWindow(
 						{
-							content : '<div id="cont">'
-									+ store_name + ' </div>'
+							content : '<div id="cont">'	+ store_name + ' </div>'
 						});
 				infowindow.open(map, marker);
 
