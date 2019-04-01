@@ -43,7 +43,9 @@
 	<!-- play store button div-->
 	<div>
 		<h1>번호요 지금 바로 이용하기</h1>
-		<img alt="no image" src="resources/img/playstore.png">
+		<a href="https://play.google.com/store/apps/details?id=com.soonbuny">
+			<img alt="no image" src="resources/img/playstore.png">
+		</a>
 	</div>
 	
 	<!-- Paging -->
