@@ -10,6 +10,10 @@ header {
 	border: 1px solid #000000;
 }
 
+#mainLogo {
+	height: 50px;
+}
+
 /* ¸Þ´º */
 .main-nav {
 	float: right;

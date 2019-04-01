@@ -13,7 +13,7 @@
 <body>
 	<header>
 		<!-- 로고 -->
-		<img src="resources/img/test.png">
+		<img id="mainLogo" src="resources/img/mainLogo.png">
 
 		<!-- 메뉴 -->
 		<ul class="main-nav">
