@@ -1,0 +1,23 @@
+/* home css */
+*{
+	margin: 0;
+	padding: 0;
+}
+#notice {
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+}
+
+#notice th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+}
+
+.pagination a{
+	text-decoration: none;
+}
+
+.pagination li {
+	position: relative;
+	display: inline-block;
+}

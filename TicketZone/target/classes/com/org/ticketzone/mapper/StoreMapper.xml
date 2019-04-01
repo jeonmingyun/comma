@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.org.ticketzone.mapper.StoreMapper">
+<select id="storeList" resultType="com.org.ticketzone.domain.StoreVO">
+	select a.license_number, a.store_name, a.store_tel, a.store_time, b.address_name
+	from store a, load_address b
+	where a.address_code = b.address_code
+</select>
+
+<select id="storeInfo" resultType="com.org.ticketzone.domain.StoreVO">
+	select a.license_number, a.store_name, a.store_tel, a.store_time, a.store_intro, b.address_name
+	from store a, load_address b
+	where a.address_code = b.address_code
+	and a.license_number = substr(#{license},0,12)	
+</select>
+
+</mapper>

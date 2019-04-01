@@ -1,0 +1,26 @@
+/* inquiry css */
+* {
+	margin: 0;
+	padding: 0;
+}
+#suggest_type2 {
+	text-align: center;
+}
+h2{
+    padding: 10px 0;
+    text-align: center;
+    font-size: 50px;   
+}
+
+#suggest{
+	width: 800px;
+	border-collpase: collapse;
+	text-align: center;
+    font-size: 13pt;
+    margin:0 auto;
+    	
+}
+th,td {
+	border-bottom: 1px solid #444444;
+	padding: 10px;	
+}
