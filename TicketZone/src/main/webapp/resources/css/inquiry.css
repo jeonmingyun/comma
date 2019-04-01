@@ -14,7 +14,7 @@ h2{
 
 #suggest{
 	width: 800px;
-	border-collpase: collapse;
+	border-collapse: collapse;
 	text-align: center;
     font-size: 13pt;
     margin:0 auto;
@@ -23,4 +23,9 @@ h2{
 th,td {
 	border-bottom: 1px solid #444444;
 	padding: 10px;	
+}
+
+td:hover {
+	cursor: pointer;
+	background-color: #cccccc;
 }
