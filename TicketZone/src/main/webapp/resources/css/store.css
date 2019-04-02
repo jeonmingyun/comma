@@ -4,7 +4,6 @@
 }
 
 #area_form {
-	width: 1280px;
 	height: 100%;
 	margin: 0 auto;
 }
@@ -51,6 +50,7 @@ li {
 	height : 100%;
 }
 
+/* pagination */
 .pagination {
     justify-content: center;
     text-align: center;

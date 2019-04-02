@@ -16,7 +16,10 @@ public interface NoticeBoardMapper {
 	public void noticeBoardDel(NoticeBoardVO notice);
 
 	public void noticeInsert(NoticeBoardVO notice);
-
+	
+//	public ArrayList<NoticeBoardVO> noticeSearch(NoticeBoardVO notice);
+	
+	public int SearchCount(Criteria cri);
 	// ∆‰¿Ã¬°
 //	public List<NoticeBoardVO> getListWithPaging(Criteria cri);
 

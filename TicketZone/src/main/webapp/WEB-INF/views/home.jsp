@@ -20,12 +20,23 @@
 	<!-- 공지사항 div -->
 	<div>
 		<h1>공지사항</h1>
+		<form id="searchForm" method="get" action = "/">
+		<select name="type">
+			<option value="T">제목</option>
+			<option value="C">내용</option>
+			<option value="TC">제목 or 내용</option>
+		</select>
+		<input type="text" name="keyword" />
+		<input type="hidden" id="efg" name="pageNum" value = "${pageMaker.cri.pageNum}">
+		<input type="hidden" id="abcd" name="amout" value = "${pageMaker.cri.amount}">
+		<button class="btn btn-default">검색</button>
+		</form>
 		<table id="notice">
 			<tr>
-				<td>번호
-				<td>제목
-				<td>작성자
-				<td>날짜
+				<th>번호
+				<th>제목
+				<th>작성자
+				<th>날짜
 			</tr>
 		 	<c:forEach var="nl" items="${noticeList}">
 				<tr onclick="showNotice(${nl.notice_no})">
@@ -36,16 +47,8 @@
 				</tr>
 			</c:forEach>			
 		</table>
-		
-	</div>
-	<button id="noticeWrite" onclick="noticeWrite()">글쓰기</button>
-	
-	<!-- play store button div-->
-	<div>
-		<h1>번호요 지금 바로 이용하기</h1>
-		<a href="https://play.google.com/store/apps/details?id=com.soonbuny">
-			<img alt="no image" src="resources/img/playstore.png">
-		</a>
+		<!-- play store button div-->
+		<button id="noticeWrite" onclick="noticeWrite()">글쓰기</button>
 	</div>
 	
 	<!-- Paging -->
@@ -67,9 +70,20 @@
 	<form id='actionForm' action='/' method='get'>
 		<input type="hidden" id="efg" name="pageNum" value = "${pageMaker.cri.pageNum}">
 		<input type="hidden" id="abcd" name="amout" value = "${pageMaker.cri.amount}">
+		<input type="hidden" name="type" value='<c:out value="${pageMaker.cri.type}"/>'>
+		<input type="hidden" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"/>'>
 	</form>
 	<!-- end Pagination -->
+	
+	<div>
+		<h1>번호요 지금 바로 이용하기</h1>
+		<a href="https://play.google.com/store/apps/details?id=com.soonbuny">
+			<img alt="no image" src="resources/img/playstore.png">
+		</a>
+	</div>
+	
 	<%@include file="include/footer.jsp"%>
+	
 
 </body>
 </html>

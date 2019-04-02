@@ -27,5 +27,17 @@ public class BoardServiceImplement implements BoardService {
 	public void boardUpd(BoardVO board) {	
 		mapper.boardUpd(board);
 	}
+
+	@Override
+	public void boardDel(BoardVO board) {
+		mapper.boardDel(board);
+		
+	}
+
+	@Override
+	public void boardInsert(BoardVO board) {
+		mapper.boardInsert(board);
+		
+	}
 			
 }
