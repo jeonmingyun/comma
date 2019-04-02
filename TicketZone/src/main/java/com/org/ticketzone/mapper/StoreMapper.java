@@ -8,4 +8,6 @@ public interface StoreMapper {
 	public ArrayList<StoreVO> storeList();
 	
 	public ArrayList<StoreVO> storeInfo(String license);
+	
+	public void storeRegister(StoreVO store);
 }

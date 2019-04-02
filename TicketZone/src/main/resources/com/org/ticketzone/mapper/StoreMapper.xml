@@ -16,4 +16,10 @@
 	and a.license_number = substr(#{license},0,12)	
 </select>
 
+<insert id="storeRegister">
+	insert into store
+	values(#{license_number}, #{r_name}, #{address_code}, 0, 0, #{cate_code}, #{owner_id}, #{store_name}, #{store_tel}, #{store_time}, #{store_intro})
+</insert>
+
+
 </mapper>

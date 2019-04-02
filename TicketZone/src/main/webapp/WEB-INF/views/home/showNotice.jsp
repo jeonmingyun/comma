@@ -45,32 +45,5 @@
 	<button type="button" id="btnDelete"
 		onclick="delNotice(${noticeUpd[0].notice_no})">삭제</button>
 
-	<div class="container">
-		<form id="commentForm" name="commentForm" method="post">
-			<br> <br>
-			<div>
-				<div>
-					<span><strong>Comments</strong></span>
-				</div>
-				<div>
-					<table class="table">
-						<tr>
-							<td><textarea id="comment" name="comment" placeholder="댓글입력"></textarea>
-								<br></td>
-						</tr>
-					</table>
-				</div>
-			</div>
-		</form>
-	</div>
-	<div class="container">
-		<form id="commentListForm" name="commentListForm" method="post">
-			댓글 리스트
-			<div id="commentList"></div>
-		</form>
-	</div>
-	<div>
-		<button type="button" id="cmtRegist">등록</button>
-	</div>
 </body>
 </html>
