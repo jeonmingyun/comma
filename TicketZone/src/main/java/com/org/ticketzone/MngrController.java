@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.org.ticketzone.domain.OwnerVO;
+import com.org.ticketzone.domain.StoreVO;
 import com.org.ticketzone.service.OwnerService;
+import com.org.ticketzone.service.StoreService;
 
 import lombok.AllArgsConstructor;
 
@@ -20,7 +22,7 @@ import lombok.AllArgsConstructor;
 @Controller
 public class MngrController {
 	private OwnerService ownerService;
-
+	private StoreService storeService;
 	// 관리자 로그인화면
 	@RequestMapping(value = "/mngr")
 	public String admin(Model model) {
@@ -30,10 +32,13 @@ public class MngrController {
 	// 관리자 로그인처리
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String loginCheck(Model model, HttpSession session, @RequestParam String id, @RequestParam String password) {
+	public String loginCheck(Model model, HttpSession session, HttpSession session2, @RequestParam String id, @RequestParam String password) {
 		ArrayList<OwnerVO> arr = new ArrayList<OwnerVO>();
+		ArrayList<StoreVO> arr2 = new ArrayList<StoreVO>();
 		arr = ownerService.login(id);
+		arr2 = storeService.storeGet(id);
 		session.setAttribute("id", arr);
+		session2.setAttribute("store", arr2);
 		System.out.println(arr);
 		if (arr.size() != 0) {
 			if (arr.get(0).getOwner_password().equals(password)) {

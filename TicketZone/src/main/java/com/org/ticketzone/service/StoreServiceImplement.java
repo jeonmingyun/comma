@@ -33,4 +33,10 @@ public class StoreServiceImplement implements StoreService{
 		
 	}
 
+	@Override
+	public ArrayList<StoreVO> storeGet(String id) {
+		
+		return mapper.storeGet(id);
+	}
+
 }
