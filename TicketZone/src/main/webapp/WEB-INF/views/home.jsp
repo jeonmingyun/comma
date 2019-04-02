@@ -33,10 +33,10 @@
 		</form>
 		<table id="notice">
 			<tr>
-				<td>번호
-				<td>제목
-				<td>작성자
-				<td>날짜
+				<th>번호
+				<th>제목
+				<th>작성자
+				<th>날짜
 			</tr>
 		 	<c:forEach var="nl" items="${noticeList}">
 				<tr onclick="showNotice(${nl.notice_no})">
@@ -47,14 +47,8 @@
 				</tr>
 			</c:forEach>			
 		</table>
-		
-	</div>
-	<button id="noticeWrite" onclick="noticeWrite()">글쓰기</button>
-	
-	<!-- play store button div-->
-	<div>
-		<h1>번호요 지금 바로 이용하기</h1>
-		<img alt="no image" src="resources/img/playstore.png">
+		<!-- play store button div-->
+		<button id="noticeWrite" onclick="noticeWrite()">글쓰기</button>
 	</div>
 	
 	<!-- Paging -->
@@ -80,7 +74,16 @@
 		<input type="hidden" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"/>'>
 	</form>
 	<!-- end Pagination -->
+	
+	<div>
+		<h1>번호요 지금 바로 이용하기</h1>
+		<a href="https://play.google.com/store/apps/details?id=com.soonbuny">
+			<img alt="no image" src="resources/img/playstore.png">
+		</a>
+	</div>
+	
 	<%@include file="include/footer.jsp"%>
+	
 
 </body>
 </html>

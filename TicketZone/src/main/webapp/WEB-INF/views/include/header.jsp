@@ -8,12 +8,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Document</title>
-<link href="resources/css/header.css" rel="stylesheet"/>
+<link href="../resources/css/header.css" rel="stylesheet"/>
+<script>
+	$(document).ready(function(){
+		$("#Logo").click(function(){
+			window.location.href="/";
+		});
+	});
+</script>
 </head>
 <body>
 	<header>
 		<!-- 로고 -->
-		<img src="resources/img/test.png">
+		<button id="Logo"><img id="mainLogo" src="../resources/img/mainLogo.png"></button>
 
 		<!-- 메뉴 -->
 		<ul class="main-nav">
