@@ -8,12 +8,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Document</title>
-<link href="resources/css/header.css" rel="stylesheet"/>
+<link href="../resources/css/header.css" rel="stylesheet"/>
 </head>
 <body>
 	<header>
 		<!-- 로고 -->
-		<img id="mainLogo" src="resources/img/mainLogo.png">
+		<img id="mainLogo" src="../resources/img/mainLogo.png">
 
 		<!-- 메뉴 -->
 		<ul class="main-nav">
