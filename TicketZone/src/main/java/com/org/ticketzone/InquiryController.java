@@ -30,6 +30,15 @@ public class InquiryController {
 		return "inquiry/inquiryWrite";
 	}
 
+	// 문의 글쓰기 처리
+	@RequestMapping(value = "/insertInquiry", method = RequestMethod.POST)
+	public String insertInquiry(Model model, BoardVO board) {
+		
+		boardService.boardInsert(board);
+		System.out.println(board);
+		return "redirect:/inquiry";
+	}
+		
 	// 문의글 상세보기
 	@RequestMapping(value = "/showInquiry", method = RequestMethod.GET)
 	public String showInquiry(Model model, HttpServletRequest request) {
@@ -55,4 +64,11 @@ public class InquiryController {
 		return "redirect:inquiry";
 	}
 	
+	// 문의사항 삭제처리
+	@RequestMapping(value = "/delInquiry", method = RequestMethod.GET)
+	public String deleteBoard(BoardVO board) {
+		boardService.boardDel(board);
+			
+		return "redirect:/inquiry";
+	}	
 }

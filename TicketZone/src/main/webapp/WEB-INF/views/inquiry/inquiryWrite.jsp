@@ -13,7 +13,7 @@
 </head>
 <body>
 	<!-- 고객센터 문의글 작성 -->
-	<form name="suggest" method="post">
+	<form name="suggest" method="post" action="/insertInquiry">
 		<div class="table_wapper">
 			<h1>문의글 작성</h1>
 			<table class="cus_show">
@@ -28,19 +28,19 @@
 
 					<tr>
 						<th><label for="title">제목</label></th>
-						<td><input type="text" name="title" id="title" size="60"></td>
+						<td><input type="text" name="board_title" id="title" size="60"></td>
 					</tr>
 
 					<tr>
 						<th><label for="content">내용</label></th>
-						<td><textarea name="content" id="content" rows="8" cols="60"></textarea></td>
+						<td><textarea name="board_content" id="content" rows="8" cols="60"></textarea></td>
 					</tr>
 
-					<tr>
+					<!-- <tr>
 						<th><label for="attached_file">첨부파일</label></th>
 						<td><input type="file" name="attached_file"
 							id="attached_file"></td>
-					</tr>
+					</tr> -->
 			</table>
 			<!-- cus_show-->
 			<!-- 확인 취소버튼 -->
