@@ -36,7 +36,8 @@
 <title>매장등록 페이지</title>
 </head>
 <body>
-	<h2>매장등록페이지</h2>
+<%@include file="/WEB-INF/views/include/Mngrheader.jsp"%>	
+	<section>
 	<div>
 		<form method="post" action="/mStore_Reg">
 		<p>매장이름 <input type="text" name="store_name"></p>
@@ -54,6 +55,7 @@
 		<input type="submit" value="등록">
 		</form>
 	</div>
-
+	</section>	
+<%@include file="/WEB-INF/views/include/footer.jsp"%>	
 </body>
 </html>

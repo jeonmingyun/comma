@@ -46,13 +46,6 @@ public class MngrController {
 		}
 	}
 
-//	// 로그인 성공페이지(아직 미완성)
-//	@RequestMapping(value = "/mStore", method = RequestMethod.GET)
-//	public String mstore(Model model) {
-//		
-//		return "/mngrOnly/mStore";
-//	}
-
 	// 아이디 찾기페이지(기능미완성)
 	@RequestMapping(value = "/mngr_find", method = RequestMethod.GET)
 	public String mngr_find(Model model) {
@@ -73,4 +66,5 @@ public class MngrController {
 
 		return "mngr";
 	}
+	
 }

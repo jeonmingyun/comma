@@ -13,6 +13,7 @@
 <script src="resources/js/mngrOnly/mStore.js"></script>
 </head>
 <body>
+<%@include file="/WEB-INF/views/include/Mngrheader.jsp"%>
 <c:if test="${empty sessionScope.id}">
 	<button class="store_register">매장등록</button>
 </c:if>
@@ -22,5 +23,6 @@
 	</c:forEach>
 	<br><button class="store_register">매장등록</button>
 </c:if>
+<%@include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>

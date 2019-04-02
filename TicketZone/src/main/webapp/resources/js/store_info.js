@@ -13,7 +13,7 @@ $(function() {
 	var map = new daum.maps.Map(mapContainer, mapOption);
 	// 주소-좌표 변환 객체를 생성합니다
 	var geocoder = new daum.maps.services.Geocoder();
-	var add = $("#store_info").attr('name');
+	var add = $("#store_info").attr('class');
 	var store_name = $("#store_name").text();
 	
 	// 주소로 좌표를 검색합니다

@@ -19,11 +19,11 @@
 <body>
 	<!-- 가게 정보 -->
 	<%@include file="/WEB-INF/views/include/header.jsp"%>
-	
+	<section>
 	<div id="store_name">${storeList[0].store_name}</div>
 	
 	<c:forEach var="s" items="${storeList}">
-		<div id="store_info" name="${s.address_name}">
+		<div id="store_info" class="${s.address_name}">
 			<p>
 				<img src="../resources/img/miyago.jpg">
 			</p>
@@ -37,7 +37,7 @@
 
 	<!-- 지도 -->
 	<div id="map"></div>
-
+</section>
 	<%@include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>
