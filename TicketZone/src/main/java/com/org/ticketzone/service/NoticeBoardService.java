@@ -15,4 +15,6 @@ public interface NoticeBoardService {
 	public void noticeInsert(NoticeBoardVO notice); // 게시글 작성
 	public ArrayList<NoticeBoardVO> getListWithPaging(Criteria cri);
 	public int total(Criteria cri);
+//	public ArrayList<NoticeBoardVO> noticeSearch(NoticeBoardVO notice);// 게시글 검색
+	public int SearchCount(Criteria cri);
 }

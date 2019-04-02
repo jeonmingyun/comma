@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 //github.com/jeonmingyun/comma.git
 import com.org.ticketzone.domain.Criteria;
@@ -86,6 +88,18 @@ public class HomeController {
 
 		return "redirect:/";
 	}
+	
+	//공지사항 검색
+//	@RequestMapping(value = "/searchKeyword", method = RequestMethod.GET)
+//	public String searchNotice(Model model, NoticeBoardVO notice, Criteria Cri) {
+//		int count = noticeBoardService.SearchCount(Cri);
+//		model.addAttribute("noticeList", noticeBoardService.noticeSearch(notice));
+//		model.addAttribute("list", noticeBoardService.getListWithPaging(Cri));
+//		model.addAttribute("pageMaker", new PageDTO(Cri, count));
+//		
+//		
+//		return "redirect:/";
+//	}
 
 	// 테스트용
 
