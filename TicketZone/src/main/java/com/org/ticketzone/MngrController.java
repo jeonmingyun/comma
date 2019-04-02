@@ -33,22 +33,17 @@ public class MngrController {
 	public String loginCheck(Model model, HttpSession session, @RequestParam String id, @RequestParam String password) {
 		ArrayList<OwnerVO> arr = new ArrayList<OwnerVO>();
 		arr = ownerService.login(id);
-
+		session.setAttribute("id", arr);
+		System.out.println(arr);
 		if (arr.size() != 0) {
 			if (arr.get(0).getOwner_password().equals(password)) {
-				return "success";
+				return "mngrOnly";
 			} else {
 				return "fail";
 			}
 		} else {
 			return "fail";
 		}
-	}
-
-	// 로그인 성공페이지(아직 미완성)
-	@RequestMapping(value = "/success", method = RequestMethod.GET)
-	public String success(Model model) {
-		return "mngr/success";
 	}
 
 	// 아이디 찾기페이지(기능미완성)
@@ -71,4 +66,5 @@ public class MngrController {
 
 		return "mngr";
 	}
+	
 }

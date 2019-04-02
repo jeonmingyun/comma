@@ -27,4 +27,10 @@ public class StoreServiceImplement implements StoreService{
 		return mapper.storeInfo(license);
 	}
 
+	@Override
+	public void storeRegister(StoreVO store) {
+		mapper.storeRegister(store);
+		
+	}
+
 }
