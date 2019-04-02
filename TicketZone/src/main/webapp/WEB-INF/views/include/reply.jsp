@@ -2,6 +2,7 @@
 <%@ page session="false" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <script src="../resources/js/reply.js"></script>
+
 <!-- 답글 쓰기 -->
 <div class="addReply">
 	<form action="addReply" method="post">
