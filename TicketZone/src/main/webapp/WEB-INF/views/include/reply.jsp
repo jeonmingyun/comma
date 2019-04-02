@@ -7,6 +7,7 @@
 <div class="addReply">
 	<form action="addReply" method="post">
 		<div>
+			<input type="hidden" name="board_no" value="${InquiryUpd[0].board_no}">
 			<div>
 				<strong>답글</strong>
 			</div>
