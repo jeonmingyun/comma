@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.org.ticketzone.mapper.NumberMapper">
+
+	<!-- 번호표 발급 아직 미완성(번호표코드생성 및 번호표 번호 -->
+	<insert id="CreateTicket">
+		insert into number_ticket
+		values(20190402006,
+		(select
+		(wait_number+1) as wait_number
+		from number_ticket
+		where wait_number =
+		(select count(*) from number_ticket where wait_number >
+		0)),ticket_seq.nextval, 4, 222-33-5555, 010-2222-1111, 0);
+	</insert>
+
+	<!-- 서비스가 끝났을때(코드추가해야함 취소일경우) -->
+	<update id="ServiceFinish">
+		update number_ticket
+		set wait_number =
+		case
+		when wait_number = -1 then 0
+		when ticket_status = 0 then (wait_number-1)
+		when ticket_status = 1 then wait_number
+		else wait_number
+		end,
+		ticket_status =
+		case
+		when wait_number = 0 then (ticket_status+1)
+		else ticket_status
+		end
+	</update>
+</mapper>

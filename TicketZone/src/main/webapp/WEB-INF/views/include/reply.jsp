@@ -5,9 +5,9 @@
 
 <!-- 답글 쓰기 -->
 <div class="addReply">
-	<form action="addReply" method="post">
-		<div>
-			<input type="hidden" name="board_no" value="${InquiryUpd[0].board_no}">
+	<!-- <form action="addReply" method="POST"> -->
+	 	<div>
+			<input type="hidden" id="board_no" name="board_no" value="${InquiryUpd[0].board_no}">
 			<div>
 				<strong>답글</strong>
 			</div>
@@ -18,17 +18,21 @@
 				<button type="submit" id="reply_submit">등록</button>
 			</div>
 		</div>
-	</form>
+	<!-- </form> -->
 </div>
 
 <!-- 답글 리스트 -->
 <div class="replyList">
-	<form name="replyListForm" method="post">
-		<div id="reply"></div>
+	<div id="reply">
+			<div id="reply_head">
+				<strong>관리자</strong>
+				<span>${replyList[0].reply_reg}</span>
+			</div>
+			<div id="reply_content">${replyList[0].reply_content}</div>
+			<div id="reply_button">
+				<button onclick="reply_update(${replyList[0].board_no})">수정</button>
+				<button onclick="reply_delete(${replyList[0].board_no})">삭제</button>
+			</div>
+	</div>
 
-		<div>
-			<button id="reply_update">수정</button>
-			<button id="reply_delete">삭제</button>
-		</div>
-	</form>
 </div>
