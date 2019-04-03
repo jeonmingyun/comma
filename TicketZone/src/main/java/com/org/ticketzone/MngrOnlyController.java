@@ -1,3 +1,4 @@
+
 package com.org.ticketzone;
 
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ public class MngrOnlyController {
 	private CategorieService categorieService;
 	private AddressService addressService;
 	private NumberTicketService numberTicketService;
+
 	// 관리자 첫화면
 	@RequestMapping(value = "/mngrOnly")
 	public String admin(Model model) {
@@ -61,15 +63,15 @@ public class MngrOnlyController {
 
 	@RequestMapping(value = "/mState", method = RequestMethod.GET)
 	public String mState(Model model) {
-		
+
 		return "/mngrOnly/mState";
 	}
-	
+
 	// 번호표 발급
-	@RequestMapping(value ="/issue_ticket", method = RequestMethod.POST)
+	@RequestMapping(value = "/issue_ticket", method = RequestMethod.POST)
 	public String isuue_ticket(Model model, NumberTicketVO ticket) {
 		String codeMaker = numberTicketService.codeSelect(ticket);
-		if(codeMaker.equals("not")) {
+		if (codeMaker.equals("not")) {
 			System.out.println("코드를 발급해야합니다!");
 			numberTicketService.firstCode(ticket);
 			numberTicketService.makeTicket(ticket);
@@ -77,12 +79,12 @@ public class MngrOnlyController {
 			System.out.println("이미코드가 있습니다!");
 			numberTicketService.plusTicket(ticket);
 		}
-		
+
 		return "/mngrOnly/mCustomer";
 	}
-	
+
 	// 번호표 순환(대기인원수 -1)
-	@RequestMapping(value ="/minus_ticket", method = RequestMethod.POST)
+	@RequestMapping(value = "/minus_ticket", method = RequestMethod.POST)
 	public String minus_ticket(Model model, NumberTicketVO ticket) {
 		numberTicketService.minusTicket(ticket);
 		System.out.println("정상결제입니다.");

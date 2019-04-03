@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Document</title>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="resources/js/updInquiry.js"></script>
+<script src="../resources/js/mngrOnly/mUpdInquiry.js"></script>
 <style media="screen">
 </style>
 <script>
@@ -20,7 +20,7 @@
 
 <body>
 	<h2>게시글 보기</h2>
-	<form method="post" action="/updInquiryForm">
+	<form method="post" action="/mUpdInquiryForm">
 		<input type="hidden" value="${InquiryUpd[0].board_no}" name="board_no">
 		<div>문의 유형</div>
 		<div>
