@@ -3,7 +3,7 @@ $(function() {
 	$('.addReply_submit').click(function() {
 		var query = {
 			board_no : $('#board_no').val(),
-			reply_content : $('#addReply_content').val()
+			reply_content : $('#addReply_content').val().trim()
 		}
 		
 		if( query.reply_content == "") {
@@ -27,30 +27,32 @@ $(function() {
 		})
 	})
 	
+	$('.updReply_submit').click(function() {
+		var query = {
+			reply_content : $('#reply_content').text().trim(),
+			board_no : $('#board_no').val()
+		}
+		console.log(query);
+		$.ajax({
+			type: 'post',
+			url: 'reply_update',
+			data: query,
+			success: function(data) {
+				console.log('success');
+			},
+			error: function(data) {
+				console.log('error');
+			}
+		})
+	})
+	
 })
 
-function reply_update(board_no) {
-	var query = {
-		reply_content : $('#reply_content').text(),
-		board_no : board_no
-	}
-	$.ajax({
-		type: 'post',
-		url: 'reply_update',
-		data: query,
-		success: function(data) {
-			console.log('success');
-			$('#reply_head span').text("");
-			$('#reply_content').text("");
-		},
-		error: function(data) {
-			console.log('error');
-		}
-	})
+function reply_update_info(board_no) {
+	$('#addReply_content').val($('#reply_content').text().trim());
 }
 
 function reply_delete(board_no) {
-	console.log(board_no);
 	$.ajax({
 		type: 'post',
 		url: 'reply_delete',
@@ -59,7 +61,6 @@ function reply_delete(board_no) {
 			$('#reply_head span').text("");
 			$('#reply_content').text("");
 			$('.updReply_submit').toggleClass('addReply_submit updReply_submit');
-			
 		}
 	})
 }

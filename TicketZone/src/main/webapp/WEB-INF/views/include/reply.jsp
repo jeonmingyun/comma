@@ -14,7 +14,12 @@
 			<textarea id="addReply_content" name="reply_content" placeholder="답글 추가"></textarea>
 		</div>
 		<div>
-			<button type="submit" class="addReply_submit">등록</button>
+			<c:if test="${empty replyList}">
+				<button type="submit" class="addReply_submit">등록</button>
+			</c:if>
+			<c:if test="${!empty replyList}">
+				<button type="submit" class="updReply_submit">등록</button>
+			</c:if>
 		</div>
 	</div>
 </div>
@@ -30,7 +35,7 @@
 			${replyList[0].reply_content}			
 		</div>
 		<div id="reply_button">
-			<button onclick="reply_update(${param.board_no })">수정</button>
+			<button onclick="reply_update_info(${param.board_no })">수정</button>
 			<button onclick="reply_delete(${param.board_no })">삭제</button>
 		</div>
 	</div>
