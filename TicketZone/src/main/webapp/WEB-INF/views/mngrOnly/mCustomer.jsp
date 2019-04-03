@@ -11,7 +11,37 @@
 </head>
 <body>
 <%@include file="/WEB-INF/views/include/Mngrheader.jsp"%>
-<h1>고객관리페이지</h1>
+<h1>현재(오늘) 상태 통계</h1>
+<table id="customadmin">
+	<tr>
+		<th>대기자 수
+		<th>부재
+		<th>접수
+		<th>접수 취소
+	</th>
+	<tr>
+		<td>
+		<td>
+		<td>
+		<td>
+	</tr>
+</table>
+
+<h1>고객 대기 목록</h1>
+<table id="customadmin">
+	<tr>
+		<th>번호
+		<th>고객
+		<th>인원 수
+		<th>상태
+	</th>
+	<tr>
+		<td>
+		<td>
+		<td>
+		<td>
+	</tr>
+</table>
 <%@include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>
