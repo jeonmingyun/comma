@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.org.ticketzone.domain.AddressVO;
+import com.org.ticketzone.domain.NumberTicketVO;
 import com.org.ticketzone.domain.StoreVO;
 import com.org.ticketzone.service.AddressService;
 import com.org.ticketzone.service.CategorieService;
+import com.org.ticketzone.service.NumberTicketService;
 import com.org.ticketzone.service.StoreService;
 
 import lombok.AllArgsConstructor;
@@ -20,7 +22,7 @@ public class MngrOnlyController {
 	private StoreService storeService;
 	private CategorieService categorieService;
 	private AddressService addressService;
-
+	private NumberTicketService numberTicketService;
 	// 관리자 첫화면
 	@RequestMapping(value = "/mngrOnly")
 	public String admin(Model model) {
@@ -61,5 +63,28 @@ public class MngrOnlyController {
 	public String mState(Model model) {
 		
 		return "/mngrOnly/mState";
+	}
+	
+	// 번호표 발급
+	@RequestMapping(value ="/issue_ticket", method = RequestMethod.POST)
+	public String isuue_ticket(Model model, NumberTicketVO ticket) {
+		String codeMaker = numberTicketService.codeSelect(ticket);
+		if(codeMaker.equals("not")) {
+			System.out.println("코드를 발급해야합니다!");
+			numberTicketService.firstCode(ticket);
+			numberTicketService.makeTicket(ticket);
+		} else {
+			System.out.println("이미코드가 있습니다!");
+			numberTicketService.plusTicket(ticket);
+		}
+		
+		return "/mngrOnly/mCustomer";
+	}
+	
+	@RequestMapping(value ="/minus_ticket", method = RequestMethod.POST)
+	public String minus_ticket(Model model, NumberTicketVO ticket) {
+		numberTicketService.minusTicket(ticket);
+		System.out.println("정상결제입니다.");
+		return "/mngrOnly/mCustomer";
 	}
 }
