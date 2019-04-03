@@ -5,13 +5,14 @@ import lombok.ToString;
 
 @Getter
 @ToString
-//4월2일 미완성 코드만들어주는VO
+//TicketCode를 만들어주는 코드
 public class TicketCode {
-	private String ticketcode;
+	private String Makecode;
+	private int code;
 	
-	public String CodeMake() {
-				
-		return ticketcode;
+	public int makeCode(String Makecode) {
+		code = Integer.parseInt(Makecode);
+		 return code;
 	}
 	
 }
