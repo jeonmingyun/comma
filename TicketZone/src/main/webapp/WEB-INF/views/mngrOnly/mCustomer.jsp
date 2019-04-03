@@ -11,6 +11,7 @@
 </head>
 <body>
 <%@include file="/WEB-INF/views/include/Mngrheader.jsp"%>
+<<<<<<< HEAD
 <h1>현재(오늘) 상태 통계</h1>
 <table id="customadmin">
 	<tr>
@@ -42,6 +43,11 @@
 		<td>
 	</tr>
 </table>
+=======
+<form>
+	
+</form>
+>>>>>>> branch 'master' of https://github.com/jeonmingyun/comma.git
 <%@include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>

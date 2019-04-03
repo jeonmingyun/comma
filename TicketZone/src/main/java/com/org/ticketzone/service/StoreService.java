@@ -8,4 +8,5 @@ public interface StoreService {
 	public ArrayList<StoreVO> storeList();
 	public ArrayList<StoreVO> storeInfo(String license);
 	public void storeRegister(StoreVO store);
+	public ArrayList<StoreVO> storeGet(String id);
 }
