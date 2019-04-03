@@ -81,6 +81,7 @@ public class MngrOnlyController {
 		return "/mngrOnly/mCustomer";
 	}
 	
+	// 번호표 순환(대기인원수 -1)
 	@RequestMapping(value ="/minus_ticket", method = RequestMethod.POST)
 	public String minus_ticket(Model model, NumberTicketVO ticket) {
 		numberTicketService.minusTicket(ticket);
