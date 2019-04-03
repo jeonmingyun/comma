@@ -20,7 +20,7 @@
 			<li><a href="/mngrOnly">홈</a></li>
 			<li><a href="/mState">매장관리</a></li>
 			<li><a href="/mCustomer">고객관리</a></li>
-			<li><a href="#">건의사항</a></li>
+			<li><a href="/mInquiry">건의사항</a></li>
 		</ul>
 	</header>
 
