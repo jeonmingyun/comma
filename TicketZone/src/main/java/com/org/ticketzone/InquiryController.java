@@ -27,6 +27,7 @@ public class InquiryController {
 	@RequestMapping(value = "/inquiry", method = RequestMethod.GET)
 	public String inquiry(Model model) {
 		model.addAttribute("suggestList", boardService.boardList());
+		
 		return "inquiry";
 	}
 
@@ -39,9 +40,8 @@ public class InquiryController {
 	// 문의 글쓰기 처리
 	@RequestMapping(value = "/insertInquiry", method = RequestMethod.POST)
 	public String insertInquiry(Model model, BoardVO board) {
-		
 		boardService.boardInsert(board);
-		System.out.println(board);
+		
 		return "redirect:/inquiry";
 	}
 		
@@ -51,7 +51,7 @@ public class InquiryController {
 		String board_no = request.getParameter("board_no");
 		model.addAttribute("InquiryUpd", boardService.boardUpdInfo(board_no));
 		model.addAttribute("replyList", includeService.replyList(board_no));
-
+		
 		return "inquiry/showInquiry";
 	}
 
@@ -60,6 +60,7 @@ public class InquiryController {
 	public String updInquiry(Model model, HttpServletRequest request) {
 		String board_no = request.getParameter("board_no");
 		model.addAttribute("InquiryUpd", boardService.boardUpdInfo(board_no));
+		
 		return "inquiry/updInquiry";
 	}
 
@@ -70,7 +71,16 @@ public class InquiryController {
 
 		return "redirect:inquiry";
 	}
+
+	// 문의사항 삭제처리
+	@RequestMapping(value = "/delInquiry", method = RequestMethod.GET)
+	public String deleteBoard(BoardVO board) {
+		boardService.boardDel(board);
+			
+		return "redirect:/inquiry";
+	}
 	
+	// 댓글 추가
 	@ResponseBody
 	@RequestMapping(value = "/addReply", method = RequestMethod.POST)
 	public ArrayList<ReplyVO> searchCustomer(Model model, ReplyVO reply,HttpServletRequest request) {
@@ -79,12 +89,25 @@ public class InquiryController {
 		
 		return includeService.replyList(board_no); //select
 	}
-
-	// 문의사항 삭제처리
-	@RequestMapping(value = "/delInquiry", method = RequestMethod.GET)
-	public String deleteBoard(BoardVO board) {
-		boardService.boardDel(board);
-			
-		return "redirect:/inquiry";
-	}	
+	
+	// 댓글 삭제
+	@ResponseBody
+	@RequestMapping(value = "/reply_delete", method = RequestMethod.POST)
+	public String replyDelete(Model model, HttpServletRequest request) {
+		String board_no = request.getParameter("board_no");
+		includeService.reply_delete(board_no);
+		
+		return "";
+	}
+	
+	// 댓글 수정
+	@ResponseBody
+	@RequestMapping(value = "/reply_update", method = RequestMethod.POST)
+	public String replyUpdate(Model model, HttpServletRequest request) {
+		String reply_content = request.getParameter("reply_content");
+		String board_no = request.getParameter("board_no");
+		includeService.reply_update(reply_content, board_no);
+		
+		return "";
+	}
 }
