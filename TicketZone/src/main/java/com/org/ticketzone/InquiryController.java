@@ -49,7 +49,7 @@ public class InquiryController {
 	public String showInquiry(Model model, HttpServletRequest request) {
 		String board_no = request.getParameter("board_no");
 		model.addAttribute("InquiryUpd", boardService.boardUpdInfo(board_no));
-		model.addAttribute("replyList", includeService.replyList(board_no));
+		//model.addAttribute("replyList", includeService.replyList(board_no));
 
 		return "inquiry/showInquiry";
 	}
@@ -70,15 +70,16 @@ public class InquiryController {
 		return "redirect:inquiry";
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/addReply", method = RequestMethod.POST)
-	public ArrayList<ReplyVO> searchCustomer(Model model, ReplyVO reply,HttpServletRequest request) {
-		String board_no = request.getParameter("board_no");
-		includeService.addReply(reply); // insert
-		
-		return includeService.replyList(board_no); //select
-	}
-
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value = "/addReply", method = RequestMethod.POST) public
+	 * ArrayList<ReplyVO> searchCustomer(Model model, ReplyVO
+	 * reply,HttpServletRequest request) { String board_no =
+	 * request.getParameter("board_no"); includeService.addReply(reply); // insert
+	 * 
+	 * return includeService.replyList(board_no); //select }
+	 */
 	// 문의사항 삭제처리
 	@RequestMapping(value = "/delInquiry", method = RequestMethod.GET)
 	public String deleteBoard(BoardVO board) {
