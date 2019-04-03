@@ -62,4 +62,5 @@ public class MngrOnlyController {
 		
 		return "/mngrOnly/mState";
 	}
+	
 }

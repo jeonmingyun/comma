@@ -41,7 +41,6 @@ public class InquiryController {
 	public String insertInquiry(Model model, BoardVO board) {
 		
 		boardService.boardInsert(board);
-		System.out.println(board);
 		return "redirect:/inquiry";
 	}
 		
