@@ -40,6 +40,8 @@ public class NoticeBoardServiceImplement implements NoticeBoardService {
 	public void noticeInsert(NoticeBoardVO notice) {
 		mapper.noticeInsert(notice);		
 	}
+	
+	
 
 	@Override
 	public ArrayList<NoticeBoardVO> getListWithPaging(Criteria cri) {
@@ -51,6 +53,18 @@ public class NoticeBoardServiceImplement implements NoticeBoardService {
 	public int total(Criteria cri) {
 		
 		return mapper.total(cri);
+	}
+
+//	@Override
+//	public ArrayList<NoticeBoardVO> noticeSearch(NoticeBoardVO notice) {
+//		
+//		return mapper.noticeSearch(notice);
+//	}
+
+	@Override
+	public int SearchCount(Criteria cri) {
+		
+		return mapper.SearchCount(cri);
 	}
 
 

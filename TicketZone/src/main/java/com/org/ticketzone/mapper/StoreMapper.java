@@ -10,4 +10,6 @@ public interface StoreMapper {
 	public ArrayList<StoreVO> storeInfo(String license);
 	
 	public void storeRegister(StoreVO store);
+	
+	public ArrayList<StoreVO> storeGet(String id);
 }

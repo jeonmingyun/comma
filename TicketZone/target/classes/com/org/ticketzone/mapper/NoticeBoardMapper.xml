@@ -32,7 +32,35 @@
 		values(notice_seq.nextval, #{notice_title}, #{notice_content})
 	</insert>
 	
-	<!-- 게시판 페이징 -->
+	<!-- 공지사항 검색 -->
+<!--  <select id="noticeSearch" resultType="com.org.ticketzone.domain.NoticeBoardVO">
+	<![CDATA[
+		select notice_no, notice_title, notice_content, notice_reg
+		from notice_board
+		where notice_title like '%'||#{keyword}||'%'
+		OR notice_content like '%'||#{keyword}||'%'
+		OR notice_no like '%'||#{keyword}||'%'
+	]]>	
+	</select> -->
+	<!-- 동적 SQL -->
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							notice_title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							notice_content like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	<!-- 게시판 페이징<검색> -->
 	<select id="getListWithPaging"
 		resultType="com.org.ticketzone.domain.NoticeBoardVO">
 		<![CDATA[
@@ -40,7 +68,25 @@
 			from
 			(select rownum rn, notice_no, notice_title, notice_content, notice_reg
 			from notice_board
-			where rownum <= #{pageNum} * #{amount})
+			where			
+		]]>
+			<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							notice_title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							notice_content like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+		<![CDATA[	
+			rownum <= #{pageNum} * #{amount}
+			)
 			where rn > (#{pageNum} -1) * #{amount}
 		]]>
 	</select>
@@ -49,5 +95,7 @@
 		select count(*) from notice_board where notice_no > 0
 	</select>
 	
+	
+
 	
 </mapper>

@@ -11,7 +11,9 @@
 </head>
 <body>
 <%@include file="/WEB-INF/views/include/Mngrheader.jsp"%>
-<h1>고객관리페이지</h1>
+<form>
+	
+</form>
 <%@include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>

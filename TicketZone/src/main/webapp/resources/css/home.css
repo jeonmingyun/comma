@@ -66,10 +66,26 @@ h1 {
 
 /* pagination */
 .pagination a{
-	text-decoration: none;
+	padding: 8px 16px;
+    text-decoration: none;
+    color: black;
+    
 }
-
+.pagination ul{
+	
+}
 .pagination li {
 	position: relative;
 	display: inline-block;
+	
+}
+/* 선택되지 않았을 때 */
+.pagination a:active{
+    border-bottom: 1px solid #000000;
+    color: #000000;
+    font-weight: bold;
+}
+
+.pagination a:hover{
+    background-color: #ddd;
 }

@@ -9,11 +9,18 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Document</title>
 <link href="../resources/css/header.css" rel="stylesheet"/>
+<script>
+	$(document).ready(function(){
+		$("#Logo").click(function(){
+			window.location.href="/";
+		});
+	});
+</script>
 </head>
 <body>
 	<header>
 		<!-- 로고 -->
-		<img id="mainLogo" src="../resources/img/mainLogo.png">
+		<button id="Logo"><img id="mainLogo" src="../resources/img/mainLogo.png"></button>
 
 		<!-- 메뉴 -->
 		<ul class="main-nav">

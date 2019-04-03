@@ -20,6 +20,17 @@
 	<!-- 공지사항 div -->
 	<div>
 		<h1>공지사항</h1>
+		<form id="searchForm" method="get" action = "/">
+		<select name="type">
+			<option value="T">제목</option>
+			<option value="C">내용</option>
+			<option value="TC">제목 or 내용</option>
+		</select>
+		<input type="text" name="keyword" />
+		<input type="hidden" id="efg" name="pageNum" value = "${pageMaker.cri.pageNum}">
+		<input type="hidden" id="abcd" name="amout" value = "${pageMaker.cri.amount}">
+		<button class="btn btn-default">검색</button>
+		</form>
 		<table id="notice">
 			<tr>
 				<th>번호
@@ -59,6 +70,8 @@
 	<form id='actionForm' action='/' method='get'>
 		<input type="hidden" id="efg" name="pageNum" value = "${pageMaker.cri.pageNum}">
 		<input type="hidden" id="abcd" name="amout" value = "${pageMaker.cri.amount}">
+		<input type="hidden" name="type" value='<c:out value="${pageMaker.cri.type}"/>'>
+		<input type="hidden" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"/>'>
 	</form>
 	<!-- end Pagination -->
 	
