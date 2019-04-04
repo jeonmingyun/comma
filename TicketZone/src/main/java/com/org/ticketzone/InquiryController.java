@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.org.ticketzone.domain.BoardVO;
@@ -106,8 +107,8 @@ public class InquiryController {
 	public String replyUpdate(Model model, HttpServletRequest request) {
 		String reply_content = request.getParameter("reply_content");
 		String board_no = request.getParameter("board_no");
-//		includeService.reply_update(reply_content, board_no);
-		System.out.println(reply_content + ", " + board_no);
+		includeService.reply_update(reply_content, board_no);
+
 		return "";
 	}
 }

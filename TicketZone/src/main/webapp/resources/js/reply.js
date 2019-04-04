@@ -18,36 +18,34 @@ $(function() {
 			data: query,
 			success: function(data) {
 				$('#addReply_content').val("");
-				$('#reply_head span').text("");
-				$('#reply_content').text("");
-				$('#reply_head span').append(data[0].reply_reg);
-				$('#reply_content').append(data[0].reply_content);
+				$('#reply_head span').text(data[0].reply_reg);
+				$('#reply_content').text(data[0].reply_content);
 				$('.addReply_submit').toggleClass('addReply_submit updReply_submit');
 			}
 		})
 	})
 	
+	//답글 수정 처리
 	$('.updReply_submit').click(function() {
 		var query = {
-			reply_content : $('#reply_content').text().trim(),
+			reply_content : $('#addReply_content').val().trim(),
 			board_no : $('#board_no').val()
 		}
-		console.log(query);
+		
 		$.ajax({
 			type: 'post',
 			url: 'reply_update',
 			data: query,
 			success: function(data) {
-				console.log('success');
-			},
-			error: function(data) {
-				console.log('error');
+				$('#addReply_content').val("");
+				$('#reply_content').text(query.reply_content);
 			}
 		})
 	})
 	
 })
 
+//답글 수정 요청
 function reply_update_info(board_no) {
 	$('#addReply_content').val($('#reply_content').text().trim());
 }
