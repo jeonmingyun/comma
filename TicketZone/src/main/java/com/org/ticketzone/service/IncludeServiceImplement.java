@@ -2,6 +2,7 @@ package com.org.ticketzone.service;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.org.ticketzone.domain.ReplyVO;
@@ -28,6 +29,10 @@ public class IncludeServiceImplement implements IncludeService{
 	@Override
 	public void reply_delete(String board_no) {
 		mapper.reply_delete(board_no);
-		
+	}
+
+	@Override
+	public void reply_update(@Param("reply_content") String reply_content,@Param("board_no") String board_no) {
+		mapper.reply_update(reply_content, board_no);
 	}
 }

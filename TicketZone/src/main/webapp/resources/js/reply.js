@@ -1,14 +1,14 @@
 $(function() {
-// 답글 등록시
-	$('#reply_submit').click(function() {
+	// 답글 등록시
+	$('.addReply_submit').click(function() {
 		var query = {
 			board_no : $('#board_no').val(),
-			reply_content : $('#reply_content').val()
+			reply_content : $('#addReply_content').val().trim()
 		}
 		
 		if( query.reply_content == "") {
 			alert('답글을 입력하세요');
-			$('#reply_content').focus();
+			$('#addReply_content').focus();
 			return false;
 		}
 				
@@ -17,18 +17,48 @@ $(function() {
 			url: 'addReply',
 			data: query,
 			success: function(data) {
-				$('#reply_head span').val("");
-				$('#reply_head span').append(data[0].reply_reg);
+				$('#addReply_content').val("");
+				$('#reply_head span').text(data[0].reply_reg);
+				$('#reply_content').text(data[0].reply_content);
+				$('.addReply_submit').toggleClass('addReply_submit updReply_submit');
+			}
+		})
+	})
+	
+	//답글 수정 처리
+	$('.updReply_submit').click(function() {
+		var query = {
+			reply_content : $('#addReply_content').val().trim(),
+			board_no : $('#board_no').val()
+		}
+		
+		$.ajax({
+			type: 'post',
+			url: 'reply_update',
+			data: query,
+			success: function(data) {
+				$('#addReply_content').val("");
+				$('#reply_content').text(query.reply_content);
 			}
 		})
 	})
 	
 })
 
-function reply_update(board_no) {
-// $(location).attr('href', 'reply_update/board_no='+board_no);
+//답글 수정 요청
+function reply_update_info(board_no) {
+	$('#addReply_content').val($('#reply_content').text().trim());
 }
 
 function reply_delete(board_no) {
-	$(location).attr('href', 'reply_delete?board_no='+board_no);
+	$.ajax({
+		type: 'post',
+		url: 'reply_delete',
+		data: {board_no: board_no},
+		success: function(data) {
+			$('#reply_head span').text("");
+			$('#reply_content').text("");
+			$('.updReply_submit').toggleClass('addReply_submit updReply_submit');
+		}
+	})
 }

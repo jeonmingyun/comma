@@ -19,4 +19,12 @@
 	<delete id="reply_delete">
 		delete from reply where board_no = #{board_no}
 	</delete>
+	
+	<!-- 답글 수정 -->	
+	<update id="reply_update">
+		update reply
+		set reply_content = #{reply_content}
+		where board_no = #{board_no}
+	</update>
+
 </mapper>
