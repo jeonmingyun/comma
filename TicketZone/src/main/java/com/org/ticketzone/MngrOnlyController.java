@@ -1,10 +1,15 @@
 
 package com.org.ticketzone;
 
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.org.ticketzone.domain.AddressVO;
 import com.org.ticketzone.domain.NumberTicketVO;
@@ -54,9 +59,20 @@ public class MngrOnlyController {
 	// 고객관리 페이지 이동
 
 	@RequestMapping(value = "/mCustomer", method = RequestMethod.GET)
-	public String mCustomer(Model model) {
+	public String mCustomer(Model model, HttpServletRequest request) {
+		String license_number = request.getParameter("license_number");
+		model.addAttribute("license_number", numberTicketService.waitList(license_number));
 
 		return "/mngrOnly/mCustomer";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getLicense", method = RequestMethod.POST)
+		public String getLicense(Model model, HttpServletRequest request) {
+		String license_number = request.getParameter("license_number");
+		model.addAttribute("license_number", numberTicketService.waitList(license_number));
+		
+		return " ";
 	}
 
 	// 매장관리 페이지 이동
@@ -90,4 +106,10 @@ public class MngrOnlyController {
 		System.out.println("정상결제입니다.");
 		return "/mngrOnly/mCustomer";
 	}
+	
+//	@RequestMapping(value = "/getLicense", method = RequestMethod.POST)
+//	public String getLicense(Model model, NumberTicketVO ticket) {
+//		model.addAttribute("ticket", numberTicketService.waitList(ticket));
+//		return "/mngrOnly/mCustomer";
+//	}
 }
