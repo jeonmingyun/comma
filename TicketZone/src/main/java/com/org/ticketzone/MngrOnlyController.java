@@ -4,6 +4,7 @@ package com.org.ticketzone;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +36,14 @@ public class MngrOnlyController {
 	public String admin(Model model) {
 
 		return "/mngrOnly/mStore";
+	}
+	
+	//관리자 로그아웃
+	@RequestMapping(value = "/mngrLogout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		
+		return "mngr";
 	}
 
 	// 매장등록 페이지

@@ -42,3 +42,8 @@ header {
 	cursor:pointer;	
 }
 
+#log_out {
+	height: 30px;
+	vertical-align: top;
+	margin: 10px;
+}

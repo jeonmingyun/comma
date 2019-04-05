@@ -10,6 +10,20 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link href="resources/css/mCustomer.css" rel="stylesheet" />
+<script>
+	$(document).ready(function(){
+		var issueForm = $("#issueForm");
+		var successForm = $("#successForm");
+		$("#issueForm button").on("click", function(e){
+			e.preventDefault();
+			issueForm.submit();
+		});
+		$("#successForm button").on("click", function(e){
+			e.preventDefault();
+			successForm.submit();
+		});
+	});
+</script>
 <script src="resources/js/mngrOnly/mCustomer.js"></script>
 <title></title>
 </head>
