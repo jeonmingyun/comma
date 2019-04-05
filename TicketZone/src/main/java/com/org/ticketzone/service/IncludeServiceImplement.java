@@ -27,7 +27,11 @@ public class IncludeServiceImplement implements IncludeService{
 
 	@Override
 	public void reply_delete(String board_no) {
-		mapper.reply_delete(board_no);
-		
+		mapper.reply_delete(board_no);		
+	}
+
+	@Override
+	public void reply_update(String reply_content, String board_no) {
+		mapper.reply_update(reply_content, board_no);
 	}
 }
