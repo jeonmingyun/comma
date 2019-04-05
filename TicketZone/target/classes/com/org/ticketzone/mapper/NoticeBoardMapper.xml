@@ -6,7 +6,7 @@
 
 	<!-- 공지사항 -->	
 	<select id="noticeBoardList" resultType="com.org.ticketzone.domain.NoticeBoardVO">
-		select * from notice_board where cate_code ='N1' order by notice_reg
+		select * from notice_board where cate_code ='N1' order by notice_reg desc
 	</select>
 	
 	<!-- 공지사항 수정페이지리턴 -->	

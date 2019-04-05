@@ -14,7 +14,6 @@
 	<header>
 		
 		<img id="mainLogo" src="resources/img/mainLogo.png">
-
 		
 		<ul class="main-nav">
 			<li><a href="/mngrOnly">홈</a></li>
