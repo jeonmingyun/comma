@@ -1,5 +1,7 @@
 package com.org.ticketzone.service;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Service;
 
 import com.org.ticketzone.domain.NumberTicketVO;
@@ -41,6 +43,12 @@ public class NumberTicketServiceImplement implements NumberTicketService {
 	public void minusTicket(NumberTicketVO ticket) {
 		mapper.minusTicket(ticket);
 		
+	}
+
+	@Override
+	public ArrayList<NumberTicketVO> waitList(String license_number) {
+		
+		return mapper.waitList(license_number);
 	}
 
 }

@@ -21,7 +21,7 @@
 	<header>
 		<!-- 로고 -->
 		<button id="Logo"><img id="mainLogo" src="../resources/img/mainLogo.png"></button>
-
+		
 		<!-- 메뉴 -->
 		<ul class="main-nav">
 			<li class="active"><a href="/">홈</a></li>

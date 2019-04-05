@@ -39,7 +39,7 @@ public class MngrController {
 		arr2 = storeService.storeGet(id);
 		session.setAttribute("id", arr);
 		session2.setAttribute("store", arr2);
-		System.out.println(arr);
+		
 		if (arr.size() != 0) {
 			if (arr.get(0).getOwner_password().equals(password)) {
 				return "mngrOnly";

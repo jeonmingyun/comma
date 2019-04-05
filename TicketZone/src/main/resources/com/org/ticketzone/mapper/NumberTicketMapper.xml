@@ -97,5 +97,9 @@
 		(select license_number from store where license_number = #{license_number}) || '%'
 		]]>
 	</update>
-
+	
+	<select id="waitList" resultType="com.org.ticketzone.domain.NumberTicketVO">
+		select * from number_ticket where license_number = #{license_number}
+	</select>
+	
 </mapper>
