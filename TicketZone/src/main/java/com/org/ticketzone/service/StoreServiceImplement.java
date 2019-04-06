@@ -39,4 +39,17 @@ public class StoreServiceImplement implements StoreService{
 		return mapper.storeGet(id);
 	}
 
+	@Override
+	public StoreVO storeUpdate(String license) {
+	
+		return mapper.storeUpdate(license);
+	}
+
+	@Override
+	public void storeUpdCom(StoreVO store) {
+		
+		mapper.storeUpdCom(store);
+		
+	}
+
 }

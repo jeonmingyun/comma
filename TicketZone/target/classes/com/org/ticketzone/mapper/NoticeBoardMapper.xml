@@ -19,7 +19,7 @@
 		delete from notice_board where notice_no = #{notice_no}
 	</delete>
 	
-	<!-- 공지사항 업데이트 -->
+	<!-- 공지사항 업데이트 (수정) -->
 	<update id="noticeBoardUpd">
 		update notice_board
 		set notice_title = #{notice_title},
