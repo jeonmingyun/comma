@@ -3,19 +3,21 @@ $(document).ready(function(){
 		location.href = "/mngr_register";
 	});
 		$("#login_btn").click(function(){
-			alert("클릭");
 			var id = $("#mngr_id").val();
 			var password = $("#mngr_pw").val();
+			
 			if(id == ""){
 				alert("아이디를 입력하세요.");
 				$("#mngr_id").focus();
 				return;
 			}
+			
 			if(password == ""){
 				alert("비밀번호를 입력하세요.");
 				$("#mngr_pw").focus();
 				return;
 			}
+			
 			var query = {id, password};
 			$.ajax({
 				type : "post",

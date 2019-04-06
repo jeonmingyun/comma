@@ -1,11 +1,13 @@
 package com.org.ticketzone.domain;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
 public class ReplyVO {
-	private String board_no;
+	private int board_no;
 	private String reply_content;
-	private String reply_reg;
+	private Date reply_reg;
 	private String admin_id;
 }

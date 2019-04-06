@@ -7,7 +7,24 @@
 	<!-- 답글 추가 -->
 	<insert id="addReply">
 		insert into reply
-		values(board_no, #{reply_content}, sysdate,admin_id)
+		values(#{board_no}, #{reply_content}, sysdate, 'nam')
 	</insert>
 	
+	<!-- 답글 리스트 -->	
+	<select id="replyList" resultType="com.org.ticketzone.domain.ReplyVO">
+		select * from reply where board_no = #{board_no} order by reply_reg desc
+	</select>
+	
+	<!-- 답글 삭제 -->	
+	<delete id="reply_delete">
+		delete from reply where board_no = #{board_no}
+	</delete>
+	
+	<!-- 답글 수정 -->	
+	<update id="reply_update">
+		update reply
+		set reply_content = #{reply_content}
+		where board_no = #{board_no}
+	</update>
+
 </mapper>
