@@ -16,6 +16,7 @@ $(function() {
 	var add = $("#store_info").attr('class');
 	var store_name = $("#store_name").text();
 	
+	
 	// 주소로 좌표를 검색합니다
 	geocoder.addressSearch(add,
 		function(result, status) {

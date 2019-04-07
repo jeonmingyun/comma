@@ -6,4 +6,5 @@ import com.org.ticketzone.domain.MemberVO;
 
 public interface MemberService {
 	public ArrayList<MemberVO> getList();
+	public ArrayList<MemberVO> memberTest();
 }

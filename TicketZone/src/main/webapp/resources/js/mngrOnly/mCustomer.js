@@ -1,15 +1,38 @@
 $(document).ready(function() {
-	var issueForm = $("#issueForm");
-	var successForm = $("#successForm");
-	$("#issueForm button").on("click", function(e) {
-		e.preventDefault();
-		issueForm.submit();
+	
+	$(".Ticketbtn").click(function(){
+		var query = {
+			member_tel : $(this).val(),
+			license_number : $(this).attr('name')
+		}
 		
+		$.ajax({
+			type: 'post',
+			url: 'issue_ticket',
+			data: query,
+			success: function(data) {
+				console.log('success');
+				$(location).attr('href', '/mCustomer?license_number='+query.license_number);
+			}
+		})
 	});
-	$("#successForm button").on("click", function(e) {
-		e.preventDefault();
-		successForm.submit();
+	
+	$(".Paybtn").click(function(){
+		var query = {
+				license_number : $("#payment").val()
+		}
+		$.ajax({
+			type: 'post',
+			url: 'minus_ticket',
+			data: query,
+			success: function(data){
+				console.log('success');
+				$(location).attr('href', '/mCustomer?license_number='+query.license_number);
+			}
+		})
 	});
+		
+	
 	
 	/*매장 option selected 지정*/
 	var select_license_number = $('#select_license_number').val();

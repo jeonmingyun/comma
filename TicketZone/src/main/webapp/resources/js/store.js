@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	$(".license").click(function() {
 		var query = $(this).val();
+		alert(query);
 
 		$.ajax({
 			type : "post",
