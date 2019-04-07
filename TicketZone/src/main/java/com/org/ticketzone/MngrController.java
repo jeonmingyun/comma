@@ -39,7 +39,7 @@ public class MngrController {
 		arr2 = storeService.storeGet(id);
 		session.setAttribute("id", arr);
 		session2.setAttribute("store", arr2);
-		
+
 		if (arr.size() != 0) {
 			if (arr.get(0).getOwner_password().equals(password)) {
 				return "mngrOnly";
@@ -66,7 +66,6 @@ public class MngrController {
 	// 관리자 회원가입처리
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String register(Model model, OwnerVO owner) {
-
 		ownerService.insertOwner(owner);
 
 		return "mngr";

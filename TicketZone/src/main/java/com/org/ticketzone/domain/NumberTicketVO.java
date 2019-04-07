@@ -1,3 +1,4 @@
+
 package com.org.ticketzone.domain;
 
 import lombok.Data;
@@ -15,4 +16,7 @@ public class NumberTicketVO {
 	private String cancel;
 	private String absence;
 	private int status_total;
+
+
 }
+

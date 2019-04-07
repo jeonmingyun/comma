@@ -6,7 +6,7 @@
 
 	<!-- 공지사항 -->	
 	<select id="noticeBoardList" resultType="com.org.ticketzone.domain.NoticeBoardVO">
-		select * from notice_board where cate_code ='N1' order by notice_reg
+		select * from notice_board where cate_code ='N1' order by notice_reg desc
 	</select>
 	
 	<!-- 공지사항 수정페이지리턴 -->	
@@ -19,7 +19,7 @@
 		delete from notice_board where notice_no = #{notice_no}
 	</delete>
 	
-	<!-- 공지사항 업데이트 -->
+	<!-- 공지사항 업데이트 (수정) -->
 	<update id="noticeBoardUpd">
 		update notice_board
 		set notice_title = #{notice_title},

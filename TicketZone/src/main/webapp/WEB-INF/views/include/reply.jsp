@@ -4,7 +4,7 @@
 <script src="../resources/js/reply.js"></script>
 <link href="../resources/css/reply.css" rel="stylesheet">
 <!-- 답글 쓰기 -->
-<div class="addReply">
+<div id="addReply">
  	<div>
 		<input type="hidden" id="board_no" name="board_no" value="${InquiryUpd[0].board_no}">
 		<div>
@@ -25,7 +25,7 @@
 </div>
 
 <!-- 답글 리스트 -->
-<div class="replyList">
+<div id="replyList">
 	<div id="reply">
 		<div id="reply_head">
 			<strong>관리자</strong>

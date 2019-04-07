@@ -10,7 +10,7 @@ public interface NoticeBoardMapper {
 	public ArrayList<NoticeBoardVO> noticeBoardList(Criteria cri);
 
 	public ArrayList<NoticeBoardVO> noticeBoardUpdInfo(String notice_no);
-
+	
 	public void noticeBoardUpd(NoticeBoardVO notice);
 
 	public void noticeBoardDel(NoticeBoardVO notice);
