@@ -97,9 +97,65 @@
 		(select license_number from store where license_number = #{license_number}) || '%'
 		]]>
 	</update>
-	
-	<select id="waitList" resultType="com.org.ticketzone.domain.NumberTicketVO">
-		select * from number_ticket where license_number = #{license_number}
+
+	<!-- 번호표 대기 -->
+	<select id="tWait"
+		resultType="com.org.ticketzone.domain.NumberTicketVO">
+		<![CDATA[
+		select case
+		when ticket_status = 0 then '대기' end as wait, count(ticket_status) as
+		status_total
+		from number_ticket
+		where license_number = #{license_number}
+		and ticket_status = 0
+		group by ticket_status
+		]]>
+	</select>
+	<!-- 번호표 발급완료 -->
+	<select id="tSuccess"
+		resultType="com.org.ticketzone.domain.NumberTicketVO">
+		<![CDATA[
+		select case
+		when ticket_status = 1 then '발급완료' end as success, count(ticket_status) as
+		status_total
+		from number_ticket
+		where license_number = #{license_number}
+		and ticket_status = 1
+		group by ticket_status
+		]]>
+	</select>
+	<!-- 번호표 발급취소 -->
+	<select id="tCancel"
+		resultType="com.org.ticketzone.domain.NumberTicketVO">
+		<![CDATA[
+		select case
+		when ticket_status = 2 then '발급취소' end as cancel, count(ticket_status) as
+		status_total
+		from number_ticket
+		where license_number = #{license_number}
+		and ticket_status = 2
+		group by ticket_status
+		]]>
+	</select>
+	<!-- 부재 -->
+	<select id="tAbsence"
+		resultType="com.org.ticketzone.domain.NumberTicketVO">
+		<![CDATA[
+		select case
+		when ticket_status = 3 then '부재' end as absence, count(ticket_status) as
+		status_total
+		from number_ticket
+		where license_number = #{license_number}
+		and ticket_status = 3
+		group by ticket_status
+		]]>
 	</select>
 	
+	
+	<select id="waitList"
+		resultType="com.org.ticketzone.domain.NumberTicketVO">
+		select * from number_ticket where license_number =
+		#{license_number}
+	</select>
+
 </mapper>

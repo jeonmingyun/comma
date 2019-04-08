@@ -13,7 +13,7 @@
 	select a.license_number, a.store_name, a.store_tel, a.store_time, a.store_intro, b.address_name
 	from store a, load_address b
 	where a.address_code = b.address_code
-	and a.license_number = substr(#{license},0,12)	
+	and a.license_number = substr(#{license},0,10)	
 </select>
 
 <insert id="storeRegister">

@@ -18,6 +18,7 @@ import com.org.ticketzone.domain.OwnerVO;
 import com.org.ticketzone.domain.StoreVO;
 import com.org.ticketzone.service.AddressService;
 import com.org.ticketzone.service.CategorieService;
+import com.org.ticketzone.service.MemberService;
 import com.org.ticketzone.service.NumberTicketService;
 import com.org.ticketzone.service.StoreService;
 
@@ -31,6 +32,7 @@ public class MngrOnlyController {
 	private CategorieService categorieService;
 	private AddressService addressService;
 	private NumberTicketService numberTicketService;
+	private MemberService memberService;
 
 	// 관리자 첫화면
 	@RequestMapping(value = "/mngrOnly")
@@ -91,17 +93,22 @@ public class MngrOnlyController {
 	@RequestMapping(value = "/mCustomer", method = RequestMethod.GET)
 	public String mCustomer(Model model, HttpServletRequest request) {
 		String license_number = request.getParameter("license_number");
-		model.addAttribute("license_number", numberTicketService.waitList(license_number));
+		model.addAttribute("license_number", numberTicketService.waitList(license_number));		
+		model.addAttribute("wait", numberTicketService.tWait(license_number));
+		model.addAttribute("success", numberTicketService.tSuccess(license_number));
+		model.addAttribute("cancel", numberTicketService.tCancel(license_number));
+		model.addAttribute("absence", numberTicketService.tAbsence(license_number));		
+		model.addAttribute("member", memberService.memberTest());
 
 		return "/mngrOnly/mCustomer";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/getLicense", method = RequestMethod.POST)
-		public String getLicense(Model model, HttpServletRequest request) {
+	public String getLicense(Model model, HttpServletRequest request) {
 		String license_number = request.getParameter("license_number");
 		model.addAttribute("license_number", numberTicketService.waitList(license_number));
-		
+
 		return " ";
 	}
 
@@ -113,8 +120,10 @@ public class MngrOnlyController {
 	}
 
 	// 번호표 발급
+	@ResponseBody
 	@RequestMapping(value = "/issue_ticket", method = RequestMethod.POST)
 	public String isuue_ticket(Model model, NumberTicketVO ticket) {
+		
 		String codeMaker = numberTicketService.codeSelect(ticket);
 		if (codeMaker.equals("not")) {
 			System.out.println("코드를 발급해야합니다!");
@@ -124,8 +133,8 @@ public class MngrOnlyController {
 			System.out.println("이미코드가 있습니다!");
 			numberTicketService.plusTicket(ticket);
 		}
-
-		return "/mngrOnly/mCustomer";
+			
+		return " ";
 	}
 
 	// 번호표 순환(대기인원수 -1)
@@ -135,7 +144,7 @@ public class MngrOnlyController {
 		System.out.println("정상결제입니다.");
 		return "/mngrOnly/mCustomer";
 	}
-	
+
 //	@RequestMapping(value = "/getLicense", method = RequestMethod.POST)
 //	public String getLicense(Model model, NumberTicketVO ticket) {
 //		model.addAttribute("ticket", numberTicketService.waitList(ticket));
