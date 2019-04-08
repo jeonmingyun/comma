@@ -42,7 +42,7 @@ public class InquiryController {
 	@RequestMapping(value = "/insertInquiry", method = RequestMethod.POST)
 	public String insertInquiry(Model model, BoardVO board) {
 		boardService.boardInsert(board);
-
+		
 		return "redirect:/inquiry";
 	}
 		
