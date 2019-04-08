@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.org.ticketzone.mapper.InterceptorMapper">
+	
+	<!-- 관리자 로그인 확인 -->	
+	<select id="mngr_login" resultType="com.org.ticketzone.domain.AdminVO">
+		select * from reply 
+		where admin_id = #{admin_id} 
+		and admin_password = #{admin_password} 
+	</select>
+	
+</mapper>
