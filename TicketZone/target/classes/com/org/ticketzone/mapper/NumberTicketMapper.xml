@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.org.ticketzone.mapper.NumberTicketMapper">
+
+	<!-- 현재 번호표가 있는지 없는지 비교 -->
+	<select id="codeSelect" resultType="String">
+	<![CDATA[
+		select nvl(max(code1), 'not')
+		as code1
+		from make_code
+		where code1 like to_char(sysdate, 'yyyymmdd') || 
+		(select license_number 
+		from store where license_number = #{license_number})
+		|| '%'
+		]]>
+	</select>
+
+	<!-- 번호표 코드 최초생성 -->
+	<insert id="firstCode">
+	<![CDATA[
+		insert into make_code
+		values((select to_char(sysdate,
+		'yyyymmdd') from dual)
+		|| (select license_number
+		from store
+		where
+		license_number = #{license_number}), '000')
+		]]>
+	</insert>
+
+	<!-- 최초1번 번호표 발급 -->
+	<insert id="makeTicket">
+	<![CDATA[
+		insert into number_ticket
+		values(
+		(select (code1 || code2) + 1 as code
+		from make_code
+		where code1 like to_char(sysdate, 'yyyymmdd') ||
+		(select
+		license_number from store where license_number = #{license_number})), 
+		1,				
+		#{the_number}, 
+		#{license_number}, 
+		#{member_tel}, 
+		0)
+		]]>
+	</insert>
+
+	<!-- 번호표 발급 -->
+	<insert id="plusTicket">
+	<![CDATA[
+		insert into number_ticket
+		values(
+		(select (ticket_code + 1) as ticket_code
+		from (select ticket_code from number_ticket 
+		where ticket_code like to_char(sysdate,'yyyymmdd') || 
+		(select license_number 
+		from store 
+		where license_number = #{license_number}) || '%'
+		order by ticket_code desc)
+		where rownum <= 1),
+		(select (wait_number+1) as wait_number
+		from (select wait_number from number_ticket
+		where ticket_code like to_char(sysdate,'yyyymmdd') ||
+		(select license_number
+		from store
+		where license_number = #{license_number}) || '%'
+		order by wait_number desc)
+		where rownum <= 1),
+		#{the_number}, 
+		#{license_number}, 
+		#{member_tel}, 
+		0)
+		]]>
+	</insert>
+
+	<!-- 정상적 서비스종료 대기인원 줄이기 -->
+	<update id="minusTicket">
+	<![CDATA[
+		update number_ticket
+		set wait_number =
+		case
+		when wait_number = -1 then 0
+		when ticket_status = 0 then (wait_number-1)
+		when ticket_status = 1 then wait_number
+		when ticket_status = 2 then 0
+		when ticket_status = 3 then 0
+		else wait_number
+		end,
+		ticket_status =
+		case
+		when wait_number = 0 then (ticket_status+1)
+		else ticket_status
+		end
+		where ticket_code like to_char(sysdate,'yyyymmdd') ||
+		(select license_number from store where license_number = #{license_number}) || '%'
+		]]>
+	</update>
+	<!-- 발급취소 -->
+	<update id="cancelStatus">
+	<![CDATA[
+		update number_ticket
+		set ticket_status = 2
+		where ticket_code like to_char(sysdate,'yyyymmdd') ||
+		(select license_number from store where license_number = #{license_number}) || '%'
+		and member_tel = #{member_tel}
+	]]>
+	</update>
+	<!-- 부재중 -->
+	<update id="absenceStatus">
+	<![CDATA[
+		update number_ticket
+		set ticket_status = 3
+		where ticket_code like to_char(sysdate,'yyyymmdd') ||
+		(select license_number from store where license_number = #{license_number}) || '%'
+		and member_tel = #{member_tel}
+	]]>
+	</update>
+	<!-- 취소나 부재시 티켓업데이트 -->
+	<update id="cancelTicket">
+	<![CDATA[
+		update number_ticket
+		set wait_number = 
+		case 
+		when wait_number = -1 then 0
+		when ticket_status = 0 then (wait_number-1)
+		when ticket_status = 1 then wait_number
+		when ticket_status = 2 then 0
+		when ticket_status = 3 then 0
+		else wait_number
+		end
+        where ticket_code in (select ticket_code from number_ticket
+		where to_number(ticket_code) >= 
+		(select to_number(ticket_code) from number_ticket where ticket_code like to_char(sysdate,'yyyymmdd') ||
+		(select license_number from store where license_number = #{license_number}) || '%'
+		and member_tel = #{member_tel})
+		and ticket_code like to_char(sysdate,'yyyymmdd') ||
+		(select license_number from store where license_number = #{license_number}) || '%')
+	]]>
+	</update>
+
+	<!-- 번호표 대기 -->
+	<select id="tWait"
+		resultType="com.org.ticketzone.domain.NumberTicketVO">
+		<![CDATA[
+		select case
+		when ticket_status = 0 then '대기' end as wait, count(ticket_status) as
+		status_total
+		from number_ticket
+		where license_number = #{license_number}
+		and ticket_status = 0
+		group by ticket_status
+		]]>
+	</select>
+	<!-- 번호표 발급완료 -->
+	<select id="tSuccess"
+		resultType="com.org.ticketzone.domain.NumberTicketVO">
+		<![CDATA[
+		select case
+		when ticket_status = 1 then '발급완료' end as success, count(ticket_status) as
+		status_total
+		from number_ticket
+		where license_number = #{license_number}
+		and ticket_status = 1
+		group by ticket_status
+		]]>
+	</select>
+	<!-- 번호표 발급취소 -->
+	<select id="tCancel"
+		resultType="com.org.ticketzone.domain.NumberTicketVO">
+		<![CDATA[
+		select case
+		when ticket_status = 2 then '발급취소' end as cancel, count(ticket_status) as
+		status_total
+		from number_ticket
+		where license_number = #{license_number}
+		and ticket_status = 2
+		group by ticket_status
+		]]>
+	</select>
+	<!-- 부재 -->
+	<select id="tAbsence"
+		resultType="com.org.ticketzone.domain.NumberTicketVO">
+		<![CDATA[
+		select case
+		when ticket_status = 3 then '부재' end as absence, count(ticket_status) as
+		status_total
+		from number_ticket
+		where license_number = #{license_number}
+		and ticket_status = 3
+		group by ticket_status
+		]]>
+	</select>
+	
+	
+	<select id="waitList"
+		resultType="com.org.ticketzone.domain.NumberTicketVO">
+		select substr(ticket_code,19) as ticket_code, wait_number, the_number, license_number, member_tel, ticket_status number_ticket 
+        from number_ticket
+        where license_number = #{license_number}
+        order by ticket_code
+	</select>
+
+
+</mapper>
