@@ -20,7 +20,7 @@ public class MInquiryController {
 	// 관리자 건의 사항
 	@RequestMapping(value = "/mInquiry", method = RequestMethod.GET)
 	public String mInquiry(Model model) {
-		model.addAttribute("suggestList", boardService.boardList());
+		//model.addAttribute("suggestList", boardService.boardList());
 		
 		return "mngrOnly/mInquiry";
 	}

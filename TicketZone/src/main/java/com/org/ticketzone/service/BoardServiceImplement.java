@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import com.org.ticketzone.domain.BoardVO;
+import com.org.ticketzone.domain.Criteria;
+import com.org.ticketzone.domain.NoticeBoardVO;
 import com.org.ticketzone.mapper.BoardMapper;
 
 import lombok.AllArgsConstructor;
@@ -14,8 +16,8 @@ import lombok.AllArgsConstructor;
 public class BoardServiceImplement implements BoardService {
 	private BoardMapper mapper;
 	@Override
-	public ArrayList<BoardVO> boardList() {
-		return mapper.boardList();
+	public ArrayList<BoardVO> boardList(Criteria cri) {
+		return mapper.getListWithPaging(cri);
 	}
 	
 	@Override
@@ -39,5 +41,24 @@ public class BoardServiceImplement implements BoardService {
 		mapper.boardInsert(board);
 		
 	}
+	
+	@Override
+	public ArrayList<BoardVO> getListWithPaging(Criteria cri) {
+		// TODO Auto-generated method stub
+		return mapper.getListWithPaging(cri);
+	}
+
+	@Override
+	public int total(Criteria cri) {
+		
+		return mapper.total(cri);
+	}
+	
+	@Override
+	public int SearchCount(Criteria cri) {
+		
+		return mapper.SearchCount(cri);
+	}
+
 			
 }

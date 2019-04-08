@@ -33,4 +33,57 @@
 		delete from board where board_no = #{board_no}
 	</delete>
 	
+	<!-- 동적 SQL -->
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							board_title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							board_content like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	<!-- 게시판 페이징<검색> -->
+	<select id="getListWithPaging"
+		resultType="com.org.ticketzone.domain.BoardVO">
+		<![CDATA[
+			select board_no, board_title, board_content, board_reg
+			from
+			(select rownum rn, board_no, board_title, board_content, board_reg
+			from board
+			where			
+		]]>
+			<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							board_title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							board_content like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+		<![CDATA[	
+			rownum <= #{pageNum} * #{amount}
+			)
+			where rn > (#{pageNum} -1) * #{amount}
+		]]>
+	</select>
+	
+	<select id="total" resultType="int">
+		select count(*) from board where board_no > 0
+	</select>
+	
 </mapper>
