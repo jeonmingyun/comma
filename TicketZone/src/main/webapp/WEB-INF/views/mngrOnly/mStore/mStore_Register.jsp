@@ -11,23 +11,26 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script
 	src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
-<script
-	src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 <script>
 	function sample6_execDaumPostcode() {
 		daum.postcode
 				.load(function() {
 					new daum.Postcode(
+							
 							{
 								oncomplete : function(data) {
 									var addr = '';
+									var address_code = '';
 									if (data.userSelectedType === 'R') {
+										console.log(data.buildingName);
 										addr = data.roadAddress;
 									} else {
 										addr = data.jibunAddress;
 									}
-									document.getElementById('sample6_postcode').value = data.zonecode;
+									
+									
 									document.getElementById("sample6_address").value = addr;
+									
 								}
 							}).open();
 				});
@@ -77,18 +80,18 @@
 						</tr>
 						<tr>
 							<th>매장 주소</th>
-							<td><input type="text" name="address_code"
-								id="sample6_postcode" placeholder="우편번호">-<input
+							<td><input
 								type="text" id="sample6_address" name="address_name"
 								placeholder="주소"><input type="button"
 								onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></td>
-
+							
 							<c:forEach var="id" items="${id}">
 								<input type="hidden" name="owner_id" value="${id.owner_id}">
 							</c:forEach>
 						</tr>
 					</tbody>
 				</table>
+				
 				<!-- 등록 버튼 -->
 				<input type="submit" value="등록">
 			</form>

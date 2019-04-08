@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.org.ticketzone.domain.AddressVO;
 import com.org.ticketzone.domain.NumberTicketVO;
 import com.org.ticketzone.domain.OwnerVO;
 import com.org.ticketzone.domain.StoreVO;
-import com.org.ticketzone.service.AddressService;
+
 import com.org.ticketzone.service.CategorieService;
 import com.org.ticketzone.service.MemberService;
 import com.org.ticketzone.service.NumberTicketService;
@@ -30,7 +29,7 @@ public class MngrOnlyController {
 
 	private StoreService storeService;
 	private CategorieService categorieService;
-	private AddressService addressService;
+
 	private NumberTicketService numberTicketService;
 	private MemberService memberService;
 
@@ -40,18 +39,18 @@ public class MngrOnlyController {
 		ArrayList<StoreVO> store_arr = new ArrayList<StoreVO>();
 		ArrayList<OwnerVO> owner_arr = (ArrayList<OwnerVO>) session.getAttribute("id");
 		String owner_id = owner_arr.get(0).getOwner_id();
-		
+
 		store_arr = storeService.storeGet(owner_id);
 		session.setAttribute("store", store_arr);
-		
+
 		return "/mngrOnly/mStore";
 	}
-	
-	//관리자 로그아웃
+
+	// 관리자 로그아웃
 	@RequestMapping(value = "/mngrLogout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		
+
 		return "mngr";
 	}
 
@@ -65,8 +64,8 @@ public class MngrOnlyController {
 
 	// 매장등록 처리(insert)
 	@RequestMapping(value = "/mStore_Reg", method = RequestMethod.POST)
-	public String Register(Model model, StoreVO store, AddressVO address) {
-		addressService.insertAddress(address);
+	public String Register(Model model, StoreVO store) {
+
 		storeService.storeRegister(store);
 
 		return "/mngrOnly/mStore";
@@ -77,13 +76,14 @@ public class MngrOnlyController {
 	public String updmStore_Register(StoreVO storeVO, Model model, HttpServletRequest request) {
 		String license = storeVO.getLicense_number();
 		model.addAttribute("updmStore", storeService.storeUpdate(license));
-
+		model.addAttribute("cate", categorieService.categorieFoodList());
 		return "/mngrOnly/mStore/updmStore_Register";
 	}
 
 	// 매장수정 처리
 	@RequestMapping(value = "/updmStore_Complete", method = RequestMethod.POST)
 	public String updmStore_Complete(StoreVO store) {
+		
 		storeService.storeUpdCom(store);
 
 		return "redirect:/mngrOnly";
@@ -93,11 +93,11 @@ public class MngrOnlyController {
 	@RequestMapping(value = "/mCustomer", method = RequestMethod.GET)
 	public String mCustomer(Model model, HttpServletRequest request) {
 		String license_number = request.getParameter("license_number");
-		model.addAttribute("license_number", numberTicketService.waitList(license_number));		
+		model.addAttribute("license_number", numberTicketService.waitList(license_number));
 		model.addAttribute("wait", numberTicketService.tWait(license_number));
 		model.addAttribute("success", numberTicketService.tSuccess(license_number));
 		model.addAttribute("cancel", numberTicketService.tCancel(license_number));
-		model.addAttribute("absence", numberTicketService.tAbsence(license_number));		
+		model.addAttribute("absence", numberTicketService.tAbsence(license_number));
 		model.addAttribute("member", memberService.memberTest());
 
 		return "/mngrOnly/mCustomer";
@@ -123,7 +123,7 @@ public class MngrOnlyController {
 	@ResponseBody
 	@RequestMapping(value = "/issue_ticket", method = RequestMethod.POST)
 	public String isuue_ticket(Model model, NumberTicketVO ticket) {
-		
+
 		String codeMaker = numberTicketService.codeSelect(ticket);
 		System.out.println(codeMaker + "code");
 		System.out.println(ticket + "ticket");
@@ -135,7 +135,7 @@ public class MngrOnlyController {
 			System.out.println("이미코드가 있습니다!");
 			numberTicketService.plusTicket(ticket);
 		}
-			
+
 		return " ";
 	}
 
@@ -146,25 +146,26 @@ public class MngrOnlyController {
 		System.out.println("정상결제입니다.");
 		return "/mngrOnly/mCustomer";
 	}
-	
+
 	// 번호표 발급취소(취소한사람 기준 -1)
 	@RequestMapping(value = "/cancel_ticket", method = RequestMethod.POST)
 	public String cancel_ticket(Model model, NumberTicketVO ticket) {
-		
+
 		numberTicketService.cancelStatus(ticket);
 		numberTicketService.cancelTicket(ticket);
-		
+
 		return "/mngrOnly/mCustomer";
 	}
+
 	// 번호표 부재(부재중인사람 기준 -1)
 	@RequestMapping(value = "/absence_ticket", method = RequestMethod.POST)
 	public String absence_ticket(Model model, NumberTicketVO ticket) {
-		
+
 		numberTicketService.absenceStatus(ticket);
 		numberTicketService.cancelTicket(ticket);
 		return "/mngrOnly/mCustomer";
 	}
-	
+
 //	@RequestMapping(value = "/getLicense", method = RequestMethod.POST)
 //	public String getLicense(Model model, NumberTicketVO ticket) {
 //		model.addAttribute("ticket", numberTicketService.waitList(ticket));

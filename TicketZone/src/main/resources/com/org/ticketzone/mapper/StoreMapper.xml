@@ -4,21 +4,19 @@
 
 <mapper namespace="com.org.ticketzone.mapper.StoreMapper">
 <select id="storeList" resultType="com.org.ticketzone.domain.StoreVO">
-	select a.license_number, a.store_name, a.store_tel, a.store_time, b.address_name
-	from store a, load_address b
-	where a.address_code = b.address_code
+	select license_number, store_name, store_tel, store_time, address_name
+	from store 
 </select>
 
 <select id="storeInfo" resultType="com.org.ticketzone.domain.StoreVO">
-	select a.license_number, a.store_name, a.store_tel, a.store_time, a.store_intro, b.address_name
-	from store a, load_address b
-	where a.address_code = b.address_code
-	and a.license_number = substr(#{license},0,10)	
+	select license_number, store_name, store_tel, store_time, store_intro, address_name
+	from store
+	where license_number = substr(#{license},0,10)	
 </select>
 
 <insert id="storeRegister">
 	insert into store
-	values(#{license_number}, #{r_name}, #{address_code}, 0, 0, #{cate_code}, #{owner_id}, #{store_name}, #{store_tel}, #{store_time}, #{store_intro})
+	values(#{license_number}, #{r_name}, 0, 0, #{cate_code}, #{owner_id}, #{store_name}, #{store_tel}, #{store_time}, #{store_intro}, #{address_name})
 </insert>
 
 <select id="storeGet" resultType="com.org.ticketzone.domain.StoreVO">
@@ -39,7 +37,7 @@
 	store_tel = #{store_tel},
 	store_time = #{store_time},
 	store_intro = #{store_intro},
-	address_code = #{address_code}
+	address_name = #{address_name}
 	where license_number = #{license_number}
 	
 </update>
