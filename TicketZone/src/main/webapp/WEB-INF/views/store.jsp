@@ -76,8 +76,8 @@
 							</button>
 							<div>
 								<h3>${store.store_name}</h3>
-								<p>매장연락처: ${store.store_tel}</p>
-								<p>매장주소: ${store.address_name}</p>
+								<p>연락처: ${store.store_tel}</p>
+								<p>주소: ${store.address_name}</p>
 								<p>영업시간: ${store.store_time}</p>
 							</div>
 						</li>

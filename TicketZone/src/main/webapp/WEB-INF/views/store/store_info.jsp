@@ -10,8 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Insert title here</title>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2a24234e20fd78957bd509e4c423610f&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2a24234e20fd78957bd509e4c423610f&libraries=services,clusterer,drawing"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="../resources/js/store_info.js"></script>
 <link href="../resources/css/store_info.css" rel="stylesheet">

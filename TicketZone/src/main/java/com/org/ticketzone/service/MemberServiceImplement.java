@@ -21,4 +21,10 @@ public class MemberServiceImplement implements MemberService {
 		return mapper.getList();
 	}
 
+	@Override
+	public ArrayList<MemberVO> memberTest() {
+		
+		return mapper.memberTest();
+	}
+
 }

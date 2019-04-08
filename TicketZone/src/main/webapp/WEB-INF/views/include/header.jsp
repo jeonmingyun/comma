@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -8,20 +8,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Document</title>
-<link href="../resources/css/header.css" rel="stylesheet"/>
-<script>
-	$(document).ready(function(){
-		$("#Logo").click(function(){
-			window.location.href="/";
-		});
-	});
-</script>
+<link href="../resources/css/header.css" rel="stylesheet" />
+<script src="../resources/js/header.js"></script>
 </head>
 <body>
 	<header>
 		<!-- 로고 -->
-		<button id="Logo"><img id="mainLogo" src="../resources/img/mainLogo.png"></button>
-		
+		<img id="mainLogo" src="../resources/img/mainLogo.png">
 		<!-- 메뉴 -->
 		<ul class="main-nav">
 			<li class="active"><a href="/">홈</a></li>
