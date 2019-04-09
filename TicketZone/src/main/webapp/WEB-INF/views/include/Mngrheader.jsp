@@ -14,6 +14,10 @@
 		$("#log_out").click(function(){
 			window.location.href="/mngrLogout";
 		});
+		
+		$("#mainLogo").click(function(){
+			window.location.href="/mngrOnly";
+		})
 	});
 </script>
 </head>

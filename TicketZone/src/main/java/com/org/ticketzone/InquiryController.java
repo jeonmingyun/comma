@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,10 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.org.ticketzone.domain.BoardVO;
+import com.org.ticketzone.domain.Criteria;
+import com.org.ticketzone.domain.PageDTO;
 import com.org.ticketzone.domain.ReplyVO;
 import com.org.ticketzone.service.BoardService;
 import com.org.ticketzone.service.IncludeService;
-import com.org.ticketzone.service.InterceptorService;
 
 import lombok.AllArgsConstructor;
 
@@ -24,12 +24,14 @@ import lombok.AllArgsConstructor;
 public class InquiryController {
 	private BoardService boardService;
 	private IncludeService includeService;
-	private InterceptorService interceptorService;
 
 	// ∞Ì∞¥ºæ≈Õ
 	@RequestMapping(value = "/inquiry", method = RequestMethod.GET)
-	public String inquiry(Model model) {
-		model.addAttribute("suggestList", boardService.boardList());
+	public String inquiry(Model model, Criteria Cri) {
+		int total = boardService.total(Cri);
+		model.addAttribute("suggestList", boardService.boardList(Cri));
+		model.addAttribute("list", boardService.getListWithPaging(Cri));
+		model.addAttribute("pageMaker", new PageDTO(Cri, total));
 		
 		return "inquiry";
 	}
