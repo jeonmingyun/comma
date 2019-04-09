@@ -12,22 +12,8 @@
 <title>Document</title>
 <link href="../resources/css/mngr_find.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script>
-        $(function(){
-            // $('input[type=radio][name=id_find]').on('click',function(){
-            $(".id_find").click(function(){
-                var checkedValue = $(".id_find:checked").val();
-                
-                if(checkedValue == 'phone_num'){
-                    $("#phone_ok").css('display','block');
-                    $("#email_ok").css('display','none');
-                } else if (checkedValue == 'e_mail'){
-                    $("#phone_ok").css('display','none');
-                    $("#email_ok").css('display','block');
-                }
-            });
-        });
-    </script>
+<script src="resources/js/mngr_find.js"></script>
+
 </head>
 <body>
 <%@include file="/WEB-INF/views/include/header.jsp"%>
@@ -41,7 +27,12 @@
             <label for="phone">휴대폰 본인인증</label>
                 <!-- 휴대폰 본인인증 라디오 버튼 클릭했을 때 -->
                 <div id="phone_ok">
-                    <button>본인명의 휴대폰 인증</button>            
+                    <p>이름</p>
+                    <input type="text" id="owner_name" name="owner_name">
+                    <p>전화번호 ('-'꼭 기입 해 주세요.)</p>
+                    <input type="tel" id="owner_tel" name="owner_tel">  
+                    <input type="submit" class="find_btn" name="find_success" value="찾기">
+                    <div id="findfail"></div>       
                 </div>
             </div>
 

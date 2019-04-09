@@ -2,6 +2,7 @@ package com.org.ticketzone;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -54,9 +55,39 @@ public class MngrController {
 	// 아이디 찾기페이지(기능미완성)
 	@RequestMapping(value = "/mngr_find", method = RequestMethod.GET)
 	public String mngr_find(Model model) {
+				
 		return "mngr/mngr_find";
 	}
-
+	
+	
+	//아이디 찾기
+	@ResponseBody
+	@RequestMapping(value = "/mngr_findTel_pro", method = RequestMethod.POST)
+	public String mngr_findTel_pro(Model model, OwnerVO owner, HttpServletRequest request, HttpSession session){
+		String owner_name = request.getParameter("owner_name");
+		String owner_tel = request.getParameter("owner_tel");
+		ArrayList<OwnerVO> arr = new ArrayList<OwnerVO>();
+		
+		arr = ownerService.findOwner(owner_name, owner_tel);
+		session.setAttribute("tel", arr);
+		if (arr.size() != 0) {
+			if (arr.get(0).getOwner_tel().equals(owner_tel)) {
+				return "mngr_findTel";
+			} else {
+				return "fail";
+			}
+		} else {
+			return "fail";
+		}
+		
+	}
+	
+	// 아이디 찾기페이지(기능미완성)
+	@RequestMapping(value = "/mngr_findTel", method = RequestMethod.GET)
+	public String mngr_findTel() {			
+		return "mngr/mngr_findTel";
+	}
+	
 	// 관리자 회원가입페이지 이동
 	@RequestMapping(value = "/mngr_register")
 	public String mngr_register(Model model) {

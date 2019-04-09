@@ -26,5 +26,10 @@ public class OwnerServiceImplement implements OwnerService {
 		mapper.insertOwner(owner);
 		
 	}
+	
+	@Override
+	public ArrayList<OwnerVO> findOwner(String owner_name, String owner_tel) {
+		return mapper.findOwner(owner_name, owner_tel);
+	}
 
 }
