@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.org.ticketzone.domain.BoardVO;
+import com.org.ticketzone.domain.Criteria;
+import com.org.ticketzone.domain.PageDTO;
 import com.org.ticketzone.service.BoardService;
 
 import lombok.AllArgsConstructor;
@@ -19,8 +21,11 @@ public class MInquiryController {
 	
 	// 관리자 건의 사항
 	@RequestMapping(value = "/mInquiry", method = RequestMethod.GET)
-	public String mInquiry(Model model) {
-		model.addAttribute("suggestList", boardService.boardList());
+	public String mInquiry(Model model, Criteria Cri) {
+		int total = boardService.total(Cri);
+		model.addAttribute("suggestList", boardService.boardList(Cri));
+		model.addAttribute("list", boardService.getListWithPaging(Cri));
+		model.addAttribute("pageMaker", new PageDTO(Cri, total));
 		
 		return "mngrOnly/mInquiry";
 	}

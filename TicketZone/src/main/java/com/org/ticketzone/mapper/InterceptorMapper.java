@@ -1,9 +1,7 @@
 package com.org.ticketzone.mapper;
 
-import org.apache.ibatis.annotations.Param;
-
-import com.org.ticketzone.domain.MemberVO;
+import com.org.ticketzone.domain.BoardVO;
 
 public interface InterceptorMapper {
-	public MemberVO member_login(@Param("admin_id") String admin_id, @Param("admin_password") String admin_password);
+	public BoardVO board_pass_pro(BoardVO board);
 }

@@ -22,15 +22,17 @@
 			<div id="suggest_form">
 				<h2>문의하기</h2>
 				<!-- 문의하기 -->
-				<div id=suggest_type2>
-					<select>
-						<option value="title">글제목</option>
-						<option value="error">앱 오류</option>
-						<option value="else">기타</option>
-					</select> <input type="search"> <input type="button" value="검색">
-					<button type="button" id="btnwrite">글쓰기</button>
-				</div>
-
+				<form id="searchForm" method="get" action="/inquiry">
+					<select name="type">
+						<option value="T">제목</option>
+						<option value="C">내용</option>
+						<option value="TC">제목 or 내용</option>
+					</select> <input type="text" name="keyword" />
+					<input type="hidden" id="efg" name="pageNum" value="${pageMaker.cri.pageNum}">
+					<input type="hidden" id="abcd" name="amout" value="${pageMaker.cri.amount}">
+					<button class="btn btn-default">검색</button>
+				</form>
+				<button type="button" id="btnwrite">글쓰기</button>
 				<table id="suggest">
 					<tr>
 						<th>번호</th>
@@ -52,6 +54,30 @@
 					</c:forEach>
 				</table>
 			</div>
+			
+			<!-- Paging -->
+	<div class='pull-right'>
+		<ul class="pagination">
+			<c:if test="${pageMaker.prev}">
+				<li class="paginate_button previous"><a href="${pageMaker.startPage -1}"><</a></li>
+			</c:if>
+			
+			<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+				<li class="paginate_button"><a href="${num}">${num}</a></li>
+			</c:forEach>
+			
+			<c:if test="${pageMaker.next}">
+				<li class="paginate_button next"><a href="${pageMaker.endPage +1 }">></a></li>
+			</c:if>
+		</ul>
+	</div>
+	<form id='actionForm' action='/inquiry' method='get'>
+		<input type="hidden" id="efg" name="pageNum" value = "${pageMaker.cri.pageNum}">
+		<input type="hidden" id="abcd" name="amout" value = "${pageMaker.cri.amount}">
+		<input type="hidden" name="type" value='<c:out value="${pageMaker.cri.type}"/>'>
+		<input type="hidden" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"/>'>
+	</form>
+	<!-- end Pagination -->
 		</section>
 
 		<%@include file="include/footer.jsp"%>

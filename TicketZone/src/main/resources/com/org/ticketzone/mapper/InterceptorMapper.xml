@@ -4,11 +4,11 @@
 
 <mapper namespace="com.org.ticketzone.mapper.InterceptorMapper">
 	
-	<!-- 관리자 로그인 확인 -->	
-	<select id="mngr_login" resultType="com.org.ticketzone.domain.AdminVO">
-		select * from reply 
-		where admin_id = #{admin_id} 
-		and admin_password = #{admin_password} 
+	<!-- 게시판  -->	
+	<select id="board_pass" resultType="com.org.ticketzone.domain.BoardVO">
+		select * from board
+		where board_no = #{board_no} 
+		and board_password = #{board_password}
 	</select>
 	
 </mapper>

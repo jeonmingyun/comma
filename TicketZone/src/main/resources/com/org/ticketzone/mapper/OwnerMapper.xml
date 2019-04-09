@@ -12,5 +12,11 @@
 	values(#{owner_id}, #{owner_password}, #{owner_name}, #{owner_tel}, #{email})
 </insert>
 
+<select id="findOwner" resultType="com.org.ticketzone.domain.OwnerVO">
+	select owner_id,owner_name,owner_tel 
+	from owner where owner_name = #{owner_name} 
+	and owner_tel = #{owner_tel}
+</select>
 
 </mapper>
+
