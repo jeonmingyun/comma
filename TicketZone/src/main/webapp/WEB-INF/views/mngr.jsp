@@ -12,9 +12,7 @@
 <title>Document</title>
 <link href="resources/css/mngr.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="resources/js/mngr.js">
-	
-</script>
+<script src="resources/js/mngr.js"></script>
 </head>
 <body>
 
