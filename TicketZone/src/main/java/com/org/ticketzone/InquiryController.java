@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.org.ticketzone.domain.BoardVO;
+import com.org.ticketzone.domain.Criteria;
+import com.org.ticketzone.domain.PageDTO;
 import com.org.ticketzone.domain.ReplyVO;
 import com.org.ticketzone.service.BoardService;
 import com.org.ticketzone.service.IncludeService;
@@ -28,8 +30,11 @@ public class InquiryController {
 
 	// ∞Ì∞¥ºæ≈Õ
 	@RequestMapping(value = "/inquiry", method = RequestMethod.GET)
-	public String inquiry(Model model) {
-		model.addAttribute("suggestList", boardService.boardList());
+	public String inquiry(Model model, Criteria Cri) {
+		int total = boardService.total(Cri);
+		model.addAttribute("suggestList", boardService.boardList(Cri));
+		model.addAttribute("list", boardService.getListWithPaging(Cri));
+		model.addAttribute("pageMaker", new PageDTO(Cri, total));
 		
 		return "inquiry";
 	}

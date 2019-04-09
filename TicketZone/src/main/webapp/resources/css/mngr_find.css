@@ -40,6 +40,24 @@ h1 {
 	color: red;
 }
 
+.find_btn {
+    /* display: inline-block; */
+    padding: 5px;
+    border: none;
+    outline: none;
+    background: #000000;
+    color: white;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+.find_btn:hover {
+    cursor: pointer;
+    background-color: cornflowerblue;
+    color: #ffffff;
+    
+}
+
 .ok_btn {
     /* display: inline-block; */
     padding: 5px;
