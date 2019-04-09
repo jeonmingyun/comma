@@ -9,6 +9,8 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <!-- updmStore_Reg.js 경로 -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!-- CSS경로 -->
+<link href="resources/css/updmStore_Register.css" rel="stylesheet" />
 <script src="resources/js/mngrOnly/updmStore_Reg.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
@@ -85,8 +87,10 @@ function sample6_execDaumPostcode() {
 					</tbody>
 				</table>
 				<!-- 수정,삭제 버튼 -->
-				<input type="submit" id="update" value="수정">
-				<input type="button" id="cancel" value="취소">
+				<div class="write_btn">
+					<input type="submit" id="update" value="수정">
+					<input type="button" id="cancel" value="취소">
+				</div>
 			</form>
 		</div>
 		</section>
