@@ -33,5 +33,21 @@
 /* 수정,취소버튼 */
 .write_btn {
     float: right;
-    width: 
+    width: 680px;
+    table-layout:fixed;
+}
+
+.write_btn input {
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #000000;
+    color: #ffffff;
+    outline: none;
+    font: 20px;
+}
+
+.write_btn input:hover {
+    cursor: pointer;
+    background-color: cornflowerblue;
 }
