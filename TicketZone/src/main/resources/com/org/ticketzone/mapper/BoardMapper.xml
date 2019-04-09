@@ -20,6 +20,11 @@
 		select * from board where board_no= #{board_no}
 	</select>
 	
+	<!-- 문의사항 수정페이지-->	
+	<select id="board_pass" resultType="com.org.ticketzone.domain.BoardVO">
+		select * from board where board_no= #{board_no}
+	</select>
+	
 	<!-- 문의사항 수정처리 -->
 	<update id="boardUpd">
 		update board
