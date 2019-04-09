@@ -11,6 +11,8 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Document</title>
 <link href="../resources/css/mngr_register.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="resources/js/mngr_join.js"></script>
 </head>
 <body>
 	
@@ -37,7 +39,7 @@
 
             <input type="submit" class="join_btn" name="join_success" value="등록">
        </form>
-            <button class="join_btn" name="join_cancel">취소</button>
+            <button class="join_btn" name="join_cancel" id="join_cancel">취소</button>
         </div>
 
 

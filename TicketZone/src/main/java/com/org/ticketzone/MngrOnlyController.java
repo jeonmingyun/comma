@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.org.ticketzone.domain.CoordinatesVO;
 import com.org.ticketzone.domain.NumberTicketVO;
 import com.org.ticketzone.domain.OwnerVO;
 import com.org.ticketzone.domain.StoreVO;
-
 import com.org.ticketzone.service.CategorieService;
+import com.org.ticketzone.service.CoordinatesService;
 import com.org.ticketzone.service.MemberService;
 import com.org.ticketzone.service.NumberTicketService;
 import com.org.ticketzone.service.StoreService;
@@ -29,7 +30,7 @@ public class MngrOnlyController {
 
 	private StoreService storeService;
 	private CategorieService categorieService;
-
+	private CoordinatesService coordinatesService;
 	private NumberTicketService numberTicketService;
 	private MemberService memberService;
 
@@ -64,8 +65,8 @@ public class MngrOnlyController {
 
 	// 매장등록 처리(insert)
 	@RequestMapping(value = "/mStore_Reg", method = RequestMethod.POST)
-	public String Register(Model model, StoreVO store) {
-
+	public String Register(Model model, StoreVO store, CoordinatesVO coor) {
+		coordinatesService.insertXY(coor);
 		storeService.storeRegister(store);
 
 		return "/mngrOnly/mStore";
@@ -73,8 +74,9 @@ public class MngrOnlyController {
 
 	// 매장수정 페이지 이동
 	@RequestMapping(value = "/updmStore_Register", method = RequestMethod.GET)
-	public String updmStore_Register(StoreVO storeVO, Model model, HttpServletRequest request) {
+	public String updmStore_Register(StoreVO storeVO, Model model, CoordinatesVO coor) {
 		String license = storeVO.getLicense_number();
+		model.addAttribute("coor", coordinatesService.XYList(license));
 		model.addAttribute("updmStore", storeService.storeUpdate(license));
 		model.addAttribute("cate", categorieService.categorieFoodList());
 		return "/mngrOnly/mStore/updmStore_Register";
