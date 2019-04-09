@@ -1,7 +1,7 @@
 package com.org.ticketzone.service;
 
-import com.org.ticketzone.domain.MemberVO;
+import com.org.ticketzone.domain.BoardVO;
 
 public interface InterceptorService {
-	public MemberVO member_login(String admin_id, String admin_password);
+	public BoardVO board_pass_pro(BoardVO board);
 }

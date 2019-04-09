@@ -27,7 +27,7 @@
 					</tr>
 					
 					<tr>
-						<th><label for="board_password">비밀글</label></th>
+						<th><label for="board_password">비밀번호</label></th>
 						<td>
 							<input type="password" name="board_password" id="board_password">
 						</td>
@@ -35,12 +35,12 @@
 					
 					<tr>
 						<th><label for="title">제목</label></th>
-						<td><input type="text" name="board_title" id="title" size="60"></td>
+						<td><input type="text" name="board_title" id="title" size="60" required></td>
 					</tr>
 
 					<tr>
 						<th><label for="content">내용</label></th>
-						<td><textarea name="board_content" id="content" rows="8" cols="60"></textarea></td>
+						<td><textarea name="board_content" id="content" rows="8" cols="60" required></textarea></td>
 					</tr>
 
 					<!-- <tr>

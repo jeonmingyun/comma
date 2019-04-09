@@ -11,8 +11,8 @@
 	
 	<!-- 문의사항 글쓰기 처리 -->
 	<insert id="boardInsert">
-		insert into board(board_no, board_title, board_content)
-		values(board_seq.nextval, #{board_title}, #{board_content})
+		insert into board(board_no, board_title, board_content, board_password)
+		values(board_seq.nextval, #{board_title}, #{board_content}, #{board_password})
 	</insert>
 	
 	<!-- 문의사항 수정페이지-->	

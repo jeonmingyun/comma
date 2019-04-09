@@ -4,17 +4,18 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.org.ticketzone.domain.BoardVO;
 import com.org.ticketzone.domain.ReplyVO;
 import com.org.ticketzone.service.BoardService;
 import com.org.ticketzone.service.IncludeService;
+import com.org.ticketzone.service.InterceptorService;
 
 import lombok.AllArgsConstructor;
 
@@ -23,6 +24,7 @@ import lombok.AllArgsConstructor;
 public class InquiryController {
 	private BoardService boardService;
 	private IncludeService includeService;
+	private InterceptorService interceptorService;
 
 	// 고객센터
 	@RequestMapping(value = "/inquiry", method = RequestMethod.GET)
@@ -45,7 +47,21 @@ public class InquiryController {
 		
 		return "redirect:/inquiry";
 	}
+	
+	// 문의 글쓰기 비번 체크
+	@RequestMapping(value = "/board_pass_form", method = RequestMethod.GET)
+	public String inquiry_pass_form() {
+		return "interceptor/board_pass_form";
+	}
 		
+	// 문의 글쓰기 비번 체크
+	@RequestMapping(value = "/board_pass_pro", method = RequestMethod.POST)
+	public String inquiry_pass_pro(BoardVO board) {
+//			interceptorService.board_pass(board);
+		System.out.println(board);
+		return "inquiry/inquiryWrite";
+	}
+	
 	// 문의글 상세보기
 	@RequestMapping(value = "/showInquiry", method = RequestMethod.GET)
 	public String showInquiry(Model model, HttpServletRequest request) {
