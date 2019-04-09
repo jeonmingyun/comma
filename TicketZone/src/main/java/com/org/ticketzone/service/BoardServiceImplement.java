@@ -23,10 +23,10 @@ public class BoardServiceImplement implements BoardService {
 		return mapper.boardUpdInfo(board_no);
 	}
 	
-	@Override
-	public BoardVO board_pass(String board_no) {
-		return mapper.board_pass(board_no);
-	}
+//	@Override
+//	public BoardVO board_pass(String board_no) {
+//		return mapper.board_pass(board_no);
+//	}
 	
 	@Override
 	public void boardUpd(BoardVO board) {	

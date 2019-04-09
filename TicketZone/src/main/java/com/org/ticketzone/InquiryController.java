@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +14,6 @@ import com.org.ticketzone.domain.BoardVO;
 import com.org.ticketzone.domain.ReplyVO;
 import com.org.ticketzone.service.BoardService;
 import com.org.ticketzone.service.IncludeService;
-import com.org.ticketzone.service.InterceptorService;
 
 import lombok.AllArgsConstructor;
 
@@ -24,7 +22,6 @@ import lombok.AllArgsConstructor;
 public class InquiryController {
 	private BoardService boardService;
 	private IncludeService includeService;
-	private InterceptorService interceptorService;
 
 	// ∞Ì∞¥ºæ≈Õ
 	@RequestMapping(value = "/inquiry", method = RequestMethod.GET)
