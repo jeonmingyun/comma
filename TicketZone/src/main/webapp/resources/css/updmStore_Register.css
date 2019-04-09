@@ -32,5 +32,6 @@
 
 /* 수정,취소버튼 */
 .write_btn {
-    align: right; 
+    float: right;
+    width: 
 }

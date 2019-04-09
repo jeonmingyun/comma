@@ -6,7 +6,7 @@ import lombok.Data;
 public class StoreVO {
 	private String license_number;
 	private String r_name;
-	private String address_code;
+	private String zipcode;
 	private int max_number;
 	private int store_status;
 	private String cate_code;

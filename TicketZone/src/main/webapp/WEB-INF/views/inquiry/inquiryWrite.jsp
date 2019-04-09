@@ -25,7 +25,14 @@
 								<option value="else">기타</option>
 						</select></td>
 					</tr>
-
+					
+					<tr>
+						<th><label for="board_password">비밀글</label></th>
+						<td>
+							<input type="password" name="board_password" id="board_password">
+						</td>
+					</tr>
+					
 					<tr>
 						<th><label for="title">제목</label></th>
 						<td><input type="text" name="board_title" id="title" size="60"></td>

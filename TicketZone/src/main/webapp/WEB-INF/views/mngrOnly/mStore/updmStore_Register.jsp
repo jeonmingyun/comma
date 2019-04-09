@@ -26,7 +26,7 @@ function sample6_execDaumPostcode() {
 				} else {
 					addr = data.jibunAddress;
 				}
-				document.getElementById('sample6_postcode').value = data.zonecode;
+				
 				document.getElementById("sample6_address").value = addr;
 			}
 		}).open();
@@ -77,8 +77,8 @@ function sample6_execDaumPostcode() {
 						</tr>
 						<tr>
 							<th>매장 주소</th>
-							<td><input type="text" name="address_code" id="sample6_postcode" placeholder="우편번호">-
-							<input type="text" id="sample6_address" name="address_name" placeholder="주소">
+							<td>
+							<input type="text" id="sample6_address" name="address_name" placeholder="주소" value="${updmStore.address_name}">
 							<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></td>
 							<c:forEach var="id" items="${id}">
 								<input type="hidden" name="owner_id" value="${id.owner_id}">
