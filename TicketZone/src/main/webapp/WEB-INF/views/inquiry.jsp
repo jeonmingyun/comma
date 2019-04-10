@@ -32,7 +32,7 @@
 					<input type="hidden" id="abcd" name="amout" value="${pageMaker.cri.amount}">
 					<button class="btn btn-default">검색</button>
 				</form>
-				<button type="button" id="btnwrite">글쓰기</button>
+				
 				<table id="suggest">
 					<tr>
 						<th>번호</th>
@@ -53,7 +53,11 @@
 						</tr>
 					</c:forEach>
 				</table>
-			</div>
+				<!-- 글쓰기 버튼 -->
+			<button type="button" id="btnwrite">글쓰기</button>
+		</div>
+			
+			
 			
 			<!-- Paging -->
 	<div class='pull-right'>

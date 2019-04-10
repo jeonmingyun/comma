@@ -3,6 +3,13 @@
 	margin: 0;
 	padding: 0;
 }
+/* 큰 div 폼 */
+#suggest_form {
+	margin: 0 auto;
+	width: 800px; /*table  width크기랑 똑같이 */
+	height: 100%;	
+}
+
 #suggest_type2 {
 	text-align: center;
 }
@@ -48,4 +55,9 @@ h2{
 #suggest tr:hover td{
 	cursor: pointer;
 	background-color: #EBEBEB;
+}
+
+/* 글쓰기 버튼 */
+#btnwrite {
+	float: right;
 }

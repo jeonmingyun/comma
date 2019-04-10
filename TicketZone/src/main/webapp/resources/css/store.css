@@ -29,22 +29,26 @@ li {
 	margin: 0 auto;
 }
 
-매장사
-
+/* ul 태그 */
 .store_img {
-	width: 210px;
+	margin: 10px 0;
+	width: 930px;
 }
 
+/* 매장 사진 정렬 */
 .store_img li {
 	width: 220px;
     position: relative;
     display: inline-block;
     margin: 20 10px 30px;
 }
+
+/* 매장 이름 */
 .store_img li h3 {
 	text-align: center;
 }
 
+/* 이미지 */
 .store_img .s_img {
 	width : 100%;
 	height : 100%;

@@ -77,7 +77,7 @@
 							<div>
 								<h3>${store.store_name}</h3>
 								<p>연락처: ${store.store_tel}</p>
-								<p>주소: ${store.address_name}</p>
+								<p style="white-space:nowrap;">주소: ${store.address_name}</p>
 								<p>영업시간: ${store.store_time}</p>
 							</div>
 						</li>

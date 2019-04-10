@@ -3,6 +3,12 @@
     padding: 0;
 }
 
+.table_wapper {
+	margin: 0 auto;
+	width: 800px; /*table  width크기랑 똑같이 */
+	height: 100%;
+}
+
 /* 문의글 작성 */
 .table_wapper h1 {
     text-align: center;
@@ -12,7 +18,7 @@
 .cus_show {
     margin: 10px auto;
     border-collapse: collapse;
-    width: 50%;
+    width: 800px;
 }
 
 /* 테이블 제목 */
@@ -31,8 +37,7 @@
 
 /* 확인,취소 버튼 */
 .write_btn {
-    float: right;
-    margin-right: 25%;
+	text-align: right;
 }
 
 .write_btn button {
