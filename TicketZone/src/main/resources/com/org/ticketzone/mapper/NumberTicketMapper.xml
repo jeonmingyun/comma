@@ -34,6 +34,7 @@
 	<insert id="makeTicket">
 	<![CDATA[
 		insert into number_ticket
+		(ticket_code, wait_number, the_number, license_number, member_tel, ticket_status)
 		values(
 		(select (code1 || code2) + 1 as code
 		from make_code
@@ -52,6 +53,7 @@
 	<insert id="plusTicket">
 	<![CDATA[
 		insert into number_ticket
+		(ticket_code, wait_number, the_number, license_number, member_tel, ticket_status)
 		values(
 		(select (ticket_code + 1) as ticket_code
 		from (select ticket_code from number_ticket 
@@ -193,15 +195,18 @@
 		group by ticket_status
 		]]>
 	</select>
-	
-	
+
+
 	<select id="waitList"
 		resultType="com.org.ticketzone.domain.NumberTicketVO">
-		select substr(ticket_code,19) as ticket_code, wait_number, the_number, license_number, member_tel, ticket_status number_ticket 
-        from number_ticket
-        where license_number = #{license_number}
-        order by ticket_code
+		select substr(ticket_code,19) as ticket_code, wait_number,
+		the_number, license_number, member_tel, ticket_status number_ticket
+		from number_ticket
+		where license_number = #{license_number}
+		order by
+		ticket_code
 	</select>
 
+	
 
 </mapper>

@@ -79,9 +79,9 @@ public class MngrOnlyController {
 	// 매장등록 처리(insert)
 	@RequestMapping(value = "/mStore_Reg", method = RequestMethod.POST)
 	public String Register(Model model, StoreVO store, CoordinatesVO coor) {
-		coordinatesService.insertXY(coor);
+		
 		storeService.storeRegister(store);
-
+		coordinatesService.insertXY(coor);
 		return "/mngrOnly/mStore";
 	}
 

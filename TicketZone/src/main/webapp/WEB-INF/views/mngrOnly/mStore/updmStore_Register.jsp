@@ -81,9 +81,6 @@
 				<input type="hidden" id="coor_y" name="coor_y" value="${coor[0].coor_y}">
 				<!-- 수정,삭제 버튼 -->
 
-				<input type="submit" id="update" value="수정"> <input
-					type="button" id="cancel" value="취소">
-
 				<div class="write_btn">
 					<input type="submit" id="update" value="수정">
 					<input type="button" id="cancel" value="취소">

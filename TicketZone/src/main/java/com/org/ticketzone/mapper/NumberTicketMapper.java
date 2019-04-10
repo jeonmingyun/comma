@@ -3,6 +3,7 @@ package com.org.ticketzone.mapper;
 
 import java.util.ArrayList;
 
+import com.org.ticketzone.domain.ChartVO;
 import com.org.ticketzone.domain.NumberTicketVO;
 
 public interface NumberTicketMapper {
@@ -31,4 +32,6 @@ public interface NumberTicketMapper {
 	public void absenceStatus(NumberTicketVO ticket);
 	
 	public void cancelTicket(NumberTicketVO ticket);
+	
+	
 }
