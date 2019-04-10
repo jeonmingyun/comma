@@ -41,6 +41,6 @@
 	<button type="button" id="btnDelete"
 		onclick="delInquiry(${InquiryUpd[0].board_no})">삭제</button>
 	
-	<%-- <%@include file="../include/reply.jsp"%> --%>
+	 <%@include file="../../include/reply.jsp"%> 
 </body>
 </html>

@@ -11,6 +11,7 @@ import com.org.ticketzone.domain.BoardVO;
 import com.org.ticketzone.domain.Criteria;
 import com.org.ticketzone.domain.PageDTO;
 import com.org.ticketzone.service.BoardService;
+import com.org.ticketzone.service.IncludeService;
 
 import lombok.AllArgsConstructor;
 
@@ -18,6 +19,7 @@ import lombok.AllArgsConstructor;
 @Controller
 public class MInquiryController {
 	private BoardService boardService;
+	private IncludeService includeService;
 	
 	// 관리자 건의 사항
 	@RequestMapping(value = "/mInquiry", method = RequestMethod.GET)
@@ -49,6 +51,7 @@ public class MInquiryController {
 		public String mShowInquiry(Model model, HttpServletRequest request) {
 			String board_no = request.getParameter("board_no");
 			model.addAttribute("InquiryUpd", boardService.boardUpdInfo(board_no));
+			model.addAttribute("replyList", includeService.replyList(board_no));
 			return "mngrOnly/mInquiry/mShowInquiry";
 		}	
 		
