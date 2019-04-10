@@ -38,7 +38,6 @@
 			<beans:bean id="commonInterceptor"
 				class="com.org.ticketzone.interceptor.CommonInterceptor" />
 		</interceptor>
-	</interceptors>
-		
+	</interceptors>	
 	
 </beans:beans>
