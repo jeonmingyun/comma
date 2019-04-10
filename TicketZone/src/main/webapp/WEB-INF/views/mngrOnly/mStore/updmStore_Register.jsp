@@ -21,6 +21,7 @@
 <body>
 	<!-- 헤더부분 -->
 	<%@include file="/WEB-INF/views/include/Mngrheader.jsp"%>
+	<%@include file="/WEB-INF/views/include/storeAdmin.jsp" %>
 	<section>
 		<div class="table_wapper">
 			<form method="post" action="updmStore_Complete">
