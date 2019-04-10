@@ -46,6 +46,19 @@ public class MngrOnlyController {
 
 		return "/mngrOnly/mStore";
 	}
+	
+		
+	@RequestMapping(value = "mTicketSet")
+	public String mTicketSet() {
+		
+		return "/mngrOnly/mStoreAdmin/mTicketSet";
+	}
+	
+	@RequestMapping(value = "mMenuAdmin")
+	public String mMenuAdmin() {
+		
+		return "/mngrOnly/mStoreAdmin/mMenuAdmin";
+	}
 
 	// 관리자 로그아웃
 	@RequestMapping(value = "/mngrLogout")
@@ -114,12 +127,6 @@ public class MngrOnlyController {
 		return " ";
 	}
 
-	// 매장관리 페이지 이동
-	@RequestMapping(value = "/mState", method = RequestMethod.GET)
-	public String mState(Model model) {
-
-		return "/mngrOnly/mState";
-	}
 
 	// 번호표 발급
 	@ResponseBody

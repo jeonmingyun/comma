@@ -27,8 +27,6 @@
 		<img id="mainLogo" src="resources/img/mainLogo.png">
 
 		<ul class="main-nav">
-			<li><a href="/mngrOnly">홈</a></li>
-			<li><a href="/mState">매장관리</a></li>
 			<li><a href="/mCustomer?license_number=${store[0].license_number}">고객관리</a></li>
 			<li><a href="/mInquiry">건의사항</a></li>
 		</ul>
