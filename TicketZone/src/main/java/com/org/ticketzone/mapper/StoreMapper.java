@@ -2,10 +2,11 @@ package com.org.ticketzone.mapper;
 
 import java.util.ArrayList;
 
+import com.org.ticketzone.domain.StoreCriteria;
 import com.org.ticketzone.domain.StoreVO;
 
 public interface StoreMapper {
-	public ArrayList<StoreVO> storeList();
+	public ArrayList<StoreVO> storeList(StoreCriteria cri);
 	
 	public ArrayList<StoreVO> storeInfo(String license);
 	
@@ -19,4 +20,9 @@ public interface StoreMapper {
 	// 매장 수정 처리(update)
 	public void storeUpdCom(StoreVO store);
 	
+	public int SearchCount(StoreCriteria cri);
+
+	public ArrayList<StoreVO> getListWithPaging(StoreCriteria cri);
+	
+	public int total(StoreCriteria cri);
 }

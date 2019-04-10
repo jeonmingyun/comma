@@ -18,8 +18,9 @@
 	<%@include file="include/header.jsp"%>
 	
 	<!-- 공지사항 div -->
-	<div>
+	<div id="home">
 		<h1>공지사항</h1>
+		<div id="notice_table">
 		<form id="searchForm" method="get" action = "/">
 		<select name="type">
 			<option value="T">제목</option>
@@ -29,8 +30,9 @@
 		<input type="text" name="keyword" />
 		<input type="hidden" id="efg" name="pageNum" value = "${pageMaker.cri.pageNum}">
 		<input type="hidden" id="abcd" name="amout" value = "${pageMaker.cri.amount}">
-		<button class="btn btn-default">검색</button>
+		<button class="btn-default">검색</button>
 		</form>
+
 		<table id="notice">
 			<tr>
 				<th>번호
@@ -47,8 +49,11 @@
 				</tr>
 			</c:forEach>			
 		</table>
+		<div id="writebutton">
 		<!-- play store button div-->
 		<button id="noticeWrite" onclick="noticeWrite()">글쓰기</button>
+		</div>
+		</div>
 	</div>
 	
 	<!-- Paging -->
@@ -75,7 +80,7 @@
 	</form>
 	<!-- end Pagination -->
 	
-	<div>
+	<div id="app">
 		<h1>번호요 지금 바로 이용하기</h1>
 		<a href="https://play.google.com/store/apps/details?id=com.soonbuny">
 			<img alt="no image" src="resources/img/playstore.png">

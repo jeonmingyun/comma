@@ -20,8 +20,9 @@
 
 		<section>
 			<div id="suggest_form">
-				<h2>문의하기</h2>
-				<!-- 문의하기 -->
+			<!-- 문의하기 -->
+				<h1>문의하기</h1>
+				<div id="inquiry_table">
 				<form id="searchForm" method="get" action="/inquiry">
 					<select name="type">
 						<option value="T">제목</option>
@@ -30,9 +31,9 @@
 					</select> <input type="text" name="keyword" />
 					<input type="hidden" id="efg" name="pageNum" value="${pageMaker.cri.pageNum}">
 					<input type="hidden" id="abcd" name="amout" value="${pageMaker.cri.amount}">
-					<button class="btn btn-default">검색</button>
+					<button class="btn-default">검색</button>
 				</form>
-				<button type="button" id="btnwrite">글쓰기</button>
+				
 				<table id="suggest">
 					<tr>
 						<th>번호</th>
@@ -53,6 +54,10 @@
 						</tr>
 					</c:forEach>
 				</table>
+				<div id="writebutton">
+				<button type="button" id="btnwrite">글쓰기</button>
+				</div>
+				</div>
 			</div>
 			
 			<!-- Paging -->

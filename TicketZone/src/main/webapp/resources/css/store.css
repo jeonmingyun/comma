@@ -50,27 +50,29 @@ li {
 	height : 100%;
 }
 
-/* pagination */
-.pagination {
-    justify-content: center;
-    text-align: center;
-    margin-top: 15px;
-    align-items: center;
+.pull-right{
+	text-align: center;
 }
-
-.pagination a {
-    padding: 8px 16px;
+/* pagination */
+.pagination a{
+	padding: 8px 16px;
     text-decoration: none;
     color: black;
+    
 }
 
+.pagination li {
+	position: relative;
+	display: inline-block;
+	
+}
 /* 선택되지 않았을 때 */
-.pagination a:hover:not(.active) {
-    background-color: #ddd;
-}
-
-.pagination a.active{
+.pagination a:active{
     border-bottom: 1px solid #000000;
     color: #000000;
     font-weight: bold;
+}
+
+.pagination a:hover{
+    background-color: #ddd;
 }
