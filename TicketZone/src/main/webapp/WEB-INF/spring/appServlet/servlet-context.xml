@@ -32,10 +32,8 @@
 		<interceptor>
 			<mapping path="/showInquiry/**" />
 			<exclude-mapping path="/login/**" />
-			<beans:bean id="commonInterceptor"
-				class="com.org.ticketzone.interceptor.CommonInterceptor" />
+			<beans:bean id="commonInterceptor" class="com.org.ticketzone.interceptor.CommonInterceptor" />
 		</interceptor>
-	</interceptors>
-		
+	</interceptors>	
 	
 </beans:beans>

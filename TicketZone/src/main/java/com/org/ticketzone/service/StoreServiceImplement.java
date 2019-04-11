@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
+import com.org.ticketzone.domain.StoreCriteria;
 import com.org.ticketzone.domain.StoreVO;
 import com.org.ticketzone.mapper.StoreMapper;
 
@@ -16,9 +17,27 @@ public class StoreServiceImplement implements StoreService{
 	private StoreMapper mapper;
 	
 	@Override
-	public ArrayList<StoreVO> storeList() {
+	public ArrayList<StoreVO> storeList(StoreCriteria cri) {
 		
-		return mapper.storeList();
+		return mapper.getListWithPaging(cri);
+	}
+	
+	@Override
+	public ArrayList<StoreVO> getListWithPaging(StoreCriteria cri) {
+		// TODO Auto-generated method stub
+		return mapper.getListWithPaging(cri);
+	}
+
+	@Override
+	public int total(StoreCriteria cri) {
+		
+		return mapper.total(cri);
+	}
+	
+	@Override
+	public int SearchCount(StoreCriteria cri) {
+		
+		return mapper.SearchCount(cri);
 	}
 
 	@Override

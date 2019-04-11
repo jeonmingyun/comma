@@ -3,12 +3,6 @@
     padding: 0;
 }
 
-.table_wapper {
-	margin: 0 auto;
-	width: 800px; /*table  width크기랑 똑같이 */
-	height: 100%;
-}
-
 /* 문의글 작성 */
 .table_wapper h1 {
     text-align: center;
@@ -18,7 +12,7 @@
 .cus_show {
     margin: 10px auto;
     border-collapse: collapse;
-    width: 800px;
+    width: 50%;
 }
 
 /* 테이블 제목 */
@@ -26,7 +20,7 @@
     border: 1px solid #dddddd;
     background-color: #000000;
     color: #ffffff;
-    /* padding: 15px 10px; */
+    padding: 15px 10px;
     font-size: 16px;
 }
 
@@ -37,7 +31,8 @@
 
 /* 확인,취소 버튼 */
 .write_btn {
-	text-align: right;
+    float: right;
+    margin-right: 25%;
 }
 
 .write_btn button {
@@ -53,9 +48,4 @@
 .write_btn button:hover {
     cursor: pointer;
     background-color: cornflowerblue;
-}
-
-/* 글 쓰기 (textarea) */
-#content {
-	resize: none;
 }

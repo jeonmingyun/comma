@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.org.ticketzone.domain.StoreCriteria;
+import com.org.ticketzone.domain.StorePageDTO;
 import com.org.ticketzone.domain.StoreVO;
 import com.org.ticketzone.service.StoreService;
 
@@ -23,8 +25,12 @@ public class StoreController {
 
 	// ¡¶»ﬁ∏≈¿Â
 	@RequestMapping(value = "/store", method = RequestMethod.GET)
-	public String sotre(Model model) {
-		model.addAttribute("list", storeService.storeList());
+	public String sotre(Model model, StoreCriteria Cri) {
+		
+		int total = storeService.total(Cri);
+		model.addAttribute("list", storeService.storeList(Cri));
+		model.addAttribute("list", storeService.getListWithPaging(Cri));
+		model.addAttribute("pageMaker", new StorePageDTO(Cri, total));
 
 		return "store";
 	}

@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <title>고객센터 게시글 작성</title>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<!-- <link href="../resources/css/inquiryWrite.css" rel="stylesheet" />-->
+<link href="../resources/css/mInquiryWrite.css" rel="stylesheet" />
 <script src="../resources/js/mngrOnly/mInquiryWrite.js"></script>
 
 </head>

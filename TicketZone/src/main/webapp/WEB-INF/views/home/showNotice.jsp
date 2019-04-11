@@ -19,6 +19,7 @@
 </script>
 </head>
 <body>
+<<<<<<< HEAD
 	<h2>게시글 보기</h2>
 	<table class="show">
 		<tbody>
@@ -57,6 +58,38 @@
 		onclick="updNotice(${noticeUpd[0].notice_no})">수정</button>
 	<button type="button" id="btnDelete"
 		onclick="delNotice(${noticeUpd[0].notice_no})">삭제</button>
+=======
+	<div class="table_wapper">
+		<h1>게시글 보기</h1>
+		<table class="notice_show">
+			<tbody>
+				<tr>
+					<!-- <th scope="row">제목</th> -->
+					<td><h2>${noticeUpd[0].notice_title}</h2></td>
+				</tr>
+				<tr>
+					<!-- <th scope="row">작성자</th> -->
+					<td>관리자</td>
+>>>>>>> b32ea9cb725b91aaaf1598649b31777dfa1e7a6e
 
+
+					<!-- <th scope="row">작성일</th> -->
+					<td>${noticeUpd[0].notice_reg }</td>
+				</tr>
+				<tr>
+					<th scope="row">내용</th>
+					<td>${noticeUpd[0].notice_content}</td>
+				</tr>
+				<tr>
+					<th>첨부파일</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<button type="button" id="btnUpdate"
+			onclick="updNotice(${noticeUpd[0].notice_no})">수정</button>
+		<button type="button" id="btnDelete"
+			onclick="delNotice(${noticeUpd[0].notice_no})">삭제</button>
+	</div>
 </body>
 </html>

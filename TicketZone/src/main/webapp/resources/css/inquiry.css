@@ -3,22 +3,35 @@
 	margin: 0;
 	padding: 0;
 }
+
 #suggest_type2 {
 	text-align: center;
 }
-h2{
-    padding: 10px 0;
-    text-align: center;
-    font-size: 50px;   
+
+/* 전체 div */
+#suggest_form {
+	text-align: center;
+}
+
+#inquiry_table {
+	display: inline-block;
+}
+
+h1 {
+	text-align: center;
+	margin: 10px auto;
+	font-size: 32px;
 }
 
 /* 표(테이블) */
-#suggest{
-	width: 800px;
+#suggest {
+	table-layout: fixed;
+	width : 800px;
 	border-collapse: collapse;
 	text-align: center;
-    font-size: 16px;
-    margin:20px auto;
+	font-size: 16px;
+	margin: 20px auto;
+	width: 800px;
 }
 
 /* 표의 제목 */
@@ -32,20 +45,89 @@ h2{
 
 /* 표제목 테두리 둥글게 */
 #suggest th:first-child {
-  border-top-left-radius:5px;
+	border-top-left-radius: 5px;
 }
 
 #suggest th:last-child {
-  border-top-right-radius:5px;
+	border-top-right-radius: 5px;
 }
 
 #suggest td {
+	white-space: nowrap;
 	border-bottom: 1px solid #000000;
 	padding: 10px;
 }
 
 /* 게시글 제목 클릭했을 때 */
-#suggest tr:hover td{
+#suggest tr:hover td {
 	cursor: pointer;
 	background-color: #EBEBEB;
+}
+
+/* 글쓰기 버튼 정렬*/
+#writebutton {
+	float: right;
+}
+
+/* 글쓰기 버튼 */
+#btnwrite {
+	padding: 5px 15px;
+	border: none;
+	border-radius: 5px;
+	background-color: #000000;
+	color: #ffffff;
+	outline: none;
+	font: 20px;
+}
+
+/* 글쓰기 버튼 클릭했을 때 */
+#btnwrite:hover {
+	cursor: pointer;
+	background-color: cornflowerblue;
+}
+/* select선택 창 */
+#searchForm select {
+	vertical-align: middle;
+}
+
+/* 검색 버튼 */
+.btn-default {
+	padding: 5px 15px;
+	border: none;
+	border-radius: 5px;
+	background-color: #000000;
+	color: #ffffff;
+	outline: none;
+	font: 20px;
+}
+
+/* 검색 버튼 클릭했을 때 */
+.btn-default:hover {
+	cursor: pointer;
+	background-color: cornflowerblue;
+}
+/* pagination 정렬 */
+.pull-right {
+	text-align: center;
+}
+/* pagination */
+.pagination a {
+	padding: 8px 16px;
+	text-decoration: none;
+	color: black;
+}
+
+.pagination li {
+	position: relative;
+	display: inline-block;
+}
+/* 선택되지 않았을 때 */
+.pagination a:active {
+	border-bottom: 1px solid #000000;
+	color: #000000;
+	font-weight: bold;
+}
+
+.pagination a:hover {
+	background-color: #ddd;
 }
