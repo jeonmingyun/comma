@@ -58,10 +58,19 @@ public class InquiryController {
 		
 	// 문의 글쓰기 비번 체크
 	@RequestMapping(value = "/board_pass_pro", method = RequestMethod.POST)
-	public String inquiry_pass_pro(BoardVO board) {
-//			interceptorService.board_pass(board);
-		System.out.println(board);
-		return "inquiry/inquiryWrite";
+	public String inquiry_pass_pro(Model model, BoardVO board) {
+		BoardVO board_pass_ck = boardService.board_pass(board);
+		String board_no = board.getBoard_no() + "";
+		model.addAttribute("InquiryUpd", boardService.boardUpdInfo(board_no));
+		model.addAttribute("replyList", includeService.replyList(board_no));
+		model.addAttribute("board_no", board_no);
+		
+		if(board_pass_ck != null) { // pass 성공시
+			return "inquiry/showInquiry";
+		} else { // pass 실패시
+			return "redirect:board_pass_form";
+		}
+		
 	}
 	
 	// 문의글 상세보기
@@ -69,7 +78,6 @@ public class InquiryController {
 	public String showInquiry(Model model, HttpServletRequest request) {
 		String board_no = request.getParameter("board_no");
 		model.addAttribute("InquiryUpd", boardService.boardUpdInfo(board_no));
-
 		model.addAttribute("replyList", includeService.replyList(board_no));
 		
 		return "inquiry/showInquiry";

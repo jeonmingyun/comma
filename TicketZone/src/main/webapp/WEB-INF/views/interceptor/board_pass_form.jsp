@@ -15,8 +15,8 @@
 
 	<%@include file="../include/header.jsp"%>
 	
-    <form action="/board_pass_pro" method="post">
-    	<input type="password" name="board_pass" placeholder="비밀번호" required>
+    <form action="/board_pass_pro?board_no=${param.board_no}" method="post">
+    	<input type="password" name="board_password" placeholder="비밀번호" required>
     	<input type="submit" value="확인">
     	<input type="button" value="취소">
     </form>

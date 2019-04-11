@@ -44,11 +44,6 @@ public class BoardServiceImplement implements BoardService {
 		return mapper.boardUpdInfo(board_no);
 	}
 	
-//	@Override
-//	public BoardVO board_pass(String board_no) {
-//		return mapper.board_pass(board_no);
-//	}
-	
 	@Override
 	public void boardUpd(BoardVO board) {	
 		mapper.boardUpd(board);
@@ -64,6 +59,11 @@ public class BoardServiceImplement implements BoardService {
 	public void boardInsert(BoardVO board) {
 		mapper.boardInsert(board);
 		
+	}
+
+	@Override
+	public BoardVO board_pass(BoardVO board) {
+		return mapper.board_pass(board);
 	}
 			
 }

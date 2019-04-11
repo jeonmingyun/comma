@@ -18,6 +18,7 @@ import com.org.ticketzone.domain.OwnerVO;
 import com.org.ticketzone.domain.StoreVO;
 import com.org.ticketzone.service.CategorieService;
 import com.org.ticketzone.service.CoordinatesService;
+import com.org.ticketzone.service.IncludeService;
 import com.org.ticketzone.service.MemberService;
 import com.org.ticketzone.service.NumberTicketService;
 import com.org.ticketzone.service.StoreService;
@@ -33,7 +34,7 @@ public class MngrOnlyController {
 	private CoordinatesService coordinatesService;
 	private NumberTicketService numberTicketService;
 	private MemberService memberService;
-
+	
 	// 관리자 첫화면
 	@RequestMapping(value = "/mngrOnly")
 	public String admin(Model model, HttpSession session) {
@@ -174,6 +175,8 @@ public class MngrOnlyController {
 		numberTicketService.cancelTicket(ticket);
 		return "/mngrOnly/mCustomer";
 	}
+	
+	
 
 //	@RequestMapping(value = "/getLicense", method = RequestMethod.POST)
 //	public String getLicense(Model model, NumberTicketVO ticket) {
