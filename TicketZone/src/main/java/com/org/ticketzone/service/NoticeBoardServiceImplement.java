@@ -37,8 +37,8 @@ public class NoticeBoardServiceImplement implements NoticeBoardService {
 	}
 
 	@Override
-	public void noticeInsert(NoticeBoardVO notice) {
-		mapper.noticeInsert(notice);		
+	public void insertSelectKey(NoticeBoardVO notice) {
+		mapper.insertSelectKey(notice);		
 	}
 	
 	

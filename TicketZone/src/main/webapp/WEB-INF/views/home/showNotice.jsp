@@ -35,11 +35,24 @@
 				<td>${noticeUpd[0].notice_content}</td>
 			</tr>
 			<tr>
-				<th>첨부파일</th>
-				<td></td>
+				<th scope="row">첨부파일</th>
+				<td><c:if test="${file[0] != null}">${file[0].fileName}</c:if><c:if test="${file[0] == null}">없음</c:if></td>
 			</tr>
 		</tbody>
 	</table>
+	<c:if test="${file[0] != null}">
+		<div class="uploadResult">
+			<ul>
+				
+			</ul>
+		</div>
+	</c:if>	
+		<c:if test="${file[0] != null}">
+		<input id="uuid" type="hidden" name="uuid" value="${file[0].uuid}">
+		<input id="fileType" type="hidden" name="fileType" value="${file[0].fileType}">
+		<input id="uploadPath" type="hidden" name="uploadPath" value="${file[0].uploadPath}">
+		<input id="fileName" type="hidden" name="fileName" value="${file[0].fileName}">
+		</c:if>		
 	<button type="button" id="btnUpdate"
 		onclick="updNotice(${noticeUpd[0].notice_no})">수정</button>
 	<button type="button" id="btnDelete"
