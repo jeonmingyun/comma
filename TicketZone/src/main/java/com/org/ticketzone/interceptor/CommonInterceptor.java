@@ -16,6 +16,10 @@ import lombok.AllArgsConstructor;
 public class CommonInterceptor extends HandlerInterceptorAdapter {
 	private BoardService boardService; 
 	
+	public CommonInterceptor() {
+
+	}
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
