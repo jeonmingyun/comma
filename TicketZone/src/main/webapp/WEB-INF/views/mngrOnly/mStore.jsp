@@ -15,10 +15,6 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/views/include/Mngrheader.jsp"%>
-
-	<c:if test="${empty sessionScope.id}">
-		<button class="store_register">매장등록</button>
-	</c:if>
 	
 	<div id="StoreBox">
 		<c:if test="${!empty sessionScope.id}">
@@ -36,6 +32,10 @@
 			</div>
 		</c:if>
 	</div>
+
+	<c:if test="${empty sessionScope.id}">
+		<button class="store_register">매장등록</button>
+	</c:if>
 	
 	<%@include file="/WEB-INF/views/include/footer.jsp"%>
 </body>

@@ -84,14 +84,29 @@
 					</c:forEach>
 				</ul>
 
-				<!-- pagination -->
-				<div class="pagination">
-					<a href="#"><</a> 
-					<a href="#" class="active"> 1 </a> 
-					<a href="#"> 2 </a> 
-					<a href="#"> 3 </a> 
-					<a href="#">></a>
+				<!-- Paging -->
+				<div class='pull-right'>
+					<ul class="pagination">
+						<c:if test="${pageMaker.prev}">
+							<li class="paginate_button previous"><a href="${pageMaker.startPage -1}"><</a></li>
+						</c:if>
+			
+						<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+							<li class="paginate_button"><a href="${num}">${num}</a></li>
+						</c:forEach>
+			
+						<c:if test="${pageMaker.next}">
+							<li class="paginate_button next"><a href="${pageMaker.endPage +1 }">></a></li>
+						</c:if>
+					</ul>
 				</div>
+				<form id='actionForm' action='/store' method='get'>
+					<input type="hidden" id="efg" name="pageNum" value = "${pageMaker.cri.pageNum}">
+					<input type="hidden" id="abcd" name="amout" value = "${pageMaker.cri.amount}">
+					<input type="hidden" name="type" value='<c:out value="${pageMaker.cri.type}"/>'>
+					<input type="hidden" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"/>'>
+				</form>
+				<!-- end Pagination -->
 			</div>
 		</section>
 

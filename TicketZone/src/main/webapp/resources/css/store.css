@@ -21,7 +21,7 @@ li {
 #search_box {
 	padding: 10px;
 	text-align: center;
-	border-bottom : 2px solid #000000;
+	border-bottom: 2px solid #000000;
 }
 
 #store_form {
@@ -29,6 +29,27 @@ li {
 	margin: 0 auto;
 }
 
+/* select선택 창 */
+#search_box select {
+	vertical-align: middle;
+}
+
+/* 검색 버튼 */
+.search_btn {
+	padding: 5px 15px;
+	border: none;
+	border-radius: 5px;
+	background-color: #000000;
+	color: #ffffff;
+	outline: none;
+	font: 20px;
+}
+
+/* 검색 버튼 클릭했을 때 */
+.search_btn:hover {
+	cursor: pointer;
+	background-color: cornflowerblue;
+}
 /* ul 태그 */
 .store_img {
 	margin: 10px 0;
@@ -38,9 +59,9 @@ li {
 /* 매장 사진 정렬 */
 .store_img li {
 	width: 220px;
-    position: relative;
-    display: inline-block;
-    margin: 20 10px 30px;
+	position: relative;
+	display: inline-block;
+	margin: 20 10px 30px;
 }
 
 /* 매장 이름 */
@@ -50,31 +71,32 @@ li {
 
 /* 이미지 */
 .store_img .s_img {
-	width : 100%;
-	height : 100%;
+	width: 100%;
+	height: 100%;
+}
+
+.pull-right {
+	text-align: center;
 }
 
 /* pagination */
-.pagination {
-    justify-content: center;
-    text-align: center;
-    margin-top: 15px;
-    align-items: center;
-}
-
 .pagination a {
-    padding: 8px 16px;
-    text-decoration: none;
-    color: black;
+	padding: 8px 16px;
+	text-decoration: none;
+	color: black;
 }
 
+.pagination li {
+	position: relative;
+	display: inline-block;
+}
 /* 선택되지 않았을 때 */
-.pagination a:hover:not(.active) {
-    background-color: #ddd;
+.pagination a:active {
+	border-bottom: 1px solid #000000;
+	color: #000000;
+	font-weight: bold;
 }
 
-.pagination a.active{
-    border-bottom: 1px solid #000000;
-    color: #000000;
-    font-weight: bold;
+.pagination a:hover {
+	background-color: #ddd;
 }

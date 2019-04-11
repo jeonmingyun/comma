@@ -35,7 +35,7 @@
 					
 					<tr>
 						<th><label for="title">제목</label></th>
-						<td><input type="text" name="board_title" id="title" size="60" required></td>
+						<td><input type="text" name="board_title" id="title" required></td>
 					</tr>
 
 					<tr>

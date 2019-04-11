@@ -1,0 +1,41 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.table_wapper {
+	margin: 0 auto;
+	width: 800px; /*table  width크기랑 똑같이 */
+	height: 100%;
+}
+/* 게시글 보기 */
+.table_wapper h1 {
+    text-align: center;
+}
+
+/* 게시글 제목 */
+.notice_show h2 {
+	font-size: 20px;
+	border-bottom: 1px solid #000000; 
+}
+
+/* 게시글 작성 테이블 */
+.notice_show {
+    margin: 10px auto;
+    border-collapse: collapse;
+    width: 800px;
+}
+
+/* 테이블 제목 */
+.notice_show th {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 15px 10px;
+    font-size: 16px;
+}
+
+/* 테이블 내용 */
+.notice_show td {
+
+}
+

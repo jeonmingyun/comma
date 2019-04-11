@@ -12,6 +12,15 @@ h2{
     font-size: 50px;   
 }
 
+#minquiry_table{
+	display: inline-block;
+}
+
+/* 전체 div */
+#suggest_form{
+	text-align: center;
+}
+
 /* 표(테이블) */
 #suggest{
 	width: 800px;
@@ -48,4 +57,71 @@ h2{
 #suggest tr:hover td{
 	cursor: pointer;
 	background-color: #EBEBEB;
+}
+
+/* 글쓰기 버튼 정렬*/
+#writebutton{
+	float:right;
+}
+
+/* 글쓰기 버튼 */
+#btnwrite {
+	padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #000000;
+    color: #ffffff;
+    outline: none;
+    font: 20px;
+}
+
+/* 글쓰기 버튼 클릭했을 때 */
+#btnwrite:hover {
+    cursor: pointer;
+    background-color: cornflowerblue;
+}
+
+/* 검색 버튼 */
+.btn-default {
+	padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #000000;
+    color: #ffffff;
+    outline: none;
+    font: 20px;
+}
+
+/* 검색 버튼 클릭했을 때 */
+.btn-default:hover {
+    cursor: pointer;
+    background-color: cornflowerblue;
+}
+
+/* pagination 정렬 */
+.pull-right{
+	text-align: center;
+}
+/* pagination */
+.pagination a{
+	padding: 8px 16px;
+    text-decoration: none;
+    color: black;
+    
+}
+
+.pagination li {
+	position: relative;
+	display: inline-block;
+	
+}
+/* 선택되지 않았을 때 */
+.pagination a:active{
+    border-bottom: 1px solid #000000;
+    color: #000000;
+    font-weight: bold;
+}
+
+.pagination a:hover{
+    background-color: #ddd;
 }
