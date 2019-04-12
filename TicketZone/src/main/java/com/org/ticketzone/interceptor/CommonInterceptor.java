@@ -20,7 +20,6 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		String board_no = request.getParameter("board_no");
-//		System.out.println(boardService.boardUpdInfo(board_no));
 		ArrayList<BoardVO> board_arr = boardService.boardUpdInfo(board_no);
 		String board_password = board_arr.get(0).getBoard_password();
 
