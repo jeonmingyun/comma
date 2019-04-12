@@ -35,10 +35,10 @@
 
 		<table id="notice">
 			<tr>
-				<th>번호
-				<th>제목
-				<th>작성자
-				<th>날짜
+				<th style="width:5%;">번호</th>
+				<th style="width:30%;">제목</th>
+				<th style="width:10%;">작성자</th>
+				<th style="width:20%;">날짜</th>
 			</tr>
 		 	<c:forEach var="nl" items="${noticeList}">
 				<tr onclick="showNotice(${nl.notice_no})">

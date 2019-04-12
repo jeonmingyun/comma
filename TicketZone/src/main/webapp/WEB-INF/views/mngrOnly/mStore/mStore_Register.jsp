@@ -11,7 +11,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2a24234e20fd78957bd509e4c423610f&libraries=services"></script>
-		
+	
 <title>매장등록 페이지</title>
 </head>
 <body>
@@ -62,11 +62,19 @@
 								<div id="map"
 									style="width: 300px; height: 300px; margin-top: 10px; display: none"></div>
 							</td>
-
+						</tr>	
+						<tr>	
+							<th>매장사진</th>
+							<td><input type="file" id="upload_img" name="fileName">
+							<div class="img_preview">
+								<img id="preview" style="width:300px; height:300px; margin-top :10px; display: none">
+							</div>
+							</td>
+						</tr>	
 							<c:forEach var="id" items="${id}">
 								<input type="hidden" name="owner_id" value="${id.owner_id}">
 							</c:forEach>
-						</tr>
+						
 					</tbody>
 				</table>
 				<input type="hidden" id="coor_x" name="coor_x">

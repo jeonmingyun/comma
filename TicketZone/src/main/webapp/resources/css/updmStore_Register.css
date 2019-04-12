@@ -3,6 +3,11 @@
 	padding : 0;
 }
 
+.table_wapper {
+	margin: 0 auto;
+	width: 800px; /*table  width크기랑 똑같이 */
+	height: 100%;
+}
 /* 매장 수정*/
 .table_wapper h1 {
 	margin: 10px 0;
@@ -22,7 +27,7 @@
 	background-color: #000000;
 	border-bottom: 1px solid #000000;
 	padding: 5px;
-	font-size: 18px;
+	font-size: 16px;
 }
 
 /* 테이블 내용 */
@@ -32,9 +37,7 @@
 
 /* 수정,취소버튼 */
 .write_btn {
-    float: right;
-    width: 680px;
-    table-layout:fixed;
+	text-align:right;
 }
 
 .write_btn input {
@@ -45,6 +48,7 @@
     color: #ffffff;
     outline: none;
     font: 20px;
+   
 }
 
 .write_btn input:hover {
