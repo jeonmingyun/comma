@@ -61,12 +61,7 @@ public class HomeController {
 			System.out.println(attach);
 			
 		noticeBoardService.insertSelectKey(notice);
-		
-		
 		noticeAttachService.Fileinsert(attach);
-		
-		
-		
 
 		return "redirect:/";
 	}

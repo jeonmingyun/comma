@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page session="false" contentType="text/html; charset=utf-8"
    pageEncoding="utf-8"%>
 
@@ -50,7 +51,7 @@
                               height="15" width="15" />
                         </c:if>
                      <td>${sl.member_tel}
-                     <td>${sl.board_reg}
+                     <td><fmt:formatDate value="${sl.board_reg}" pattern="yyyy.MM.dd"/>
                   </tr>
                </c:forEach>
             </table>
