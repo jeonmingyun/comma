@@ -21,19 +21,16 @@
 </head>
 <body>
 <%@include file="../include/header.jsp"%>
-
 	<div class="notice_wapper">
 		<div class="page_title">
 			<h1>NOTICE</h1>
-		</div>
-		<!-- page_title -->
+		</div> <!-- page_title -->
 
 		<div class="notice_view">
 			<div class="notice_title">
 				<p id="title">${noticeUpd[0].notice_title}</p>
-			</div>
-			<!-- notice_title -->
-
+			</div><!-- notice_title -->
+		
 			<div class="notice_info">
 				<span id="writer"><svg xmlns="http://www.w3.org/2000/svg"
 						width="15" height="15" viewBox="0 0 24 24">
@@ -57,35 +54,31 @@
 			
 			<!-- 첨부파일 -->
 			<div class="notice_file">
-				<c:if test="${file[0] != null}">${file[0].fileName}</c:if>
-				<c:if test="${file[0] == null}">없음</c:if>
+				<span id="date">첨부파일</span>
+				<c:if test="${file[0] != null}"><a href="#"class="downFile">${file[0].fileName}</a></c:if><c:if test="${file[0] == null}">없음</c:if>
 			</div> <!-- notice_file -->
-			
-			<c:if test="${file[0] != null}">
-				<div class="uploadResult">
-					<ul>
-
-					</ul>
-				</div> <!-- uploadResult -->
-			</c:if>
-			<c:if test="${file[0] != null}">
-				<input id="uuid" type="hidden" name="uuid" value="${file[0].uuid}">
-				<input id="fileType" type="hidden" name="fileType"
-					value="${file[0].fileType}">
-				<input id="uploadPath" type="hidden" name="uploadPath"
-					value="${file[0].uploadPath}">
-				<input id="fileName" type="hidden" name="fileName"
-					value="${file[0].fileName}">
-			</c:if>
-			</div> <!-- notice_view -->
-			
-			<div class="notice_btn">
-				<button type="button" id="btnUpdate"
-					onclick="updNotice(${noticeUpd[0].notice_no})">수정</button>
-				<button type="button" id="btnDelete"
-					onclick="delNotice(${noticeUpd[0].notice_no})">삭제</button>
-			</div> <!-- notice_btn -->
-		</div> <!-- notice_wapper -->
-
+		
+	<c:if test="${file[0] != null}">
+		<div class="uploadResult">
+			<ul>
+				
+			</ul>
+		</div>
+	</c:if>	
+		<c:if test="${file[0] != null}">
+		<input id="uuid" type="hidden" name="uuid" value="${file[0].uuid}">
+		<input id="uploadPath" type="hidden" name="uploadPath" value="${file[0].uploadPath}">
+		<input id="fileName" type="hidden" name="fileName" value="${file[0].fileName}">
+	</c:if>
+	</div> <!-- notice_view -->		
+		
+	<div class="notice_btn">
+		<button type="button" id="btnUpdate"
+			onclick="updNotice(${noticeUpd[0].notice_no})">수정</button>
+		<button type="button" id="btnDelete"
+			onclick="delNotice(${noticeUpd[0].notice_no})">삭제</button>
+	</div> <!-- notice_btn -->
+</div> <!-- notice_wapper -->
+	
 </body>
 </html>
