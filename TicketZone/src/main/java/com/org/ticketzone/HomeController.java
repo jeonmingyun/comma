@@ -1,18 +1,23 @@
 package com.org.ticketzone;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.org.ticketzone.domain.AttachFileDTO;
 //github.com/jeonmingyun/comma.git
 import com.org.ticketzone.domain.Criteria;
+import com.org.ticketzone.domain.NoticeAttachVO;
 import com.org.ticketzone.domain.NoticeBoardVO;
 import com.org.ticketzone.domain.PageDTO;
+import com.org.ticketzone.service.NoticeAttachService;
 import com.org.ticketzone.service.NoticeBoardService;
 import com.org.ticketzone.service.TestService;
 
@@ -26,6 +31,7 @@ import lombok.AllArgsConstructor;
 public class HomeController {
 
 	private NoticeBoardService noticeBoardService;
+	private NoticeAttachService noticeAttachService;
 	private TestService test;
 
 	// 고객 홈
@@ -49,8 +55,18 @@ public class HomeController {
 
 	// 공지사항 글쓰기 처리
 	@RequestMapping(value = "/noticeInsert", method = RequestMethod.POST)
-	public String noticeInsert(Model model, NoticeBoardVO notice) {
-		noticeBoardService.noticeInsert(notice);
+	public String noticeInsert(Model model, NoticeBoardVO notice, NoticeAttachVO attach, RedirectAttributes rttr) {
+		
+			System.out.println(notice);
+			System.out.println(attach);
+			
+		noticeBoardService.insertSelectKey(notice);
+		
+		
+		noticeAttachService.Fileinsert(attach);
+		
+		
+		
 
 		return "redirect:/";
 	}
@@ -60,7 +76,8 @@ public class HomeController {
 	public String showNotice(Model model, HttpServletRequest request) {
 		String notice_no = request.getParameter("notice_no");
 		model.addAttribute("noticeUpd", noticeBoardService.noticeBoardUpdInfo(notice_no));
-
+		model.addAttribute("file",noticeAttachService.findByNotice_no(notice_no));
+		
 		return "home/showNotice";
 	}
 
@@ -102,5 +119,5 @@ public class HomeController {
 //	}
 
 	// 테스트용
-
+	
 }

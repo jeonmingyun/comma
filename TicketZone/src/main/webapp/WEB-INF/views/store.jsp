@@ -12,6 +12,7 @@
 <link href="resources/css/store.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="resources/js/store.js"></script>
+ 
 </head>
 <body>
 
@@ -19,53 +20,25 @@
 		<%@include file="include/header.jsp"%>
 
 		<section>
-			<div id="search_box">
-				<!-- 지역 -->
-				<select id="area">
-					<option value="hide">지역선택</option>
-					<option value="seoul">서울</option>
-					<option value="busan">부산</option>
-					<option value="daegu">대구</option>
-					<option value="gwangju">광주</option>
-					<option value="incheon">인천</option>
-					<option value="daejeon">대전</option>
-					<option value="ulsan">울산</option>
-					<option value="gyunggi">경기</option>
-					<option value="gangwon">강원</option>
-					<option value="chungnam">충남</option>
-					<option value="chungbuk">충북</option>
-					<option value="gyeongnam">경남</option>
-					<option value="gyeongbuk">경북</option>
-					<option value="jeonnam">전남</option>
-					<option value="jeonbuk">전북</option>
-					<option value="jeju">제주</option>
-				</select>
-				<!-- 시/군/구 -->
-				<select id="city">
-					<option value="hide">시/군/구</option>
-					<option value="seoul">서울</option>
-					<option value="busan">부산</option>
-					<option value="daegu">대구</option>
-					<option value="gwangju">광주</option>
-					<option value="incheon">인천</option>
-					<option value="daejeon">대전</option>
-					<option value="ulsan">울산</option>
-					<option value="gyunggi">경기</option>
-					<option value="gangwon">강원</option>
-					<option value="chungnam">충남</option>
-					<option value="chungbuk">충북</option>
-					<option value="gyeongnam">경남</option>
-					<option value="gyeongbuk">경북</option>
-					<option value="jeonnam">전남</option>
-					<option value="jeonbuk">전북</option>
-					<option value="jeju">제주</option>
-				</select>
-				<!-- 검색 -->
-				<input type="search" name="search" placeholder="매장이름">
-				<input type="submit" value="검색" class="search_btn">
-			</div>
+			
 			<!--search_box-->
-
+			<input type="hidden" id="sido_key" value="12685d425f1af0872d756c" />
+			<input type="hidden" id="sigoon_key" value="b0888bae39fbd0463a9252" /> 
+    		<input type="hidden" id="dong_key" value="91afccaa8d7f499151ee3b" /> <!--  아직 key 인증을 받지 못함... -->
+    		<input type="hidden" name="apiKey" value="E4A59B05-0CF4-3654-BD0C-A169F70CCB34" />
+    		<div>
+        		<select id="sido_code">
+            		<option>선택</option>
+        		</select>		
+        		<select id="sigoon_code">
+            		<option>선택</option>
+        		</select>
+        		<select id="dong_code">
+            		<option>선택</option>
+				</select>
+				<input type="text" id="detail">
+				<button id="test">선택확인</button>
+    		</div>
 			<!-- 제휴매장 -->
 			<div id="store_form">
 				<ul class="store_img">

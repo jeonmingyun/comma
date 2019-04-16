@@ -1,6 +1,7 @@
 package com.org.ticketzone.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -12,4 +13,6 @@ public class NoticeBoardVO {
 	private Date notice_reg;
 	private String cate_code;
 	private String keyword;
+	
+	
 }
