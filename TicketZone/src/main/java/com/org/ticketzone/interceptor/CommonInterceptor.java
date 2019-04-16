@@ -14,8 +14,9 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class CommonInterceptor extends HandlerInterceptorAdapter {
+
 	private BoardService boardService;
-		
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
