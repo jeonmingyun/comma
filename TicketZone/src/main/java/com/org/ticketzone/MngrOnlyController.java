@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.org.ticketzone.domain.CoordinatesVO;
 import com.org.ticketzone.domain.NumberTicketVO;
 import com.org.ticketzone.domain.OwnerVO;
+import com.org.ticketzone.domain.StoreAttachVO;
 import com.org.ticketzone.domain.StoreVO;
 import com.org.ticketzone.service.CategorieService;
 import com.org.ticketzone.service.CoordinatesService;
 import com.org.ticketzone.service.MemberService;
 import com.org.ticketzone.service.NumberTicketService;
+import com.org.ticketzone.service.StoreAttachService;
 import com.org.ticketzone.service.StoreService;
 
 import lombok.AllArgsConstructor;
@@ -33,7 +35,7 @@ public class MngrOnlyController {
 	private CoordinatesService coordinatesService;
 	private NumberTicketService numberTicketService;
 	private MemberService memberService;
-
+	private StoreAttachService storeAttachService;
 	// 관리자 첫화면
 	@RequestMapping(value = "/mngrOnly")
 	public String admin(Model model, HttpSession session) {
@@ -78,20 +80,25 @@ public class MngrOnlyController {
 
 	// 매장등록 처리(insert)
 	@RequestMapping(value = "/mStore_Reg", method = RequestMethod.POST)
-	public String Register(Model model, StoreVO store, CoordinatesVO coor) {
+	public String Register(Model model, StoreVO store, CoordinatesVO coor,StoreAttachVO vo) {
 		
 		storeService.storeRegister(store);
 		coordinatesService.insertXY(coor);
+		storeAttachService.StoreImgInsert(vo);
+		System.out.println(store);
+		System.out.println(vo);
+		System.out.println(coor);
 		return "/mngrOnly/mStore";
 	}
 
 	// 매장수정 페이지 이동
 	@RequestMapping(value = "/updmStore_Register", method = RequestMethod.GET)
-	public String updmStore_Register(StoreVO storeVO, Model model, CoordinatesVO coor) {
+	public String updmStore_Register(StoreVO storeVO, Model model, CoordinatesVO coor, StoreAttachVO vo) {
 		String license = storeVO.getLicense_number();
 		model.addAttribute("coor", coordinatesService.XYList(license));
 		model.addAttribute("updmStore", storeService.storeUpdate(license));
 		model.addAttribute("cate", categorieService.categorieFoodList());
+
 		return "/mngrOnly/mStore/updmStore_Register";
 	}
 
@@ -174,6 +181,8 @@ public class MngrOnlyController {
 		numberTicketService.cancelTicket(ticket);
 		return "/mngrOnly/mCustomer";
 	}
+	
+	
 
 //	@RequestMapping(value = "/getLicense", method = RequestMethod.POST)
 //	public String getLicense(Model model, NumberTicketVO ticket) {

@@ -69,27 +69,25 @@
 								<input type="button" onclick="sample5_execDaumPostcode()"
 								value="주소 검색"><br>
 								<div id="map"
-									style="width: 300px; height: 300px; margin-top: 10px; "></div></td>
+									style="width: 500px; height: 300px; margin: 10px; "></div></td>
 							<c:forEach var="id" items="${id}">
 								<input type="hidden" name="owner_id" value="${id.owner_id}">
 							</c:forEach>
 						</tr>
-						
 					</tbody>
 				</table>
 				<input type="hidden" id="coor_x" name="coor_x" value="${coor[0].coor_x}">
 				<input type="hidden" id="coor_y" name="coor_y" value="${coor[0].coor_y}">
+				
 				<!-- 수정,삭제 버튼 -->
-
 				<div class="write_btn">
 					<input type="submit" id="update" value="수정">
 					<input type="button" id="cancel" value="취소">
 				</div>
 
 			</form>
-		</div>		
-		
-	</section>
+		</div>				
+</section>
 	<%@include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>

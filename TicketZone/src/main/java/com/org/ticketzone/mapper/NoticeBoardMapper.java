@@ -15,7 +15,9 @@ public interface NoticeBoardMapper {
 
 	public void noticeBoardDel(NoticeBoardVO notice);
 
-	public void noticeInsert(NoticeBoardVO notice);
+	public void insertSelectKey(NoticeBoardVO notice);
+	
+	public void InsertStatus(NoticeBoardVO notice);
 	
 //	public ArrayList<NoticeBoardVO> noticeSearch(NoticeBoardVO notice);
 	

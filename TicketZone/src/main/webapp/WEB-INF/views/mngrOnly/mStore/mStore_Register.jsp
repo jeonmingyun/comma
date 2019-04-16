@@ -12,14 +12,14 @@
 <link href="../resources/css/mStore_Register.css" rel="stylesheet" />
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2a24234e20fd78957bd509e4c423610f&libraries=services"></script>
-		
+	
 <title>매장등록 페이지</title>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/include/Mngrheader.jsp"%>
 	<section>
 		<div class="table_wapper">
-			<form method="post" action="/mStore_Reg">
+			<form id="insert_Store" method="post" action="/mStore_Reg">
 				<h1>매장 등록</h1>
 				<table class="mngr_show">
 					<tbody>
@@ -63,11 +63,22 @@
 								<div id="map"
 									style="width: 300px; height: 300px; margin-top: 10px; display: none"></div>
 							</td>
-
+						</tr>	
+						<tr>	
+							<th>매장사진</th>
+							<td><input id ="upload_img" type="file" name="uploadFile">
+							<div class="img_preview">
+								<img id="preview" style="width:300px; height:300px; margin-top :10px; display: none">
+							</div>
+							<div class="resultDiv">
+							
+							</div>
+							</td>
+						</tr>	
 							<c:forEach var="id" items="${id}">
 								<input type="hidden" name="owner_id" value="${id.owner_id}">
 							</c:forEach>
-						</tr>
+						
 					</tbody>
 				</table>
 				<input type="hidden" id="coor_x" name="coor_x">

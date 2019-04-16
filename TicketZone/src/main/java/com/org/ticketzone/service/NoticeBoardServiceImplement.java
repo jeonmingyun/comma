@@ -37,8 +37,8 @@ public class NoticeBoardServiceImplement implements NoticeBoardService {
 	}
 
 	@Override
-	public void noticeInsert(NoticeBoardVO notice) {
-		mapper.noticeInsert(notice);		
+	public void insertSelectKey(NoticeBoardVO notice) {
+		mapper.insertSelectKey(notice);		
 	}
 	
 	
@@ -65,6 +65,12 @@ public class NoticeBoardServiceImplement implements NoticeBoardService {
 	public int SearchCount(Criteria cri) {
 		
 		return mapper.SearchCount(cri);
+	}
+
+	@Override
+	public void InsertStatus(NoticeBoardVO notice) {
+		mapper.InsertStatus(notice);
+		
 	}
 
 

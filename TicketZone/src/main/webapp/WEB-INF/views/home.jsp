@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page session="false" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 
@@ -35,17 +36,17 @@
 
 		<table id="notice">
 			<tr>
-				<th>번호
-				<th>제목
-				<th>작성자
-				<th>날짜
+				<th style="width:5%;">번호</th>
+				<th style="width:30%;">제목</th>
+				<th style="width:10%;">작성자</th>
+				<th style="width:20%;">날짜</th>
 			</tr>
 		 	<c:forEach var="nl" items="${noticeList}">
 				<tr onclick="showNotice(${nl.notice_no})">
 					<td>${nl.notice_no}
 					<td>${nl.notice_title}
 					<td>관리자
-					<td>${nl.notice_reg}
+					<td><fmt:formatDate value="${nl.notice_reg}" pattern="yyyy.MM.dd"/>
 				</tr>
 			</c:forEach>			
 		</table>

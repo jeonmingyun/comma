@@ -13,12 +13,13 @@ h1 {
 	text-align: center;
 }
 
-/* 표 (테이블)*/
 #notice_table{
 	margin: 0 auto;	
 }
 
+/* 표 (테이블) */
 #notice {
+	table-layout: fixed;
 	width: 800px;
     border-collapse: collapse;
     text-align: center;	
@@ -44,6 +45,9 @@ h1 {
 }
 
 #notice td {
+	white-space: nowrap; /* 텍스트가 길어도 줄바꿈 안됨 */
+	overflow: hidden;
+	text-overflow: ellipsis;
     border-bottom: 1px solid #444444;
     padding: 10px;
 }
@@ -84,6 +88,11 @@ h1 {
 #noticeWrite:hover {
     cursor: pointer;
     background-color: cornflowerblue;
+}
+
+/* select선택 창 */
+#searchForm select {
+	vertical-align: middle;
 }
 
 /* 검색 버튼 */

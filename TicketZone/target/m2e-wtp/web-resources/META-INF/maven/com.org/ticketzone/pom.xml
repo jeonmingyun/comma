@@ -21,6 +21,12 @@
 			<artifactId>maven-plugin-api</artifactId>
 			<version>3.6.0</version>
 		</dependency>
+		<!-- json-simple -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
 		<!-- jackson-core -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -39,7 +45,12 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.9.8</version>
 		</dependency>
-
+		<!-- jackson -dataformat-xml -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+			<version>2.9.8</version>
+		</dependency>
 		<!-- LomBok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -77,19 +88,13 @@
 			<artifactId>commons-dbcp2</artifactId>
 			<version>2.6.0</version>
 		</dependency>
-
-		<!-- MultipartHttpServletRequest -->
+		<!-- 썸네일 -->
 		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.4</version>
+			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>0.4.8</version>
 		</dependency>
 
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.2.2</version>
-		</dependency>
 
 		<!-- 이메일 전송 -->
 		<dependency>
@@ -102,7 +107,7 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>5.1.4.RELEASE</version>
 		</dependency>
-		
+
 
 		<!-- Spring -->
 		<dependency>
