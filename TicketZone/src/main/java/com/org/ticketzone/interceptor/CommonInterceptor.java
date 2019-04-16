@@ -14,21 +14,21 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class CommonInterceptor extends HandlerInterceptorAdapter {
-   private BoardService boardService;
 
-   @Override
-   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-         throws Exception {
-      String board_no = request.getParameter("board_no");
+	private BoardService boardService;
 
-      ArrayList<BoardVO> board_arr = boardService.boardUpdInfo(board_no);
-      String board_password = board_arr.get(0).getBoard_password();
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+		String board_no = request.getParameter("board_no");
+		ArrayList<BoardVO> board_arr = boardService.boardUpdInfo(board_no);
+		String board_password = board_arr.get(0).getBoard_password();
 
-      if (board_password != null) {
-         response.sendRedirect("/board_pass_form?board_no=" + board_no);
-         return false;
-      } else
-         return true;
+		if (board_password != null) {
+			response.sendRedirect("/board_pass_form?board_no=" + board_no);
+			return false;
+		} else
+			return true;
 
-   }
+	}
 }

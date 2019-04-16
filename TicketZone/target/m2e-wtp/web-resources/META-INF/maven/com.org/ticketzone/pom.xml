@@ -21,6 +21,12 @@
 			<artifactId>maven-plugin-api</artifactId>
 			<version>3.6.0</version>
 		</dependency>
+		<!-- json-simple -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
 		<!-- jackson-core -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -84,11 +90,11 @@
 		</dependency>
 		<!-- 썸네일 -->
 		<dependency>
-    		<groupId>net.coobird</groupId>
-    		<artifactId>thumbnailator</artifactId>
-    		<version>0.4.8</version>
+			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>0.4.8</version>
 		</dependency>
-		
+
 
 		<!-- 이메일 전송 -->
 		<dependency>
@@ -101,7 +107,7 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>5.1.4.RELEASE</version>
 		</dependency>
-		
+
 
 		<!-- Spring -->
 		<dependency>

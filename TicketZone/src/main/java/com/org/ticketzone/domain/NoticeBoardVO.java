@@ -13,5 +13,6 @@ public class NoticeBoardVO {
 	private Date notice_reg;
 	private String cate_code;
 	private String keyword;
-		
+	private String notice_status;
+	
 }

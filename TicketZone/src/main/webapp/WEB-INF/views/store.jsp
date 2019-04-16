@@ -42,21 +42,25 @@
 			<!-- 제휴매장 -->
 			<div id="store_form">
 				<ul class="store_img">
-					<c:forEach var="store" items="${list}">
+					<c:forEach var="store" items="${list}" varStatus="status">
 						<li>
-							<button class="license" value="${store.license_number}">
-								<img class="s_img" src="resources/img/miyago.jpg">
+							
+							<button class="license" value="${store.license_number}">								
+								<img class="s_img" name="s_img${status.index}">
 							</button>
 							<div>
 								<h3>${store.store_name}</h3>
 								<p>연락처: ${store.store_tel}</p>
 								<p style="white-space:nowrap;">주소: ${store.address_name}</p>
 								<p>영업시간: ${store.store_time}</p>
+								<input type="hidden" name="path" class="uuid${status.index}" value="${store.img_uuid}">
+								<input type="hidden" name="path" class="filename${status.index}" value="${store.img_filename}">
+								<input type="hidden" name="path"class="uploadpath${status.index}" value="${store.img_uploadpath}">								
 							</div>
 						</li>
 					</c:forEach>
 				</ul>
-
+			
 				<!-- Paging -->
 				<div class='pull-right'>
 					<ul class="pagination">

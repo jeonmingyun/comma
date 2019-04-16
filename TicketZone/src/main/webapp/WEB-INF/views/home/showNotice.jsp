@@ -86,5 +86,6 @@
 					onclick="delNotice(${noticeUpd[0].notice_no})">삭제</button>
 			</div> <!-- notice_btn -->
 		</div> <!-- notice_wapper -->
+
 </body>
 </html>

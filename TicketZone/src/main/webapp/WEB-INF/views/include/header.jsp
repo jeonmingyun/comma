@@ -17,9 +17,7 @@
 		<img id="mainLogo" src="../resources/img/mainLogo.png">
 		<!-- 메뉴 -->
 		<ul class="main-nav">
-			<li class="active"><a href="/">홈</a></li>
-			<li><a href="/store">제휴매장</a></li>
-			<li><a href="/cos">코스</a></li>
+			<li><a href="/store">제휴매장</a></li>			
 			<li><a href="/inquiry">고객센터</a></li>
 			<li><a href="/mngr">관리자</a></li>
 		</ul>

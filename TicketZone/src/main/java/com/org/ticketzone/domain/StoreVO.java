@@ -16,5 +16,7 @@ public class StoreVO {
 	private String store_time;
 	private String address_name;
 	private String store_intro;
-	
+	private String img_uuid;
+	private String img_uploadpath;
+	private String img_filename;
 }

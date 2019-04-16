@@ -25,6 +25,7 @@ $(function() {
 			type: 'post',
 			url: 'addReply',
 			data: query,
+			dataType: 'json',
 			success: function(data) {
 				$('#addReply_content').val("");
 				$('#reply_head span').text(data[0].reply_reg);

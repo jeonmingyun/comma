@@ -13,36 +13,15 @@ $(document).ready(function(){
 	var fileName = $("#fileName").val();
 	var str ="";
 	
-	
-	
-	if(fileType){
-	var fileCallPath = encodeURIComponent(uploadPath +"/s_" + uuid + "_" + fileName);
-		str += "<li data-path='"+uploadPath+"' data-uuid='"+uuid+"' data-filename='"+fileName+"' data-type='"+fileType+"'><div>";
-		str += "<img src='/display?fileName="+fileCallPath+"'>";
-		str += "</div>";
-		str + "</li>";
-		console.log(str);
-	} else {
-		
-		str += "<li data-path='"+uploadPath+"' data-uuid='"+uuid+"' data-filename='"+fileName+"' data-type='"+fileType+"'><div>";
-		str += "<span> " + fileName + "</span><br/>";
-		str += "</div>";
-		str +"</li>";
-		console.log(str);
-	}
-	$(".uploadResult ul").html(str);
-	
-	$(".uploadResult").on("click", "li", function(e){
+	$(".downFile").on("click", function(e){
 		console.log("view image");
-		var liObj = $(this);
-		console.log(this);
-		var path = encodeURIComponent(liObj.data("path")+"/" + liObj.data("uuid") +"_"+ liObj.data("filename"));
 		
-		if(liObj.data("type")){
-			self.location = "/download?fileName="+path
+//		var path = encodeURIComponent(liObj.data("path")+"/" + liObj.data("uuid") +"_"+ liObj.data("filename"));
+		var path2 = encodeURIComponent(uploadPath+"/"+uuid+"_"+fileName);
+		
+			self.location = "/download?fileName="+path2;
 			
-		} else {
-			console.log("error");
-		}
+		
+		
 	});
 });

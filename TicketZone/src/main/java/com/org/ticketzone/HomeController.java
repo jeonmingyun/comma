@@ -1,17 +1,14 @@
 package com.org.ticketzone;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.org.ticketzone.domain.AttachFileDTO;
 //github.com/jeonmingyun/comma.git
 import com.org.ticketzone.domain.Criteria;
 import com.org.ticketzone.domain.NoticeAttachVO;
@@ -55,13 +52,19 @@ public class HomeController {
 
 	// 공지사항 글쓰기 처리
 	@RequestMapping(value = "/noticeInsert", method = RequestMethod.POST)
-	public String noticeInsert(Model model, NoticeBoardVO notice, NoticeAttachVO attach, RedirectAttributes rttr) {
-		
-			System.out.println(notice);
-			System.out.println(attach);
-			
-		noticeBoardService.insertSelectKey(notice);
-		noticeAttachService.Fileinsert(attach);
+	public String noticeInsert(Model model, NoticeBoardVO notice, NoticeAttachVO attach, HttpServletRequest request,
+			RedirectAttributes rttr) {
+		String notice_status = request.getParameter("notice_status");
+		System.out.println(notice);
+		System.out.println(attach);
+		System.out.println(notice_status + "상태");
+
+		if (notice_status.equals("1")) {
+			noticeBoardService.InsertStatus(notice);
+			noticeAttachService.Fileinsert(attach);
+		} else {
+			noticeBoardService.insertSelectKey(notice);
+		}
 
 		return "redirect:/";
 	}
@@ -71,8 +74,8 @@ public class HomeController {
 	public String showNotice(Model model, HttpServletRequest request) {
 		String notice_no = request.getParameter("notice_no");
 		model.addAttribute("noticeUpd", noticeBoardService.noticeBoardUpdInfo(notice_no));
-		model.addAttribute("file",noticeAttachService.findByNotice_no(notice_no));
-		
+		model.addAttribute("file", noticeAttachService.findByNotice_no(notice_no));
+
 		return "home/showNotice";
 	}
 
@@ -100,8 +103,8 @@ public class HomeController {
 
 		return "redirect:/";
 	}
-	
-	//공지사항 검색
+
+	// 공지사항 검색
 //	@RequestMapping(value = "/searchKeyword", method = RequestMethod.GET)
 //	public String searchNotice(Model model, NoticeBoardVO notice, Criteria Cri) {
 //		int count = noticeBoardService.SearchCount(Cri);
@@ -114,5 +117,5 @@ public class HomeController {
 //	}
 
 	// 테스트용
-	
+
 }
