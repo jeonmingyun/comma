@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<link href="../resources/css/mStore_Register.css" rel="stylesheet" />
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2a24234e20fd78957bd509e4c423610f&libraries=services"></script>
 		
@@ -58,7 +59,7 @@
 							<th>매장 주소</th>
 							<td><input type="text" id="sample5_address" name="address_name" placeholder="주소">
 								<input type="button" onclick="sample5_execDaumPostcode()"
-								value="주소 검색"><br>
+								id="address_search" value="주소 검색"><br>
 								<div id="map"
 									style="width: 300px; height: 300px; margin-top: 10px; display: none"></div>
 							</td>
@@ -72,7 +73,9 @@
 				<input type="hidden" id="coor_x" name="coor_x">
 				<input type="hidden" id="coor_y" name="coor_y">
 				<!-- 등록 버튼 -->
-				<input type="submit" value="등록">
+				<div id="regi_button">
+				<input type="submit" id="regi" value="등록">
+				</div>
 			</form>
 		</div>
 		<!-- table_wapper -->
