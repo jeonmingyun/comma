@@ -1,8 +1,8 @@
 package com.org.ticketzone;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -34,11 +34,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.org.ticketzone.domain.AttachFileDTO;
 
 import lombok.AllArgsConstructor;
-import net.coobird.thumbnailator.Thumbnailator;
 
 @AllArgsConstructor
 @Controller
-public class CosController {
+public class UploadController {
 
 	// 날짜별 폴더생성(2019/04/10)
 	private String getFolder() {
@@ -140,15 +139,15 @@ public class CosController {
 				attachDTO.setUploadPath(uploadFolderPath);
 
 				// 이미지 파일 체크
-				if (checkImageType(saveFile)) {
-
-					attachDTO.setImage(true);
-
-					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
-					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
-
-					thumbnail.close();
-				}
+//				if (checkImageType(saveFile)) {
+//
+//					attachDTO.setImage(true);
+//
+//					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
+//					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
+//
+//					thumbnail.close();
+//				}
 				list.add(attachDTO);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -166,7 +165,7 @@ public class CosController {
 
 		File file = new File("c:\\upload\\" + fileName);
 		System.out.println("file: " + file);
-
+		System.out.println("도착");
 		ResponseEntity<byte[]> result = null;
 
 		try {
@@ -174,11 +173,13 @@ public class CosController {
 			header.add("Content-Type", Files.probeContentType(file.toPath()));
 			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
 		} catch (IOException e) {
+			
 			e.printStackTrace();
 		}
-		System.out.println(result);
+		System.out.println(result + "결과");
 		return result;
 	}
+	
 
 	// 다운로드
 	@GetMapping(value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)

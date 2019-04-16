@@ -4,14 +4,20 @@
 
 <mapper namespace="com.org.ticketzone.mapper.StoreMapper">
 <select id="storeList" resultType="com.org.ticketzone.domain.StoreVO">
-	select license_number, store_name, store_tel, store_time, address_name
-	from store 
+
+	select a.license_number, a.store_name, a.store_tel, a.store_time, a.address_name,
+	b.img_uuid, b.img_uploadpath, b.img_filename 
+	from store a, store_attach b
+	where a.license_number = b.license_number
+ 
 </select>
 
 <select id="storeInfo" resultType="com.org.ticketzone.domain.StoreVO">
-	select license_number, store_name, store_tel, store_time, store_intro, address_name
-	from store
-	where license_number = substr(#{license},0,10)	
+	select a.license_number, a.store_name, a.store_tel, a.store_time, a.store_intro, a.address_name,
+	b.img_uuid, b.img_uploadpath, b.img_filename
+	from store a, store_attach b
+	where a.license_number = b.license_number
+	and a.license_number = substr(#{license},0,10)	
 </select>
 
 <insert id="storeRegister">
@@ -20,7 +26,10 @@
 </insert>
 
 <select id="storeGet" resultType="com.org.ticketzone.domain.StoreVO">
-	select * from store where owner_id = #{owner_id}
+	select a.*, b.img_uuid, b.img_uploadpath, b.img_filename
+	from store a, store_attach b 
+	where a.owner_id = #{owner_id}
+	and a.license_number = b.license_number
 </select>
 
 <!-- 매장 수정페이지 -->
@@ -46,7 +55,8 @@
 	<select id="getListWithPaging"
 		resultType="com.org.ticketzone.domain.StoreVO">
 		<![CDATA[
-			select license_number, store_name, address_name, store_time, store_tel
+			select a.license_number, a.store_name, a.address_name, a.store_time, a.store_tel,
+			b.img_uuid, b.img_filename, b.img_uploadpath
 			from
 			(select rownum rn, license_number, store_name, address_name, store_time, store_tel
 			from store
@@ -68,8 +78,9 @@
 		</trim> -->
 		<![CDATA[	
 			rownum <= #{pageNum} * #{amount}
-			)
+			) a, store_attach b
 			where rn > (#{pageNum} -1) * #{amount}
+			and a.license_number = b.license_number
 		]]>
 	</select>
 	

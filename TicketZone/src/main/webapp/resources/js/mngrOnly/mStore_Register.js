@@ -46,25 +46,110 @@ function sample5_execDaumPostcode() {
 		}
 	}).open();
 }
-function handleImgFileSelect(e){
-	var files = e.target.files;
-	var filesArr = Array.prototype.slice.call(files);
 	
-	filesArr.forEach(function(f){
-		if(!f.type.match("image.*")){
-			alert("확장자는 이미지 확장자만 가능합니다.");
-			return
-		}
-		sel_file = f;
+	function handleImgFileSelect(e){
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
 		
-		var reader = new FileReader();
-		reader.onload = function(e){
-			$("#preview").attr("src", e.target.result);
-			$("#preview").show();
+		filesArr.forEach(function(f){
+			if(!f.type.match("image.*")){
+				alert("확장자는 이미지 확장자만 가능합니다.");
+				return
+			}
+			sel_file = f;
+			
+			var reader = new FileReader();
+			reader.onload = function(e){
+				$("#preview").attr("src", e.target.result);
+				$("#preview").show();
+			}
+			reader.readAsDataURL(f);
+		});
+	}
+
+	var maxSize = 5242880; //5MB
+
+	function checkExtension(fileSize) {
+	if (fileSize >= maxSize) {
+		alert("파일 사이즈 초과");
+		return false;
+	} else {
+		return true;
+	}
+	
+	}
+	$(document).ready(function(){
+		var formObj = $("#insert_Store");
+
+		$("input[type='submit']").on("click", function(e){
+			e.preventDefault();
+			console.log("submit clicked");
+			var str = "";
+			formObj.submit();
+			
+		});
+		
+		$("input[type='file']").change(function(e){
+			
+			var formData = new FormData();
+			var inputFile = $("input[name='uploadFile']");
+			var files = inputFile[0].files;
+			for(var i=0; i<files.length; i++){
+				if(!checkExtension(files[i].size)){
+					return false;
+				}
+				formData.append("uploadFile", files[i]);
+			}
+			
+			$.ajax({
+				url: '/uploadAjaxAction',
+				processData: false,
+				contentType: false,data:
+				formData,type: 'POST',
+				dataType: 'json',
+					success: function(result){
+						console.log(result);
+						uploadSuccess(result);
+					}
+			}); //$.ajax
+		});
+		var resultDiv = $(".resultDiv");
+		function uploadSuccess(uploadResultArr){
+			var str = "";
+			
+			$(uploadResultArr).each(function(i,obj){
+				var fileCallPath = encodeURIComponent(obj.uploadPath+"/" + obj.uuid +"_"+obj.fileName);
+				
+				str += "<span data-file=\'"+fileCallPath+"\' data-type='file'>삭제하기</span>";
+				str += "<input type='hidden' name='img_filename' value='"+obj.fileName+"'>";
+				str += "<input type='hidden' name='img_uuid' value='"+obj.uuid+"'>";
+				str += "<input type='hidden' name='img_uploadpath' value='"+obj.uploadPath+"'>";
+				
+				
+			});
+			resultDiv.append(str);
 		}
-		reader.readAsDataURL(f);
-	});
-}
-$(document).ready(function(){
+		
+		
+		$(".resultDiv").on("click", "span", function(e){
+			console.log("delete file");
+			
+			var targetFile = $(this).data("file");
+			var type = $(this).data("type");
+			
+			var targetLi = $(this).closest("span");
+			
+			$.ajax({
+				url: '/deleteFile',
+				data: {fileName: targetFile, type:type},
+				dataType: 'text',
+				type: 'POST',
+					success: function(result){
+						alert(result);
+						targetLi.remove();
+						
+					}
+			});
+		});
 	$("#upload_img").on("change", handleImgFileSelect);
 });

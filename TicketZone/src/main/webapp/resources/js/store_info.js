@@ -1,3 +1,10 @@
+$(document).ready(function(){
+	var uuid = $("#uuid").val();
+	var uploadpath = $("#uploadpath").val();
+	var filename = $("#filename").val();
+	var filePath = encodeURIComponent(uploadpath+"/" + uuid +"_"+filename);
+	var a = $("img[name=store_img]").attr("src", "/display?fileName="+filePath);
+});
 $(function() {
 	var mapContainer = document.getElementById('map'), // 지도를
 	// 표시할

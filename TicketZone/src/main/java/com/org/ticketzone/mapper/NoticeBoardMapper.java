@@ -17,6 +17,8 @@ public interface NoticeBoardMapper {
 
 	public void insertSelectKey(NoticeBoardVO notice);
 	
+	public void InsertStatus(NoticeBoardVO notice);
+	
 //	public ArrayList<NoticeBoardVO> noticeSearch(NoticeBoardVO notice);
 	
 	public int SearchCount(Criteria cri);

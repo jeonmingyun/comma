@@ -18,13 +18,16 @@
 	
 	<div id="StoreBox">
 		<c:if test="${!empty sessionScope.id}">
-			<c:forEach var="s" items="${store}">
+			<c:forEach var="s" items="${store}" varStatus="status">
 				<div class="mngrStore">
 					<button class="license_number" value="${s.license_number}">
-						<img class="s_img" src="resources/img/miyago.jpg">
+						<img name="s_img${status.index}" class="s_img">
 					</button>
 					<p>${s.store_name}</p>
 				</div>
+				<input type="hidden" name="path" class="uuid${status.index}" value="${s.img_uuid}">
+				<input type="hidden" name="path" class="filename${status.index}" value="${s.img_filename}">
+				<input type="hidden" name="path"class="uploadpath${status.index}" value="${s.img_uploadpath}">
 			</c:forEach>
 			
 			<div id="StoreBox2">

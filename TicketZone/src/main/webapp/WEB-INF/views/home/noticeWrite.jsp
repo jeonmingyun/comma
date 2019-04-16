@@ -28,45 +28,7 @@
 	}
 	
 	$(document).ready(function(){
-		function showUploadResult(uploadResultArr) {
-			if(!uploadResultArr || uploadResultArr.length == 0){return;}
-			var uploadUL = $(".uploadResult ul");
-			var str = "";
-
-			$(uploadResultArr).each(
-					function(i, obj) {
-						
-						if (!obj.image) {
-							console.log(obj.uploadPath);
-							//다운로드	
-								var fileCallPath = encodeURIComponent( obj.uploadPath+ "/s_" + obj.uuid +"_"+obj.fileName);							
-								str += "<li data-path='"+obj.uploadPath+"'";
-								str +=" data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'"  + str +"' ><div>";
-								str += "<span> " + obj.fileName+"</span>";
-								str += "<button type='button' data-file=\'"+fileCallPath+"\' "
-								str += "data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-								str += "<img src='/display?fileName="+fileCallPath+"'>";
-								str += "</div>";
-								str += "</li>";
-							} else {
-								
-								var fileCallPath = encodeURIComponent( obj.uploadPath+"/"+ obj.
-										uuid +"_"+obj.fileName);
-								var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");
-								
-								str += "<li "
-								str += "data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"' ><div>";
-								str += "<span> " + obj.fileName+"</span>";
-								str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' class='btn btn-warning btn-circle'>";
-								str += "<i class='fa fa-times'></i></button><br>";
-								str += "<img src='/resources/img/attach.png'></a>";
-								str += "</div>";
-								str += "</li>";
-							}
-
-					});
-			uploadUL.append(str);
-		}
+		
 		
 		var formObj = $("#insert_from");
 
@@ -74,16 +36,8 @@
 			e.preventDefault();
 			console.log("submit clicked");
 			var str = "";
-			$(".uploadResult ul li").each(function(i, obj){				
-				var jobj = $(obj);
-				console.dir(jobj);
-				str += "<input type='hidden' name='fileName' value='"+jobj.data("filename")+"'>";
-				str += "<input type='hidden' name='uuid' value='"+jobj.data("uuid")+"'>";
-				str += "<input type='hidden' name='uploadPath' value='"+jobj.data("path")+"'>";
-				str += "<input type='hidden' name='fileType' value='"+jobj.data("type")+"'>";
-				console.log(str);
-			});
-			formObj.append(str).submit();
+			formObj.submit();
+			
 		});
 		
 		$("input[type='file']").change(function(e){
@@ -106,19 +60,33 @@
 				dataType: 'json',
 					success: function(result){
 						console.log(result);
-						showUploadResult(result);
-						
-						
+						uploadSuccess(result);
 					}
 			}); //$.ajax
 		});
-		$(".uploadResult").on("click", "button", function(e){
+		var resultDiv = $(".resultDiv");
+		function uploadSuccess(uploadResultArr){
+			var str = "";
+			
+			$(uploadResultArr).each(function(i,obj){
+				var fileCallPath = encodeURIComponent(obj.uploadPath+"/" + obj.uuid +"_"+obj.fileName);
+				str += "<span data-file=\'"+fileCallPath+"\' data-type='file'>"+obj.fileName+"삭제하기</span>";
+				str += "<input type='hidden' name='fileName' value='"+obj.fileName+"'>";
+				str += "<input type='hidden' name='uuid' value='"+obj.uuid+"'>";
+				str += "<input type='hidden' name='uploadPath' value='"+obj.uploadPath+"'>";				
+				str += "<input type='hidden' name='notice_status' value='1'>";
+			});
+			resultDiv.append(str);
+		}
+		
+		
+		$(".resultDiv").on("click", "span", function(e){
 			console.log("delete file");
 			
 			var targetFile = $(this).data("file");
 			var type = $(this).data("type");
 			
-			var targetLi = $(this).closest("li");
+			var targetLi = $(this).closest("span");
 			
 			$.ajax({
 				url: '/deleteFile',
@@ -128,11 +96,18 @@
 					success: function(result){
 						alert(result);
 						targetLi.remove();
+						
 					}
 			});
 		});
+		$("#write_cancle").on("click", function(){
+			console.log("클릭");
+			history.go(-1);	
+		});
 		
 	});
+	
+	
 	
 </script>
 <style>
@@ -168,13 +143,13 @@
 		<div class="uploadDiv">
 			<input type="file" name="uploadFile" multiple>
 		</div>
-		<div class="uploadResult">
-			<ul>
-
-			</ul>
+		<div class="resultDiv">
+			
 		</div>
-		<br> <input type="submit" value="글작성">
+		
+		<br> <input type="submit" value="글작성"><br>		
 	</form>
+		<button id="write_cancle">취소</button>
 	<%@include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>

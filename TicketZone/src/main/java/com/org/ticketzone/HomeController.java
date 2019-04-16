@@ -1,17 +1,14 @@
 package com.org.ticketzone;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.org.ticketzone.domain.AttachFileDTO;
 //github.com/jeonmingyun/comma.git
 import com.org.ticketzone.domain.Criteria;
 import com.org.ticketzone.domain.NoticeAttachVO;
@@ -55,16 +52,20 @@ public class HomeController {
 
 	// 공지사항 글쓰기 처리
 	@RequestMapping(value = "/noticeInsert", method = RequestMethod.POST)
-	public String noticeInsert(Model model, NoticeBoardVO notice, NoticeAttachVO attach, RedirectAttributes rttr) {
-		
+	public String noticeInsert(Model model, NoticeBoardVO notice, NoticeAttachVO attach, HttpServletRequest request, RedirectAttributes rttr) {
+			String notice_status = request.getParameter("notice_status");
 			System.out.println(notice);
 			System.out.println(attach);
+			System.out.println(notice_status + "상태");
 			
-		noticeBoardService.insertSelectKey(notice);
 		
 		
-		noticeAttachService.Fileinsert(attach);
-		
+		if(notice_status.equals("1")) {
+			noticeBoardService.InsertStatus(notice);
+			noticeAttachService.Fileinsert(attach);
+		} else {
+			noticeBoardService.insertSelectKey(notice);
+		}
 		
 		
 

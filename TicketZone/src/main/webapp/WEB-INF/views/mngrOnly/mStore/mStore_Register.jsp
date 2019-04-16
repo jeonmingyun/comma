@@ -18,7 +18,7 @@
 	<%@include file="/WEB-INF/views/include/Mngrheader.jsp"%>
 	<section>
 		<div class="table_wapper">
-			<form method="post" action="/mStore_Reg">
+			<form id="insert_Store" method="post" action="/mStore_Reg">
 				<h1>매장 등록</h1>
 				<table class="mngr_show">
 					<tbody>
@@ -65,9 +65,12 @@
 						</tr>	
 						<tr>	
 							<th>매장사진</th>
-							<td><input type="file" id="upload_img" name="fileName">
+							<td><input id ="upload_img" type="file" name="uploadFile">
 							<div class="img_preview">
 								<img id="preview" style="width:300px; height:300px; margin-top :10px; display: none">
+							</div>
+							<div class="resultDiv">
+							
 							</div>
 							</td>
 						</tr>	

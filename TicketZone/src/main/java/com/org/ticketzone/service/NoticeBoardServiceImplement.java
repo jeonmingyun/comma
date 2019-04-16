@@ -67,5 +67,11 @@ public class NoticeBoardServiceImplement implements NoticeBoardService {
 		return mapper.SearchCount(cri);
 	}
 
+	@Override
+	public void InsertStatus(NoticeBoardVO notice) {
+		mapper.InsertStatus(notice);
+		
+	}
+
 
 }
