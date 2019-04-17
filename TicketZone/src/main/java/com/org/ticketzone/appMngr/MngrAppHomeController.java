@@ -25,10 +25,10 @@ public class MngrAppHomeController {
 		String owner_id = request.getParameter("owner_id");
 		String owner_password = request.getParameter("owner_password");
 		ArrayList<OwnerVO> ownervo = ownerService.login(owner_id);
-		String db_owner_password = ownervo.get(0).getOwner_password();
-		System.out.println(ownervo);
+		String db_owner_password;
 		
 		if( ownervo.size() != 0) {
+			db_owner_password = ownervo.get(0).getOwner_password();
 			if( db_owner_password.equals(owner_password))
 				return "1"; // login success
 			 else 
