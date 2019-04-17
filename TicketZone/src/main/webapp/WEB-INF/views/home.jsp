@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page session="false" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 
@@ -45,7 +46,7 @@
 					<td>${nl.notice_no}
 					<td>${nl.notice_title}
 					<td>관리자
-					<td>${nl.notice_reg}
+					<td><fmt:formatDate value="${nl.notice_reg}" pattern="yyyy.MM.dd"/>
 				</tr>
 			</c:forEach>			
 		</table>

@@ -56,22 +56,19 @@ public class HomeController {
 
 	// 공지사항 글쓰기 처리
 	@RequestMapping(value = "/noticeInsert", method = RequestMethod.POST)
-	public String noticeInsert(Model model, NoticeBoardVO notice, NoticeAttachVO attach, HttpServletRequest request, RedirectAttributes rttr) {
-			String notice_status = request.getParameter("notice_status");
-			System.out.println(notice);
-			System.out.println(attach);
-			System.out.println(notice_status + "상태");
-			
-		
-		
-		if(notice_status.equals("1")) {
+	public String noticeInsert(Model model, NoticeBoardVO notice, NoticeAttachVO attach, HttpServletRequest request,
+			RedirectAttributes rttr) {
+		String notice_status = request.getParameter("notice_status");
+		System.out.println(notice);
+		System.out.println(attach);
+		System.out.println(notice_status + "상태");
+
+		if (notice_status.equals("1")) {
 			noticeBoardService.InsertStatus(notice);
 			noticeAttachService.Fileinsert(attach);
 		} else {
 			noticeBoardService.insertSelectKey(notice);
 		}
-		
-		
 
 		return "redirect:/";
 	}
@@ -81,8 +78,8 @@ public class HomeController {
 	public String showNotice(Model model, HttpServletRequest request) {
 		String notice_no = request.getParameter("notice_no");
 		model.addAttribute("noticeUpd", noticeBoardService.noticeBoardUpdInfo(notice_no));
-		model.addAttribute("file",noticeAttachService.findByNotice_no(notice_no));
-		
+		model.addAttribute("file", noticeAttachService.findByNotice_no(notice_no));
+
 		return "home/showNotice";
 	}
 
@@ -110,8 +107,8 @@ public class HomeController {
 
 		return "redirect:/";
 	}
-	
-	//공지사항 검색
+
+	// 공지사항 검색
 //	@RequestMapping(value = "/searchKeyword", method = RequestMethod.GET)
 //	public String searchNotice(Model model, NoticeBoardVO notice, Criteria Cri) {
 //		int count = noticeBoardService.SearchCount(Cri);
@@ -124,6 +121,7 @@ public class HomeController {
 //	}
 
 	// 테스트용
+
 	@ResponseBody
 	@RequestMapping(value = "/chart", method = RequestMethod.POST)
 	public ArrayList<NumberTicketVO> test(HttpServletRequest request) {
@@ -133,4 +131,5 @@ public class HomeController {
 		return numberTicketService.getTotal();
 	}
 	
+
 }
