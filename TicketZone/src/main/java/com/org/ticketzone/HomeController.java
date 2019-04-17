@@ -1,22 +1,25 @@
 package com.org.ticketzone;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 //github.com/jeonmingyun/comma.git
 import com.org.ticketzone.domain.Criteria;
 import com.org.ticketzone.domain.NoticeAttachVO;
 import com.org.ticketzone.domain.NoticeBoardVO;
+import com.org.ticketzone.domain.NumberTicketVO;
 import com.org.ticketzone.domain.PageDTO;
 import com.org.ticketzone.service.NoticeAttachService;
 import com.org.ticketzone.service.NoticeBoardService;
-import com.org.ticketzone.service.TestService;
+import com.org.ticketzone.service.NumberTicketService;
 
 import lombok.AllArgsConstructor;
 
@@ -29,7 +32,8 @@ public class HomeController {
 
 	private NoticeBoardService noticeBoardService;
 	private NoticeAttachService noticeAttachService;
-	private TestService test;
+	private NumberTicketService numberTicketService;
+	
 
 	// 고객 홈
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -117,5 +121,15 @@ public class HomeController {
 //	}
 
 	// 테스트용
+
+	@ResponseBody
+	@RequestMapping(value = "/chart", method = RequestMethod.POST)
+	public ArrayList<NumberTicketVO> test(HttpServletRequest request) {
+		String today = request.getParameter("today");
+		
+		System.out.println(today);
+		return numberTicketService.getTotal();
+	}
+	
 
 }

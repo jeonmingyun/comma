@@ -77,7 +77,7 @@ public class UploadController {
 	@PostMapping("/uploadFormAction")
 	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
 
-		String uploadFolder = "C:\\upload";
+		String uploadFolder = "C:\\Users\\bon300-14\\Desktop\\4Github\\comma\\TicketZone\\src\\main\\webapp\\resources\\img";
 
 		for (MultipartFile multipartFile : uploadFile) {
 			System.out.println("------------------------------------");
@@ -104,7 +104,7 @@ public class UploadController {
 
 		List<AttachFileDTO> list = new ArrayList<>();
 //		System.out.println("update ajax post........");
-		String uploadFolder = "C:\\upload"; // 업로드할 경로지정
+		String uploadFolder = "C:\\Users\\bon300-14\\Desktop\\4Github\\comma\\TicketZone\\src\\main\\webapp\\resources\\img"; // 업로드할 경로지정
 		String uploadFolderPath = getFolder();
 		// make folder ---------------
 		File uploadPath = new File(uploadFolder, uploadFolderPath); // 파일경로
@@ -163,7 +163,7 @@ public class UploadController {
 	public ResponseEntity<byte[]> getFile(String fileName) {
 		System.out.println("fileName: " + fileName);
 
-		File file = new File("c:\\upload\\" + fileName);
+		File file = new File("C:\\Users\\bon300-14\\Desktop\\4Github\\comma\\TicketZone\\src\\main\\webapp\\resources\\img\\" + fileName);
 		System.out.println("file: " + file);
 		System.out.println("도착");
 		ResponseEntity<byte[]> result = null;
@@ -187,7 +187,7 @@ public class UploadController {
 	public ResponseEntity<Resource> downloadFile(@RequestHeader("User-Agent") String userAgent, String fileName) {
 		System.out.println("download file: " + fileName);
 
-		Resource resource = new FileSystemResource("c:\\upload\\" + fileName);
+		Resource resource = new FileSystemResource("C:\\Users\\bon300-14\\Desktop\\4Github\\comma\\TicketZone\\src\\main\\webapp\\resources\\img\\" + fileName);
 		System.out.println("resource: " + resource);
 
 		if (resource.exists() == false) {
