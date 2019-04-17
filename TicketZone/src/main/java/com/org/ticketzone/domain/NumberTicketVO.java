@@ -16,7 +16,7 @@ public class NumberTicketVO {
 	private String cancel;
 	private String absence;
 	private int status_total;
-	
-
+	private String ticket_reg;
+	private String team;
 }
 

@@ -207,6 +207,14 @@
 		ticket_code
 	</select>
 
+	<!-- 방문자수통계 -->
+	<select id="getTotal" resultType="com.org.ticketzone.domain.NumberTicketVO">
+	<![CDATA[
+	select substr(ticket_reg,9,3) as ticket_reg, sum(the_number) as the_number, count(ticket_code) as team
+	from number_ticket
+	group by substr(ticket_reg,9,3)
+	order by ticket_reg
+	]]>
+	</select>
 	
-
 </mapper>

@@ -120,6 +120,7 @@ public class MngrOnlyController {
 		model.addAttribute("success", numberTicketService.tSuccess(license_number));
 		model.addAttribute("cancel", numberTicketService.tCancel(license_number));
 		model.addAttribute("absence", numberTicketService.tAbsence(license_number));
+		System.out.println(model.addAttribute("absence", numberTicketService.tAbsence(license_number)));
 		model.addAttribute("member", memberService.memberTest());
 
 		return "/mngrOnly/mCustomer";
@@ -178,6 +179,7 @@ public class MngrOnlyController {
 	public String absence_ticket(Model model, NumberTicketVO ticket) {
 
 		numberTicketService.absenceStatus(ticket);
+		
 		numberTicketService.cancelTicket(ticket);
 		return "/mngrOnly/mCustomer";
 	}
