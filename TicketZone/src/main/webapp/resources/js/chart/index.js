@@ -25,7 +25,7 @@ $(document).ready(function(){
 			test[0] = [ 'Time', '대기인원', '대기팀' ];
 			
 			for(var i=1; i<=data.length; i++){
-				test[i] = [data[i].ticket_reg.trim(), data[i].the_number+"명"+, parseInt(data[i].team)];				
+				test[i] = [data[i].ticket_reg.trim(), data[i].the_number, data[i].team];				
 			}
 			console.log(test);
 		}, error : function(data){
