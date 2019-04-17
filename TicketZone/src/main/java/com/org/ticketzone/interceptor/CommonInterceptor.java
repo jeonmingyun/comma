@@ -22,13 +22,16 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		String board_no = request.getParameter("board_no");
 		ArrayList<BoardVO> board_arr = boardService.boardUpdInfo(board_no);
-		String board_password = board_arr.get(0).getBoard_password();
+		String board_password;
 
-		if (board_password != null) {
-			response.sendRedirect("/board_pass_form?board_no=" + board_no);
-			return false;
-		} else
-			return true;
+		if (board_arr != null) {
+			board_password = board_arr.get(0).getBoard_password();
+			if( board_password != null) {
+				response.sendRedirect("/board_pass_form?board_no=" + board_no);
+				return false;
+			}
+		}
+		return true;
 
 	}
 }
