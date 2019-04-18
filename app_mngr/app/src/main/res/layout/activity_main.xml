@@ -12,22 +12,13 @@
         android:layout_height="match_parent"
         android:background="#fff">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            app:contentInsetStart="0dp"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Main Page"
             android:layout_centerInParent="true" />
-</RelativeLayout>
+    </RelativeLayout>
 
     <!--navigation drawer-->
     <android.support.design.widget.NavigationView
@@ -36,5 +27,4 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:menu="@menu/main_navigation_menu" />
-
-</android.support.v4.widget.DrawerLayout>
+    </android.support.v4.widget.DrawerLayout>
