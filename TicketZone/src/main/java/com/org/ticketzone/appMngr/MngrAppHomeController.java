@@ -40,15 +40,25 @@ public class MngrAppHomeController {
 		
 	}
 	
-	/*
-	 * //관리자 회원가입
-	 * 
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping(value = "/register", method = RequestMethod.POST) public
-	 * String register(Model model, OwnerVO owner) {
-	 * ownerService.insertOwner(owner);
-	 * 
-	 * return "1"; }
-	 */
+	@ResponseBody
+	@RequestMapping(value = "/id_check", method = RequestMethod.POST)
+	public String id_check(HttpServletRequest request) {
+		String owner_id = request.getParameter("owner_id");
+		ArrayList<OwnerVO> ownervo = ownerService.login(owner_id);
+		
+		if( ownervo.size() != 0) {
+			return "0";
+		} else {
+			return "1";
+		}
+	}
+	// id가 있을때 0 return / id가 없을때 1 return 
+	//관리자 회원가입
+	@ResponseBody
+	@RequestMapping(value = "/appregister", method = RequestMethod.POST)
+	public String appregister(Model model, OwnerVO owner) {
+		ownerService.insertOwner(owner); 
+
+		return "1";
+	}
 }
