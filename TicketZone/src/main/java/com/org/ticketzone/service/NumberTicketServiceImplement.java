@@ -98,5 +98,11 @@ public class NumberTicketServiceImplement implements NumberTicketService {
 
 	}
 
+	@Override
+	public ArrayList<NumberTicketVO> getTotal() {
+		
+		return mapper.getTotal();
+	}
+
 	
 }
