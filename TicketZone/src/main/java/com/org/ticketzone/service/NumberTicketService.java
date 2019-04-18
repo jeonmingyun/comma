@@ -33,5 +33,7 @@ public interface NumberTicketService {
 
 	public void cancelTicket(NumberTicketVO ticket);
 	
+	public ArrayList<NumberTicketVO> getTotal();
+	
 	
 }

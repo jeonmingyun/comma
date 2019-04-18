@@ -33,5 +33,6 @@ public interface NumberTicketMapper {
 	
 	public void cancelTicket(NumberTicketVO ticket);
 	
+	public ArrayList<NumberTicketVO> getTotal();
 	
 }
