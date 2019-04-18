@@ -63,8 +63,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public class MngrLoginTask extends AsyncTask<String, Void, String> {
-        String ip ="39.127.7.42"; //학교 IP번호
-        String path = "http://"+ip+"/login"; // 연결할 jsp주소
+        String ip ="39.127.7.46"; //학교 IP번호
+        String path = "http://"+ip+":8080/login"; // 연결할 jsp주소
 
         @Override
         protected String doInBackground(String... strings) {
