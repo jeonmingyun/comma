@@ -126,7 +126,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public class MngrJoin extends AsyncTask<String, Void, String> {
-        String ip ="39.127.7.46"; //학교 IP번호
+        String ip ="39.127.7.42"; //학교 IP번호
         String path = "http://"+ip+":8080/"; // 연결할 jsp주소
 
         @Override
