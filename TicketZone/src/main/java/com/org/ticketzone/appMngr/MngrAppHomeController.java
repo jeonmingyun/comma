@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,22 +22,35 @@ import lombok.AllArgsConstructor;
 @Controller
 public class MngrAppHomeController {
 	OwnerService ownerService;
+	
 	@ResponseBody
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@RequestBody OwnerVO ownervo) {
+	public JSONArray login(@RequestBody OwnerVO ownervo) {
 		String owner_id = ownervo.getOwner_id();
 		String owner_password = ownervo.getOwner_password();
 		ArrayList<OwnerVO> ownerList = ownerService.login(owner_id);
 		String db_owner_password;
-
+		JSONArray jarr = new JSONArray();
+		JSONObject jobj = new JSONObject();
+		
 		if( ownerList.size() != 0) {
 			db_owner_password = ownerList.get(0).getOwner_password();
-			if( db_owner_password.equals(owner_password))
-				return "1"; // login success
-			 else 
-				return "0"; // pass wrong
+			if( db_owner_password.equals(owner_password)) {
+				jobj.put("status", "1");
+				jarr.add(jobj);
+				System.out.println(jarr);
+				return jarr; // login success
+			} else {
+				jobj.put("status", "0");
+				jarr.add(jobj);
+				System.out.println(jarr);
+				return jarr; // pass wrong
+			}
 		} else {
-			return "-1"; // id wrong
+			jobj.put("status", "-1");
+			jarr.add(jobj);
+			System.out.println(jarr);
+			return jarr; // id wrong
 		}
 		
 	}

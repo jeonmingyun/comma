@@ -1,13 +1,9 @@
-package ticketzone.org.com.app_mngr;
+package com.org.ticketzone.app_mem;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
-import org.apache.http.HttpResponse;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,7 +14,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class NetworkTask extends AsyncTask<SendDataSet, Void, JSONArray> {
+public class NetworkTask extends AsyncTask<SendDataSet, Void, String> {
     String ip ="39.127.7.42"; //학교 IP번호
     String path = "http://"+ip+":8080/"; // 연결할 jsp주소
 
@@ -27,10 +23,9 @@ public class NetworkTask extends AsyncTask<SendDataSet, Void, JSONArray> {
     }
 
     @Override
-    protected JSONArray doInBackground(SendDataSet... strings) {
-        JSONArray data = new JSONArray(); // response data
-//        String data = "";
-        JSONObject jobj = new JSONObject(); // request data
+    protected String doInBackground(SendDataSet... strings) {
+        String data ="";
+        JSONObject jobj = new JSONObject();
 
         try {
             for ( int i = 0; i < strings.length; i++) {
@@ -52,40 +47,22 @@ public class NetworkTask extends AsyncTask<SendDataSet, Void, JSONArray> {
             owr.flush();
             owr.close();
 
-            String response;
-            int responseCoe = conn.getResponseCode();
-
-            if(responseCode == HttpURLConnection.HTTP_OK) {
-
-            }
             /* 서버 -> 안드로이드 파라메터값 전달 */
             InputStream is = null;
             BufferedReader br = null;
 
-//            HttpResponse response;
-//
-//            br = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"));
-//
-//            String json = br.readLine();
-//            JSONTokener json_token = new JSONTokener(json);
-//            data = new JSONArray(json_token);
-//            Log.e("result ", data.toString());
             is = conn.getInputStream();
             br = new BufferedReader(new InputStreamReader(is), 8*1024);
-
             StringBuffer sBuff = new StringBuffer();
-//            String line = null;
-//
-//            while ((line = br.readLine()) != null) {
-//                sBuff.append(line +"\n");
-//            }
-            sBuff.append(br.readLine());
-            Log.e("tlqk", sBuff.toString().trim()+"" );
-            JSONArray jarr = new JSONArray(sBuff.toString().trim());
-            Log.e("tlqk", jarr+"" );
-            data = jarr;
+            String line = null;
+
+            while ((line = br.readLine()) != null) {
+                sBuff.append(line +"\n");
+            }
+            data = sBuff.toString().trim();
             is.close();
             conn.disconnect();
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
