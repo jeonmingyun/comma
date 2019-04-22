@@ -2,7 +2,7 @@ google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
 var the_number;
 var ticket_reg;
-var test = []
+var test = [];
 $(document).ready(function(){
 	var today = new Date();
 	var dd = today.getDate();
@@ -22,10 +22,12 @@ $(document).ready(function(){
 		dataType : "json",
 		data : {today},
 		success : function(data) {
+			console.log(data);
 			test[0] = [ 'Time', '대기인원', '대기팀' ];
 			
 			for(var i=1; i<=data.length; i++){
-				test[i] = [data[i].ticket_reg.trim(), data[i].the_number, data[i].team];				
+				test[i] = [data[i].ticket_reg.trim(), data[i].the_number, parseInt(data[i].team)];
+				console.log(data[i].ticket_reg);
 			}
 			console.log(test);
 		}, error : function(data){
@@ -38,7 +40,7 @@ $(document).ready(function(){
 function drawChart() {
 	var data = google.visualization
 			.arrayToDataTable(test);
-	console.log(data);
+	
 	var options = {
 		title : 'Company Performance',
 		curveType : 'function',

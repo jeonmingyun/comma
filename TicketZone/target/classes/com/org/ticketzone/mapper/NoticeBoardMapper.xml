@@ -27,10 +27,7 @@
 		where notice_no = #{notice_no}
 	</update>
 	
-	<insert id="noticeInsert">
-		insert into notice_board(notice_no, notice_title, notice_content)
-		values(notice_seq.nextval, #{notice_title}, #{notice_content})
-	</insert>
+	
 	
 	<insert id="insertSelectKey">
 		<selectKey keyProperty="notice_no" order="BEFORE" resultType="int">
