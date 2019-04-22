@@ -61,14 +61,15 @@ public class HomeController {
 		String notice_status = request.getParameter("notice_status");
 		System.out.println(notice);
 		System.out.println(attach);
-		System.out.println(notice_status + "ป๓ลย");
-
-		if (notice_status.equals("1")) {
+		System.out.println(notice_status);
+		
+		if (attach.getFileName() == null) {			
+			noticeBoardService.insertSelectKey(notice);
+		} else {			
 			noticeBoardService.InsertStatus(notice);
 			noticeAttachService.Fileinsert(attach);
-		} else {
-			noticeBoardService.insertSelectKey(notice);
-		}
+			
+	}
 
 		return "redirect:/";
 	}
