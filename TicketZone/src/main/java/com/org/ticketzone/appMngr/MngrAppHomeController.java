@@ -42,11 +42,11 @@ public class MngrAppHomeController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/id_check", method = RequestMethod.POST)
-	public String id_check(HttpServletRequest request) {
-		String owner_id = request.getParameter("owner_id");
-		ArrayList<OwnerVO> ownervo = ownerService.login(owner_id);
+	public String id_check(@RequestBody OwnerVO ownervo) {
+		String owner_id = ownervo.getOwner_id();
+		ArrayList<OwnerVO> ownerList = ownerService.login(owner_id);
 		
-		if( ownervo.size() != 0) {
+		if( ownerList.size() != 0) {
 			return "0";
 		} else {
 			return "1";
@@ -56,7 +56,7 @@ public class MngrAppHomeController {
 	//관리자 회원가입
 	@ResponseBody
 	@RequestMapping(value = "/appregister", method = RequestMethod.POST)
-	public String appregister(Model model, OwnerVO owner) {
+	public String appregister(@RequestBody OwnerVO owner) {
 		ownerService.insertOwner(owner); 
 
 		return "1";
