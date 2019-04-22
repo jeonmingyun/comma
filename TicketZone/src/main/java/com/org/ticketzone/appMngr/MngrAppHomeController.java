@@ -30,7 +30,7 @@ public class MngrAppHomeController {
 		String owner_password = ownervo.getOwner_password();
 		ArrayList<OwnerVO> ownerList = ownerService.login(owner_id);
 		String db_owner_password;
-
+		
 		if( ownerList.size() != 0) {
 			db_owner_password = ownerList.get(0).getOwner_password();
 			if( db_owner_password.equals(owner_password))
@@ -81,5 +81,14 @@ public class MngrAppHomeController {
 			return jarr; // login success
 		}
 		return jarr;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/test", method = RequestMethod.POST)
+	public String test(HttpServletRequest req ) {
+		String request = req.getParameter("request");
+		System.out.println(request);
+
+		return "¸â¹ö app";
 	}
 }

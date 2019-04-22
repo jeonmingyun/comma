@@ -678,7 +678,6 @@ id barrier
 id beginning
 id blocking
 id bottom
-id btn
 id buttonPanel
 id center
 id center_horizontal
@@ -739,6 +738,8 @@ id percent
 id progress_circular
 id progress_horizontal
 id radio
+id request
+id response
 id right
 id right_icon
 id right_side
@@ -772,6 +773,7 @@ id standard
 id start
 id submenuarrow
 id submit_area
+id submits
 id tabMode
 id tag_transition_group
 id tag_unhandled_key_event_manager
