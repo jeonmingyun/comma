@@ -55,7 +55,8 @@ public class SignUpActivity extends AppCompatActivity {
                 owner_name = m_owner_name.getText().toString();
                 owner_tel = m_owner_tel.getText().toString();
                 email = m_email.getText().toString();
-                MngrJoin mngrJoin = new MngrJoin(){
+
+                NetworkTask networkTask = new NetworkTask("appregister"){
                     @Override
                     protected void onPostExecute(String data) {
                         super.onPostExecute(data);
@@ -67,9 +68,16 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                     }
                 };
+
+                SendDataSet sds1 = new SendDataSet("owner_id", owner_id);
+                SendDataSet sds2 = new SendDataSet("owner_password", owner_password);
+                SendDataSet sds3 = new SendDataSet("owner_name", owner_name);
+                SendDataSet sds4 = new SendDataSet("owner_tel", owner_tel);
+                SendDataSet sds5 = new SendDataSet("email", email);
+
                 if(checked == true) {
                     if (owner_password.equals(owner_password_ck)) {
-                        mngrJoin.execute("appregister", "owner_id=" + owner_id + "&owner_password=" + owner_password + "&owner_name=" + owner_name + "&owner_tel=" + owner_tel + "&email=" + email);
+                        networkTask.execute(sds1, sds2, sds3, sds4, sds5);
                     }
                 }else if(checked == false){
                     if (owner_id.equals("")) {
@@ -105,7 +113,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 owner_id = m_owner_id.getText().toString();
 
-                MngrJoin check = new MngrJoin() {
+                NetworkTask networkTask2 = new NetworkTask("id_check") {
                     @Override
                     protected  void onPostExecute(String data){
                         super.onPostExecute(data);
@@ -120,60 +128,62 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                     }
                 };
-                check.execute("id_check", "owner_id="+ owner_id);
+
+                SendDataSet sds1 = new SendDataSet("owner_id", owner_id);
+                networkTask2.execute(sds1);
             }
         });
     }
 
-    public class MngrJoin extends AsyncTask<String, Void, String> {
-        String ip ="39.127.7.42"; //학교 IP번호
-        String path = "http://"+ip+":8080/"; // 연결할 jsp주소
-
-        @Override
-        protected String doInBackground(String... strings) {
-            path += strings[0];
-            String param = strings[1];
-            String data ="";
-
-            try {
-                /* 서버연결 */
-                URL url = new URL(path);
-                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-                conn.setRequestMethod("POST");
-                conn.setDoInput(true);
-                conn.connect();
-
-                /* 안드로이드 -> 서버 파라메터값  전달 */
-                OutputStream os = conn.getOutputStream();
-                os.write(param.getBytes("utf-8"));
-                os.flush();
-                os.close();
-
-                /* 서버 -> 안드로이드 파라메터값 전달 */
-                InputStream is = null;
-                BufferedReader br = null;
-
-                is = conn.getInputStream();
-                br = new BufferedReader(new InputStreamReader(is), 8*1024);
-                StringBuffer sBuff = new StringBuffer();
-                String line = null;
-
-                while ((line = br.readLine()) != null) {
-                    sBuff.append(line +"\n");
-                }
-                data = sBuff.toString().trim();
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return data;
-        }
-
-
-    }
+//    public class MngrJoin extends AsyncTask<String, Void, String> {
+//        String ip ="39.127.7.42"; //학교 IP번호
+//        String path = "http://"+ip+":8080/"; // 연결할 jsp주소
+//
+//        @Override
+//        protected String doInBackground(String... strings) {
+//            path += strings[0];
+//            String param = strings[1];
+//            String data ="";
+//
+//            try {
+//                /* 서버연결 */
+//                URL url = new URL(path);
+//                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+//                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+//                conn.setRequestMethod("POST");
+//                conn.setDoInput(true);
+//                conn.connect();
+//
+//                /* 안드로이드 -> 서버 파라메터값  전달 */
+//                OutputStream os = conn.getOutputStream();
+//                os.write(param.getBytes("utf-8"));
+//                os.flush();
+//                os.close();
+//
+//                /* 서버 -> 안드로이드 파라메터값 전달 */
+//                InputStream is = null;
+//                BufferedReader br = null;
+//
+//                is = conn.getInputStream();
+//                br = new BufferedReader(new InputStreamReader(is), 8*1024);
+//                StringBuffer sBuff = new StringBuffer();
+//                String line = null;
+//
+//                while ((line = br.readLine()) != null) {
+//                    sBuff.append(line +"\n");
+//                }
+//                data = sBuff.toString().trim();
+//
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            return data;
+//        }
+//
+//
+//    }
 
 }
