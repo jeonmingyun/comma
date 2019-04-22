@@ -41,7 +41,7 @@ public class JsonArrayTask extends AsyncTask<SendDataSet, Void, JSONArray> {
             conn.setDoOutput(true); // xml내용을 전달하기 위해서 출력 스트림을 사용
             conn.setDoInput(true);
             conn.connect();
-            Log.e("jobj", jobj.toString()+"");
+
             /* 안드로이드 -> 서버 파라메터값  전달 */
             OutputStreamWriter owr = new OutputStreamWriter(conn.getOutputStream());
             owr.write(jobj.toString());
@@ -69,7 +69,7 @@ public class JsonArrayTask extends AsyncTask<SendDataSet, Void, JSONArray> {
         }catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.e("data", data.toString()+"");
+
         return data;
     }
 
