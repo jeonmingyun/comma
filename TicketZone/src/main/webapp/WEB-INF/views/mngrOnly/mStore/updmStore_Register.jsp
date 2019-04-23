@@ -26,7 +26,7 @@
 		<div class="table_wapper">
 			<form method="post" action="updmStore_Complete">
 				<h1>매장 수정</h1>
-				<input type="hidden" name="license_number"
+				<input type="hidden" id="license_number" name="license_number"
 					value="${updmStore.license_number}">
 				<table class="mngr_show">
 					<tbody>

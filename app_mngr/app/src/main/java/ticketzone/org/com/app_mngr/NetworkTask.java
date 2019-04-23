@@ -16,24 +16,21 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class NetworkTask extends AsyncTask<SendDataSet, Void, String> {
-    String ip ="39.127.7.42"; //학교 IP번호
+    String ip ="39.127.7.46"; //학교 IP번호
     String path = "http://"+ip+":8080/"; // 연결할 jsp주소
 
-    NetworkTask(String url) {
-        this.path += url;
-    }
+    NetworkTask(String url) { this.path += url; }
 
     @Override
     protected String doInBackground(SendDataSet... strings) {
         String data ="";
-//        path += strings[0].value;
         JSONObject jobj = new JSONObject();
-        Log.e("1", path);
+
         try {
             for ( int i = 0; i < strings.length; i++) {
                 jobj.put(strings[i].key, strings[i].value);
             }
-            Log.e("1", jobj.toString());
+
             /* 서버연결 */
             URL url = new URL(path);
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();

@@ -27,7 +27,12 @@
 		<img id="mainLogo" src="resources/img/mainLogo.png">
 
 		<ul class="main-nav">
+		<c:if test="${!empty store}">
 			<li><a href="/mCustomer?license_number=${store[0].license_number}">고객관리</a></li>
+		</c:if>
+		<c:if test="${empty store}">
+			<li><a href="/mCustomer?license_number=${param.license_number}">고객관리</a></li>
+		</c:if>	
 			<li><a href="/mInquiry">건의사항</a></li>
 		</ul>
 		
