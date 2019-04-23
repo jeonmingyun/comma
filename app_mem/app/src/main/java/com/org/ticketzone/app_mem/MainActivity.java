@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     EditText request, response;
     Button submit;
     String s_request;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 s_request = request.getText().toString();
+
                 Log.e("1", s_request);
                 NetworkTask nt = new NetworkTask("test") {
                     @Override
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 };
 
-                SendDataSet sds = new SendDataSet("request", s_request);
+                SendDataSet sds = new SendDataSet("owner_id", s_request);
                 nt.execute(sds);
             }
         });

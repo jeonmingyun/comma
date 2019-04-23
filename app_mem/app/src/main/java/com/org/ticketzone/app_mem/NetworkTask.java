@@ -7,6 +7,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,7 +17,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 
 public class NetworkTask extends AsyncTask<SendDataSet, Void, String> {
     String ip ="39.127.7.42"; //학교 IP번호
@@ -31,19 +33,20 @@ public class NetworkTask extends AsyncTask<SendDataSet, Void, String> {
             for ( int i = 0; i < strings.length; i++) {
                 jobj.put(strings[i].key, strings[i].value);
             }
-            Log.e("2", path +"");
+
             /* 서버연결 */
             URL url = new URL(path);
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-            conn.setRequestProperty("Content-Type", "application/json; utf-8");
-            conn.setRequestProperty("Accept", "application/x-www-form-urlencoded; utf-8");
+
+            conn.setRequestProperty("Content-Type", "application/json");
+//            conn.setRequestProperty("Accept", "text/html,application/xhtml+xml,application/xml;");
             conn.setRequestMethod("POST");
             conn.setDoOutput(true); // xml내용을 전달하기 위해서 출력 스트림을 사용
             conn.setDoInput(true);
             conn.connect();
 
             /* 안드로이드 -> 서버 파라메터값  전달 */
-            OutputStreamWriter owr = new OutputStreamWriter(conn.getOutputStream());
+            OutputStreamWriter owr = new OutputStreamWriter(conn.getOutputStream(), "utf-8");
             owr.write(jobj.toString());
             owr.flush();
             owr.close();
@@ -61,6 +64,7 @@ public class NetworkTask extends AsyncTask<SendDataSet, Void, String> {
                 sBuff.append(line +"\n");
             }
             data = sBuff.toString().trim();
+Log.e("1", data+"");
             is.close();
             conn.disconnect();
 
