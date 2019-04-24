@@ -13,10 +13,112 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link href="resources/css/home.css" rel="stylesheet" />
 <script src="resources/js/home.js"></script>
+<!-- Bootstrap core CSS -->
+<link href="/resources/bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom fonts for this template -->
+<link href="bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+<!-- Custom styles for this template -->
+<link href="/resources/bootstrap/css/clean-blog.min.css" rel="stylesheet">
+
 </head>
 <body>
 
 	<%@include file="include/header.jsp"%>
+	
+	 <!-- Page Header -->
+  <header class="masthead" style="background-image: url('resources/bootstrap/img/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <a href="https://play.google.com/store/apps/details?id=com.soonbuny">
+				<img alt="no image" src="resources/img/playstore.png">
+			</a>
+            <span class="subheading">번호요 지금 바로 이용하세요</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+	
+	<!-- 서비스 -->
+    <div class="features-container section-container">
+     <div class="container">
+         <div class="main_row">
+             <div class="main_service">
+                 	<h2>Main Service</h2>
+                 <div class="divider_1"><div class="line"></div></div>
+             </div>
+         </div>
+         
+         <div class="row">
+             <div class="col-sm-6 features-box wow fadeInLeft">
+             	<div class="row">
+             		<div class="box_icon">
+             			<i class="fa fa-twitter"><img src="../resources/icon/번호표.png" width="60px" height="60px"></i>
+             		</div>
+             		<div class="col-sm-9">
+             			<h3>스마트 번호표 발급</h3>
+                  	<p>
+                  		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.
+                  		Ut wisi enim ad minim veniam, quis nostrud.
+                  	</p>
+             		</div>
+             	</div>
+             </div>
+             <div class="col-sm-6 features-box wow fadeInLeft">
+             	<div class="row">
+             		<div class="box_icon">
+             			<i class="fa fa-instagram"><img src="../resources/icon/푸시.png" width="60px" height="60px"></i>
+             		</div>
+             		<div class="col-sm-9">
+             			<h3>PUSH알림 서비스</h3>
+                  	<p>
+                  		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.
+                  		Ut wisi enim ad minim veniam, quis nostrud.
+                  	</p>
+             		</div>
+             	</div>
+             </div>
+         </div>
+         
+         <div class="row">
+             <div class="col-sm-6 features-box wow fadeInLeft">
+             	<div class="row">
+             		<div class="box_icon">
+             			<i class="fa fa-magic"><img src="../resources/icon/카테고리별.png" width="60px" height="60px"></i>
+             		</div>
+             		<div class="col-sm-9">
+             			<h3>카테고리별 검색</h3>
+                  	<p>
+                  		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.
+                  		Ut wisi enim ad minim veniam, quis nostrud.
+                  	</p>
+             		</div>
+             	</div>
+             </div>
+             <div class="col-sm-6 features-box wow fadeInLeft">
+             	<div class="row">
+             		<div class="box_icon">
+             			<i class="fa fa-cloud"><img src="../resources/icon/웨이팅.png" width="60px" height="60px"></i>
+             		</div>
+             		<div class="col-sm-9">
+             			<h3>실시간 웨이팅 현황</h3>
+                  	<p>
+                  		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.
+                  		Ut wisi enim ad minim veniam, quis nostrud.
+                  	</p>
+             		</div>
+             	</div>
+             </div>
+         </div>
+     </div>
+    </div>
 	
 	<!-- 공지사항 div -->
 	<div id="home">

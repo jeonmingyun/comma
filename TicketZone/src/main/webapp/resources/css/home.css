@@ -4,6 +4,32 @@
 	padding: 0;
 }
 
+
+/* 메인 서비스 */
+.main_row {
+	margin-bottom: 50px; 
+}
+
+.main_service{
+	text-align: center;
+	margin: 0 auto;
+	padding: 0px 15px 10px;
+}
+
+.divider_1 .line {
+	width: 160px;
+	margin: 0 auto;
+	padding: 10px 0px 15px 0px;
+	border-bottom: 1px dashed #ccc;
+}
+
+/* 아이콘 */
+.box_icon{
+	padding: 0px 10px;
+	text-align: center;
+}
+
+
 h1 {
 	text-align: center;
 	margin: 10px auto;
