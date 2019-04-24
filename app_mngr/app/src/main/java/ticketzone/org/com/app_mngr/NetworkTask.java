@@ -35,6 +35,7 @@ public class NetworkTask extends AsyncTask<SendDataSet, Void, String> {
             URL url = new URL(path);
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             conn.setRequestProperty("Content-Type", "application/json; utf-8");
+            conn.setRequestProperty("Accept", "text/html; charset=utf-8");
             conn.setRequestMethod("POST");
             conn.setDoOutput(true); // xml내용을 전달하기 위해서 출력 스트림을 사용
             conn.setDoInput(true);
@@ -51,7 +52,7 @@ public class NetworkTask extends AsyncTask<SendDataSet, Void, String> {
             BufferedReader br = null;
 
             is = conn.getInputStream();
-            br = new BufferedReader(new InputStreamReader(is), 8*1024);
+            br = new BufferedReader(new InputStreamReader(is, "utf-8"));
             StringBuffer sBuff = new StringBuffer();
             String line = null;
 

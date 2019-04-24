@@ -80,11 +80,4 @@ public class MngrAppHomeController {
       return jarr;
    }
    
-   @ResponseBody
-   @RequestMapping(value = "/test", method = RequestMethod.POST)
-   public String test(@RequestBody OwnerVO o ) {
-      System.out.println(o.getOwner_id());
-
-      return o.getOwner_id() +"app";
-   }
 }
