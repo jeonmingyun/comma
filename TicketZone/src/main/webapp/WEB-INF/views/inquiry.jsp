@@ -28,6 +28,7 @@
                <select name="type">
                   <option value="T">제목</option>
                   <option value="C">내용</option>
+                  <option value="CA">유형</option>                  
                   <option value="TC">제목 or 내용</option>
                </select> <input type="text" name="keyword" />
                <input type="hidden" id="efg" name="pageNum" value="${pageMaker.cri.pageNum}">
@@ -38,6 +39,7 @@
             <table id="suggest">
                <tr>
                   <th style="width:5%;">번호</th>
+                  <th style="width:20%;">문의유형</th>
                   <th style="width:30%;">제목</th>
                   <th style="width:10%;">작성자</th>
                   <th style="width:20%;">작성일</th>
@@ -45,6 +47,7 @@
                <c:forEach var="sl" items="${suggestList}">
                   <tr onclick="showInquiry(${sl.board_no})">
                      <td>${sl.board_no}
+                     <td>${sl.cate_name}
                      <td>${sl.board_title}<c:if
                            test="${!empty sl.board_password}">
                            <img src="resources/icon/baseline-lock-24px.svg" alt="locked"

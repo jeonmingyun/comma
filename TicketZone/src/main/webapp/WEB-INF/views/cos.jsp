@@ -21,8 +21,8 @@
 <title>Document</title>
 </head>
 <body>
- <h1>일별 시간대별 현황</h1>
+ <h1>일별 시간대별 현황</h1> 
  <script src="resources/js/chart/index.js"></script>
-  <div id="curve_chart" style="width: 900px; height: 500px"></div>
+ <div id="curve_chart" style="width: 900px; height: 500px"></div>  
 </body>
 </html>

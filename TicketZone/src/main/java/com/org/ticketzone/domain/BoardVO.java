@@ -14,5 +14,6 @@ public class BoardVO {
 	private int board_status;
 	private String board_password;
 	private String cate_code;
+	private String cate_name;
 	private int count;
 }

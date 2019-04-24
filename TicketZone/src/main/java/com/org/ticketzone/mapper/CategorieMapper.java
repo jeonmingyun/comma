@@ -8,4 +8,6 @@ public interface CategorieMapper {
 	
 	public ArrayList<CategorieVO> categorieFoodList();
 	
+	public ArrayList<CategorieVO> boardCateList();
+	
 }

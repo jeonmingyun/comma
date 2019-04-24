@@ -21,4 +21,10 @@ public class CategorieServiceImplement implements CategorieService {
 		return mapper.categorieFoodList();
 	}
 
+	@Override
+	public ArrayList<CategorieVO> boardCateList() {
+		// TODO Auto-generated method stub
+		return mapper.boardCateList();
+	}
+
 }

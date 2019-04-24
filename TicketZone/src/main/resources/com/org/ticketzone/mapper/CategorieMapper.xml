@@ -8,4 +8,11 @@
 		select * from categorie where cate_code like '%F%'
 	]]>	 
 	</select>
+	
+	<select id="boardCateList" resultType="com.org.ticketzone.domain.CategorieVO">
+		<![CDATA[
+			select * from categorie
+			where cate_code like 'B%'	
+		]]>	 
+	</select>
 </mapper>

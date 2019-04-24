@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.org.ticketzone.domain.BoardVO;
 import com.org.ticketzone.domain.Criteria;
+import com.org.ticketzone.domain.InqAttachVO;
 import com.org.ticketzone.domain.PageDTO;
 import com.org.ticketzone.domain.ReplyVO;
 import com.org.ticketzone.service.BoardService;
+import com.org.ticketzone.service.CategorieService;
 import com.org.ticketzone.service.IncludeService;
+import com.org.ticketzone.service.InqAttachService;
 
 import lombok.AllArgsConstructor;
 
@@ -24,6 +27,8 @@ import lombok.AllArgsConstructor;
 public class InquiryController {
 	private BoardService boardService;
 	private IncludeService includeService;
+	private CategorieService categorieService;
+	private InqAttachService inqAttachService;
 
 	// 고객센터
 	@RequestMapping(value = "/inquiry", method = RequestMethod.GET)
@@ -39,14 +44,21 @@ public class InquiryController {
 	// 문의 글쓰기 페이지 이동
 	@RequestMapping(value = "/inquiryWrite", method = RequestMethod.GET)
 	public String inquiryWrite(Model model) {
+		model.addAttribute("cate", categorieService.boardCateList());
+		
 		return "inquiry/inquiryWrite";
 	}
 
 	// 문의 글쓰기 처리
 	@RequestMapping(value = "/insertInquiry", method = RequestMethod.POST)
-	public String insertInquiry(Model model, BoardVO board) {
-		boardService.boardInsert(board);
+	public String insertInquiry(Model model, BoardVO board, InqAttachVO inq, HttpServletRequest request) {
 		
+	if(inq.getInq_filename() == null) {	
+		boardService.boardInsert(board);
+	} else {
+		boardService.boardInsert(board);
+		inqAttachService.Inq_fileinsert(inq);
+	}
 		return "redirect:/inquiry";
 	}
 	

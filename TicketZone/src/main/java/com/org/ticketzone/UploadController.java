@@ -2,7 +2,6 @@ package com.org.ticketzone;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -32,13 +31,18 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.org.ticketzone.domain.AttachFileDTO;
+import com.org.ticketzone.domain.NoticeAttachVO;
+import com.org.ticketzone.service.NoticeAttachService;
 
 import lombok.AllArgsConstructor;
+
+	
 
 @AllArgsConstructor
 @Controller
 public class UploadController {
-
+	private NoticeAttachService noticeAttachService;
+	
 	// 날짜별 폴더생성(2019/04/10)
 	private String getFolder() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -103,13 +107,13 @@ public class UploadController {
 	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
 
 		List<AttachFileDTO> list = new ArrayList<>();
-//		System.out.println("update ajax post........");
+		System.out.println("update ajax post........");
 		String uploadFolder = "C:\\Users\\bon300-14\\Desktop\\4Github\\comma\\TicketZone\\src\\main\\webapp\\resources\\img"; // 업로드할 경로지정
 		String uploadFolderPath = getFolder();
 		// make folder ---------------
 		File uploadPath = new File(uploadFolder, uploadFolderPath); // 파일경로
 
-//		System.out.println("upload path: " + uploadPath);
+		System.out.println("upload path: " + uploadPath);
 
 		if (uploadPath.exists() == false) { // 경로에 폴더가없으면 폴더생성
 			uploadPath.mkdirs();
@@ -153,7 +157,7 @@ public class UploadController {
 				e.printStackTrace();
 			}
 		}
-//		System.out.println(list);
+		System.out.println(list);
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 
@@ -221,20 +225,22 @@ public class UploadController {
 	// 파일삭제
 	@PostMapping("/deleteFile")
 	@ResponseBody
-	public ResponseEntity<String> deleteFile(String fileName, String type) {
+	public ResponseEntity<String> deleteFile(String fileName, NoticeAttachVO vo) {
+		int notice_no = vo.getNotice_no();
 		System.out.println("deleteFile: " + fileName);
-
+		System.out.println(notice_no);
 		File file;
 
 		try {
-			file = new File("c:\\upload\\" + URLDecoder.decode(fileName, "UTF-8"));
+			file = new File("C:\\Users\\bon300-14\\Desktop\\4Github\\comma\\TicketZone\\src\\main\\webapp\\resources\\img\\" + URLDecoder.decode(fileName, "UTF-8"));
 			file.delete();
-			if (type.equals("image")) {
+			
 				String largeFileName = file.getAbsolutePath().replace("s_", "");
 				System.out.println("largeFileName: " + largeFileName);
 				file = new File(largeFileName);
 				file.delete();
-			}
+				noticeAttachService.delete(notice_no);
+			
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
