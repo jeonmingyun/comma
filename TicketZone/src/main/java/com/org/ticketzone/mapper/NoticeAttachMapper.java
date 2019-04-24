@@ -9,4 +9,8 @@ public interface NoticeAttachMapper {
 	public void Fileinsert(NoticeAttachVO attach);
 	
 	public ArrayList<NoticeAttachVO> findByNotice_no(String notice_no);
+	
+	public void delete(int notice_no);
+	
+	public void FileModifyinsert(NoticeAttachVO attach);
 }

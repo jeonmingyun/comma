@@ -55,7 +55,7 @@
 			<!-- 첨부파일 -->
 			<div class="notice_file">
 				<span id="date">첨부파일</span>
-				<c:if test="${file[0] != null}"><a href="#"class="downFile">${file[0].fileName}</a></c:if><c:if test="${file[0] == null}">없음</c:if>
+				<c:if test="${file[0] != null}"><a href="#"class="downFile">${file[0].fileName}</a></c:if><c:if test="${file[0] == null}">없음</c:if>				
 			</div> <!-- notice_file -->
 		
 	<c:if test="${file[0] != null}">
@@ -75,10 +75,9 @@
 	<div class="notice_btn">
 		<button type="button" id="btnUpdate"
 			onclick="updNotice(${noticeUpd[0].notice_no})">수정</button>
-		<button type="button" id="btnDelete"
-			onclick="delNotice(${noticeUpd[0].notice_no})">삭제</button>
+		<button type="button" id="btnDelete">삭제</button>			
 	</div> <!-- notice_btn -->
 </div> <!-- notice_wapper -->
-	
+	<input type="hidden" id="notice_no" name="notice_no" value="${noticeUpd[0].notice_no}">
 </body>
 </html>

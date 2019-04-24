@@ -23,14 +23,12 @@
 	<update id="noticeBoardUpd">
 		update notice_board
 		set notice_title = #{notice_title},
-		notice_content = #{notice_content}
+		notice_content = #{notice_content},
+		notice_status = #{notice_status}
 		where notice_no = #{notice_no}
 	</update>
 	
-	<insert id="noticeInsert">
-		insert into notice_board(notice_no, notice_title, notice_content)
-		values(notice_seq.nextval, #{notice_title}, #{notice_content})
-	</insert>
+	
 	
 	<insert id="insertSelectKey">
 		<selectKey keyProperty="notice_no" order="BEFORE" resultType="int">
@@ -105,6 +103,7 @@
 			rownum <= #{pageNum} * #{amount}
 			)
 			where rn > (#{pageNum} -1) * #{amount}
+			order by notice_reg desc
 		]]>
 	</select>
 	

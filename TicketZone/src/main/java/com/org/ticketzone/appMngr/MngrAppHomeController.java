@@ -2,10 +2,10 @@ package com.org.ticketzone.appMngr;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
-
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,38 +18,73 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Controller
 public class MngrAppHomeController {
-	OwnerService ownerService;
-	
-	@ResponseBody
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(HttpServletRequest request) {
-		String owner_id = request.getParameter("owner_id");
-		String owner_password = request.getParameter("owner_password");
-		ArrayList<OwnerVO> ownervo = ownerService.login(owner_id);
-		String db_owner_password;
-		System.out.println(ownervo);
-		
-		if( ownervo.size() != 0) {
-			db_owner_password = ownervo.get(0).getOwner_password();
-			if( db_owner_password.equals(owner_password))
-				return "1"; // login success
-			 else 
-				return "0"; // pass wrong
-		} else {
-			return "-1"; // id wrong
-		}
-		
-	}
-	
-	/*
-	 * //∞¸∏Æ¿⁄ »∏ø¯∞°¿‘
-	 * 
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping(value = "/register", method = RequestMethod.POST) public
-	 * String register(Model model, OwnerVO owner) {
-	 * ownerService.insertOwner(owner);
-	 * 
-	 * return "1"; }
-	 */
+   OwnerService ownerService;
+   
+   @ResponseBody
+   @RequestMapping(value = "/login", method = RequestMethod.POST)
+   public String login(@RequestBody OwnerVO ownervo) {
+      String owner_id = ownervo.getOwner_id();
+      String owner_password = ownervo.getOwner_password();
+      ArrayList<OwnerVO> ownerList = ownerService.login(owner_id);
+      String db_owner_password;
+      
+      if( ownerList.size() != 0) {
+         db_owner_password = ownerList.get(0).getOwner_password();
+         if( db_owner_password.equals(owner_password))
+            return "1"; // login success
+          else 
+            return "0"; // pass wrong
+      } else {
+         return "-1"; // id wrong
+      }
+      
+   }
+   
+   @ResponseBody
+   @RequestMapping(value = "/id_check", method = RequestMethod.POST)
+   public String id_check(@RequestBody OwnerVO ownervo) {
+      String owner_id = ownervo.getOwner_id();
+      ArrayList<OwnerVO> ownerList = ownerService.login(owner_id);
+      
+      if( ownerList.size() != 0) {
+         return "0";
+      } else {
+         return "1";
+      }
+   }
+   // idÍ∞Ä ÏûàÏùÑÎïå 0 return / idÍ∞Ä ÏóÜÏùÑÎïå 1 return 
+   //Í¥ÄÎ¶¨Ïûê ÌöåÏõêÍ∞ÄÏûÖ
+   @ResponseBody
+   @RequestMapping(value = "/appregister", method = RequestMethod.POST)
+   public String appregister(@RequestBody OwnerVO owner) {
+      ownerService.insertOwner(owner); 
+
+      return "1";
+   }
+   
+   
+   
+
+   /* JSONArray ÌòïÌÉúÎ°ú return ÏòàÏãú / JsonArrayTask ÏÇ¨Ïö©*/
+   @ResponseBody
+   @RequestMapping(value = "/json_test", method = RequestMethod.POST)
+   public JSONArray json_test(@RequestBody OwnerVO ownervo) {
+      System.out.println(ownervo);
+      JSONArray jarr = new JSONArray();
+      JSONObject jobj = new JSONObject();
+      if( ownervo != null) {
+         jobj.put("a", "a");
+         jarr.add(jobj);
+         return jarr; // login success
+      }
+      return jarr;
+   }
+   
+   @ResponseBody
+   @RequestMapping(value = "/test", method = RequestMethod.POST)
+   public String test(@RequestBody OwnerVO o ) {
+      System.out.println(o.getOwner_id());
+
+      return o.getOwner_id() +"app";
+   }
 }
