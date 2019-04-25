@@ -11,5 +11,6 @@ public interface StoreMenuMapper {
 	public String checkMenu(String license_number);
 	public void addMenu(StoreMenuVO menu);
 	public void firstMenu(StoreMenuVO menu);
-	
+	public void updateMenu(StoreMenuVO menu);
+	public void deleteMenu(StoreMenuVO menu);
 }

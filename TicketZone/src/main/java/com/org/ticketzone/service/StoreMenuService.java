@@ -11,5 +11,7 @@ public interface StoreMenuService {
 	public String checkMenu(String license_number);
 	public void addMenu(ArrayList<StoreMenuVO> menu);
 	public void firstMenu(ArrayList<StoreMenuVO> menu);
+	public void updateMenu(ArrayList<StoreMenuVO> menu);
+	public void deleteMenu(ArrayList<StoreMenuVO> menu);
 	
 }

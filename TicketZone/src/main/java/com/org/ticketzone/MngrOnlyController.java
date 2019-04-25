@@ -105,7 +105,7 @@ public class MngrOnlyController {
 		return menu_cate; 
 	}
 	
-	//test1
+	//카테고리추가
 	@ResponseBody
 	@RequestMapping(value = "loadCate", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	public String loadCate(Model model, StoreMenuVO menu, HttpServletRequest request) {
@@ -113,7 +113,7 @@ public class MngrOnlyController {
 		
 		return menu_cate;
 	}
-	//test2
+	//메뉴추가
 	@RequestMapping(value = "insertMenu")
 	public String insertMenu(Model model, StoreMenuVO menu, HttpServletRequest request) {
 			
@@ -127,7 +127,7 @@ public class MngrOnlyController {
 	
    
 	   
-	//test3
+	//최종 메뉴추가 처리
 	
 	@ResponseBody
 	@RequestMapping(value = "insertAccess", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
@@ -151,6 +151,27 @@ public class MngrOnlyController {
 		
 		return menu.get(0).getMenu_cate();
 		
+	}
+	
+	//메뉴 수정
+	@ResponseBody
+	@RequestMapping(value = "updateMenu", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
+	public String menuUpdate(@RequestBody ArrayList<StoreMenuVO> menu, HttpServletRequest request) {
+		
+		
+		storeMenuService.updateMenu(menu);
+		
+		return menu.get(0).getMenu_cate();
+	}
+	
+	//메뉴 삭제
+	@ResponseBody
+	@RequestMapping(value = "deleteMenu", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
+	public String menuDelete(@RequestBody ArrayList<StoreMenuVO> menu) {
+		
+		storeMenuService.deleteMenu(menu);
+		
+		return menu.get(0).getMenu_cate();
 	}
 	
 

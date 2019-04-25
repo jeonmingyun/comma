@@ -7,6 +7,19 @@ $(function() {
 		$('#addReply').hide(); // 답글 있을 때
 	}
 	
+	$("#reply_icon").click(function(){
+		if($("#reply_button").is(":visible")){
+			$("#reply_button").slideUp();
+		}else{
+			$("#reply_button").slideDown();
+		}
+	})
+	
+/*	// 자동 높이 조절
+	$("#addReply_content").on('keydown keyup', function() {
+		$(this).height(1).height( $(this).prop('scrollHeight')+12 );
+	})*/
+	
 	// 답글 등록
 	$(document).on('click', '.addReply_submit', function() {
 		var query = {
@@ -53,6 +66,7 @@ $(function() {
 				$('#reply_content').text(query.reply_content);
 				$('#replyList').show();
 				$('#addReply').hide();
+				$('#reply_button').css('display','none');
 			}
 		})
 	})
@@ -77,6 +91,7 @@ function reply_delete(board_no) {
 			$('.updReply_submit').toggleClass('addReply_submit updReply_submit');
 			$('#replyList').hide();
 			$('#addReply').show();
+			$('#reply_button').css('display','none');
 		}
 	})
 }

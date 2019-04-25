@@ -8,11 +8,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.org.ticketzone.app_mem.vo.MemberVO;
+
 public class MainActivity extends AppCompatActivity {
 
     EditText request, response;
     Button submit;
     String s_request;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,12 +34,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     protected void onPostExecute(String s) {
                         super.onPostExecute(s);
-
+                        Log.e("2", s+"");
                         response.setText(s);
                     }
                 };
 
-                SendDataSet sds = new SendDataSet("request", s_request);
+                SendDataSet sds = new SendDataSet("owner_id", s_request);
                 nt.execute(sds);
             }
         });

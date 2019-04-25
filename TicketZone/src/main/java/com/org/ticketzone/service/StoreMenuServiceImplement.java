@@ -57,6 +57,22 @@ public class StoreMenuServiceImplement implements StoreMenuService {
 		
 	}
 
+	@Override
+	public void updateMenu(ArrayList<StoreMenuVO> menu) {
+		for(StoreMenuVO vo : menu) {
+			mapper.updateMenu(vo);
+		}
+		
+	}
+
+	@Override
+	public void deleteMenu(ArrayList<StoreMenuVO> menu) {
+		for(StoreMenuVO vo : menu) {
+			mapper.deleteMenu(vo);
+		}
+		
+	}
+
 
 	
 

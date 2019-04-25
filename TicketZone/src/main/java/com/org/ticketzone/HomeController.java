@@ -67,8 +67,7 @@ public class HomeController {
 			noticeBoardService.insertSelectKey(notice);
 		} else {			
 			noticeBoardService.InsertStatus(notice);
-			noticeAttachService.Fileinsert(attach);
-			
+			noticeAttachService.Fileinsert(attach);			
 	}
 
 		return "redirect:/";
@@ -89,16 +88,26 @@ public class HomeController {
 	public String updNotice(Model model, HttpServletRequest request) {
 		String notice_no = request.getParameter("notice_no");
 		model.addAttribute("noticeUpd", noticeBoardService.noticeBoardUpdInfo(notice_no));
-
+		model.addAttribute("file", noticeAttachService.findByNotice_no(notice_no));
 		return "home/updNotice";
 	}
 
 	// 공지사항 수정처리
+	@ResponseBody
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updateNotice(NoticeBoardVO notice) {
-		noticeBoardService.noticeBoardUpd(notice);
+	public String updateNotice(NoticeBoardVO notice, NoticeAttachVO vo) {
+		
+		if(vo.getUuid() == null) {
+			System.out.println("파일없음");
+			noticeBoardService.noticeBoardUpd(notice);
+		} else {
+			System.out.println("파일있음");
+			noticeAttachService.FileModifyinsert(vo);
+			noticeBoardService.noticeBoardUpd(notice);			
+		}
 
-		return "redirect:/";
+
+		return "success";
 	}
 
 	// 공지사항 삭제처리
@@ -124,7 +133,7 @@ public class HomeController {
 	// 테스트용
 
 	@ResponseBody
-	@RequestMapping(value = "/chart", method = RequestMethod.POST)
+	@RequestMapping(value = "/chart")
 	public ArrayList<NumberTicketVO> test(HttpServletRequest request) {
 		String today = request.getParameter("today");
 		

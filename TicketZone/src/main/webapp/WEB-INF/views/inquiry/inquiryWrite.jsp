@@ -13,17 +13,20 @@
 </head>
 <body>
 	<!-- 고객센터 문의글 작성 -->
-	<form name="suggest" method="post" action="/insertInquiry">
+	<form name="suggest" id="suggest_form" method="post" action="/insertInquiry">
 		<div class="table_wapper">
 			<h1>문의글 작성</h1>
 			<table class="cus_show">
 				<tbody>
 					<tr>
 						<th><label for="suggest_type">문의 유형</label></th>
-						<td><select name="suggest_type" id="suggest_type">
-								<option value="error">앱 오류</option>
-								<option value="else">기타</option>
-						</select></td>
+												
+						<td>	<select name="cate_code" id="suggest_type">
+								<c:forEach var="c" items="${cate}">
+								<option value="${c.cate_code}">${c.cate_name}</option>								
+								</c:forEach>
+								</select>
+						</td>		
 					</tr>
 					
 					<tr>
@@ -43,11 +46,12 @@
 						<td><textarea name="board_content" id="content" rows="8" cols="60" required></textarea></td>
 					</tr>
 
-					<!-- <tr>
-						<th><label for="attached_file">첨부파일</label></th>
-						<td><input type="file" name="attached_file"
-							id="attached_file"></td>
-					</tr> -->
+					<tr>
+						<th><label for="upload_file">첨부파일</label></th>
+						<td><input type="file" name="uploadFile" multiple>
+							<div class="resultDiv"></div>
+						</td>
+					</tr>					
 			</table>
 			<!-- cus_show-->
 			<!-- 확인 취소버튼 -->

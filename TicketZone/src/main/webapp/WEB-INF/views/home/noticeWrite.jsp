@@ -11,28 +11,7 @@
 <title>Document</title>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="resources/js/NoticeWrite.js"></script>
-<style>
-.uploadResult {
-	width: 100%;
-	background-color: gray;
-}
-
-.uploadResult ul {
-	display: flex;
-	flex-flow: row;
-	justify-content: center;
-	align-items: center;
-}
-
-.uploadResult ul li {
-	list-style: none;
-	padding: 10px;
-}
-
-.uploadResult ul li img {
-	width: 100px;
-}
-</style>
+<link href="resources/css/noticeWrite.css" rel="stylesheet"/>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/include/header.jsp"%>

@@ -49,7 +49,7 @@
 						console.log(result);
 						uploadSuccess(result);
 					}
-			}); //$.ajax
+			}); 
 		});
 		var resultDiv = $(".resultDiv");
 		function uploadSuccess(uploadResultArr){
@@ -72,7 +72,7 @@
 			
 			var targetFile = $(this).data("file");
 			var type = $(this).data("type");
-			
+			console.log(targetFile);
 			var targetLi = $(this).closest("span");
 			
 			$.ajax({

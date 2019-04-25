@@ -51,6 +51,129 @@ p	{
 	
 	$(document).ready(function(){
 		
+		//메뉴 전체 선택 해제
+		$("#selectAll").click(function(){		
+			if($("#selectAll").prop("checked")){
+				$("input[name='selectMenu']").prop("checked", true);
+			} else {
+				$("input[name='selectMenu']").prop("checked", false);
+			}
+		});
+		
+		//선택한 메뉴 수정창 만들어주기
+		$("#UpdateInputMenu").click(function(){
+			
+			var tdArr = [];
+			var checkbox = $("input[name='selectMenu']:checked");
+			
+			checkbox.each(function(i){
+				var tr = checkbox.parent().parent().eq(i);
+				var td = tr.children();
+				var str = "";
+				//값찾는과정
+				var menu_name = td.eq(1).text();
+				var menu_price = td.eq(2).text();
+				var store_note = td.eq(3).text();
+				//값을 비우는과정				
+				td.eq(1).empty();
+				td.eq(2).empty();
+				td.eq(3).empty();
+				//값을 추가하는 과정								
+				td.eq(1).append("<input type='text' id='store_note' value='"+menu_name.trim()+"' style='text-align:left'>");
+				td.eq(2).append("<input type='text' id='store_note' value='"+menu_price.trim()+"' style='text-align:left'>");
+				td.eq(3).append("<input type='text' id='store_note' value='"+store_note.trim()+"' style='text-align:left'>");
+				
+										
+			});
+			$("#UpdateMenu").show();
+			
+		});
+		
+		//수정된내용 수정처리하기
+		$("#UpdateMenu").click(function(){
+			var license_number = $("input[name='license_number']").val();
+			var tdArr = [];
+			var checkbox = $("input[name='selectMenu']:checked");
+			
+			checkbox.each(function(i){
+				var tr = checkbox.parent().parent().eq(i);
+				var td = tr.children();
+				var str = "";
+				//값찾는과정
+				var menu_code = td.eq(0).find("input[type='checkbox']").val();
+				var menu_name = td.eq(1).find("input[type='text']").val();
+				var menu_price = td.eq(2).find("input[type='text']").val();
+				var store_note = td.eq(3).find("input[type='text']").val();
+				var menu_cate = $("input[name='menu_cate']").val();
+				
+				tdArr[i] = {
+						menu_code : menu_code,
+						menu_name : menu_name,
+						menu_price : menu_price,
+						store_note : store_note,
+						menu_cate : menu_cate
+				};
+				
+										
+			});
+			
+			$.ajax({
+				type: 'post',
+				url: 'updateMenu',
+				data: JSON.stringify(tdArr),
+				contentType: 'application/json',
+				success: function(data){
+					var menu_cate = data
+					console.log(data);
+					$(location).attr('href','/mMenuAdmin?license_number='+license_number+'&menu_cate='+menu_cate); 
+				}		
+			});
+			
+			
+		});
+		$("#CateInputUpdate").click(function(){
+			$(".categorie").show();
+			$("#UpdateCate").show();
+		});
+		
+		/* $(".categorie").change(function(){
+			var test = $(".catebtn").eq(this.value);
+			var add = $(".Tab").eq(this.value);
+			test.remove();
+			add.append("<input type='text' size=5>");
+			
+			
+			
+		}); */
+		
+		$("#DeleteMenu").click(function(){
+			var tdArr = [];
+			var checkbox = $("input[name='selectMenu']:checked");
+			var license_number = $("input[name='license_number']").val();
+			
+			checkbox.each(function(i){
+				var tr = checkbox.parent().parent().eq(i);
+				var td = tr.children();
+				var menu_code = td.eq(0).find("input[type='checkbox']").val();
+				var menu_cate = $("input[name='menu_cate']").val();
+				tdArr[i] = {menu_code : menu_code,
+							menu_cate : menu_cate}
+							
+				});
+					$.ajax({
+						type: 'post',
+						url: 'deleteMenu',
+						data: JSON.stringify(tdArr),
+						contentType: 'application/json',
+						success: function(data){
+							var menu_cate = data
+							console.log(data);
+							$(location).attr('href','/mMenuAdmin?license_number='+license_number+'&menu_cate='+menu_cate); 
+						}		
+				});						
+			});
+			
+		
 		$(".catebtn").click(function(){
 			var license_number = $("input[name='license_number']").val();
 			console.log(license_number);
@@ -106,6 +229,7 @@ p	{
 		
 		$("#addMenu").click(function(){
 			var rowItem = "<tr>";
+			rowItem += "<td> </td>"
 			rowItem += "<td> <input type='text' class='add_name' name='menu_name'></td>";
 			rowItem += "<td> <input type='text' class='add_price' name='menu_price'></td>";
 			rowItem += "<td> <textarea class='add_store_note' name='store_note' style='width:500px'></textarea></td>";
@@ -147,6 +271,7 @@ p	{
 			
 		});
 		
+		
 	});
 </script>
 </head>
@@ -162,7 +287,8 @@ p	{
 		<c:if test="${empty tab}"></c:if>		
 		<c:if test="${!empty tab}">
 			<c:forEach var="c" items="${tab}" varStatus = "status">
-				<p class="Tab"><button class="catebtn" name="menu_cate" value="${c.menu_cate}">${c.menu_cate}</button></p>
+				<p class="Tab"><input type="checkbox" class="categorie" value="${status.index}" style="display:none;"><button class="catebtn" name="menu_cate" value="${c.menu_cate}">${c.menu_cate}</button>
+				</p>
 			</c:forEach>
 		</c:if>	
 			<c:if test="${!empty add}">
@@ -174,8 +300,10 @@ p	{
 		
 		
 		<div id="menuList" style="display:inline-block; text-align:center; float:left;">
+		<button id="CateInputUpdate">탭 수정하기</button>
 		<button id="addMenu">메뉴 추가하기</button>
-		
+		<button id="UpdateInputMenu">수정</button>
+		<button id="DeleteMenu">삭제</button>	
 		<c:if test="${empty menu}">
 			<table id="customAdmin">
 				<tr>
@@ -189,20 +317,25 @@ p	{
 		<c:if test="${!empty menu}">
 			<table id="customAdmin">
 				<tr>
+					<th><input type="checkbox" id="selectAll">선택
 					<th>메뉴이름
 					<th>가격
 					<th>설명</th>
 				</tr>
 				<c:forEach var="m" items="${menu}">
 				<tr>
-					<td>${m.menu_name}
-					<td>${m.menu_price}
-					<td>${m.store_note}
+					<td><input type="checkbox" class="selectMenu" name="selectMenu" value="${m.menu_code}">
+					<td id="menu_name">${m.menu_name}
+					<td id="menu_price">${m.menu_price}
+					<td id="store_note">${m.store_note}
 				</tr>
 				</c:forEach>				
 			</table>
-		</c:if>	
+		</c:if>
+			
 			<button id="TraddMenu" style="display:none">추가하기</button>		
+			<button id="UpdateMenu" style="display:none">수정하기</button>
+			<button id="UpdateCate" style="display:none">탭 수정하기</button>
 		 </div>
 		 		 
 </div>

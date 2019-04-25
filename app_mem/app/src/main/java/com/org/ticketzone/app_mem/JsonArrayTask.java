@@ -52,7 +52,7 @@ public class JsonArrayTask extends AsyncTask<SendDataSet, Void, JSONArray> {
             BufferedReader br = null;
 
             is = conn.getInputStream();
-            br = new BufferedReader(new InputStreamReader(is), 8*1024);
+            br = new BufferedReader(new InputStreamReader(is, "utf-8"));
             StringBuffer sBuff = new StringBuffer();
             String line = null;
 
