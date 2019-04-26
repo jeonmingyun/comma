@@ -8,7 +8,7 @@ public class DBOpenHelper {
 
     private static final String DATABASE_NAME = "InnerDatabase(SQLite).db";
     private static final int DATABASE_VERSION = 1;
-    public static SQLiteDatabase mDB;
+    public static SQLiteDatabase sqLite;
     private DataBaseHelper mDBHelper;
     private Context context;
 
@@ -21,8 +21,6 @@ public class DBOpenHelper {
         /**
          * Database가 존재하지 않을 때, 딱 한번 실행된다.
          * DB를 만드는 역할을 한다.
-         *
-         * @param db
          */
         @Override
         public void onCreate(SQLiteDatabase db) {
@@ -42,16 +40,16 @@ public class DBOpenHelper {
 
     public DBOpenHelper open() throws SQLException {
         mDBHelper = new DataBaseHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
-        mDB = mDBHelper.getWritableDatabase();
+        sqLite = mDBHelper.getWritableDatabase();
         return this;
     }
 
     public void create(){
-        mDBHelper.onCreate(mDB);
+        mDBHelper.onCreate(sqLite);
     }
 
     public void close(){
-        mDB.close();
+        sqLite.close();
     }
 
 }
