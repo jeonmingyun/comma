@@ -122,7 +122,8 @@
 	
 	<!-- 공지사항 div -->
 	<div id="home">
-		<h1>공지사항</h1>
+		<h2>Notice</h2>
+		<div class="divider_1"><div class="line"></div></div>
 		<div id="notice_table">
 		<form id="searchForm" method="get" action = "/">
 		<select name="type">
@@ -183,15 +184,9 @@
 	</form>
 	<!-- end Pagination -->
 	
-	<div id="app">
-		<h1>번호요 지금 바로 이용하기</h1>
-		<a href="https://play.google.com/store/apps/details?id=com.soonbuny">
-			<img alt="no image" src="resources/img/playstore.png">
-		</a>
-	</div>
-	
-	<%@include file="include/footer.jsp"%>
-	
+	<footer>
+		<%@include file="include/footer.jsp"%>
+	</footer>
 
 </body>
 </html>

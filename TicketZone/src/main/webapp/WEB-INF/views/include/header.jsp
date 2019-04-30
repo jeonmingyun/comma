@@ -21,6 +21,9 @@
 
 <!-- Custom styles for this template -->
 <link href="/resources/bootstrap1/css/modern-business.css" rel="stylesheet">
+<!-- Bootstrap core JavaScript -->
+  <script src="/resources/bootstrap1/vendor/jquery/jquery.min.js"></script>
+  <script src="/resources/bootstrap1/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 
@@ -65,10 +68,6 @@
     </div>
   </div>
 </nav>
-
-<!-- Bootstrap core JavaScript -->
-  <script src="/resources/bootstrap1/vendor/jquery/jquery.min.js"></script>
-  <script src="/resources/bootstrap1/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   
 </body>
 </html>

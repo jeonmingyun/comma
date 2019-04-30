@@ -19,27 +19,29 @@
 	<!-- 가게 정보 -->
 	<%@include file="/WEB-INF/views/include/header.jsp"%>
 	<section>
-	<div id="store_name" style="display:none;">${storeList[0].store_name}</div>
+		<div id="store_name" style="display:none;">${storeList[0].store_name}</div>
+		
+		<c:forEach var="s" items="${storeList}">
+			<div id="store_info" class="${s.address_name}">
+				<p>
+					<img name="store_img">
+				</p>
+				<p id="store_name">매장이름: ${s.store_name}</p>
+				<p>매장연락처: ${s.store_tel}</p>
+				<p>매장주소: ${s.address_name}</p>
+				<p>영업시간: ${s.store_time}</p>
+				<p>매장소개: ${s.store_intro}</p>
+			</div>
+			<input type="hidden" id="uuid" value="${s.img_uuid}">
+			<input type="hidden" id="uploadpath" value="${s.img_uploadpath}">
+			<input type="hidden" id="filename" value="${s.img_filename}">
+		</c:forEach>
 	
-	<c:forEach var="s" items="${storeList}">
-		<div id="store_info" class="${s.address_name}">
-			<p>
-				<img name="store_img">
-			</p>
-			<p id="store_name">매장이름: ${s.store_name}</p>
-			<p>매장연락처: ${s.store_tel}</p>
-			<p>매장주소: ${s.address_name}</p>
-			<p>영업시간: ${s.store_time}</p>
-			<p>매장소개: ${s.store_intro}</p>
-		</div>
-		<input type="hidden" id="uuid" value="${s.img_uuid}">
-		<input type="hidden" id="uploadpath" value="${s.img_uploadpath}">
-		<input type="hidden" id="filename" value="${s.img_filename}">
-	</c:forEach>
+		<!-- 지도 -->
+		<div id="map"></div>
+	</section>
+	
+	<%-- <%@include file="/WEB-INF/views/include/footer.jsp"%> --%>
 
-	<!-- 지도 -->
-	<div id="map"></div>
-</section>
-	<%@include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>
