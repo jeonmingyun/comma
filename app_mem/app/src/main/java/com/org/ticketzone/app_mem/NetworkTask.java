@@ -38,8 +38,8 @@ public class NetworkTask extends AsyncTask<SendDataSet, Void, String> {
             URL url = new URL(path);
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 
-            conn.setRequestProperty("Content-Type", "application/json");
-//            conn.setRequestProperty("Accept", "text/html,application/xhtml+xml,application/xml;");
+            conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+            conn.setRequestProperty("Accept", "text/html; charset=utf-8");
             conn.setRequestMethod("POST");
             conn.setDoOutput(true); // xml내용을 전달하기 위해서 출력 스트림을 사용
             conn.setDoInput(true);
@@ -63,8 +63,8 @@ public class NetworkTask extends AsyncTask<SendDataSet, Void, String> {
             while ((line = br.readLine()) != null) {
                 sBuff.append(line +"\n");
             }
+
             data = sBuff.toString().trim();
-Log.e("1", data+"");
             is.close();
             conn.disconnect();
 
