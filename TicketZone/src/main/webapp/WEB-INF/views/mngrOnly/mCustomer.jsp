@@ -68,24 +68,10 @@
 			
 	</table>
 	
-		<c:forEach var="mem" items="${member}">
-			<input type="hidden" id="the_number" name="the_number" value="4"> 
-			<button class="Ticketbtn btn-default" name="${param.license_number}" value="${mem.member_tel}">발급</button>
-		</c:forEach>	
+		
 	
 	<input type="hidden" id="check" value="${id}">
 	
-		<input type="hidden" id="payment" name="license_number" value="${param.license_number}">
-		<button class="Paybtn btn-default">발급완료</button>
-	
-		
-		<input type="hidden" id="Cancel" name="license_number" value="${param.license_number}">
-		<input type="hidden" id="m_tel" name="member_tel" value="010-5555-0005">
-		<button class="Cancelbtn btn-default">발급취소</button>
-		
-		<input type="hidden" id="Absence" name="license_number" value="${param.license_number}">
-		<input type="hidden" id="m_tel2" name="member_tel" value="010-5555-0006">
-		<button class="Absencebtn btn-default">부재</button>
 		
 	<%@include file="/WEB-INF/views/include/footer.jsp"%>
 </body>

@@ -11,8 +11,9 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link href="../resources/css/mStore_Register.css" rel="stylesheet" />
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2a24234e20fd78957bd509e4c423610f&libraries=services"></script>
-	
+<script
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2a24234e20fd78957bd509e4c423610f&libraries=services"></script>
+
 <title>매장등록 페이지</title>
 </head>
 <body>
@@ -48,8 +49,9 @@
 						</tr>
 						<tr>
 							<th>영업 시간</th>
-							<td><input type="text" name="store_time">
-								<p>(ex:09:00-18:00 * 정확히입력하지않으면 데이터가들어가지않습니다.)</p></td>
+							<td><input type="time" id="time" name="aaa">
+								- <input type="time" id="time2" name="bbb">
+							</td>
 						</tr>
 						<tr>
 							<th>매장 소개</th>
@@ -57,41 +59,41 @@
 						</tr>
 						<tr>
 							<th>매장 주소</th>
-							<td><input type="text" id="sample5_address" name="address_name" placeholder="주소">
-								<input type="button" onclick="sample5_execDaumPostcode()"
+							<td><input type="text" id="sample5_address"
+								name="address_name" placeholder="주소"> <input
+								type="button" onclick="sample5_execDaumPostcode()"
 								id="address_search" value="주소 검색"><br>
 								<div id="map"
 									style="width: 300px; height: 300px; margin-top: 10px; display: none"></div>
 							</td>
-						</tr>	
-						<tr>	
+						</tr>
+						<tr>
 							<th>매장사진</th>
-							<td><input id ="upload_img" type="file" name="uploadFile">
-							<div class="img_preview">
-								<img id="preview" style="width:300px; height:300px; margin-top :10px; display: none">
-							</div>
-							<div class="resultDiv">
-							
-							</div>
-							</td>
-						</tr>	
-							<c:forEach var="id" items="${id}">
-								<input type="hidden" name="owner_id" value="${id.owner_id}">
-							</c:forEach>
-						
+							<td><input id="upload_img" type="file" name="uploadFile">
+								<div class="img_preview">
+									<img id="preview"
+										style="width: 300px; height: 300px; margin-top: 10px; display: none">
+								</div>
+								<div class="resultDiv"></div></td>
+						</tr>
+						<c:forEach var="id" items="${id}">
+							<input type="hidden" name="owner_id" value="${id.owner_id}">
+						</c:forEach>
+
 					</tbody>
 				</table>
-				<input type="hidden" id="coor_x" name="coor_x">
-				<input type="hidden" id="coor_y" name="coor_y">
+				<input type="hidden" id="coor_x" name="coor_x"> <input
+					type="hidden" id="coor_y" name="coor_y">
 				<!-- 등록 버튼 -->
 				<div id="regi_button">
-				<input type="submit" id="regi" value="등록">
+					<input type="submit" id="regi" value="등록">
 				</div>
+				<button id="test">test</button>
 			</form>
 		</div>
 		<!-- table_wapper -->
-		
-		<!-- 지도 -->	
+
+		<!-- 지도 -->
 		<script src="../resources/js/mngrOnly/mStore_Register.js"></script>
 	</section>
 	<%@include file="/WEB-INF/views/include/footer.jsp"%>

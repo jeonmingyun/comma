@@ -25,4 +25,8 @@ public interface StoreMapper {
 	public ArrayList<StoreVO> getListWithPaging(StoreCriteria cri);
 	
 	public int total(StoreCriteria cri);
+	
+	public int searchTotal(StoreVO store);
+	
+	public ArrayList<StoreVO> getListWithSearchPaging(StoreCriteria cri);
 }

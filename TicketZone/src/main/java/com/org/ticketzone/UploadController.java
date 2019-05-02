@@ -31,7 +31,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.org.ticketzone.domain.AttachFileDTO;
+import com.org.ticketzone.domain.InqAttachVO;
 import com.org.ticketzone.domain.NoticeAttachVO;
+import com.org.ticketzone.service.InqAttachService;
 import com.org.ticketzone.service.NoticeAttachService;
 
 import lombok.AllArgsConstructor;
@@ -42,7 +44,7 @@ import lombok.AllArgsConstructor;
 @Controller
 public class UploadController {
 	private NoticeAttachService noticeAttachService;
-	
+	private InqAttachService inqAttachService;
 	// 날짜별 폴더생성(2019/04/10)
 	private String getFolder() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -225,8 +227,9 @@ public class UploadController {
 	// 파일삭제
 	@PostMapping("/deleteFile")
 	@ResponseBody
-	public ResponseEntity<String> deleteFile(String fileName, NoticeAttachVO vo) {
+	public ResponseEntity<String> deleteFile(String fileName, NoticeAttachVO vo, InqAttachVO inq) {
 		int notice_no = vo.getNotice_no();
+		int board_no = inq.getBoard_no();
 		System.out.println("deleteFile: " + fileName);
 		System.out.println(notice_no);
 		File file;
@@ -239,7 +242,11 @@ public class UploadController {
 				System.out.println("largeFileName: " + largeFileName);
 				file = new File(largeFileName);
 				file.delete();
-				noticeAttachService.delete(notice_no);
+				if(vo.getUuid() != null) {
+					noticeAttachService.delete(notice_no);
+				} else {
+					inqAttachService.Inq_delete(board_no);
+				}
 			
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();

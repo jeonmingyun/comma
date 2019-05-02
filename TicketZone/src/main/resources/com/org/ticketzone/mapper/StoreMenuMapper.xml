@@ -5,11 +5,11 @@
 <mapper namespace="com.org.ticketzone.mapper.StoreMenuMapper">
 	<select id="menuList" resultType="com.org.ticketzone.domain.StoreMenuVO">
 		<![CDATA[
-		select menu_code, substr(menu_name,0,5) as menu_cate, substr(menu_name,6) as menu_name, menu_price, store_note
+		select menu_code, substr(menu_name,0,instr(menu_name,'-')-1) as menu_cate, substr(menu_name,instr(menu_name, '-')+1) as menu_name, menu_price, store_note
 		from store_menu
 		where menu_code like #{license_number} || '%'
-		and substr(menu_name,0,5) = 
-		(select substr(menu_name,0,5) as menu_cate 
+		and substr(menu_name,0,instr(menu_name,'-')-1) = 
+		(select substr(menu_name,0,instr(menu_name,'-')-1) as menu_cate 
 		from store_menu
 		where menu_code like #{license_number} || '%'
 		and rownum <= 1)
@@ -18,21 +18,22 @@
 	
 	<select id="getCate" resultType="com.org.ticketzone.domain.StoreMenuVO">
 		<![CDATA[
-		select substr(menu_name,0,5) as menu_cate, max(rowid), 
+		select substr(menu_name,0,instr(menu_name,'-')-1) as menu_cate, max(rowid), 
 		to_number(max(substr(menu_code,(instr(menu_code,'M')+1)))) as menu_code
 		from store_menu
 		where menu_code like #{license_number} || '%'
-		group by substr(menu_name,0,5)
+		group by substr(menu_name,0,instr(menu_name,'-')-1)
 		order by menu_code
 		]]>
 	</select>
 	
 	<select id="getListTocate" resultType="com.org.ticketzone.domain.StoreMenuVO">
 		<![CDATA[
-			select menu_code, substr(menu_name,0,5) as menu_cate, substr(menu_name,6) as menu_name, menu_price, store_note
+			select menu_code, substr(menu_name,0,instr(menu_name,'-')-1) as menu_cate,
+			substr(menu_name,instr(menu_name, '-')+1) as menu_name, menu_price, store_note
 			from store_menu
 			where menu_code like #{license_number} || '%'
-			and substr(menu_name,0,5) like #{menu_cate}
+			and substr(menu_name,0,instr(menu_name,'-')-1) like #{menu_cate}
 		]]>
 	</select>
 	<select id="checkMenu" resultType="String">
@@ -46,7 +47,7 @@
 	<insert id="firstMenu">
 		<![CDATA[
 		insert into store_menu
-		values(#{license_number} || 'M' || #{count} , #{menu_cate} || ' ' || #{menu_name}, #{menu_price}, #{store_note}) 
+		values(#{license_number} || 'M' || #{count} , #{menu_cate} || '-' || #{menu_name}, #{menu_price}, #{store_note}) 
 		]]>
 	</insert>
 	
@@ -56,14 +57,14 @@
 		values(#{license_number} || 'M' || 
 		(select max(substr(menu_code,-1))+1 as menu_code
 		from store_menu
-		where menu_code like #{license_number} || '%'), #{menu_cate} || ' ' || #{menu_name}, #{menu_price}, #{store_note})
+		where menu_code like #{license_number} || '%'), #{menu_cate} || '-' || #{menu_name}, #{menu_price}, #{store_note})
 		]]>
 	</insert>
 	
 	<update id="updateMenu">
 		<![CDATA[
 			update store_menu
-			set menu_name = #{menu_cate} || ' ' || #{menu_name},
+			set menu_name = #{menu_cate} || '-' || #{menu_name},
 			menu_price = #{menu_price},
 			store_note = #{store_note}
 			where menu_code = #{menu_code}

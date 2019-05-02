@@ -15,7 +15,7 @@
 	<insert id="Inq_fileModifyinsert">
 		insert into inquery_attach
 		values(#{inq_uuid}, #{inq_uploadpath},
-		#{inq_filename}, #{inq_board_no})
+		#{inq_filename}, #{board_no})
 	</insert>
 
 	<delete id="Inq_delete">

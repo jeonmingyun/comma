@@ -71,4 +71,16 @@ public class StoreServiceImplement implements StoreService{
 		
 	}
 
+	@Override
+	public ArrayList<StoreVO> getListWithSearchPaging(StoreCriteria cri) {
+		// TODO Auto-generated method stub
+		return mapper.getListWithSearchPaging(cri);
+	}
+
+	@Override
+	public int searchTotal(StoreVO store) {
+		// TODO Auto-generated method stub
+		return mapper.searchTotal(store);
+	}
+
 }
