@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.org.ticketzone.app_mem.vo.MemberVO;
+
 public class MainActivity extends AppCompatActivity {
 
     EditText request, response;
@@ -27,13 +29,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 s_request = request.getText().toString();
-
                 Log.e("1", s_request);
                 NetworkTask nt = new NetworkTask("test") {
                     @Override
                     protected void onPostExecute(String s) {
                         super.onPostExecute(s);
-
+                        Log.e("2", s+"");
                         response.setText(s);
                     }
                 };

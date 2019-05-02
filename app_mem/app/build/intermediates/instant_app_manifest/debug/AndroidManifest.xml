@@ -23,6 +23,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true" >
         <activity android:name="com.org.ticketzone.app_mem.MainActivity" >
+        </activity>
+        <activity android:name="com.org.ticketzone.app_mem.activity.DBActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

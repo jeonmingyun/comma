@@ -65,26 +65,15 @@ public class MngrAppHomeController {
    
    
 
-   /* JSONArray 형태로 return 예시 / JsonArrayTask 사용*/
+   /* json객체로 return 예시 / JsonArrayTask 사용*/
    @ResponseBody
    @RequestMapping(value = "/json_test", method = RequestMethod.POST)
-   public JSONArray json_test(@RequestBody OwnerVO ownervo) {
+   public OwnerVO json_test(@RequestBody OwnerVO ownervo) {
       System.out.println(ownervo);
-      JSONArray jarr = new JSONArray();
-      JSONObject jobj = new JSONObject();
-      if( ownervo != null) {
-         jobj.put("a", "a");
-         jarr.add(jobj);
-         return jarr; // login success
-      }
-      return jarr;
+      
+      // VO를 리턴하면 자동으로 json객체로 변환
+      OwnerVO ownerList = new OwnerVO("moon", "moon");
+      return ownerList;
    }
    
-   @ResponseBody
-   @RequestMapping(value = "/test", method = RequestMethod.POST)
-   public String test(@RequestBody OwnerVO o ) {
-      System.out.println(o.getOwner_id());
-
-      return o.getOwner_id() +"app";
-   }
 }
