@@ -23,4 +23,6 @@ public interface StoreService {
 	public ArrayList<StoreVO> getListWithPaging(StoreCriteria cri);
 	public int total(StoreCriteria cri);
 	public int SearchCount(StoreCriteria cri);
+	public ArrayList<StoreVO> getListWithSearchPaging(StoreCriteria cri);
+	public int searchTotal(StoreVO store);
 }

@@ -27,17 +27,15 @@
     		<input type="hidden" id="dong_key" value="91afccaa8d7f499151ee3b" /> <!--  아직 key 인증을 받지 못함... -->
     		<input type="hidden" name="apiKey" value="E4A59B05-0CF4-3654-BD0C-A169F70CCB34" />
     		<div>
-        		<select id="sido_code">
+    		<!-- <form id='actionForm' action='/storeSearch' method='get'> -->
+        		<select id="sido_code" name="sido">
             		<option>선택</option>
         		</select>		
-        		<select id="sigoon_code">
+        		<select id="sigoon_code" name="sigoon">
             		<option>선택</option>
-        		</select>
-        		<select id="dong_code">
-            		<option>선택</option>
-				</select>
-				<input type="text" id="detail">
+        		</select>        		
 				<button id="test">선택확인</button>
+			<!-- </form> -->	
     		</div>
 			<!-- 제휴매장 -->
 			<div id="store_form">
@@ -78,11 +76,18 @@
 					</ul>
 				</div>
 				<form id='actionForm' action='/store' method='get'>
-					<input type="hidden" id="efg" name="pageNum" value = "${pageMaker.cri.pageNum}">
-					<input type="hidden" id="abcd" name="amout" value = "${pageMaker.cri.amount}">
-					<input type="hidden" name="type" value='<c:out value="${pageMaker.cri.type}"/>'>
-					<input type="hidden" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"/>'>
-				</form>
+               	<input type="hidden" id="efg" name="pageNum" value = "${pageMaker.cri.pageNum}">
+               	<input type="hidden" id="abcd" name="amout" value = "${pageMaker.cri.amount}">
+               	<input type="hidden" name="type" value='<c:out value="${pageMaker.cri.type}"/>'>
+                <input type="hidden" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"/>'>  
+                <input type="hidden" name="sido" value="${param.sido}">
+               	<input type="hidden" name="sigoon" value="${param.sigoon}">              	              	
+            	</form>
+            		
+               
+            
+					
+				
 				<!-- end Pagination -->
 			</div>
 		</section>

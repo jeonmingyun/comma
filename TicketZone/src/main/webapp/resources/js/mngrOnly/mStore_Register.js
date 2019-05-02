@@ -79,6 +79,9 @@ function sample5_execDaumPostcode() {
 	
 	}
 	$(document).ready(function(){
+		
+		
+		
 		var formObj = $("#insert_Store");
 
 		$("input[type='submit']").on("click", function(e){
@@ -116,7 +119,9 @@ function sample5_execDaumPostcode() {
 		var resultDiv = $(".resultDiv");
 		function uploadSuccess(uploadResultArr){
 			var str = "";
-			
+			var time1 = $("#time").val();
+			var time2 = $("#time2").val();
+			var store_time = time1 + "-" + time2;
 			$(uploadResultArr).each(function(i,obj){
 				var fileCallPath = encodeURIComponent(obj.uploadPath+"/" + obj.uuid +"_"+obj.fileName);
 				
@@ -124,8 +129,7 @@ function sample5_execDaumPostcode() {
 				str += "<input type='hidden' name='img_filename' value='"+obj.fileName+"'>";
 				str += "<input type='hidden' name='img_uuid' value='"+obj.uuid+"'>";
 				str += "<input type='hidden' name='img_uploadpath' value='"+obj.uploadPath+"'>";
-				
-				
+				str += "<input type='hidden' name='store_time' value='"+store_time+"'>"; 				
 			});
 			resultDiv.append(str);
 		}

@@ -138,8 +138,35 @@ public class HomeController {
 		String today = request.getParameter("today");
 		
 		System.out.println(today);
+		 
 		return numberTicketService.getTotal();
 	}
 	
-
+	@RequestMapping(value = "/chart2")
+	public String test2(Model model) {
+		model.addAttribute("today", numberTicketService.today());
+		return "chart";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value ="/chartDel", method= RequestMethod.POST)
+	public ArrayList<NumberTicketVO> test3(Model model, String today, String day) {
+		
+		
+		return numberTicketService.getTotalDel(today);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value ="chartAdd", method=RequestMethod.POST)
+	public ArrayList<NumberTicketVO> test4(Model model, String today, String day){
+		
+		System.out.println(numberTicketService.getTotalAdd(today));
+		
+		
+		return numberTicketService.getTotalAdd(today);
+	}
+	
+	//adminChart
+	
+	
 }

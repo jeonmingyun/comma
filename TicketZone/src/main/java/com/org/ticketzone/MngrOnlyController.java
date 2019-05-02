@@ -194,13 +194,13 @@ public class MngrOnlyController {
 	// 매장등록 처리(insert)
 	@RequestMapping(value = "/mStore_Reg", method = RequestMethod.POST)
 	public String Register(Model model, StoreVO store, CoordinatesVO coor,StoreAttachVO vo) {
-		
+					
 		storeService.storeRegister(store);
 		coordinatesService.insertXY(coor);
 		storeAttachService.StoreImgInsert(vo);
-//		System.out.println(store);
-//		System.out.println(vo);
-//		System.out.println(coor);
+		System.out.println(store);
+		System.out.println(vo);
+		System.out.println(coor);
 		return "/mngrOnly/mStore";
 	}
 

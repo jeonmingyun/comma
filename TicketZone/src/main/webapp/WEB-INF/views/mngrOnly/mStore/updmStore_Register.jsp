@@ -55,9 +55,9 @@
 						</tr>
 						<tr>
 							<th>영업 시간</th>
-							<td><input type="text" name="store_time"
-								value="${updmStore.store_time}" required>
-								<p>(ex:09:00-18:00 * 정확히입력하지않으면 데이터가들어가지않습니다.)</p></td>
+							<td><input type="time" id="time" name="time" value="${updmStore.time}" required>
+								- <input type="time" id="time2" name="time2" value="${updmStore.time2}" required>
+							</td>
 						</tr>
 						<tr>
 							<th>매장 소개</th>

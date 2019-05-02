@@ -91,7 +91,7 @@ public class InquiryController {
 		String board_no = request.getParameter("board_no");
 		model.addAttribute("InquiryUpd", boardService.boardUpdInfo(board_no));
 		model.addAttribute("replyList", includeService.replyList(board_no));
-		
+		model.addAttribute("file", inqAttachService.Inq_findByBoard_no(Integer.parseInt(board_no)));
 		return "inquiry/showInquiry";
 	}
 
@@ -100,16 +100,25 @@ public class InquiryController {
 	public String updInquiry(Model model, HttpServletRequest request) {
 		String board_no = request.getParameter("board_no");
 		model.addAttribute("InquiryUpd", boardService.boardUpdInfo(board_no));
-		
+		model.addAttribute("file", inqAttachService.Inq_findByBoard_no(Integer.parseInt(board_no)));
 		return "inquiry/updInquiry";
 	}
 
 	// 문의사항 수정처리
+	@ResponseBody
 	@RequestMapping(value = "/updInquiryForm", method = RequestMethod.POST)
-	public String updateBoard(BoardVO board) {
-		boardService.boardUpd(board);
-
-		return "redirect:inquiry";
+	public String updateBoard(BoardVO board, InqAttachVO inq) {
+		
+		
+		if(inq.getInq_uuid() == null) {
+			System.out.println("파일없음");
+			boardService.boardUpd(board);
+		} else {
+			inqAttachService.Inq_fileModifyinsert(inq);
+			boardService.boardUpd(board);
+		}
+		
+		return "success";
 	}
 
 	// 문의사항 삭제처리
