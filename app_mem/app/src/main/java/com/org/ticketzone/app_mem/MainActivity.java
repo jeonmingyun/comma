@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                s_request = request.getText().toString();
-                Log.e("1", s_request);
                 NetworkTask nt = new NetworkTask("test") {
                     @Override
                     protected void onPostExecute(String s) {

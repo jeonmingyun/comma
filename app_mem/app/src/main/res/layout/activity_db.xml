@@ -8,15 +8,38 @@
     android:orientation="vertical">
 
     <EditText
+        android:id="@+id/m_tel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="tel"/>
     <EditText
+        android:id="@+id/m_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="name"/>
     <EditText
+        android:id="@+id/m_birth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="birth"/>
+    <Button
+        android:id="@+id/add_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="add data"/>
+    <Button
+        android:id="@+id/view_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="view list"/>
+    <Button
+        android:id="@+id/upd_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="upd_data"/>
+    <Button
+        android:id="@+id/del_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="del_data"/>
 </LinearLayout>
