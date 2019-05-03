@@ -40,7 +40,7 @@
 	<!-- 파일 업로드 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
 	</beans:bean>
-
+	
 	<!-- 게시판 비밀번호 확인 -->
 	<interceptors>
 		<interceptor>
@@ -49,5 +49,21 @@
 			<beans:bean id="commonInterceptor" class="com.org.ticketzone.interceptor.CommonInterceptor" />
 		</interceptor>
 	</interceptors>
-
+	<!-- 
+	<beans:bean id="naverClientID" class="java.lang.String">
+		<beans:constructor-arg value="Hs3DsczqirnOVYN6zjUR"/>
+	</beans:bean>
+	<beans:bean id="naverClientSecret" class="java.lang.String">
+		<beans:constructor-arg value="tIvaD1VUht"/>
+	</beans:bean>
+	<beans:bean id="naverRedirectUrl" class="java.lang.String">
+		<beans:constructor-arg value="http://localhost:8080/naver/callback"/>
+	</beans:bean>
+	
+	<beans:bean id="naverSns" class="com.jade.swp.auth.SNS"> 2019-05-05해야할일 
+		<beans:constructor-arg value="naver"/>
+		<beans:constructor-arg ref="naverClientID" />
+		<beans:constructor-arg ref="naverClientSecret" />
+		<beans:constructor-arg ref="naverRedirectUrl" />
+	</beans:bean> -->
 </beans:beans>

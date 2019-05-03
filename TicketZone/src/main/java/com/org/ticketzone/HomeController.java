@@ -1,16 +1,21 @@
 package com.org.ticketzone;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.JsonNode;
 //github.com/jeonmingyun/comma.git
 import com.org.ticketzone.domain.Criteria;
 import com.org.ticketzone.domain.NoticeAttachVO;
@@ -33,6 +38,8 @@ public class HomeController {
 	private NoticeBoardService noticeBoardService;
 	private NoticeAttachService noticeAttachService;
 	private NumberTicketService numberTicketService;
+	
+
 	
 
 	// 고객 홈
@@ -157,7 +164,7 @@ public class HomeController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value ="chartAdd", method=RequestMethod.POST)
+	@RequestMapping(value ="/chartAdd", method=RequestMethod.POST)
 	public ArrayList<NumberTicketVO> test4(Model model, String today, String day){
 		
 		System.out.println(numberTicketService.getTotalAdd(today));
@@ -166,7 +173,43 @@ public class HomeController {
 		return numberTicketService.getTotalAdd(today);
 	}
 	
-	//adminChart
 	
+	@RequestMapping(value = "/kakao", produces = "application/json", method=RequestMethod.GET)
+//	public String kakao(@RequestParam("code") String code, RedirectAttributes ra, HttpSession session, Model model)
+		public String kakao(Model model){
+//		System.out.println("kakao:" + code);
+		return "test";
+	}
+	
+	@RequestMapping(value ="/kakaoLogin", produces = "application/json", method=RequestMethod.GET)
+	public String kakaoLogin(@RequestParam("code") String code, RedirectAttributes ra, HttpSession session, HttpServletResponse response) throws IOException {
+		System.out.println("kakao code : " + code);
+		JsonNode jsonToken = KakaoAccessToken.getKakaoAccessToken(code);
+        // 여러 json객체 중 access_token을 가져온다
+        JsonNode accessToken = jsonToken.get("access_token");
+ 
+        System.out.println("access_token : " + accessToken);
+        
+        JsonNode userInfo = KakaoUserInfo.getKakaoUserInfo(accessToken);
+        
+        // Get id
+        String id = userInfo.path("id").asText();
+        String name = null;
+        String email = null;
+ 
+        // 유저정보 카카오에서 가져오기 Get properties
+        JsonNode properties = userInfo.path("properties");
+        JsonNode kakao_account = userInfo.path("kakao_account");
+ 
+        name = properties.path("nickname").asText();
+        email = kakao_account.path("email").asText();
+ 
+        System.out.println("id : " + id);
+        System.out.println("name : " + name);
+        System.out.println("email : " + email);
+
+
+		return "test2";				
+	}
 	
 }
