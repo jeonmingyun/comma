@@ -57,9 +57,15 @@
 			<!-- 첨부파일 -->
 			<div class="inquiry_file">
 				<span id="date">첨부파일</span>
+				<c:if test="${file[0] != null}"><a href="#"class="downFile">${file[0].inq_filename}</a></c:if><c:if test="${file[0] == null}">없음</c:if>
 			</div>
 			<!-- inquiry_file -->
 		</div>
+		<c:if test="${file[0] != null}">
+		<input id="inq_uuid" type="hidden" name="inq_uuid" value="${file[0].inq_uuid}">
+		<input id="inq_uploadpath" type="hidden" name="inq_uploadpath" value="${file[0].inq_uploadpath}">
+		<input id="inq_filename" type="hidden" name="inq_filename" value="${file[0].inq_filename}">
+		</c:if>
 		<!-- inquiry_view -->
 		
 		<!-- <div>inquiry_reply -->

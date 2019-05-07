@@ -4868,13 +4868,13 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 	color: #6c757d
 }
 
-.pagination {
+/* .pagination {
 	display: -ms-flexbox;
 	display: flex;
 	padding-left: 0;
 	list-style: none;
 	border-radius: .25rem
-}
+} */
 
 .page-link {
 	position: relative;

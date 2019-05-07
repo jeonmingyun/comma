@@ -212,8 +212,71 @@
 	<![CDATA[
 	select substr(ticket_reg,9,3) as ticket_reg, sum(the_number) as the_number, count(ticket_code) as team
 	from number_ticket
+    where ticket_reg like sysdate-1 || '%'
+    and ticket_status = 1
 	group by substr(ticket_reg,9,3)
 	order by ticket_reg
+	]]>
+	</select>
+	
+	<!-- 차트 오늘날짜 -->
+	<select id="today" resultType="com.org.ticketzone.domain.NumberTicketVO">
+		<![CDATA[
+			select to_char(sysdate, 'yyyy/mm/dd') as today
+			from dual
+		]]>
+	</select>
+	
+	<!-- 오늘날짜 마이너스 -->
+	<select id="todayDel" resultType="com.org.ticketzone.domain.NumberTicketVO">
+		<![CDATA[
+			select to_char(to_date(#{today},'yyyy/mm/dd')-1, 'yyyy/mm/dd') as today
+			from dual
+		]]>
+	</select>
+	<!-- 오늘날짜 플러스 -->
+	<select id="todayAdd" resultType="com.org.ticketzone.domain.NumberTicketVO">
+		<![CDATA[
+			select to_char(to_date(#{today},'yyyy/mm/dd')+1, 'yyyy/mm/dd') as today
+			from dual
+		]]>
+	</select>
+	<!-- +날짜차트 -->
+	<select id="getTotalAdd" resultType="com.org.ticketzone.domain.NumberTicketVO">
+	<![CDATA[
+	with
+	chart as (
+		select substr(ticket_reg,9,3) as ticket_reg, sum(the_number) as the_number, count(ticket_code) as team
+		from number_ticket
+		where license_number = '1597530000' and
+		ticket_reg like to_char(to_date(#{today}, 'yy/mm/dd')+1, 'yy/mm/dd') || '%'
+		and ticket_status = 1
+		group by substr(ticket_reg,9,3)
+		order by ticket_reg),
+	today as (
+		select to_char(to_date(#{today},'yyyy/mm/dd')+1, 'yyyy/mm/dd') as today		
+		from dual)
+		select a.*, b.today 
+		from chart a, today b
+	]]>
+	</select>
+	
+	<select id="getTotalDel" resultType="com.org.ticketzone.domain.NumberTicketVO">
+	<![CDATA[
+	with
+	chart as (
+		select substr(ticket_reg,9,3) as ticket_reg, sum(the_number) as the_number, count(ticket_code) as team
+		from number_ticket
+		where license_number = '1597530000' and
+		ticket_reg like to_char(to_date(#{today}, 'yy/mm/dd')-1, 'yy/mm/dd') || '%'
+		and ticket_status = 1
+		group by substr(ticket_reg,9,3)
+		order by ticket_reg),
+	today as (
+		select to_char(to_date(#{today},'yyyy/mm/dd')-1, 'yyyy/mm/dd') as today		
+		from dual)
+		select a.*, b.today 
+		from chart a, today b
 	]]>
 	</select>
 	

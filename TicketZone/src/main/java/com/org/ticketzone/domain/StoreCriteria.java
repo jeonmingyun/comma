@@ -10,7 +10,8 @@ import lombok.ToString;
 public class StoreCriteria {
 	private int pageNum;
 	private int amount;
-	
+	private String sido;
+	private String sigoon;
 	private String keyword;
 	private String type;
 	

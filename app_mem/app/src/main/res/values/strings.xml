@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">번호요</string>
+    <string name="kakao_app_key">79700baf0c13b7f8ae70dffd9625d0b5</string>
 </resources>

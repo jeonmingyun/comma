@@ -27,15 +27,31 @@ public class StoreController {
 	private StoreAttachService storeAttachService;
 	// 제휴매장
 	@RequestMapping(value = "/store", method = RequestMethod.GET)
-	public String sotre(Model model, StoreCriteria Cri) {
+	public String sotre(Model model, StoreCriteria Cri, StoreVO store) {
 		
+		
+//		model.addAttribute("list", storeService.storeList(Cri));
+		if(store.getSido() == null || store.getSido().equals("")) {
 		int total = storeService.total(Cri);
-		model.addAttribute("list", storeService.storeList(Cri));
 		model.addAttribute("list", storeService.getListWithPaging(Cri));
 		model.addAttribute("pageMaker", new StorePageDTO(Cri, total));
 		
+		} else {
+		int total = storeService.searchTotal(store);
+		model.addAttribute("list", storeService.getListWithSearchPaging(Cri));
+		model.addAttribute("pageMaker", new StorePageDTO(Cri, total));
+		}
+		System.out.println(Cri);
 		return "store";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/storSearch", method = RequestMethod.POST,produces="text/plain;charset=UTF-8")
+	public String storeSearch(Model model, StoreCriteria Cri, StoreVO store) {
+		
+		return "success";
+	}
+	
 
 	// 제휴매장 상세페이지처리
 	@ResponseBody

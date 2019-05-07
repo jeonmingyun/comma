@@ -1,7 +1,13 @@
 
 		
 $(document).ready(function() {
-	
+	var actionForm = $("#actionForm");
+	   $(".paginate_button a").on("click", function(e){
+	      e.preventDefault();
+	      
+	      actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+	      actionForm.submit();
+	   });   
 	
 	$(".license").each(function(i,e){
 		uuid = $(".uuid"+i+"").val();
@@ -17,13 +23,37 @@ $(document).ready(function() {
 	});
 			
 	
-	
-	var actionForm = $("#actionForm");
-	$(".paginate_button a").on("click", function(e){
-		e.preventDefault();
-		
-		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-		actionForm.submit();
+			
+	$("#test").on("click", function(e){
+		var a = $("#sido_code option:selected").text();
+		var b = $("#sigoon_code option:selected").text();
+			if(a.length == 5){
+				a = a.substr(0,2);
+			} else if(a.length == 4){
+				a = a.substr(0,1) + a.substr(-2,1);
+				
+			} else if (a.length == 3){
+				a = a.substr(0,2);
+			} else {
+				a = a;
+			}
+		var pageNum = $("#efg").val();
+		var amount = $("#abcd").val();
+		var query = {
+				sido : a,
+				sigoon : b,
+				pageNum : pageNum,
+				amount : amount
+		};
+		$.ajax({
+			url : '/storSearch',
+			data : query,
+			dataType : 'text',
+			type : 'POST',
+			success:function(data){
+				$(location).attr("href", "store?sido="+a+"&sigoon="+b);
+			}
+		});
 	});	
 	
 //	var searchForm = $("#searchForm");
@@ -79,9 +109,7 @@ $(document).ready(function() {
 			        var html = "<option>선택</option>";
 			
 			        for(var i=0;i<data.admVOList.admVOList.length;i++){ 
-			        	html +="<option value='"+data.admVOList.admVOList[i].admCode+"'>"+data.admVOList.admVOList[i].lowestAdmCodeNm+"</option>"
-			        	console.log(data.admVOList.admVOList[i].admCode);
-			        	console.log(data.admVOList.admVOList[i].lowestAdmCodeNm);
+			        	html +="<option value='"+data.admVOList.admVOList[i].admCode+"'>"+data.admVOList.admVOList[i].lowestAdmCodeNm+"</option>"			        	
               }
                  $('#sigoon_code').html(html);	
 		        },
@@ -110,12 +138,10 @@ $(document).ready(function() {
 	        });
      });
      $("#test").click(function(){
- 		alert($("#sido_code option:selected").text());
- 		alert($("#sigoon_code option:selected").text());
- 		alert($("#dong_code option:selected").text());
- 		alert($("#detail").val());
- 	
- });
+ 		
+ 		
+ 			
+     });
 });
 	
 		

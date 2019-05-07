@@ -34,24 +34,26 @@
 
 <!-- 매장 수정페이지 -->
 <select id="storeUpdate" resultType="com.org.ticketzone.domain.StoreVO">
-	select * from store where license_number = #{license_number}
+	select license_number, r_name, max_number, store_status, cate_code, owner_id, store_name, store_tel, substr(store_time,0,5) as time, substr(store_time,7) as time2, store_intro, address_name 
+	from store where license_number = #{license_number}
 </select>
 
 <!-- 매장 수정처리 -->
 <update id="storeUpdCom">
+<![CDATA[
 	update store
 	set store_name = #{store_name},
 	cate_code = 'F1',
 	r_name = #{r_name},
 	store_tel = #{store_tel},
-	store_time = #{store_time},
+	store_time = #{time} || '-' || #{time2},
 	store_intro = #{store_intro},
 	address_name = #{address_name}
 	where license_number = #{license_number}
-	
+]]>	
 </update>
 
-	<!-- 게시판 페이징<검색> -->
+	<!-- 게시판 페이징 -->
 	<select id="getListWithPaging"
 		resultType="com.org.ticketzone.domain.StoreVO">
 		<![CDATA[
@@ -60,22 +62,23 @@
 			from
 			(select rownum rn, license_number, store_name, address_name, store_time, store_tel
 			from store
-			where			
+			where						
 		]]>
-			<!-- <trim prefix="(" suffix=") AND " prefixOverrides="OR">
+		  
+		<!-- 	<trim prefix="(" suffix=") AND " prefixOverrides="OR">
 			<foreach item='type' collection="typeArr">
 				<trim prefix="OR">
 					<choose>
-						<when test="type == 'T'.toString()">
-							notice_title like '%'||#{keyword}||'%'
+						<when test="type == 'A'.toString()">
+							address_name like '%'||#{keyword}||'%'
 						</when>
-						<when test="type == 'C'.toString()">
-							notice_content like '%'||#{keyword}||'%'
+						<when test="type == 'B'.toString()">
+							address_name like '%'||#{keyword}||'%'
 						</when>
 					</choose>
 				</trim>
 			</foreach>
-		</trim> -->
+		</trim> --> 
 		<![CDATA[	
 			rownum <= #{pageNum} * #{amount}
 			) a, store_attach b
@@ -83,9 +86,31 @@
 			and a.license_number = b.license_number
 		]]>
 	</select>
-	
+		<!-- 게시판 페이징 -->
+	<select id="getListWithSearchPaging"
+		resultType="com.org.ticketzone.domain.StoreVO">
+		<![CDATA[
+			select a.license_number, a.store_name, a.address_name, a.store_time, a.store_tel,
+			b.img_uuid, b.img_filename, b.img_uploadpath
+			from
+			(select rownum rn, license_number, store_name, address_name, store_time, store_tel
+			from store
+			where address_name like #{sido} || ' ' || #{sigoon} || '%'											
+			and rownum <= #{pageNum} * #{amount}
+			) a, store_attach b
+			where rn > (#{pageNum} -1) * #{amount}
+			and a.license_number = b.license_number
+		]]>
+	</select>
 	<select id="total" resultType="int">
 		select count(*) from store where license_number > 0
+	</select>
+	
+	<select id="searchTotal" resultType="int">
+		<![CDATA[
+		select count(*) from store 
+		where address_name like #{sido} || ' ' || #{sigoon} || '%'
+		]]>	
 	</select>
 
 </mapper>

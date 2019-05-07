@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
 	var mapContainer = document.getElementById('map') // 지도를 표시할 div
 	var coor_x = document.getElementById("coor_x").value

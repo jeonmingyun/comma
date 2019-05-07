@@ -104,5 +104,35 @@ public class NumberTicketServiceImplement implements NumberTicketService {
 		return mapper.getTotal();
 	}
 
+	@Override
+	public ArrayList<NumberTicketVO> today() {
+		
+		return mapper.today();
+	}
+
+	@Override
+	public ArrayList<NumberTicketVO> todayDel(String today) {
+		
+		return mapper.todayDel(today);
+	}
+
+	@Override
+	public ArrayList<NumberTicketVO> todayAdd(String today) {
+
+		return mapper.todayAdd(today);
+	}
+
+	@Override
+	public ArrayList<NumberTicketVO> getTotalAdd(String today) {
+
+		return mapper.getTotalAdd(today);
+	}
+
+	@Override
+	public ArrayList<NumberTicketVO> getTotalDel(String today) {
+
+		return mapper.getTotalDel(today);
+	}
+
 	
 }

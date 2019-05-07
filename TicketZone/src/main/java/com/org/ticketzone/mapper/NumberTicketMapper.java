@@ -35,4 +35,14 @@ public interface NumberTicketMapper {
 	
 	public ArrayList<NumberTicketVO> getTotal();
 	
+	public ArrayList<NumberTicketVO> today();
+	
+	public ArrayList<NumberTicketVO> todayDel(String today);
+	
+	public ArrayList<NumberTicketVO> todayAdd(String today);
+	
+	public ArrayList<NumberTicketVO> getTotalAdd(String today);
+	
+	public ArrayList<NumberTicketVO> getTotalDel(String today);
+	
 }

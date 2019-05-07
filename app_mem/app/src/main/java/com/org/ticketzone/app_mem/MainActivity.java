@@ -1,5 +1,6 @@
 package com.org.ticketzone.app_mem;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.org.ticketzone.app_mem.vo.MemberVO;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                s_request = request.getText().toString();
-                Log.e("1", s_request);
                 NetworkTask nt = new NetworkTask("test") {
                     @Override
                     protected void onPostExecute(String s) {
@@ -43,5 +44,20 @@ public class MainActivity extends AppCompatActivity {
                 nt.execute(sds);
             }
         });
+    }
+
+    public void onClickLogout(View view) {
+        UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
+            @Override
+            public void onCompleteLogout() {
+                redirectLoginActivity();
+            }
+        });
+    }
+
+    protected void redirectLoginActivity() {
+        final Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

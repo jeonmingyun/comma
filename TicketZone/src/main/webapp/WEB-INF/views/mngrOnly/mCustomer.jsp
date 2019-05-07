@@ -16,7 +16,6 @@
 <body>
 	<%@include file="/WEB-INF/views/include/Mngrheader.jsp"%>
 	
-		
 	<input type="hidden" id="select_license_number" value="${param.license_number}">	
 	<select name="license_number" id="storelist">
 		<c:forEach var="s" items="${store}" varStatus="status">
@@ -24,7 +23,7 @@
 				${s.store_name}</option>
 		</c:forEach>
 	</select>
-
+	<div style="text-align:center;"><a href="#">현황판</a>&nbsp&nbsp&nbsp&nbsp<a href="/chart2">일별 통계</a></div>
 	<h1>현재(오늘) 상태 통계</h1>
 	<table id="customAdmin">
 		<tr>
@@ -68,24 +67,10 @@
 			
 	</table>
 	
-		<c:forEach var="mem" items="${member}">
-			<input type="hidden" id="the_number" name="the_number" value="4"> 
-			<button class="Ticketbtn btn-default" name="${param.license_number}" value="${mem.member_tel}">발급</button>
-		</c:forEach>	
+		
 	
 	<input type="hidden" id="check" value="${id}">
 	
-		<input type="hidden" id="payment" name="license_number" value="${param.license_number}">
-		<button class="Paybtn btn-default">발급완료</button>
-	
-		
-		<input type="hidden" id="Cancel" name="license_number" value="${param.license_number}">
-		<input type="hidden" id="m_tel" name="member_tel" value="010-5555-0005">
-		<button class="Cancelbtn btn-default">발급취소</button>
-		
-		<input type="hidden" id="Absence" name="license_number" value="${param.license_number}">
-		<input type="hidden" id="m_tel2" name="member_tel" value="010-5555-0006">
-		<button class="Absencebtn btn-default">부재</button>
 		
 	<%@include file="/WEB-INF/views/include/footer.jsp"%>
 </body>

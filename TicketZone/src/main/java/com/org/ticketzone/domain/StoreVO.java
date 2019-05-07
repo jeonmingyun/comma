@@ -19,4 +19,8 @@ public class StoreVO {
 	private String img_uuid;
 	private String img_uploadpath;
 	private String img_filename;
+	private String sido;
+	private String sigoon;
+	private String time;
+	private String time2;
 }
