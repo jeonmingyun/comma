@@ -16,7 +16,6 @@
 <body>
 	<%@include file="/WEB-INF/views/include/Mngrheader.jsp"%>
 	
-		
 	<input type="hidden" id="select_license_number" value="${param.license_number}">	
 	<select name="license_number" id="storelist">
 		<c:forEach var="s" items="${store}" varStatus="status">
@@ -24,7 +23,7 @@
 				${s.store_name}</option>
 		</c:forEach>
 	</select>
-
+	<div style="text-align:center;"><a href="#">현황판</a>&nbsp&nbsp&nbsp&nbsp<a href="/chart2">일별 통계</a></div>
 	<h1>현재(오늘) 상태 통계</h1>
 	<table id="customAdmin">
 		<tr>
