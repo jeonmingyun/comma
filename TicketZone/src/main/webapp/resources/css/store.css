@@ -1,85 +1,73 @@
 * {
-	margin: 0;
-	padding: 0;
+    padding: 0;
+    margin: 0;
 }
 
-#area_form {
+#main {
 	height: 100%;
-	margin: 0 auto;
 }
 
-section {
-	margin-top: 10px;
-	padding: 5px 20px;
-	font-size: 15px;
-}
-
-li {
-	list-style: none;
-}
-
+/* 매장 검색 */
 #search_box {
-	padding: 10px;
-	text-align: center;
-	border-bottom: 2px solid #000000;
+	margin-top: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;  
 }
 
-#store_form {
-	width: 897px;
-	margin: 0 auto;
-}
-
-/* select선택 창 */
+/* 매장검색 select */
 #search_box select {
+	padding-right: 5px;
+	margin: 2px;
+}
+
+/* 매장검색 bottom 선 */
+#divider_sh .line {
+	margin: 30px auto 50px;
+	width: 1200px;
+	border: 1px solid #BDBDBD;
+}
+
+/* 제휴매장 폼 */
+#store_form {
+	margin: 0 auto;
+	width: 1120px;
+	/* border: 1px solid #000000; */
+	box-sizing: border-box;
+}
+
+/* 매장사진 */
+#store_row {
+	margin: 30px 10px;
+    /* border: 1px solid #000000; */
+    position: relative;
+    display: inline-block;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    
+    width: 255px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;    
+}
+
+#store_row p {
+	margin: 0px 0px 0px 10px;
+}
+
+/* 매장설명 */
+#store_info h3{
 	vertical-align: middle;
-}
-
-/* 검색 버튼 */
-.search_btn {
-	padding: 5px 15px;
-	border: none;
-	border-radius: 5px;
-	background-color: #000000;
-	color: #ffffff;
-	outline: none;
-	font: 20px;
-}
-
-/* 검색 버튼 클릭했을 때 */
-.search_btn:hover {
-	cursor: pointer;
-	background-color: cornflowerblue;
-}
-/* ul 태그 */
-.store_img {
-	margin: 10px 0;
-	width: 930px;
-}
-
-/* 매장 사진 정렬 */
-.store_img li {
-	width: 220px;
-	position: relative;
-	display: inline-block;
-	margin: 20 10px 30px;
-}
-
-/* 매장 이름 */
-.store_img li h3 {
 	text-align: center;
 }
 
-/* 이미지 */
-.store_img .s_img {
-	width: 100%;
-	height: 100%;
-}
-
-.pull-right {
+/* Pagination */
+.pagination {
+	list-style: none;
 	text-align: center;
+	margin: 80px 0px 95px;
 }
 
-/* pagination */
 .pagination a {
 	padding: 8px 16px;
 	text-decoration: none;
@@ -88,8 +76,14 @@ li {
 
 .pagination li {
 	position: relative;
-	display: inline-block;
+	/* display: inline-block; */
+	display: inline;
 }
+
+.pagination_active {
+	background-color: #ddd;	
+}
+
 /* 선택되지 않았을 때 */
 .pagination a:active {
 	border-bottom: 1px solid #000000;
@@ -100,3 +94,5 @@ li {
 .pagination a:hover {
 	background-color: #ddd;
 }
+
+

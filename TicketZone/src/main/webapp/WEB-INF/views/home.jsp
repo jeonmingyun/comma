@@ -11,26 +11,26 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>번호요</title>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<!-- 기존의 CSS, JS -->
 <link href="resources/css/home.css" rel="stylesheet" />
 <script src="resources/js/home.js"></script>
-<!-- Bootstrap core CSS -->
-<link href="/resources/bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Custom fonts for this template -->
-<link href="bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-<link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+<!-- Bootstrap core CSS -->
+<link href="../resources/bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="/resources/bootstrap/css/clean-blog.min.css" rel="stylesheet">
+<link href="../resources/bootstrap/css/modern-business.css" rel="stylesheet">
 
 </head>
 <body>
 
-	<%@include file="include/header.jsp"%>
+<!-- header -->
+<%@include file="include/header.jsp"%>
 	
-	 <!-- Page Header -->
-  <header class="masthead" style="background-image: url('resources/bootstrap/img/home-bg.jpg')">
+<!-- Page Header -->
+  <!-- <header class="masthead" style="background-image: url('resources/bootstrap/img/home-bg.jpg')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -42,6 +42,20 @@
             <span class="subheading">번호요 지금 바로 이용하세요</span>
           </div>
         </div>
+      </div>
+    </div>
+  </header> -->
+  
+  <header>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner" role="listbox">
+        <!-- Slide One - Set the background image for this slide in the line below -->
+        <div class="carousel-item active" style="background-image: url('http://placehold.it/1900x1080')">
+          <div class="carousel-caption d-none d-md-block">
+            <h3>First Slide</h3>
+            <p>This is a description for the first slide.</p>
+          </div>
+        </div>   
       </div>
     </div>
   </header>
