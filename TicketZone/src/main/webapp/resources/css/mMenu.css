@@ -1,0 +1,36 @@
+p	{
+	margin: 5px 0px;
+}
+	#customAdmin {
+	width: 800px;
+    border-collapse: collapse;
+    text-align: center;	
+    font-size: 16px;
+    margin:20px auto;
+}
+/* 표 제목 */
+#customAdmin th {
+	color: #ffffff;
+	background-color: #000000;
+	border-bottom: 1px solid #000000;
+	padding: 5px;
+	font-size: 18px;
+}
+#customAdmin th:first-child {
+  border-top-left-radius:5px;
+}
+
+#customAdmin th:last-child {
+  border-top-right-radius:5px;
+}
+
+#customAdmin td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+}
+
+/* 게시글 제목 클릭했을 때 */
+#customAdmin tr:hover td{
+	cursor: pointer;
+	background-color: #EBEBEB;
+}
