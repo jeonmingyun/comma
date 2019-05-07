@@ -7,17 +7,17 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 <!-- Bootstrap core CSS -->
-<link href="/resources/bootstrap1/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../resources/bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="/resources/bootstrap1/css/modern-business.css" rel="stylesheet">
+<link href="../resources/bootstrap/css/modern-business.css" rel="stylesheet">
 </head>
 <body>
-	<!-- <p>4조 쉼표(,) © 2019 All rights reserved</p> -->
-	<!-- Footer -->
-  <footer class="py-5" id="footer-color">
+
+   <!-- Footer -->
+  <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center">4조 쉼표(,) © 2019 All rights reserved</p>
+      <p class="m-0 text-center text-white">4조 쉼표(,) © 2019 All rights reserved</p>
     </div>
     <!-- /.container -->
   </footer>
