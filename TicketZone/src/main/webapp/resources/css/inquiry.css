@@ -4,6 +4,18 @@
 	padding: 0;
 }
 
+#suggest_form h2 {
+	margin-top: 50px;
+}
+
+/* 문의하기 밑에 선 */
+.divider_1 .line {
+	width: 160px;
+	margin: 0 auto 30px;
+	padding: 10px 0px 15px 0px;
+	border-bottom: 1px dashed #ccc;
+}
+
 #suggest_type2 {
 	text-align: center;
 }
@@ -15,12 +27,6 @@
 
 #inquiry_table {
 	display: inline-block;
-}
-
-h1 {
-	text-align: center;
-	margin: 10px auto;
-	font-size: 32px;
 }
 
 /* 표(테이블) */
@@ -70,7 +76,7 @@ h1 {
 }
 
 /* 글쓰기 버튼 */
-#btnwrite {
+/* #btnwrite {
 	padding: 5px 15px;
 	border: none;
 	border-radius: 5px;
@@ -78,7 +84,7 @@ h1 {
 	color: #ffffff;
 	outline: none;
 	font: 20px;
-}
+} */
 
 /* 글쓰기 버튼 클릭했을 때 */
 #btnwrite:hover {
@@ -90,8 +96,9 @@ h1 {
 	vertical-align: middle;
 }
 
+
 /* 검색 버튼 */
-.btn-default {
+/* .btn-default {
 	padding: 5px 15px;
 	border: none;
 	border-radius: 5px;
@@ -99,13 +106,16 @@ h1 {
 	color: #ffffff;
 	outline: none;
 	font: 20px;
-}
+} */
 
 /* 검색 버튼 클릭했을 때 */
-.btn-default:hover {
+/* .btn-default:hover {
 	cursor: pointer;
 	background-color: cornflowerblue;
-}
+} */
+
+
+
 /* pagination 정렬 */
 .pull-right {
 	text-align: center;

@@ -22,7 +22,9 @@
       <section>
          <div id="suggest_form">
          <!-- 문의하기 -->
-            <h1>문의하기</h1>
+            <h2>문의하기</h2>
+            <div class="divider_1"><div class="line"></div></div>
+            
             <div id="inquiry_table">
             <form id="searchForm" method="get" action="/inquiry">
                <select name="type">
