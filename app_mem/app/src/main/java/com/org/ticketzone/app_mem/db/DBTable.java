@@ -15,5 +15,4 @@ public final class DBTable {
                 + MEMBER_BIRTH + " text not null );";
         public static final String DROP_QUERY= "drop table if exists "+TABLENAME;
     }
-
 }
