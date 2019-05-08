@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     protected void onPostExecute(String data) {
                         super.onPostExecute(data);
-
+                        Log.d(getClass().getName(), data);
                         if( data.equals("1")) { // login success
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 //                            //owner_id값 송신

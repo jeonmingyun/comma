@@ -27,7 +27,7 @@ public class MngrAppHomeController {
       String owner_password = ownervo.getOwner_password();
       ArrayList<OwnerVO> ownerList = ownerService.login(owner_id);
       String db_owner_password;
-      
+     
       if( ownerList.size() != 0) {
          db_owner_password = ownerList.get(0).getOwner_password();
          if( db_owner_password.equals(owner_password))
@@ -66,14 +66,14 @@ public class MngrAppHomeController {
    
 
    /* json객체로 return 예시 / JsonArrayTask 사용*/
-   @ResponseBody
-   @RequestMapping(value = "/json_test", method = RequestMethod.POST)
-   public OwnerVO json_test(@RequestBody OwnerVO ownervo) {
-      System.out.println(ownervo);
-      
-      // VO를 리턴하면 자동으로 json객체로 변환
-      OwnerVO ownerList = new OwnerVO("moon", "moon");
-      return ownerList;
-   }
+//   @ResponseBody
+//   @RequestMapping(value = "/json_test", method = RequestMethod.POST)
+//   public OwnerVO json_test(@RequestBody OwnerVO ownervo) {
+//      System.out.println(ownervo);
+//      
+//      // VO를 리턴하면 자동으로 json객체로 변환
+//      OwnerVO ownerList = new OwnerVO("moon", "moon");
+//      return ownerList;
+//   }
    
 }
