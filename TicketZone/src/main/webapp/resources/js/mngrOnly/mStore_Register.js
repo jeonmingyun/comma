@@ -31,7 +31,8 @@ function sample5_execDaumPostcode() {
 					var result = results[0]; //첫번째 결과의 값을 활용
 					document.getElementById("coor_x").value = result.x;
 					document.getElementById("coor_y").value = result.y;
-					
+					console.log(result.x);
+					console.log(result.y);
 					// 해당 주소에 대한 좌표를 받아서
 					var coords = new daum.maps.LatLng(result.y, result.x);
 					// 지도를 보여준다.
