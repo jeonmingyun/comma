@@ -15,24 +15,18 @@
 <script src="../resources/js/store_info.js"></script>
 <link href="../resources/css/store_info.css" rel="stylesheet">
 </head>
-<body>	
+<body>
+	<!-- 가게 정보 -->
 	<%@include file="/WEB-INF/views/include/header.jsp"%>
-		
-		<!-- 가게 정보 -->
+	<section>
 		<div id="store_name" style="display:none;">${storeList[0].store_name}</div>
 		
-	<div id="store_form">
 		<c:forEach var="s" items="${storeList}">
 			<div id="store_info" class="${s.address_name}">
-				<h1 id="store_name">${s.store_name}</h1>
-				<div id="divider_sh">
-					<div class="line"></div>
-				</div>
-
 				<p>
 					<img name="store_img">
 				</p>
-				
+				<p id="store_name">매장이름: ${s.store_name}</p>
 				<p>매장연락처: ${s.store_tel}</p>
 				<p>매장주소: ${s.address_name}</p>
 				<p>영업시간: ${s.store_time}</p>
@@ -45,9 +39,7 @@
 	
 		<!-- 지도 -->
 		<div id="map"></div>
-
-</div><!-- store_form -->
-
+	</section>
 	
 	<%-- <%@include file="/WEB-INF/views/include/footer.jsp"%> --%>
 

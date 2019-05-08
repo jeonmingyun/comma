@@ -19,6 +19,9 @@
 	<%@include file="include/header.jsp"%>
 
 	<div id="main">
+	 <h2>제휴매장</h2>
+     <div class="divider_1"><div class="line"></div></div>
+            
 		<div id="search_box">
 			<input type="hidden" id="sido_key" value="12685d425f1af0872d756c" />
 			<input type="hidden" id="sigoon_key" value="b0888bae39fbd0463a9252" />
@@ -32,9 +35,8 @@
 			</select> <select id="sigoon_code" name="sigoon">
 				<option>선택</option>
 			</select>
-			<button id="test">선택확인</button>
+			<button id="test">검색</button>
 			<!-- </form> -->
-
 		</div>
 		<!--search_box -->
 		<div id="divider_sh">
@@ -51,7 +53,7 @@
 					</button>
 
 					<div id="store_info">
-						<h3>${store.store_name}</h3>
+						<h4>${store.store_name}</h4>
 						<p>연락처: ${store.store_tel}</p>
 						<p style="white-space: nowrap;">주소: ${store.address_name}</p>
 						<p>영업시간: ${store.store_time}</p>

@@ -78,7 +78,7 @@ $(document).ready(function() {
   });
 	 $(".license").click(function() {
 			var query = $(this).val();
-			alert(query);
+			/*alert(query);*/
 
 			$.ajax({
 				type : "post",

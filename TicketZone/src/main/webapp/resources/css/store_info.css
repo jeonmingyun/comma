@@ -1,3 +1,9 @@
+#divider_sh .line {
+	margin: 30px auto 20px;
+	width: 1200px;
+	border: 1px solid #343a40;
+}
+
 #store_info {
 	margin-top: 1%;
 	width: 40%;
@@ -5,6 +11,7 @@
 	margin-right: 0px;
 	float: left;
 }
+
 
 #store_info img {
 	width: 70%;

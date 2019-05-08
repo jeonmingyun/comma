@@ -12,6 +12,7 @@
 
 </head>
 <body>
+	<%@include file="../include/header.jsp"%>
 	<!-- 고객센터 문의글 작성 -->
 	<form name="suggest" id="suggest_form" method="post" action="/insertInquiry">
 		<div class="table_wapper">
@@ -19,13 +20,14 @@
 			<table class="cus_show">
 				<tbody>
 					<tr>
-						<th><label for="suggest_type">문의 유형</label></th>
+						<th><label for="suggest_type">문의유형</label></th>
 												
-						<td>	<select name="cate_code" id="suggest_type">
-								<c:forEach var="c" items="${cate}">
-								<option value="${c.cate_code}">${c.cate_name}</option>								
-								</c:forEach>
-								</select>
+						<td>	
+							<select name="cate_code" id="suggest_type">
+							<c:forEach var="c" items="${cate}">
+							<option value="${c.cate_code}">${c.cate_name}</option>								
+							</c:forEach>
+							</select>
 						</td>		
 					</tr>
 					
@@ -51,7 +53,8 @@
 						<td><input type="file" name="uploadFile" multiple>
 							<div class="resultDiv"></div>
 						</td>
-					</tr>					
+					</tr>
+				</tbody>					
 			</table>
 			<!-- cus_show-->
 			<!-- 확인 취소버튼 -->
@@ -59,8 +62,7 @@
 				<button type="submit" id="save">등록</button>
 				<button type="button" id="cancel">취소</button>
 			</div>
-		</div>
-		<!-- table_wapper-->
+		</div> <!-- table_wapper-->
 	</form>
 </body>
 </html>

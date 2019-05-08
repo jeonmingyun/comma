@@ -3,36 +3,75 @@
     padding: 0;
 }
 
+button:hover {
+	cursor: pointer;
+}
+
 .table_wapper {
 	margin: 0 auto;
-	width: 800px; /*table  width크기랑 똑같이 */
+	width: 1200px; /*table  width크기랑 똑같이 */
 	height: 100%;
 }
 
 /* 문의글 작성 */
 .table_wapper h1 {
     text-align: center;
+	margin: 50px auto;
+	font-size: 14px;
+	font-weight: normal;
+    text-align: center;
+    padding: 13px 0;
+    border-top: 1px solid #343a40;
+    border-bottom: 1px solid #343a40;
+    width: 250px; height: 100%;
 }
 
 /* 게시글 작성 테이블 */
 .cus_show {
     margin: 10px auto;
     border-collapse: collapse;
-    width: 800px;
+    width: 1200px;
 }
 
 /* 테이블 제목 */
 .cus_show th {
-    border: 1px solid #dddddd;
-    background-color: #000000;
-    color: #ffffff;
-    /* padding: 15px 10px; */
+	width: 150px;
+	text-align: center;
+	font-weight: normal;
+    border-bottom: 1px solid #e6e6e6;
+    color: #888888;
+    padding: 15px 10px;
     font-size: 16px;
+}
+
+/* label 태그에 margin 없애기 */
+.cus_show label {
+	margin: 0px;
 }
 
 /* 테이블 내용 */
 .cus_show td {
-    border: 1px solid #dddddd;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+/* 테이블 select */
+.cus_show select, #board_password{
+	width: 200px;
+	font-size: 14px;
+}
+
+/* 게시글 제목 */
+.cus_show #title {
+	width: 1000px;
+}
+
+/* 글 쓰기 (textarea) */
+#content {
+	vertical-align: middle;
+	margin: 10px 0;
+	width: 1000px;
+	height: 200px;
+	resize: none;
 }
 
 /* 확인,취소 버튼 */
@@ -42,20 +81,25 @@
 
 .write_btn button {
     padding: 5px 15px;
-    border: none;
-    border-radius: 5px;
-    background-color: #000000;
-    color: #ffffff;
+    border: 1px solid #BDBDBD;
+    background-color: #FFFFFF;
+    color: #000000;
     outline: none;
     font: 20px;
 }
 
-.write_btn button:hover {
+/* .write_btn button:hover {
     cursor: pointer;
-    background-color: cornflowerblue;
 }
-
-/* 글 쓰기 (textarea) */
-#content {
-	resize: none;
+ */
+ 
+/* 문의글 수정하기 : 첨부파일 삭제 버튼 */
+#deleteFile {
+	margin-left: 150px;
+	padding: 2px 3px;
+    border: none;
+    background-color: #FFFFFF;
+    color: #343a40;
+    outline: none;
+    font: 14px;
 }

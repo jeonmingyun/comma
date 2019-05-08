@@ -73,7 +73,6 @@
     border: 1px solid #BDBDBD;
     background-color: #FFFFFF;
     color: #000000;
-    outline: none;
     font: 20px;
 }
 
@@ -84,6 +83,7 @@
 
 /* select선택 창 */
 #searchForm select {
+	font-size: 14px;
 	vertical-align: middle;
 	height: 32px;
 }
@@ -101,17 +101,13 @@
     border: 1px solid #BDBDBD;
     background-color: #FFFFFF;
     color: #000000;
-    outline: none;
     font: 20px;
 }
 
 /* 검색 버튼 클릭했을 때 */
-/* .btn-default:hover {
+.btn-default:hover {
 	cursor: pointer;
-	background-color: cornflowerblue;
-} */
-
-
+}
 
 /* pagination 정렬 */
 .pull-right {
