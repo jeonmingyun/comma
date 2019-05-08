@@ -69,15 +69,19 @@ public class LoginActivity extends AppCompatActivity {
     private void requestMe() {
         List<String> keys = new ArrayList<>();
         keys.add("properties.nickname");
-        keys.add("properties.profile_image");
-        keys.add("kakao_account.email");
+        keys.add("kakao_account.birthday");
+        keys.add("kakao_account.gender");
 
         UserManagement.getInstance().me(keys, new MeV2ResponseCallback() {
             // 사용자 정보 요청이 성공한 경우로 사용자 정보 객체를 받습니다.
             @Override
             public void onSuccess(MeV2Response response) {
-                Logger.d("user id : " + response.getId());
-//                Logger.d("email: " + response.getKakaoAccount().getEmail());
+                Log.e("success", "아히아허이하");
+                Log.d("user id : ", response.getId()+"");
+                Log.d("user getNickname : ", response.getNickname()+"");
+                Log.d("user getBirthday : ", response.getKakaoAccount().+"");
+                Log.d("user getGender : ", response.getKakaoAccount().getGender()+"");
+
                 redirectMainActivity();
             }
 

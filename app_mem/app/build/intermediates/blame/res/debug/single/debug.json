@@ -1132,10 +1132,6 @@
         "source": "C:\\Users\\bon300-11\\.gradle\\caches\\transforms-2\\files-2.1\\7bcea0a52a525df6c505aa35aa7d6c64\\res\\drawable-mdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
-        "merged": "C:\\Users\\bon300-11\\Desktop\\comma\\app_mem\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_test.xml.flat",
-        "source": "C:\\Users\\bon300-11\\Desktop\\comma\\app_mem\\app\\src\\main\\res\\layout\\activity_test.xml"
-    },
-    {
         "merged": "C:\\Users\\bon300-11\\Desktop\\comma\\app_mem\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_switch_track_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\bon300-11\\.gradle\\caches\\transforms-2\\files-2.1\\7bcea0a52a525df6c505aa35aa7d6c64\\res\\drawable-mdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
     },

@@ -10,7 +10,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -162,30 +165,6 @@ public class UploadController {
 		System.out.println(list);
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
-
-	// 업로드할때 썸네일표시
-	@GetMapping("/display")
-	@ResponseBody
-	public ResponseEntity<byte[]> getFile(String fileName) {
-		System.out.println("fileName: " + fileName);
-
-		File file = new File("C:\\Users\\bon300-14\\Desktop\\4Github\\comma\\TicketZone\\src\\main\\webapp\\resources\\img\\" + fileName);
-		System.out.println("file: " + file);
-		System.out.println("도착");
-		ResponseEntity<byte[]> result = null;
-
-		try {
-			HttpHeaders header = new HttpHeaders();
-			header.add("Content-Type", Files.probeContentType(file.toPath()));
-			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
-		} catch (IOException e) {
-			
-			e.printStackTrace();
-		}
-		System.out.println(result + "결과");
-		return result;
-	}
-	
 
 	// 다운로드
 	@GetMapping(value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)

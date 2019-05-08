@@ -10,16 +10,12 @@ $(document).ready(function() {
 	   });   
 	
 	$(".license").each(function(i,e){
-		uuid = $(".uuid"+i+"").val();
-		console.log(uuid);
-		filename = $(".filename"+i+"").val();
-		console.log(filename);
-		uploadpath = $(".uploadpath"+i+"").val();
-		console.log(uploadpath);
-		//변수분리
-		var filePath = encodeURIComponent(uploadpath+"/" + uuid +"_"+filename);
-		var a = $("img[name=s_img"+i+"]").attr("src", "/display?fileName="+filePath);
+		var uuid = $(".uuid"+i+"").val();
+		var filename = $(".filename"+i+"").val();
+		var uploadpath = $(".uploadpath"+i+"").val();
+		var result = uploadpath+"/" + uuid +"_"+filename;
 		
+		$("img[name=s_img"+i+"]").attr("src", "/resources/img/"+result);
 	});
 			
 	
