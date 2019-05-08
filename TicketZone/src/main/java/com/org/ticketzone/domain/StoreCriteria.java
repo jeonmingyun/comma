@@ -16,7 +16,7 @@ public class StoreCriteria {
 	private String type;
 	
 	public StoreCriteria() {
-		this(1, 8);
+		this(1, 4);
 	}
 	
 	public StoreCriteria(int pageNum, int amount) {

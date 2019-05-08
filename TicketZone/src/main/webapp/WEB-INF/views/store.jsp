@@ -104,9 +104,9 @@
 	<!-- end Pagination -->
 	</div>
 	<!-- main -->
-	<img alt="" src="/resource/img/2019/04/15/cde4247d-ab1c-4b9b-9426-214dcf0c7659_맘스터치.jpg">
+
 	<%@include file="include/footer.jsp"%>
-	
+
 </body>
 </html>
 
