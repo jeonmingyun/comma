@@ -1,4 +1,4 @@
-#Tue May 07 10:07:50 KST 2019
-base.0=C\:\\Users\\bon300-11\\Desktop\\comma\\app_mem\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\5
+#Wed May 08 11:10:13 KST 2019
+base.0=C\:\\Users\\bon300-14\\Desktop\\4Github\\comma\\app_mem\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\5
 path.0=classes.dex
 renamed.0=classes.dex

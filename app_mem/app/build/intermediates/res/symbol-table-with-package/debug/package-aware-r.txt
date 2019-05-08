@@ -707,7 +707,6 @@ id barrier
 id beginning
 id blocking
 id bottom
-id btn_test
 id buttonPanel
 id center
 id center_horizontal
@@ -729,7 +728,6 @@ id del_data
 id dimensions
 id direct
 id disableHome
-id ed_test
 id edit_query
 id end
 id expand_activities_button
@@ -879,7 +877,6 @@ layout activity_db
 layout activity_kakao_webview
 layout activity_login
 layout activity_main
-layout activity_test
 layout kakao_login_layout
 layout layout_login_dialog
 layout layout_login_item

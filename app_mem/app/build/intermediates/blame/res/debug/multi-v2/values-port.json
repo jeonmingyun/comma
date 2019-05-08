@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\bon300-11\\Desktop\\comma\\app_mem\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
+            "outputFile": "C:\\Users\\bon300-14\\Desktop\\4Github\\comma\\app_mem\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\bon300-11\\.gradle\\caches\\transforms-2\\files-2.1\\7bcea0a52a525df6c505aa35aa7d6c64\\res\\values-port\\values-port.xml",
+                    "source": "C:\\Users\\bon300-14\\.gradle\\caches\\transforms-2\\files-2.1\\3cfede86e3aca19fa917c5c5ffcf0373\\res\\values-port\\values-port.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

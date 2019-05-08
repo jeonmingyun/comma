@@ -30,7 +30,7 @@ $(document).ready(function(){
 						인원수 : data[i].the_number
 				};
 			}
-
+			
 			str += "<button id='prev'><</button>&nbsp&nbsp";
 			str += today;
 			str += "&nbsp&nbsp<button id='next'>></button>";
