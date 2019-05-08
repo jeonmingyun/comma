@@ -69,8 +69,9 @@ public class LoginActivity extends AppCompatActivity {
     private void requestMe() {
         List<String> keys = new ArrayList<>();
         keys.add("properties.nickname");
-        keys.add("kakao_account.birthday");
-        keys.add("kakao_account.gender");
+        keys.add("properties.birthday");
+//        keys.add("kakao_account.birthday");
+        keys.add("kakao_account.age_range");
 
         UserManagement.getInstance().me(keys, new MeV2ResponseCallback() {
             // 사용자 정보 요청이 성공한 경우로 사용자 정보 객체를 받습니다.
@@ -79,8 +80,9 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e("success", "아히아허이하");
                 Log.d("user id : ", response.getId()+"");
                 Log.d("user getNickname : ", response.getNickname()+"");
-                Log.d("user getBirthday : ", response.getKakaoAccount().+"");
+                Log.d("user getBirthday : ", response.getKakaoAccount().getBirthday()+"");
                 Log.d("user getGender : ", response.getKakaoAccount().getGender()+"");
+                Log.d("user age_range : ", response.getKakaoAccount().getAgeRange()+"");
 
                 redirectMainActivity();
             }

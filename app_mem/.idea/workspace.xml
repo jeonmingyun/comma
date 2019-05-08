@@ -49,13 +49,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/org/ticketzone/app_mem/activity/DBActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1386">
+            <state relative-caret-position="305">
               <caret line="77" column="11" selection-start-line="77" selection-start-column="11" selection-end-line="77" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1995#2751#0" expanded="true" />
+                <element signature="e#2750#2751#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -102,11 +104,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/org/ticketzone/app_mem/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
-              <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
+            <state relative-caret-position="113">
+              <caret line="72" column="42" lean-forward="true" selection-start-line="72" selection-start-column="42" selection-end-line="72" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3273#3274#0" expanded="true" />
@@ -144,6 +146,11 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>birthday</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -179,8 +186,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="953" />
-    <option name="width" value="974" />
+    <option name="x" value="812" />
+    <option name="width" value="1115" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -389,6 +396,15 @@
           <expand>
             <path>
               <item name="app_mem" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="app_mem" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
+            </path>
+            <path>
+              <item name="app_mem" type="1abcf292:AndroidViewProjectNode" />
               <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
             </path>
           </expand>
@@ -516,11 +532,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="953" y="0" width="974" height="1047" extended-state="0" />
+    <frame x="812" y="0" width="1115" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.20021881" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.17345971" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -530,7 +546,7 @@
       <window_info id="Capture Tool" order="8" />
       <window_info anchor="bottom" id="Run" order="0" sideWeight="0.1411638" weight="0.415115" />
       <window_info anchor="bottom" id="Build" order="1" sideWeight="0.49030173" weight="0.20372398" />
-      <window_info active="true" anchor="bottom" id="Logcat" order="2" sideWeight="0.70678335" visible="true" weight="0.45235488" />
+      <window_info anchor="bottom" id="Logcat" order="2" sideWeight="0.70678335" visible="true" weight="0.38773274" />
       <window_info anchor="bottom" id="TODO" order="3" />
       <window_info anchor="bottom" id="Debug" order="4" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.29321662" side_tool="true" weight="0.56516975" />
@@ -720,14 +736,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="704">
-          <caret line="32" column="66" selection-start-line="32" selection-start-column="66" selection-end-line="32" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_db.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -735,16 +743,6 @@
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/org/ticketzone/app_mem/activity/DBActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1386">
-          <caret line="77" column="11" selection-start-line="77" selection-start-column="11" selection-end-line="77" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/org/ticketzone/app_mem/db/DBOpenHelper.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -793,26 +791,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.kakao.sdk/usermgmt/1.17.0/2668d210a898231ac4b4b141d36e46cb3ceeec89/usermgmt-1.17.0-sources.jar!/com/kakao/usermgmt/response/model/UserAccount.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="291" column="18" selection-start-line="291" selection-start-column="18" selection-end-line="291" selection-end-column="18" />
-          <folding>
-            <element signature="e#9994#9995#0" expanded="true" />
-            <element signature="e#10025#10026#0" expanded="true" />
-            <element signature="e#11400#11401#0" expanded="true" />
-            <element signature="e#11429#11430#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.kakao.sdk/usermgmt/1.17.0/2668d210a898231ac4b4b141d36e46cb3ceeec89/usermgmt-1.17.0-sources.jar!/com/kakao/usermgmt/StringSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="29" column="31" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.kakao.sdk/usermgmt/1.17.0/2668d210a898231ac4b4b141d36e46cb3ceeec89/usermgmt-1.17.0-sources.jar!/com/kakao/usermgmt/response/MeV2Response.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="229">
@@ -824,14 +802,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.kakao.sdk/usermgmt/1.17.0/2668d210a898231ac4b4b141d36e46cb3ceeec89/usermgmt-1.17.0-sources.jar!/com/kakao/usermgmt/StringSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-704">
+          <caret line="67" column="67" selection-start-line="67" selection-start-column="59" selection-end-line="67" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.kakao.sdk/usermgmt/1.17.0/2668d210a898231ac4b4b141d36e46cb3ceeec89/usermgmt-1.17.0-sources.jar!/com/kakao/usermgmt/response/model/UserAccount.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="107">
+          <caret line="230" column="36" selection-start-line="230" selection-start-column="28" selection-end-line="230" selection-end-column="36" />
+          <folding>
+            <element signature="e#9994#9995#0" expanded="true" />
+            <element signature="e#10025#10026#0" expanded="true" />
+            <element signature="e#11400#11401#0" expanded="true" />
+            <element signature="e#11429#11430#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/org/ticketzone/app_mem/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
+        <state relative-caret-position="113">
+          <caret line="72" column="42" lean-forward="true" selection-start-line="72" selection-start-column="42" selection-end-line="72" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3273#3274#0" expanded="true" />
             <element signature="e#3328#3329#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="19" column="28" lean-forward="true" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/org/ticketzone/app_mem/activity/DBActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="77" column="11" selection-start-line="77" selection-start-column="11" selection-end-line="77" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1995#2751#0" expanded="true" />
+            <element signature="e#2750#2751#0" expanded="true" />
           </folding>
         </state>
       </provider>
