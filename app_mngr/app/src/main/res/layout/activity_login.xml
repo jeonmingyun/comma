@@ -16,13 +16,14 @@
         android:id="@+id/owner_id"
         android:layout_width="292dp"
         android:layout_height="wrap_content"
-        android:hint="연락처" />
+        android:hint="아이디" />
 
     <EditText
         android:id="@+id/owner_password"
         android:layout_width="292dp"
         android:layout_height="wrap_content"
-        android:hint="인원수" />
+        android:inputType="textPassword"
+        android:hint="비밀번호" />
 
     <LinearLayout
         android:layout_width="wrap_content"

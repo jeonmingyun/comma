@@ -1,10 +1,15 @@
 package ticketzone.org.com.app_mngr;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +24,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -30,6 +37,18 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo("ticketzone.org.com.app_mngr", PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
 
         et_owner_id = (EditText) findViewById(R.id.owner_id);
         et_owner_password = (EditText) findViewById(R.id.owner_password);
@@ -51,6 +70,8 @@ public class LoginActivity extends AppCompatActivity {
 
                         if( data.equals("1")) { // login success
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                            //owner_id값 송신
+//                            intent.putExtra("id",owner_id);
                             startActivity(intent);
                         } else if( data.equals("0")) { // pass wrong
                             Toast.makeText(LoginActivity.this, "비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show();
