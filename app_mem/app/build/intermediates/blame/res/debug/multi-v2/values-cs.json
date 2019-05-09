@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\bon300-48\\Desktop\\comma\\app_mem\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-cs\\values-cs.xml",
+            "outputFile": "C:\\Users\\bon300-11\\Desktop\\comma\\app_mem\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-cs\\values-cs.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\bon300-48\\.gradle\\caches\\transforms-2\\files-2.1\\5e33927097f14b631b1e25993fc78b64\\res\\values-cs\\values-cs.xml",
+                    "source": "C:\\Users\\bon300-11\\.gradle\\caches\\transforms-2\\files-2.1\\7bcea0a52a525df6c505aa35aa7d6c64\\res\\values-cs\\values-cs.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\bon300-48\\.gradle\\caches\\transforms-2\\files-2.1\\3d345faedb3475112947ad96d70a369b\\res\\values-cs\\values-cs.xml",
+                    "source": "C:\\Users\\bon300-11\\.gradle\\caches\\transforms-2\\files-2.1\\9df82c466cd9b21e48bd1377a82d060c\\res\\values-cs\\values-cs.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

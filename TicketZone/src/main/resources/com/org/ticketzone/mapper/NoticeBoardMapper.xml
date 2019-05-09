@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.org.ticketzone.mapper.NoticeBoardMapper">
+
+	<!-- 공지사항 -->	
+	<select id="noticeBoardList" resultType="com.org.ticketzone.domain.NoticeBoardVO">
+		select * from notice_board where cate_code ='N1' order by notice_reg desc
+	</select>
+	
+	<!-- 공지사항 수정페이지리턴 -->	
+	<select id="noticeBoardUpdInfo" resultType="com.org.ticketzone.domain.NoticeBoardVO">
+		select * from notice_board where notice_no = #{notice_no}
+	</select>
+	
+	<!-- 공지사항 삭제 -->
+	<delete id="noticeBoardDel">
+		delete from notice_board where notice_no = #{notice_no}
+	</delete>
+	
+	<!-- 공지사항 업데이트 (수정) -->
+	<update id="noticeBoardUpd">
+		update notice_board
+		set notice_title = #{notice_title},
+		notice_content = #{notice_content},
+		notice_status = #{notice_status}
+		where notice_no = #{notice_no}
+	</update>
+	
+	
+	
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="notice_no" order="BEFORE" resultType="int">
+			select notice_seq.nextval from dual
+		</selectKey>
+		
+		insert into notice_board(notice_no, notice_title, notice_content)
+		values(#{notice_no}, #{notice_title}, #{notice_content})		
+	</insert>
+	
+	<insert id="InsertStatus">
+			<selectKey keyProperty="notice_no" order="BEFORE" resultType="int">
+			select notice_seq.nextval from dual
+			</selectKey>
+			
+			insert into notice_board(notice_no, notice_title, notice_content, notice_status)
+			values(#{notice_no}, #{notice_title}, #{notice_content}, 1)
+	</insert>
+	<!-- 공지사항 검색 -->
+<!--  <select id="noticeSearch" resultType="com.org.ticketzone.domain.NoticeBoardVO">
+	<![CDATA[
+		select notice_no, notice_title, notice_content, notice_reg
+		from notice_board
+		where notice_title like '%'||#{keyword}||'%'
+		OR notice_content like '%'||#{keyword}||'%'
+		OR notice_no like '%'||#{keyword}||'%'
+	]]>	
+	</select> -->
+	<!-- 동적 SQL -->
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							notice_title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							notice_content like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	<!-- 게시판 페이징<검색> -->
+	<select id="getListWithPaging"
+		resultType="com.org.ticketzone.domain.NoticeBoardVO">
+		<![CDATA[
+			select notice_no, notice_title, notice_content, notice_reg
+			from
+			(select rownum rn, notice_no, notice_title, notice_content, notice_reg
+			from notice_board
+			where			
+		]]>
+			<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							notice_title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							notice_content like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+		<![CDATA[	
+			rownum <= #{pageNum} * #{amount}
+			)
+			where rn > (#{pageNum} -1) * #{amount}
+			order by notice_reg desc
+		]]>
+	</select>
+	
+	<select id="total" resultType="int">
+		select count(*) from notice_board where notice_no > 0
+	</select>
+	
+	
+
+	
+</mapper>

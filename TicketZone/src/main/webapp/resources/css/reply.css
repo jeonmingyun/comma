@@ -1,0 +1,112 @@
+* {
+	margin: 0;
+	padding: 0;
+	
+}
+
+/* 댓글쓰기 */
+#addReply {
+	background-color: #f8f9fa;
+	height: auto;
+	position: relative;
+	margin: 30px 0px;
+	padding: 0px 50px;
+}
+
+/* 댓글입력창 */
+#addReply textarea{
+	margin: 30px 0; 
+	border: none;
+	background-color: transparent;
+	border-bottom: 2px solid #BDBDBD;
+	vertical-align: middle;
+	width: 1000px;
+	outline:none;
+	resize: none;
+}
+
+/* 답글쓰기 - 댓글 등록 버튼 */
+.reply_btn button {
+	vertical-align: middle;
+	background-color: transparent;
+	border: none;
+	/* border: 1px solid #BDBDBD; */
+	padding: 12px 10px;	
+
+}
+
+.reply_btn button:hover {
+	cursor: pointer;
+	outline: none;
+}
+
+
+/* 댓글 시간 */
+#reply_head span{
+	/* float: right; */
+	margin-left: 10px;
+	color:#BDBDBD;
+    font-size: 12px;
+}
+
+#reply_icon {
+	float: right;
+	fill: #BDBDBD;
+}
+
+#reply_icon:hover {
+	cursor: pointer;
+}
+
+/* 댓글 내용 */
+#reply_content {
+	margin-top: 8px;
+	font-size: 16px;
+	white-space:pre-wrap;
+}
+
+/*------- 댓글 리스트 -------*/
+/* 댓글 리스트 */
+#replyList {
+	background-color: #f8f9fa;
+	margin: 30px 0px;
+	padding: 30px 50px;
+	position: relative;
+}
+
+/* 수정,삭제 버튼 */
+#reply_button {
+	display: none;
+	position: absolute;
+	width: 100px;
+	height: 82px;
+	background-color: #ffffff;
+	border: 1px solid #BDBDBD;
+	left: 1160px;
+	top: 25px;
+	
+}
+
+#reply_button li {
+	list-style: none;
+}
+
+/* 수정,삭제 아이콘 */
+#reply_button svg {
+	fill: #BDBDBD;
+}
+
+#reply_button button {
+	background-color: transparent;
+	border: none;
+	padding: 10px 10px;
+	padding-right: 40px;
+	font-size: 14px;
+}
+
+/* 버튼 클릭했을 때 */
+#reply_button li:hover,#reply_button button:hover{
+	cursor: pointer;
+	outline: none;
+	/* color: #EEB3A3; */
+}
