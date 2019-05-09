@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -96,6 +97,7 @@ public class HomeController {
 		String notice_no = request.getParameter("notice_no");
 		model.addAttribute("noticeUpd", noticeBoardService.noticeBoardUpdInfo(notice_no));
 		model.addAttribute("file", noticeAttachService.findByNotice_no(notice_no));
+		
 		return "home/updNotice";
 	}
 
