@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\bon300-11\\Desktop\\comma\\app_mem\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ko\\values-ko.xml",
+            "outputFile": "C:\\Users\\bon300-11\\Desktop\\app_mem\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ko\\values-ko.xml",
             "map": [
                 {
                     "source": "C:\\Users\\bon300-11\\.gradle\\caches\\transforms-2\\files-2.1\\98072094e16d1a5cd9eb858a0770d1d7\\res\\values-ko\\values-ko.xml",

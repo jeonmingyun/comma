@@ -18,9 +18,6 @@ import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +69,8 @@ public class LoginActivity extends AppCompatActivity {
     private void requestMe() {
         List<String> keys = new ArrayList<>();
         keys.add("properties.nickname");
-        keys.add("kakao_account.birthday");
+        keys.add("properties.birthday");
+//        keys.add("kakao_account.birthday");
         keys.add("kakao_account.age_range");
 
         UserManagement.getInstance().me(keys, new MeV2ResponseCallback() {
@@ -86,7 +84,6 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d("user getGender : ", response.getKakaoAccount().getGender()+"");
                 Log.d("user age_range : ", response.getKakaoAccount().getAgeRange()+"");
 
-                requestDataToServer();
                 redirectMainActivity();
             }
 
@@ -113,29 +110,9 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
     protected void redirectLoginActivity() {
-        final Intent intent = new Intent(this, LoginActivity.class);
+        final Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
-    }
-
-    protected void requestDataToServer() {
-        JsonArrayTask jat = new JsonArrayTask("mem_db_login") {
-            @Override
-            protected void onPostExecute(JSONArray jsonArray) {
-                super.onPostExecute(jsonArray);
-
-                try {
-                    Log.e("index 0 ", jsonArray.get(0).toString());
-                    Log.e("index 1 ", jsonArray.get(1).toString());
-                }catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        SendDataSet sds = new SendDataSet("member_tel", "010-7373-4812");
-        jat.execute(sds);
-
     }
 
     //디버그 키해시 구하기
