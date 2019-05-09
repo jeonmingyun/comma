@@ -1,0 +1,59 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+
+#secret_form {
+	margin: 100px auto;
+	width: 1000px;
+	text-align: center;
+}
+
+/* 비밀글 */
+#secret_form h1 {
+    text-align: center;
+	margin: 50px auto;
+	font-size: 14px;
+	font-weight: normal;
+    text-align: center;
+    padding: 13px 0;
+    border-top: 1px solid #343a40;
+    border-bottom: 1px solid #343a40;
+    width: 250px; height: 100%;
+}
+.info {
+	margin : 50px 0 40px;
+	font-size: 16px;
+	color: #888888;
+}
+
+.txt {
+	color: #343a40;
+}
+
+/* 비밀번호 */
+.passwd label{
+	margin-right: 40px;
+}
+
+/* 비밀번호 아이콘 */
+.passwd svg {
+	vertical-align: middle;
+}
+
+/* 확인,취소 버튼 */
+/* 굳이 이렇게 해야하나 */
+#pass_btn input[type="submit"],[type="button"]{
+    margin-top: 30px;
+    padding: 5px 15px;
+    border: 1px solid #BDBDBD;
+    background-color: #FFFFFF;
+    color: #000000;
+    outline: none;
+    font: 20px;
+}
+
+#pass_btn input[type="submit"],[type="button"]:hover {
+	cursor: pointer;
+}

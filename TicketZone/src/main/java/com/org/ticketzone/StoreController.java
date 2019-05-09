@@ -24,14 +24,14 @@ import lombok.AllArgsConstructor;
 @Controller
 public class StoreController {
 	private StoreService storeService;
-	private StoreAttachService storeAttachService;
+	
 	// 제휴매장
 	@RequestMapping(value = "/store", method = RequestMethod.GET)
 	public String sotre(Model model, StoreCriteria Cri, StoreVO store) {
 		
 		
 //		model.addAttribute("list", storeService.storeList(Cri));
-		if(store.getSido() == null || store.getSido().equals("")) {
+		if(store.getSido() == null || store.getSido().equals("") || store.getSido().equals("선택")) {
 		int total = storeService.total(Cri);
 		model.addAttribute("list", storeService.getListWithPaging(Cri));
 		model.addAttribute("pageMaker", new StorePageDTO(Cri, total));

@@ -15,9 +15,9 @@
 <body>
 
    <!-- Footer -->
-  <footer class="py-5 bg-dark">
+  <footer class="py-5 bg-gray">
     <div class="container">
-      <p class="m-0 text-center text-white">4조 쉼표(,) © 2019 All rights reserved</p>
+      <p class="m-0 text-center text-dark">4조 쉼표(,) © 2019 All rights reserved</p>
     </div>
     <!-- /.container -->
   </footer>
