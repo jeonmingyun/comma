@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\bon300-11\\Desktop\\app_mem\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "C:\\Users\\bon300-11\\Desktop\\comma\\app_mem\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
                     "source": "C:\\Users\\bon300-11\\.gradle\\caches\\transforms-2\\files-2.1\\73a8b969e21a1df8ba567ea6231326ee\\res\\values\\values.xml",
@@ -42,6 +42,23 @@
                     }
                 },
                 {
+                    "source": "C:\\Users\\bon300-11\\Desktop\\comma\\app_mem\\app\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "1,2",
+                        "startColumns": "4,4",
+                        "startOffsets": "16,57",
+                        "endColumns": "40,74",
+                        "endOffsets": "52,127"
+                    },
+                    "to": {
+                        "startLines": "392,419",
+                        "startColumns": "4,4",
+                        "startOffsets": "23381,25386",
+                        "endColumns": "40,74",
+                        "endOffsets": "23417,25456"
+                    }
+                },
+                {
                     "source": "C:\\Users\\bon300-11\\.gradle\\caches\\transforms-2\\files-2.1\\41028b8d195623345f197990d8adc1f6\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8",
@@ -78,24 +95,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\bon300-11\\Desktop\\app_mem\\app\\src\\main\\res\\values\\strings.xml",
+                    "source": "C:\\Users\\bon300-11\\Desktop\\comma\\app_mem\\app\\src\\main\\res\\values\\colors.xml",
                     "from": {
-                        "startLines": "1,2",
-                        "startColumns": "4,4",
-                        "startOffsets": "16,57",
-                        "endColumns": "40,74",
-                        "endOffsets": "52,127"
+                        "startLines": "4,2,3",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "153,55,102",
+                        "endColumns": "45,46,50",
+                        "endOffsets": "194,97,148"
                     },
                     "to": {
-                        "startLines": "392,419",
-                        "startColumns": "4,4",
-                        "startOffsets": "23381,25386",
-                        "endColumns": "40,74",
-                        "endOffsets": "23417,25456"
+                        "startLines": "160,161,162",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "8056,8102,8149",
+                        "endColumns": "45,46,50",
+                        "endOffsets": "8097,8144,8195"
                     }
                 },
                 {
-                    "source": "C:\\Users\\bon300-11\\Desktop\\app_mem\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "C:\\Users\\bon300-11\\Desktop\\comma\\app_mem\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "3",
                         "startColumns": "4",
@@ -111,23 +128,6 @@
                         "endLines": "436",
                         "endColumns": "12",
                         "endOffsets": "26625"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\bon300-11\\Desktop\\app_mem\\app\\src\\main\\res\\values\\colors.xml",
-                    "from": {
-                        "startLines": "4,2,3",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "153,55,102",
-                        "endColumns": "45,46,50",
-                        "endOffsets": "194,97,148"
-                    },
-                    "to": {
-                        "startLines": "160,161,162",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "8056,8102,8149",
-                        "endColumns": "45,46,50",
-                        "endOffsets": "8097,8144,8195"
                     }
                 },
                 {

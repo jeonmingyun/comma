@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
@@ -69,8 +70,8 @@ public class LoginActivity extends AppCompatActivity {
     private void requestMe() {
         List<String> keys = new ArrayList<>();
         keys.add("properties.nickname");
-        keys.add("properties.birthday");
-//        keys.add("kakao_account.birthday");
+        keys.add("kakao_account.birthday");
+        keys.add("kakao_account.gender");
         keys.add("kakao_account.age_range");
 
         UserManagement.getInstance().me(keys, new MeV2ResponseCallback() {
