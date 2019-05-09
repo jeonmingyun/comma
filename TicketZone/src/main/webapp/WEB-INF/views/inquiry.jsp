@@ -53,7 +53,7 @@
                      <td>${sl.board_title}<c:if
                            test="${!empty sl.board_password}">
                            <img src="resources/icon/baseline-lock-24px.svg" alt="locked"
-                              height="15" width="15" />
+                              height="15" width="15"  style='fill="#ededed"'/>
                         </c:if>
                      <td>${sl.member_tel}
                      <td><fmt:formatDate value="${sl.board_reg}" pattern="yyyy.MM.dd"/>
