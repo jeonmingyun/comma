@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\bon300-11\\Desktop\\comma\\app_mem\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+            "outputFile": "C:\\Users\\bon300-48\\Desktop\\comma\\app_mem\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\bon300-11\\.gradle\\caches\\transforms-2\\files-2.1\\7bcea0a52a525df6c505aa35aa7d6c64\\res\\values-v24\\values-v24.xml",
+                    "source": "C:\\Users\\bon300-48\\.gradle\\caches\\transforms-2\\files-2.1\\5e33927097f14b631b1e25993fc78b64\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
