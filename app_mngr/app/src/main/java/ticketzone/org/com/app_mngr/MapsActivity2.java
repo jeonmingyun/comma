@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -190,22 +191,22 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
         });
 
         // 맵 터치 이벤트 구현//
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng point) {
-                MarkerOptions mOptions = new MarkerOptions();
-                //마커 타이틀
-                mOptions.title("마커 좌표");
-                Double latitude = point.latitude; //위도
-                Double longitude = point.longitude; //경도
-                //마커의 스니펫(간단한 텍스트) 설정
-                mOptions.snippet(latitude.toString() + ", " + longitude.toString());
-                // LatLng: 위도 경도 쌍을 나타냄
-                mOptions.position(new LatLng(latitude, longitude));
-                //마커(핀) 추가
-                googleMap.addMarker(mOptions);
-            }
-        });
+//        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+//            @Override
+//            public void onMapClick(LatLng point) {
+//                MarkerOptions mOptions = new MarkerOptions();
+//                //마커 타이틀
+//                mOptions.title("마커 좌표");
+//                Double latitude = point.latitude; //위도
+//                Double longitude = point.longitude; //경도
+//                //마커의 스니펫(간단한 텍스트) 설정
+//                mOptions.snippet(latitude.toString() + ", " + longitude.toString());
+//                // LatLng: 위도 경도 쌍을 나타냄
+//                mOptions.position(new LatLng(latitude, longitude));
+//                //마커(핀) 추가
+//                googleMap.addMarker(mOptions);
+//            }
+//        });
 
         //버튼 이벤트
         addressButton.setOnClickListener(new Button.OnClickListener(){
@@ -213,6 +214,10 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
             @Override
             public void onClick(View v) {
                 String str=editText.getText().toString();
+                if(str.equals("")){
+                    Toast.makeText(MapsActivity2.this, "검색어를 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                    editText.setText("");
+                }
                 List<Address> addressList = null;
                 try{
                     //editText에 입력한 텍스트(주소, 지역, 장소 등)을 지오 코딩을 이용해 변환
@@ -224,6 +229,7 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
                 }
 
                 System.out.println(addressList.get(0).toString());
+
                 //콤마를 기준으로 split
                 String []splitStr = addressList.get(0).toString().split(",");
                 String address = splitStr[0].substring(splitStr[0].indexOf("\"") + 1,splitStr[0].length() - 2); //주소
@@ -267,7 +273,7 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
         //디폴트 위치, Seoul
         LatLng DEFAULT_LOCATION = new LatLng(37.56, 126.97);
         String markerTitle = "위치정보 가져올 수 없음";
-        String markerSnippet = "위치 퍼미션과 GPS 활성 요부 확인하세요";
+        String markerSnippet = "위치 퍼미션과 GPS 활성 여부 확인하세요";
 
         if(currentMarker != null) currentMarker.remove();
 
@@ -553,4 +559,5 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
                 break;
         }
     }
+
 }

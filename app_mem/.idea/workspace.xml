@@ -114,13 +114,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/org/ticketzone/app_mem/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="98" selection-start-line="98" selection-end-line="98" />
+            <state relative-caret-position="454">
+              <caret line="106" selection-start-line="106" selection-end-line="106" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1759#1760#0" expanded="true" />
                 <element signature="e#1794#1795#0" expanded="true" />
-                <element signature="e#3327#3328#0" expanded="true" />
+                <element signature="e#4085#4086#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -194,7 +194,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="953" />
+    <option name="x" value="-7" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
   </component>
@@ -448,8 +448,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="device.picker.selection" value="Nexus_5X_API_28" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../comma/app_mem" />
+    <property name="device.picker.selection" value="ce04171422a6a8530d" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../app_mngr" />
     <property name="settings.editor.selected.configurable" value="gradle.compiler" />
   </component>
   <component name="RecentsManager">
@@ -553,8 +553,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="953" y="0" width="974" height="1047" extended-state="0" />
-    <editor active="true" />
+    <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.20021881" />
@@ -566,11 +565,11 @@
       <window_info id="Resources Explorer" order="7" />
       <window_info id="Capture Tool" order="8" />
       <window_info anchor="bottom" id="Run" order="0" sideWeight="0.1411638" weight="0.415115" />
-      <window_info anchor="bottom" id="Build" order="1" sideWeight="0.6247265" weight="0.202995" />
-      <window_info active="true" anchor="bottom" id="Logcat" order="2" sideWeight="0.70568925" visible="true" weight="0.37568456" />
+      <window_info active="true" anchor="bottom" id="Build" order="1" sideWeight="0.6247265" visible="true" weight="0.2026287" />
+      <window_info anchor="bottom" id="Logcat" order="2" sideWeight="0.70568925" weight="0.38663745" />
       <window_info anchor="bottom" id="TODO" order="3" />
       <window_info anchor="bottom" id="Debug" order="4" />
-      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.29431072" side_tool="true" visible="true" weight="0.37568456" />
+      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.29431072" side_tool="true" weight="0.37568456" />
       <window_info anchor="bottom" id="Terminal" order="6" weight="0.32968238" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Android Profiler" order="8" weight="0.32968238" />
@@ -863,13 +862,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/org/ticketzone/app_mem/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="98" selection-start-line="98" selection-end-line="98" />
+        <state relative-caret-position="454">
+          <caret line="106" selection-start-line="106" selection-end-line="106" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1759#1760#0" expanded="true" />
             <element signature="e#1794#1795#0" expanded="true" />
-            <element signature="e#3327#3328#0" expanded="true" />
+            <element signature="e#4085#4086#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -19,6 +19,9 @@ import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +87,24 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d("user getBirthday : ", response.getKakaoAccount().getBirthday()+"");
                 Log.d("user getGender : ", response.getKakaoAccount().getGender()+"");
                 Log.d("user age_range : ", response.getKakaoAccount().getAgeRange()+"");
+
+                JsonArrayTask jat = new JsonArrayTask("mem_db_login"){
+                    @Override
+                    protected void onPostExecute(JSONArray jsonArray) {
+                        super.onPostExecute(jsonArray);
+
+                        try {
+                            Log.e("index 0 ", jsonArray.get(0).toString());
+                            Log.e("index 1 ", jsonArray.get(0).toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+
+                SendDataSet sds = new SendDataSet("member_tel", "010-1234-5678");
+                jat.execute(sds);
+
 
                 redirectMainActivity();
             }
