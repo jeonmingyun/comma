@@ -18,6 +18,7 @@ import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
+import com.org.ticketzone.app_mem.db.DBOpenHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,11 +29,13 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
     private SessionCallback callback;
+    private DBOpenHelper mDBHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        mDBHelper = new DBOpenHelper(this);
 
         callback = new SessionCallback();
         Session.getCurrentSession().addCallback(callback);

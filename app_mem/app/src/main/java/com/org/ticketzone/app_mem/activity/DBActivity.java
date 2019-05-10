@@ -21,9 +21,6 @@ public class DBActivity  extends AppCompatActivity {
     private static final String TAG = "DBActivity";
     private DBOpenHelper mDBHelper;
     private Cursor cursor;
-//    private InfoClass mInfoClass;
-//    private ArrayList<infoclass> mInfoArray;
-//    private CustomAdapter mAdapter;
     private EditText et_tel, et_name, et_birth;
     private Button add_data, view_list, upd_data, del_data;
     private String tel, name, birth;
@@ -86,7 +83,7 @@ public class DBActivity  extends AppCompatActivity {
                 name = et_name.getText().toString();
                 birth = et_birth.getText().toString();
 
-                boolean result = mDBHelper.insertMember(tel, name, birth);
+                boolean result = mDBHelper.insertMember(tel, name, birth, null,null);
 
                 if(result)
                     Toast.makeText(DBActivity.this, "success", Toast.LENGTH_SHORT).show();
@@ -104,7 +101,7 @@ public class DBActivity  extends AppCompatActivity {
                 name = et_name.getText().toString();
                 birth = et_birth.getText().toString();
 
-                boolean result = mDBHelper.updateMember(tel,name,birth);
+                boolean result = mDBHelper.updateMember(tel,name,birth, null,null);
 
                 if(result)
                     Toast.makeText(DBActivity.this, "success", Toast.LENGTH_SHORT).show();
