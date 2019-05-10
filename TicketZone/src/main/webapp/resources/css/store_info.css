@@ -1,33 +1,48 @@
-#divider_sh .line {
+.divider_sh .line {
 	margin: 30px auto 20px;
 	width: 1200px;
 	border: 1px solid #343a40;
 }
 
-#store_info {
-	margin-top: 1%;
-	width: 40%;
-	margin-left: 10%;
-	margin-right: 0px;
-	float: left;
+.store_row {
+	width: 1200px;
+	height: 100%;
+	margin: 50px auto;
+	/* border: 1px solid #dddddd; */
 }
 
-
-#store_info img {
-	width: 70%;
-	height: 60%;
+.left .right {
+	width: 600px;
+    height: 300PX;
+    vertical-align: top;
+   /*  margin-bottom: 10px; */
 }
 
+/* 매장사진 */
+.left {
+	/* float: left; */
+	display:inline-block; 
+	border: 1px solid;
+}
+
+/* 매장사진 크기 */
+.left img {
+	width: 500px;
+	height: 300px;
+}
+
+/* 매장설명 */
+.right {
+	/* float: right; */
+	width: 600px;
+	display:inline-block; 
+	border: 1px solid;
+}
+
+/* 매장 지도 */
 #map {
-	width: 40%;
+	width: 1200px;
 	height: 400px;
-	float: left;
 	margin-top: 1%;
 	margin-right: 10%;
-}
-
-#cont {
-	width: 150px;
-	text-align: center;
-	padding: 6px 0;
 }
