@@ -1,11 +1,11 @@
 package com.org.ticketzone.app_mem;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.content.Intent;
+import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 
@@ -110,8 +110,6 @@ public class LoginActivity extends AppCompatActivity {
                 jat.execute(sds);
 
                 redirectMainActivity();
-
-
             }
 
             @Override
@@ -138,7 +136,7 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
     protected void redirectLoginActivity() {
-        final Intent intent = new Intent(this, MainActivity.class);
+        final Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
