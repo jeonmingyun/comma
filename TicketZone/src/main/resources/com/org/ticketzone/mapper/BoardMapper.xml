@@ -72,9 +72,9 @@
 	<select id="getListWithPaging"
 		resultType="com.org.ticketzone.domain.BoardVO">
 		<![CDATA[
-			select a.board_no, a.board_title, a.board_content, a.board_reg, b.cate_name
+			select a.board_no, a.board_title, a.board_content, a.board_reg, a.board_password, b.cate_name
 			from
-			(select rownum rn, board_no, board_title, board_content, board_reg, cate_code
+			(select rownum rn, board_no, board_title, board_content, board_reg, board_password, cate_code
 			from board
 			where			
 		]]>

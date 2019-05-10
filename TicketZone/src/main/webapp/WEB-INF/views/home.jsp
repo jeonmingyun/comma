@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
-<%@ page session="false" contentType="text/html; charset=utf-8"
+<%@ page session="true" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 
 <!DOCTYPE html>
@@ -167,10 +167,12 @@
 				</tr>
 			</c:forEach>			
 		</table>
+		<c:if test="${!empty sessionScope.admin}">
 		<div id="writebutton">
 		<!-- play store button div-->
 		<button id="noticeWrite" onclick="noticeWrite()">글쓰기</button>
 		</div>
+		</c:if>	
 		</div>
 	</div>
 	
@@ -197,7 +199,9 @@
 		<input type="hidden" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"/>'>
 	</form>
 	<!-- end Pagination -->
-	
+
+
+
 	<footer>
 		<%@include file="include/footer.jsp"%>
 	</footer>
