@@ -3,7 +3,8 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.org.ticketzone.mapper.AppMemMapper">
-
+	
+	
 	<select id="ownerList" resultType="com.org.ticketzone.domain.OwnerVO">
 		select * from owner
 	</select>
@@ -12,12 +13,17 @@
 		select * from store
 	</select>
 	
+	<!-- 전체 메뉴가져오기 -->
 	<select id="menuList" resultType="com.org.ticketzone.domain.StoreMenuVO">
 		select * from store_menu
 	</select>
 	
+	
+	
 	<select id="categorieList" resultType="com.org.ticketzone.domain.CategorieVO">
-		select * from categorie
+		<![CDATA[
+		select * from categorie where cate_code like 'F' || '%'
+		]]>	 
 	</select>
 	
 	<select id="coordinatesList" resultType="com.org.ticketzone.domain.CoordinatesVO">
