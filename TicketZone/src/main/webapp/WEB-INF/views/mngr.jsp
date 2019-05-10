@@ -19,7 +19,8 @@
 	<%@include file="include/header.jsp"%>
 	<section>
 		<div class="login_form">
-			<h1>관리자 로그인</h1>
+			<h2>관리자 로그인</h2>
+			<div class="divider_1"><div class="line"></div></div>
 			
 				<div id="loginfail"></div>
 				<!-- <p>관리자 아이디</p> -->
@@ -39,7 +40,7 @@
 
 		</div>
 	</section>
-	<%@include file="include/footer.jsp"%>
+	<%-- <%@include file="include/footer.jsp"%> --%>
 
 </body>
 </html>

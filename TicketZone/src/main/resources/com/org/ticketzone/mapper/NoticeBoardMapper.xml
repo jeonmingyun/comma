@@ -101,6 +101,7 @@
 		</trim>
 		<![CDATA[	
 			rownum <= #{pageNum} * #{amount}
+			order by notice_no
 			)
 			where rn > (#{pageNum} -1) * #{amount}
 			order by notice_reg desc

@@ -23,6 +23,7 @@
 /* 전체 div */
 #suggest_form {
 	text-align: center;
+	height: 834px;
 }
 
 #inquiry_table {
@@ -56,6 +57,10 @@
 	padding: 15px 10px;
 }
 
+#suggest svg {
+	fill : #888888;
+}
+.
 /* 게시글 제목 클릭했을 때 */
 #suggest tr:hover td {
 	cursor: pointer;

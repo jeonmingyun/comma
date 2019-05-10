@@ -42,6 +42,7 @@
                <tr>
                   <th style="width:5%;">번호</th>
                   <th style="width:20%;">문의유형</th>
+                  <th style="width:5%;"> </th>
                   <th style="width:30%;">제목</th>
                   <th style="width:10%;">작성자</th>
                   <th style="width:20%;">작성일</th>
@@ -50,11 +51,11 @@
                   <tr onclick="showInquiry(${sl.board_no})">
                      <td>${sl.board_no}
                      <td>${sl.cate_name}
-                     <td>${sl.board_title}<c:if
+                     <td class="icon"><c:if
                            test="${!empty sl.board_password}">
-                           <img src="resources/icon/baseline-lock-24px.svg" alt="locked"
-                              height="15" width="15"  style='fill="#ededed"'/>
+                           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
                         </c:if>
+                     <td align="left">${sl.board_title}
                      <td>${sl.member_tel}
                      <td><fmt:formatDate value="${sl.board_reg}" pattern="yyyy.MM.dd"/>
                   </tr>

@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,12 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.org.ticketzone.domain.AdminVO;
 //github.com/jeonmingyun/comma.git
 import com.org.ticketzone.domain.Criteria;
 import com.org.ticketzone.domain.NoticeAttachVO;
 import com.org.ticketzone.domain.NoticeBoardVO;
 import com.org.ticketzone.domain.NumberTicketVO;
 import com.org.ticketzone.domain.PageDTO;
+import com.org.ticketzone.service.AdminService;
 import com.org.ticketzone.service.NoticeAttachService;
 import com.org.ticketzone.service.NoticeBoardService;
 import com.org.ticketzone.service.NumberTicketService;
@@ -39,7 +40,7 @@ public class HomeController {
 	private NoticeBoardService noticeBoardService;
 	private NoticeAttachService noticeAttachService;
 	private NumberTicketService numberTicketService;
-	
+	private AdminService adminService;
 
 	
 
@@ -212,6 +213,36 @@ public class HomeController {
 
 
 		return "test2";				
+	}
+	
+	@RequestMapping(value ="/admin", method=RequestMethod.GET)
+	public String admin(Model model) {
+		return "AdminLogin";
+	}
+	
+	
+	//이부분 해야함 param 변수 session 담기
+	@ResponseBody
+	@RequestMapping(value ="/adminLogin", method=RequestMethod.POST)
+	public String adminLogin(Model model, HttpSession session, @RequestParam("admin_id") String admin_id, @RequestParam("admin_pass") String admin_pass) {
+		ArrayList<AdminVO> arr = new ArrayList<AdminVO>();
+		arr = adminService.adminLogin(admin_id);
+		session.setAttribute("admin",arr);
+		if (arr.size() != 0) {
+			if (arr.get(0).getAdmin_pass().equals(admin_pass)) {
+				return "success";
+			} else {
+				return "fail";
+			}
+		} else {
+			return "fail";			
+		}
+	}
+	
+	@RequestMapping(value ="/adminLogout", method=RequestMethod.GET)
+	public String adminLogout(Model model, HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
 	}
 	
 }
