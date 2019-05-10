@@ -214,4 +214,9 @@ public class HomeController {
 		return "test2";				
 	}
 	
+	@RequestMapping(value ="/admin", method=RequestMethod.GET)
+	public String admin(Model model) {
+		return "AdminLogin";
+	}
+	
 }
