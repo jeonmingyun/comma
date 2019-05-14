@@ -19,32 +19,61 @@
 	<%@include file="/WEB-INF/views/include/header.jsp"%>
 	<section>
         <div class="join_form">
-            <h1>관리자 등록</h1>
+            <h2>관리자 등록</h2>
+            <div class="divider_1"><div class="line"></div></div>
+            
+            <div id="divider_sh">
+				<div class="line"></div>
+			</div>
+            
             <form action="/register" method="post">
-            <p>관리자 아이디</p>
-                <input type="text" id="owner_id" name="owner_id">
-            <!-- 비밀번호 길이가 맞지 않을 때 "8~12자" 밑에 뜨게!
-            아이디 중복일 경우, 아이디 사용 가능할 경우에도 밑에 뜨게-->
-            <p>비밀번호</p>
-                <input type="password" id="owner_password" name="owner_password">
-            <!-- 비밀번호 길이가 맞지 않을 때 "8~16자 영문, 숫자" 밑에 뜨게!-->
-            <p>비밀번호 확인</p>
-                <input type="password" name="mngr_pw_re">
-            <p>이름</p>
-                <input type="text" id="owner_name" name="owner_name">
-            <p>전화번호</p>
-                <input type="tel" id="owner_tel" name="owner_tel">
-            <p>이메일 <label>* 선택</label></p> 
-                <input type="email" id="email" name="email">
-
-            <input type="submit" class="join_btn" name="join_success" value="등록">
+            
+            <div class="join_box">
+            <table class="join_tab">
+            	<tbody>
+            		<tr>
+            			<td>관리자 아이디</td>
+            			<td><input type="text" id="owner_id" name="owner_id"></td>
+            		</tr>
+            		
+            		<tr>
+            			<td>비밀번호</td>
+            			<td><input type="password" id="owner_password" name="owner_password"></td>
+            		</tr>
+            		
+            		<tr>
+            			<td>비밀번호 확인</td>
+            			<td><input type="password" name="mngr_pw_re"></td>
+            		</tr>
+            		
+            		<tr>
+            			<td>이름</td>
+            			<td><input type="text" id="owner_name" name="owner_name"></td>
+            		</tr>
+            		
+            		<tr>
+            			<td>전화번호</td>
+            			<td><input type="tel" id="owner_tel" name="owner_tel"></td>
+            		</tr>
+            		
+            		<tr>
+            			<td>이메일</td>
+            			<td><input type="email" id="email" name="email"></td>
+            		</tr>
+            	</tbody>
+            </table>
+            	<div class="btn_box">
+		            <input type="submit" class="join_btn join_ok" name="join_success" value="등록">
+		            <button type="button" class="join_btn join_no" name="join_cancel" id="join_cancel">취소</button>
+	            </div>
+       		</div>
        </form>
-            <button class="join_btn" name="join_cancel" id="join_cancel">취소</button>
-        </div>
+            <!-- <button class="join_btn join_no" name="join_cancel" id="join_cancel">취소</button> -->
+    </div>
 
 
     </section>
-	<%@include file="/WEB-INF/views/include/footer.jsp"%>
+	<%-- <%@include file="/WEB-INF/views/include/footer.jsp"%> --%>
 
 
 	

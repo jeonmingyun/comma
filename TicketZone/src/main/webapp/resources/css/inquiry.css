@@ -58,9 +58,9 @@
 }
 
 #suggest svg {
-	fill : #888888;
+	fill : #ccc;
 }
-.
+
 /* 게시글 제목 클릭했을 때 */
 #suggest tr:hover td {
 	cursor: pointer;

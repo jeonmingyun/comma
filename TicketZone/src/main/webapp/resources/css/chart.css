@@ -1,0 +1,67 @@
+* {
+	margin: 0;
+	padding: 0;
+
+}
+
+h2 {
+	margin-top: 50px;
+	text-align: center;
+}
+
+.divider_1 .line {
+	width: 160px;
+	margin: 0 auto 60px; 
+	padding: 10px 0px 15px 0px;
+	border-bottom: 1px dashed #ccc;
+}
+
+/* 차트 테이블 */
+#chart_table {
+	border-collapse: collapse;
+	border: 1px solid;
+	margin: 0 auto;
+}
+
+#chart_table th {
+	border: 1px solid;
+}
+
+#chart_table td {
+	border: 1px solid;
+}
+
+/* chart */
+#chart_form {
+	margin: 100px auto 180px;
+	width: 1200px;
+	height: 100%;
+	/* border: 1px solid black; */
+}
+
+/* 차트 부분 */
+#chart {
+	position:absolute;
+	width:800px;
+	height: 310px;
+	border: 1px solid green;
+}
+
+/* 팀단위 */
+#team {
+	position:relative;
+  	width:300px;
+  	left:850px;
+  	height:150px;
+  	border: 1px solid red;
+}
+
+/* 대기자 */
+#waiting {
+	margin-top: 10px;
+	position:relative;
+	width:300px;
+	left:850px;
+	height: 150px;
+	border: 1px solid gold;
+}
