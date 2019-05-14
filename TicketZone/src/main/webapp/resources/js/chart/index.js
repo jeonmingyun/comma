@@ -76,6 +76,10 @@ $(document).ready(function(){
 				$("#Actoday").attr('value',('20' + data[0].today.substr(2)));
 				$("#today").empty();
 				$("#myfirstchart").empty();
+				$("#team").empty();
+				$("#waiting").empty();
+				var sum = 0;
+				var sum2 = 0;
 				var a = "";
 				a += "<button id='prev'><</button>&nbsp&nbsp"				
 				a += '20' + data[0].today.substr(2);
@@ -87,7 +91,20 @@ $(document).ready(function(){
 							ticket_reg : data[i].ticket_reg.trim() + '시',
 							인원수 : data[i].the_number
 					};
-				}		
+					sum += data[i].the_number;
+					sum2 += data[i].team;
+					
+				}
+				var team = "";
+				team += "<h4>팀</h4>";
+				team += sum2 +"팀";
+				
+				var waiting = "";
+				waiting += "<h4>대기자</h4>";
+				waiting += sum +"명";
+				
+				$("#waiting").append(waiting);
+				$("#team").append(team);
 				var obj = JSON.stringify(test);
 				json = JSON.parse(obj);
 				new Morris.Line({
@@ -136,6 +153,10 @@ $(document).ready(function(){
 				$("#Actoday").attr('value',('20' + data[0].today.substr(2)));
 				$("#today").empty();
 				$("#myfirstchart").empty();
+				$("#team").empty();
+				$("#waiting").empty();
+				var sum = 0;
+				var sum2 = 0;
 				var a = "";
 				a += "<button id='prev'><</button>&nbsp&nbsp"				
 				a += '20' + data[0].today.substr(2);
@@ -146,8 +167,21 @@ $(document).ready(function(){
 					test[i] = {
 							ticket_reg : data[i].ticket_reg.trim() + '시',
 							인원수 : data[i].the_number
+							
 					};
-				}		
+					sum += data[i].the_number;
+					sum2 += data[i].team;
+				}
+				var team = "";
+				team += "<h4>팀</h4>";
+				team += sum2 +"팀";
+				
+				var waiting = "";
+				waiting += "<h4>대기자</h4>";
+				waiting += sum +"명";
+				
+				$("#waiting").append(waiting);
+				$("#team").append(team);
 				var obj = JSON.stringify(test);
 				json = JSON.parse(obj);
 				new Morris.Line({

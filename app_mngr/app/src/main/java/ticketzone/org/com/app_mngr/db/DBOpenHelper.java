@@ -196,7 +196,14 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
         return menu_list;
     }
+    //메뉴의 카테고리 가져오기
+    public Cursor selectMenuCate(){
+        mngrdb = this.getReadableDatabase();
+        String sql = ""; // 수정해야함
+        Cursor cate_list = mngrdb.rawQuery(sql,null);
 
+        return cate_list;
+    }
     public void insertStoreMenu(JSONArray menuList) {
         mngrdb = this.getWritableDatabase();
 
@@ -205,6 +212,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 JSONObject jobj = new JSONObject(menuList.get(i).toString());
                 ContentValues values = new ContentValues();
                 values.put("menu_code", jobj.getString("menu_code"));
+                values.put("menu_cate", jobj.getString("menu_cate"));
                 values.put("menu_name", jobj.getString("menu_name"));
                 values.put("menu_price", jobj.getString("menu_price"));
                 values.put("store_note", jobj.getString("store_note"));
@@ -226,6 +234,22 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         else
             return true; // success
     }
+    //메뉴수정
+    public boolean updateMenu(String menu_code, String menu_cate, String menu_name, String menu_price, String store_note){
+        mngrdb = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("menu_cate", menu_cate);
+        values.put("menu_name", menu_name);
+        values.put("menu_price", menu_price);
+        values.put("store_note", store_note);
 
-    
+        int result = mngrdb.update(DBTable.StoreMenu.TABLENAME, values, "menu_code=?", new String[] {menu_code});
+
+        if(result == 0)
+            return false;
+        else
+            return true;
+    }
+
+
 }
