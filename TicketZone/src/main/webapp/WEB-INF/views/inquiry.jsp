@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
-<%@ page session="false" contentType="text/html; charset=utf-8"
+<%@ page session="true" contentType="text/html; charset=utf-8"
    pageEncoding="utf-8"%>
 
 <!DOCTYPE html>
