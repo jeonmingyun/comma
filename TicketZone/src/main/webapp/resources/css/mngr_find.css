@@ -3,37 +3,75 @@
     padding: 0;
 }
 
-section {
+.find_form h2 {
+	margin-top: 50px;
+	text-align: center;
+}
+
+/* 관리자 아이디 찾기 밑에 선 */
+.divider_1 .line {
+	width: 160px;
+	margin: 0 auto 60px; 
+	padding: 10px 0px 15px 0px;
+	border-bottom: 1px dashed #ccc;
+}
+
+#divider_sh .line {
+	margin: 30px auto 20px;
+	width: 1200px;
+	border: 1px solid #343a40;
+}
+
+/* section {
     margin-top: 10px;
     border: 1px solid #000000;
     padding: 5px 20px;
     font-size: 15px;
-}
+} */
 
 section input[type="text"], input[type="email"] {
     border: none;
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid #e6e6e6;
     outline: none;
     font-size: 16px;
-    width: 70%;
+    width: 350px;
+    margin: 5px 0;
 }
 
-
-h1 {
-    margin: 0;
-    padding: 0 0 20px;
-    text-align: center;
-    font-size: 22px;
-    border-bottom: 2px solid #000000;
+section input[type="tel"] {
+	width: 250px;
+	height: 32px;
+	border: 1px solid #e6e6e6;
+	vertical-align: middle;
+	margin: 8px 0;	
 }
 
 .find_form {
-    padding: 70px;
-    width: 320px;
+    /* padding: 70px; */
+    width: 1200px;
     height: 100%;
     margin: auto;
     position: relative;
-    border: 1px solid #000000;
+}
+
+/* 휴대폰 인증 */
+#phone_box {
+	margin: auto;
+	width: 600px;
+}
+
+#phone_ok, #email_ok{
+	margin: 30px auto;
+}
+
+/* 이메일 인증 */
+#email_box {
+	margin: auto;
+	width: 600px;
+}
+
+#email_ok label{
+	font-weight: normal;
 }
 
 #findfail{
@@ -42,36 +80,33 @@ h1 {
 
 .find_btn {
     /* display: inline-block; */
-    padding: 5px;
-    border: none;
+    margin: 0px 2px;
+	vertical-align: middle;
+	padding: 3px 10px;
+    border: 1px solid #BDBDBD;
+    background-color: #FFFFFF;
+    color: #000000;
     outline: none;
-    background: #000000;
-    color: white;
-    font-size: 16px;
-    border-radius: 10px;
+    font: 20px;
 }
 
 .find_btn:hover {
     cursor: pointer;
-    background-color: cornflowerblue;
-    color: #ffffff;
-    
 }
 
 .ok_btn {
     /* display: inline-block; */
-    padding: 5px;
-    border: none;
+    margin: 0px 2px;
+	vertical-align: middle;
+	padding: 3px 10px;
+    border: 1px solid #BDBDBD;
+    background-color: #FFFFFF;
+    color: #000000;
     outline: none;
-    background: #000000;
-    color: white;
-    font-size: 16px;
-    border-radius: 10px;
+    font: 20px;
 }
 
 .ok_btn:hover {
     cursor: pointer;
-    background-color: cornflowerblue;
-    color: #ffffff;
-    
+ 
 }

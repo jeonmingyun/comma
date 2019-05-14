@@ -88,6 +88,12 @@ public class MngrController {
 		return "mngr/mngr_findTel";
 	}
 	
+	// 비밀번호 찾기 페이지 이동
+	@RequestMapping(value = "/mngr_passwd", method = RequestMethod.GET)
+	public String mngr_passwd() {
+		return "mngr/mngr_passwd";
+	}
+	
 	// 관리자 회원가입페이지 이동
 	@RequestMapping(value = "/mngr_register")
 	public String mngr_register(Model model) {
