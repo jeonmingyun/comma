@@ -35,7 +35,7 @@ public class AppMemHomeController {
 		JSONArray arr = new JSONArray();
 		
 		arr.add(appMemService.ownerList());
-		arr.add(appMemService.categorieList()); //F만 가져와야하고
+		arr.add(appMemService.categorieList()); //store의 cate_code가 F인 것만 가져온다
 		arr.add(appMemService.coordinatesList());
 		arr.add(appMemService.storeList());
 		arr.add(appMemService.menuList());
