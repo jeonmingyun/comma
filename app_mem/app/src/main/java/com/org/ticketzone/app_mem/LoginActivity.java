@@ -1,14 +1,13 @@
 package com.org.ticketzone.app_mem;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.content.Intent;
+import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
@@ -84,21 +83,23 @@ public class LoginActivity extends AppCompatActivity {
             // 사용자 정보 요청이 성공한 경우로 사용자 정보 객체를 받습니다.
             @Override
             public void onSuccess(MeV2Response response) {
-                Log.e("success", "아히아허이하");
-                Log.d("user id : ", response.getId()+"");
-                Log.d("user getNickname : ", response.getNickname()+"");
-                Log.d("user getBirthday : ", response.getKakaoAccount().getBirthday()+"");
-                Log.d("user getGender : ", response.getKakaoAccount().getGender()+"");
-                Log.d("user age_range : ", response.getKakaoAccount().getAgeRange()+"");
+                final String ID = response.getId()+"";
+                final String NICKNAME = response.getNickname();
+                final String BIRTH = response.getKakaoAccount().getBirthday()+"";
+                final String GENDER = response.getKakaoAccount().getGender()+"";
+                final String APP_RANGE = response.getKakaoAccount().getAgeRange()+"";
 
                 JsonArrayTask jat = new JsonArrayTask("mem_db_login"){
                     @Override
                     protected void onPostExecute(JSONArray jsonArray) {
                         super.onPostExecute(jsonArray);
-
                         try {
-                            Log.e("index 0 ", jsonArray.get(0).toString());
-                            Log.e("index 1 ", jsonArray.get(0).toString());
+                            mDBHelper.insertMember(ID, NICKNAME, BIRTH, GENDER, APP_RANGE);
+                            mDBHelper.insertOwner(new JSONArray(jsonArray.get(0).toString()));
+                            mDBHelper.insertCategorie(new JSONArray(jsonArray.get(1).toString()));
+                            mDBHelper.insertStoreMenu(new JSONArray(jsonArray.get(4).toString()));
+                            mDBHelper.insertStore(new JSONArray(jsonArray.get(3).toString()));
+                            mDBHelper.insertCoordinates(new JSONArray(jsonArray.get(2).toString()));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -107,7 +108,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 SendDataSet sds = new SendDataSet("member_tel", "010-1234-5678");
                 jat.execute(sds);
-
 
                 redirectMainActivity();
             }
@@ -129,13 +129,14 @@ public class LoginActivity extends AppCompatActivity {
 //            }
         });
     }
+
     protected void redirectMainActivity() {
         final Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
     protected void redirectLoginActivity() {
-        final Intent intent = new Intent(this, MainActivity.class);
+        final Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
     }

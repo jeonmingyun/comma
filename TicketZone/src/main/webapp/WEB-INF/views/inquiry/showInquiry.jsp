@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
-<%@ page session="false" contentType="text/html; charset=utf-8"
+<%@ page session="true" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
@@ -69,7 +69,11 @@
 		<!-- inquiry_view -->
 		
 		<!-- <div>inquiry_reply -->
+		<c:if test="${empty sessionScope.admin}">
+		</c:if>
+		<c:if test="${!empty sessionScope.admin}">
 			<%@include file="../include/reply.jsp"%>
+		</c:if>
 		<!-- </div> -->
 		<p>
 		<div class="inquiry_btn">

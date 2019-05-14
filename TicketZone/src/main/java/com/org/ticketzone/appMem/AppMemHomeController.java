@@ -31,13 +31,14 @@ public class AppMemHomeController {
 	@ResponseBody
 	@RequestMapping(value = "/mem_db_login", method = RequestMethod.POST)
 	public JSONArray mem_db_login(@RequestBody MemberVO mvo ) {
+		System.out.println(mvo.getMember_tel());
 		JSONArray arr = new JSONArray();
 		
 		arr.add(appMemService.ownerList());
+		arr.add(appMemService.categorieList()); //F만 가져와야하고
+		arr.add(appMemService.coordinatesList());
 		arr.add(appMemService.storeList());
 		arr.add(appMemService.menuList());
-		arr.add(appMemService.categorieList());
-		arr.add(appMemService.coordinatesList());
 		
 		return arr;
 	}

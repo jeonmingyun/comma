@@ -12,7 +12,7 @@ public final class DBTable {
         public static final String MEMBER_GENDER= "member_gender";
         public static final String MEMBER_AGE_RANGE= "member_age_range";
         public static final String TABLENAME= "member";
-        public static final String CREATE_QUERY= "create table "+ TABLENAME + "("
+        public static final String CREATE_QUERY= "create table IF NOT EXISTS "+ TABLENAME + "("
                 + MEMBER_ID + " text primary key,"
                 + MEMBER_NICKNAME + " text not null,"
                 + MEMBER_BIRTH + " text,"
@@ -25,8 +25,8 @@ public final class DBTable {
     public static final class Owner implements  BaseColumns{
         public static final String OWNER_ID = "owner_id";
         public static final String TABLENAME = "owner";
-        public static final String CREATE_QUERY = "create table " + TABLENAME + "("
-                + OWNER_ID + "text primary key);";
+        public static final String CREATE_QUERY = "create table IF NOT EXISTS " + TABLENAME + "("
+                + OWNER_ID + " text primary key);";
         public static final String DROP_QUERY = "drop table if exists " + TABLENAME;
     }
 
@@ -35,7 +35,7 @@ public final class DBTable {
         public static final String LICENSE_NUMBER = "license_number";
         public static final String R_NAME = "r_name";
         public static final String MAX_NUMBER = "max_number";
-        public static final String STORE_STATUS = "store_stats";
+        public static final String STORE_STATUS = "store_status";
         public static final String CATE_CODE = "cate_code";
         public static final String OWNER_ID = "owner_id";
         public static final String STORE_TEL = "store_tel";
@@ -48,12 +48,14 @@ public final class DBTable {
                 + R_NAME + " text not null,"
                 + MAX_NUMBER + " text,"
                 + STORE_STATUS + " integer default 0,"
-                + CATE_CODE + " foreign key("+CATE_CODE+") references CATEGORIE("+CATE_CODE+"),"
-                + OWNER_ID + " foreign key("+OWNER_ID+") references OWNER("+OWNER_ID+"),"
+                + CATE_CODE + " text,"
+                + OWNER_ID + " text,"
                 + STORE_TEL + " text not null unique,"
                 + STORE_TIME + " text not null,"
                 + STORE_INTRO + " text not null,"
-                + ADDRESS_NAME + " text not null);";
+                + ADDRESS_NAME + " text not null,"
+                + "foreign key("+OWNER_ID+") references OWNER("+OWNER_ID+"),"
+                + " foreign key("+CATE_CODE+") references CATEGORIE("+CATE_CODE+"));";
         public static final String DROP_QUERY= "drop table if exists " + TABLENAME;
     }
 
@@ -78,8 +80,8 @@ public final class DBTable {
         public static final String CATE_NAME = "cate_name";
         public static final String TABLENAME = "categorie";
         public static final String CREATE_QUERY = "create table " + TABLENAME + "("
-                + CATE_CODE + "text primary key,"
-                + CATE_NAME + "text not null);";
+                + CATE_CODE + " text primary key,"
+                + CATE_NAME + " text not null);";
         public static final String DROP_QUERY = "drop table if exists "+ TABLENAME;
     }
 
@@ -90,9 +92,10 @@ public final class DBTable {
         public static final String LICENSE_NUMBER = "license_number";
         public static final String TABLENAME = "coordinates";
         public static final String CREATE_QUERY = "create table " + TABLENAME + "("
-                + COOR_X + "text not null,"
-                + COOR_Y + "text not null,"
-                + LICENSE_NUMBER + " foreign key("+LICENSE_NUMBER+") references STORE("+LICENSE_NUMBER+");";
+                + COOR_X + " text not null,"
+                + COOR_Y + " text not null,"
+                + LICENSE_NUMBER + " text,"
+                + " foreign key("+LICENSE_NUMBER+") references STORE("+LICENSE_NUMBER+"));";
         public static final String DROP_QUERY = "drop table if exists " + TABLENAME;
     }
 

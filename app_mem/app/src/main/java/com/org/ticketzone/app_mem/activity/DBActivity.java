@@ -25,6 +25,7 @@ public class DBActivity  extends AppCompatActivity {
     private Button add_data, view_list, upd_data, del_data;
     private String tel, name, birth;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

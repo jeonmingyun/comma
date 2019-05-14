@@ -73,6 +73,11 @@
 </div>
 
 <%@include file="include/footer.jsp"%>
+<!-- =======
+<h1>일별 시간대별 인원통계</h1>
+<div id="today" style="text-align:center;"></div>
+<div id="myfirstchart" style="height: 400px; width: 900px;"></div> -->
+
 
 <script src="resources/js/chart/index.js"></script>
 </body>
