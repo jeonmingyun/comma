@@ -12,4 +12,8 @@ public interface OwnerMapper {
 	public void insertOwner(OwnerVO owner);
 	
 	public ArrayList<OwnerVO> findOwner(@Param("owner_name") String owner_name,@Param("owner_tel") String owner_tel);
+
+	// 비밀번호 찾기
+	
+
 }

@@ -18,5 +18,8 @@
 	and owner_tel = #{owner_tel}
 </select>
 
+<!-- <update id="passwd">
+	
+</update> -->
 </mapper>
 
