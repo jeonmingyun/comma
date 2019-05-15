@@ -94,6 +94,9 @@ public class MngrController {
 		return "mngr/mngr_passwd";
 	}
 	
+	// 비밀번호 찾기
+	
+	
 	// 관리자 회원가입페이지 이동
 	@RequestMapping(value = "/mngr_register")
 	public String mngr_register(Model model) {

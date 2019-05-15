@@ -8,7 +8,8 @@ $(document).ready(function(){
 		console.log(uploadpath);
 		//변수분리
 		var filePath = encodeURIComponent(uploadpath+"/" + uuid +"_"+filename);
-		var a = $("img[name=s_img"+i+"]").attr("src", "/display?fileName="+filePath);
+		var result = uploadpath+"/" + uuid +"_"+filename;
+		var a = $("img[name=s_img"+i+"]").attr("src", "/resources/img/"+result);
 		
 	});
 	/*매장 등록 버튼 누르면 매장등록 페이지로 이동*/

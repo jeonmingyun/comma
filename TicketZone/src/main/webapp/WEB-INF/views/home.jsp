@@ -74,13 +74,12 @@
              <div class="col-sm-6 features-box wow fadeInLeft">
              	<div class="row">
              		<div class="box_icon">
-             			<i class="fa fa-twitter"><img src="../resources/icon/번호표.png" width="60px" height="60px"></i>
+             			<i class="fa fa-twitter"><img src="../resources/icon/번호표1.png" width="60px" height="60px"></i>
              		</div>
              		<div class="col-sm-9">
              			<h3>스마트 번호표 발급</h3>
                   	<p>
-                  		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.
-                  		Ut wisi enim ad minim veniam, quis nostrud.
+                  		어디서든 매장의 대기 정보를 확인 가능하고, 매장 근처에서 Bluetooth로 간편하게 번호표 발급이 가능합니다.
                   	</p>
              		</div>
              	</div>
@@ -93,8 +92,7 @@
              		<div class="col-sm-9">
              			<h3>PUSH알림 서비스</h3>
                   	<p>
-                  		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.
-                  		Ut wisi enim ad minim veniam, quis nostrud.
+                  		대기시간을 자유롭게 사용하고 번호표 순번이 임박할 때 PUSH / SMS 알림을 받을 수 있습니다.
                   	</p>
              		</div>
              	</div>
@@ -110,8 +108,7 @@
              		<div class="col-sm-9">
              			<h3>카테고리별 검색</h3>
                   	<p>
-                  		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.
-                  		Ut wisi enim ad minim veniam, quis nostrud.
+                  		카테고리별로 한식, 일식, 중식, 양식 등 검색이 가능하며 근처 매장을 GPS를 통해 알려줍니다.
                   	</p>
              		</div>
              	</div>
@@ -124,8 +121,7 @@
              		<div class="col-sm-9">
              			<h3>실시간 웨이팅 현황</h3>
                   	<p>
-                  		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.
-                  		Ut wisi enim ad minim veniam, quis nostrud.
+                  		일 별, 시간대별로 매장을 이용하는 고객들의 수를 그래프로 제공합니다.
                   	</p>
              		</div>
              	</div>
