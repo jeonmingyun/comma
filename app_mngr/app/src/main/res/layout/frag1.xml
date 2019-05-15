@@ -4,22 +4,31 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="  MY 가게"
-            android:textSize="32dp" />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    android:paddingTop="40dp">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/main_logo" />
+            android:src="@drawable/house" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="맛있는 집"
+            android:textSize="40dp"
+            android:paddingTop="40dp"/>
 
-    </LinearLayout>
+</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom">
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:text="결제 완료"
+                    android:textSize="30dp"/>
+        </LinearLayout>
 </LinearLayout>
