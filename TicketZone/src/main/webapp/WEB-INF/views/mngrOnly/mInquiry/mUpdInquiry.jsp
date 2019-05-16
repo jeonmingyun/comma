@@ -19,7 +19,7 @@
 </head>
 
 <body>
-
+	<%@include file="/WEB-INF/views/include/Mngrheader.jsp"%>
 	<div class="table_wapper">
 	<h1>문의글 수정</h1>
 	
