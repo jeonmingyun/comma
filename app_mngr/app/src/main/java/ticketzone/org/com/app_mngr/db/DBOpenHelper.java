@@ -72,6 +72,22 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         else
             return true; // success
     }
+    public void insertOwner(JSONArray ownerList) {
+        mngrdb = this.getWritableDatabase();
+        for(int i = 0; i < ownerList.length(); i++) {
+            try {
+                JSONObject jobj = new JSONObject(ownerList.get(i).toString());
+                ContentValues values = new ContentValues();
+                values.put("owner_id", jobj.getString("owner_id"));
+                values.put("owner_password", jobj.getString("owner_password"));
+                values.put("owner_name", jobj.getString("owner_name"));
+                values.put("owner_tel", jobj.getString("owner_tel"));
+                mngrdb.insert(DBTable.Owner.TABLENAME, null, values);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     //Categorie
     public Cursor selectAllCategorie() {
@@ -98,6 +114,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
             }
         }
     }
+
+
 
     //Store
     public Cursor selectAllStore(){
