@@ -29,4 +29,7 @@
 		]]>	 
 	</select>
 	
+	<select id="ticketList" resultType="com.org.ticketzone.domain.NumberTicketVO">
+		select * from number_ticket
+	</select>	
 </mapper>
