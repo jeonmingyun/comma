@@ -88,6 +88,15 @@ button:hover {
     font: 20px;
 }
 
+.write_btn [type="submit"], [type="button"] {
+    padding: 5px 15px;
+    border: 1px solid #BDBDBD;
+    background-color: #FFFFFF;
+    color: #000000;
+    outline: none;
+    font: 20px;
+}
+
 /* .write_btn button:hover {
     cursor: pointer;
 }
@@ -103,3 +112,4 @@ button:hover {
     outline: none;
     font: 14px;
 }
+

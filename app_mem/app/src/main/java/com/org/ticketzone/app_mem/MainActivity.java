@@ -2,6 +2,8 @@ package com.org.ticketzone.app_mem;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,10 +16,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TabHost;
 import android.widget.Toast;
 
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
+import com.org.ticketzone.app_mem.db.DBOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,13 +32,65 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout dlDrawer;
     ActionBarDrawerToggle dtToggle;
     ListView listview = null;
+    private DBOpenHelper mDBHelper;
+    private List storeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //menu toolbar
+        toolbar();
+        tabHost();
+    }
+
+    // store list 생성
+    protected void storeList() {
+        Cursor cursor = mDBHelper.selectAllStore();
+        storeList = new ArrayList();
+
+        if(cursor.getCount() == 0) { // not found data
+            Toast.makeText(this, "not found data", Toast.LENGTH_SHORT).show();
+        }
+
+        while(cursor.moveToNext()) {
+
+        }
+    }
+
+    public void onClickLogout() {
+        UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
+            @Override
+            public void onCompleteLogout() {
+                redirectLoginActivity();
+            }
+        });
+    }
+
+    protected void redirectLoginActivity() {
+        final Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    // tagHost 화면 Layout 바꿔끼우기
+    protected void tabHost() {
+        TabHost host=(TabHost)findViewById(R.id.host);
+        host.setup();
+
+        TabHost.TabSpec spec = host.newTabSpec("store list");
+        spec.setIndicator("store list");
+        spec.setContent(R.id.store_list);
+        host.addTab(spec);
+
+        spec = host.newTabSpec("categorie");
+        spec.setIndicator("categorie");
+        spec.setContent(R.id.categorie);
+        host.addTab(spec);
+    }
+
+    // menu toolbar
+    protected void toolbar() {
         toolbar = findViewById(R.id.toolbar);
         dlDrawer = findViewById(R.id.drawer_layout);
 
@@ -67,22 +126,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void onClickLogout() {
-        UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
-            @Override
-            public void onCompleteLogout() {
-                redirectLoginActivity();
-            }
-        });
-    }
-
-    protected void redirectLoginActivity() {
-        final Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    // toolbar
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu){
         getMenuInflater().inflate(R.menu.main_navigation_menu, menu);
@@ -104,12 +147,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if(id == R.id.logout){
-            Intent logoutIntent = new Intent(this, LoginActivity.class);
-            startActivity(logoutIntent);
-        }
+//        int id = item.getItemId();
+//
+//        if(id == R.id.logout){
+//            Intent logoutIntent = new Intent(this, LoginActivity.class);
+//            startActivity(logoutIntent);
+//        }
         if (dtToggle.onOptionsItemSelected(item)) {
             return true;
         }
