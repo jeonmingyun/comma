@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"/>
+        android:minHeight="?attr/actionBarSize" />
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"
@@ -17,45 +18,39 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <LinearLayout
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <me.relex.circleindicator.CircleIndicator
+                android:id="@+id/indicator"
+                android:layout_marginTop="460dp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:ci_drawable="@drawable/black_radius"
+                app:ci_height="7dp"
+                app:ci_margin="4dp"
+                app:ci_width="7dp" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vpPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:gravity="bottom">
 
-            <FrameLayout
-                android:id="@+id/main_frame"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.9"/>
+           <Button
+               android:layout_width="match_parent"
+               android:layout_height="100dp"
+               android:text="결제완료"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_weight="0">
-
-                <Button
-                    android:id="@+id/bt1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="전환1" />
-
-                <Button
-                    android:id="@+id/bt2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="전환2" />
-
-                <Button
-                    android:id="@+id/bt3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="전환3" />
-            </LinearLayout>
-
-        </LinearLayout>
-
+        </RelativeLayout>
         <ListView
             android:id="@+id/drawer"
             android:layout_width="240dp"
@@ -63,10 +58,6 @@
             android:layout_gravity="start"
             android:background="#FFFFFF" />
 
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/textView1" />-->
 
     </android.support.v4.widget.DrawerLayout>
 

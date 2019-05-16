@@ -51,6 +51,8 @@ dependencies {
     implementation 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
     implementation 'org.codehaus.jackson:jackson-mapper-asl:1.9.11'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
+    /*스와이프 indicator*/
+    implementation 'me.relex:circleindicator:1.2.2'
 
     /*mpChart*/
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'

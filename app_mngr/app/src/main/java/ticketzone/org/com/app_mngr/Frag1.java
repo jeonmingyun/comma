@@ -6,14 +6,33 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 public class Frag1 extends Fragment {
-    View view;
+    private String title;
+    private int page;
 
-    @Nullable
+    public static Frag1 newInstance(int page, String title) {
+        Frag1 frag1 = new Frag1();
+        Bundle args = new Bundle();
+        args.putInt("someInt", page);
+        args.putString("someTitle", title);
+        frag1.setArguments(args);
+        return frag1;
+    }
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState){
-        view = inflater.inflate(R.layout.frag1, container, false);
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        page = getArguments().getInt("someInt", 0);
+        title = getArguments().getString("someTitle");
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        View view = inflater.inflate(R.layout.frag1, container, false);
+        //EditText tvLabel = view.findViewById(R.id.editText);
+        //tvLabel.setText(page + " -- " + title);
 
         return view;
     }

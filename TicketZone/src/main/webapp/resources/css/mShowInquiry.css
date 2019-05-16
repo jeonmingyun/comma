@@ -19,8 +19,8 @@
 	font-weight: normal;
     text-align: center;
     padding: 13px 0;
-    border-top: 1px solid #EEB3A3;
-    border-bottom: 1px solid #EEB3A3;
+    border-top: 1px solid #343a40;
+    border-bottom: 1px solid #343a40;
     width: 250px; height: 100%;
 }
 
@@ -87,5 +87,4 @@
 /* 버튼 클릭했을 때 */
 .minquiry_btn button:hover {
     cursor: pointer;
-    background-color: cornflowerblue;
 }
