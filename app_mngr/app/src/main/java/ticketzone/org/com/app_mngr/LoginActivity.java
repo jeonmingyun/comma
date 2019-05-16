@@ -1,12 +1,9 @@
 package ticketzone.org.com.app_mngr;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -16,27 +13,28 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import org.json.JSONArray;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import ticketzone.org.com.app_mngr.db.DBOpenHelper;
+
 public class LoginActivity extends AppCompatActivity {
 
+    private DBOpenHelper mDBHelper;
     EditText et_owner_id, et_owner_password;
     Button login, sign_up;
     String owner_id, owner_password;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        mDBHelper = new DBOpenHelper(this);
+
         try {
             PackageInfo info = getPackageManager().getPackageInfo("ticketzone.org.com.app_mngr", PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
@@ -69,6 +67,14 @@ public class LoginActivity extends AppCompatActivity {
                         super.onPostExecute(data);
                         Log.d(getClass().getName(), data);
                         if( data.equals("1")) { // login success
+                            JsonArrayTask jat = new JsonArrayTask("mngr_db_login"){
+                                @Override
+                                protected void onPostExecute(JSONArray jsonArray) {
+                                    super.onPostExecute(jsonArray);
+
+                                }
+                            };
+                            jat.execute();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 //                            //owner_id값 송신
 //                            intent.putExtra("id",owner_id);
@@ -85,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 };
+
 
                 SendDataSet sds1 = new SendDataSet("owner_id", owner_id);
                 SendDataSet sds2 = new SendDataSet("owner_password", owner_password);

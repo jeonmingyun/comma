@@ -3,7 +3,6 @@ package com.org.ticketzone.appMngr;
 import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.org.ticketzone.domain.OwnerVO;
+import com.org.ticketzone.service.AppMngrService;
 import com.org.ticketzone.service.OwnerService;
 
 import lombok.AllArgsConstructor;
@@ -19,7 +19,7 @@ import lombok.AllArgsConstructor;
 @Controller
 public class MngrAppHomeController {
    OwnerService ownerService;
-   
+   AppMngrService appMngrService;
    @ResponseBody
    @RequestMapping(value = "/login", method = RequestMethod.POST)
    public String login(@RequestBody OwnerVO ownervo) {
@@ -27,17 +27,17 @@ public class MngrAppHomeController {
       String owner_password = ownervo.getOwner_password();
       ArrayList<OwnerVO> ownerList = ownerService.login(owner_id);
       String db_owner_password;
-     
+     System.out.println(ownervo);
       if( ownerList.size() != 0) {
          db_owner_password = ownerList.get(0).getOwner_password();
-         if( db_owner_password.equals(owner_password))
+         if( db_owner_password.equals(owner_password))       
             return "1"; // login success
-          else 
+         else  
             return "0"; // pass wrong
       } else {
          return "-1"; // id wrong
       }
-      
+       
    }
    
    @ResponseBody
@@ -62,6 +62,19 @@ public class MngrAppHomeController {
       return "1";
    }
    
+   @ResponseBody
+   @RequestMapping(value = "/mngr_db_login", method = RequestMethod.POST)
+	public JSONArray mngr_db_login(@RequestBody OwnerVO o) {
+		JSONArray arr = new JSONArray();
+		arr.add(appMngrService.ownerList());
+		arr.add(appMngrService.categorieList());
+		arr.add(appMngrService.memberList());
+		arr.add(appMngrService.storeList());
+		arr.add(appMngrService.menuList());
+		arr.add(appMngrService.ticketList());
+		
+		return arr;
+	}
    
    
 
