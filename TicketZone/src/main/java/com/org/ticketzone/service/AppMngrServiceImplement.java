@@ -28,8 +28,8 @@ public class AppMngrServiceImplement implements AppMngrService {
 	}
 
 	@Override
-	public StoreVO[] storeList() {
-		return mapper.storeList();
+	public StoreVO[] storeList(String owner_id) {
+		return mapper.storeList(owner_id);
 	}
 
 	@Override

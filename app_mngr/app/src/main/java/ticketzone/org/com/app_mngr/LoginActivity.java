@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -71,10 +72,23 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 protected void onPostExecute(JSONArray jsonArray) {
                                     super.onPostExecute(jsonArray);
-
+                                    try{
+                                        Log.e("insertOwner", jsonArray.get(0).toString());
+                                        Log.e("insertCategorie", jsonArray.get(1).toString());
+                                        Log.e("insertStoreMenu", jsonArray.get(3).toString());
+                                        Log.e("insertStore", jsonArray.get(2).toString());
+                                        mDBHelper.insertOwner(new JSONArray(jsonArray.get(0).toString()));
+                                        mDBHelper.insertCategorie(new JSONArray(jsonArray.get(1).toString()));
+                                        mDBHelper.insertStoreMenu(new JSONArray(jsonArray.get(3).toString()));
+                                        mDBHelper.insertStore(new JSONArray(jsonArray.get(2).toString()));
+                                    } catch (JSONException e){
+                                        e.printStackTrace();
+                                    }
                                 }
                             };
-                            jat.execute();
+                            SendDataSet sds = new SendDataSet("owner_id", owner_id);
+                            jat.execute(sds);
+
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 //                            //owner_id값 송신
 //                            intent.putExtra("id",owner_id);

@@ -13,14 +13,21 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.w3c.dom.Text;
 
 import me.relex.circleindicator.CircleIndicator;
+import ticketzone.org.com.app_mngr.db.DBOpenHelper;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -30,12 +37,12 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout dlDrawer;
     ActionBarDrawerToggle dtToggle;
     ListView listview = null;
-
+    private DBOpenHelper mDBHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mDBHelper = new DBOpenHelper(this);
         //스와이프
         ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
         adapterViewPager = new MyPagerAdater(getSupportFragmentManager());
@@ -74,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 2:
                         Intent logoutIntent = new Intent(v.getContext(), LoginActivity.class);
+                        mDBHelper.deleteAllTable();
                         startActivity(logoutIntent);
                         break;
                 }
@@ -82,6 +90,25 @@ public class MainActivity extends AppCompatActivity {
                 drawer.closeDrawer(Gravity.LEFT);
             }
         });
+        JsonArrayTask jat = new JsonArrayTask("mngr_db_login"){
+            @Override
+            protected void onPostExecute(JSONArray jsonArray) {
+                super.onPostExecute(jsonArray);
+                try{
+                    Log.e("insertOwner", jsonArray.get(0).toString());
+                    Log.e("insertCategorie", jsonArray.get(1).toString());
+                    Log.e("insertStoreMenu", jsonArray.get(3).toString());
+                    Log.e("insertStore", jsonArray.get(2).toString());
+                    mDBHelper.insertOwner(new JSONArray(jsonArray.get(0).toString()));
+                    mDBHelper.insertCategorie(new JSONArray(jsonArray.get(1).toString()));
+                    mDBHelper.insertStoreMenu(new JSONArray(jsonArray.get(3).toString()));
+                    mDBHelper.insertStore(new JSONArray(jsonArray.get(2).toString()));
+                } catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        };
+        jat.execute();
     }
 
 
@@ -98,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
+
                     return Frag1.newInstance(0, "Page # 1");
                 case 1:
                     return Frag2.newInstance(1, "Page # 2");

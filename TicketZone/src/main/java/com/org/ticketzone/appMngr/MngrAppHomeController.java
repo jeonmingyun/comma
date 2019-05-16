@@ -66,12 +66,14 @@ public class MngrAppHomeController {
    @RequestMapping(value = "/mngr_db_login", method = RequestMethod.POST)
 	public JSONArray mngr_db_login(@RequestBody OwnerVO o) {
 		JSONArray arr = new JSONArray();
+		String owner_id = o.getOwner_id();
+		
 		arr.add(appMngrService.ownerList());
 		arr.add(appMngrService.categorieList());
-		arr.add(appMngrService.memberList());
-		arr.add(appMngrService.storeList());
+//		arr.add(appMngrService.memberList());
+		arr.add(appMngrService.storeList(owner_id));
 		arr.add(appMngrService.menuList());
-		arr.add(appMngrService.ticketList());
+//		arr.add(appMngrService.ticketList());
 		
 		return arr;
 	}

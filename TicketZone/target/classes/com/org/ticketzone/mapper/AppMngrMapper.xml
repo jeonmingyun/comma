@@ -13,7 +13,7 @@
 	</select>
 	
 	<select id="storeList" resultType="com.org.ticketzone.domain.StoreVO">
-		select * from store
+		select * from store where owner_id = #{owner_id}
 	</select>
 	
 	<select id="menuList" resultType="com.org.ticketzone.domain.StoreMenuVO">

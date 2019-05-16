@@ -10,7 +10,7 @@ import com.org.ticketzone.domain.StoreVO;
 public interface AppMngrMapper {
 	public OwnerVO[] ownerList();
 	public MemberVO[] memberList();
-	public StoreVO[] storeList();
+	public StoreVO[] storeList(String owner_id);
 	public StoreMenuVO[] menuList();
 	public CategorieVO[] categorieList();
 	public NumberTicketVO[] ticketList();
