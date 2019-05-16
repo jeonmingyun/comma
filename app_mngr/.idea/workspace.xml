@@ -12,18 +12,6 @@
   <component name="AvailableLibraryUpdateStorage">
     <library-updates>
       <library-update>
-        <group-id>com.google.android.gms</group-id>
-        <name>play-services-location</name>
-        <version>16.0.0</version>
-        <repository>Google,Google Repository</repository>
-      </library-update>
-      <library-update>
-        <group-id>com.google.android.gms</group-id>
-        <name>play-services-maps</name>
-        <version>16.1.0</version>
-        <repository>Google,Google Repository</repository>
-      </library-update>
-      <library-update>
         <group-id>com.fasterxml.jackson.core</group-id>
         <name>jackson-databind</name>
         <version>2.9.8</version>
@@ -50,13 +38,13 @@
       <library-update>
         <group-id>com.android.support.constraint</group-id>
         <name>constraint-layout</name>
-        <version>2.0.0-beta1</version>
+        <version>2.0.0-alpha5</version>
         <repository>Google</repository>
       </library-update>
       <library-update>
         <group-id>junit</group-id>
         <name>junit</name>
-        <version>4.13-beta-3</version>
+        <version>4.13-beta-2</version>
         <repository>JCenter</repository>
       </library-update>
       <library-update>
@@ -78,7 +66,7 @@
         <repository>Google,Android Repository</repository>
       </library-update>
     </library-updates>
-    <last-search-timestamp>1557912102193</last-search-timestamp>
+    <last-search-timestamp>1556768722607</last-search-timestamp>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d06a7bf3-8614-4732-8326-e9d12c764fde" name="Default Changelist" comment="" />
@@ -88,6 +76,26 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_store.xml">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="513">
+                    <caret line="27" column="17" lean-forward="true" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
+                  </state>
+                </provider>
+                <provider editor-type-id="android-designer2" />
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
   </component>
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
@@ -151,29 +159,14 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-<<<<<<< HEAD
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/db/DBOpenHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-=======
         <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="97" column="22" selection-start-line="97" selection-start-column="22" selection-end-line="97" selection-end-column="22" />
+            <state relative-caret-position="-1195">
+              <caret line="31" column="29" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2211#3169#0" expanded="true" />
-                <element signature="e#3168#3169#0" expanded="true" />
-                <element signature="e#3652#3653#0" expanded="true" />
-                <element signature="e#3683#3684#0" expanded="true" />
-                <element signature="e#3895#3896#0" expanded="true" />
-                <element signature="e#3927#3928#0" expanded="true" />
-                <element signature="e#4337#4338#0" expanded="true" />
-                <element signature="e#4386#4387#0" expanded="true" />
+                <element signature="e#1848#1865#0" expanded="true" />
+                <element signature="e#1867#1884#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -182,170 +175,82 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
+            <state relative-caret-position="209">
+              <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="47" />
             </state>
           </provider>
           <provider editor-type-id="android-designer2" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-<<<<<<< HEAD
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="589">
-              <caret line="31" column="33" lean-forward="true" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-manifest" />
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/NetworkTask.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/Frag1.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="24" column="46" lean-forward="true" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
+            <state relative-caret-position="321">
+              <caret line="38" column="40" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="40" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1229#1401#0" expanded="true" />
+                <element signature="e#1400#1401#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/db/DBTable.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag1.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="14" column="51" selection-start-line="14" selection-start-column="51" selection-end-line="14" selection-end-column="51" />
+            <state relative-caret-position="323">
+              <caret line="17" column="41" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="41" />
             </state>
           </provider>
+          <provider editor-type-id="android-designer2" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/StoreActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="665">
-              <caret line="68" column="41" selection-start-line="68" selection-start-column="41" selection-end-line="68" selection-end-column="41" />
-=======
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_cusmanigi.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag1.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="13" column="48" lean-forward="true" selection-start-line="13" selection-start-column="48" selection-end-line="13" selection-end-column="48" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag2.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/Frag2.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="37" column="5" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="304">
+              <caret line="41" column="62" selection-start-line="41" selection-start-column="62" selection-end-line="41" selection-end-column="62" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-<<<<<<< HEAD
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/MainActivity.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1254">
-              <caret line="90" column="50" selection-start-line="90" selection-start-column="50" selection-end-line="90" selection-end-column="50" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-=======
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag3.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="25" column="15" selection-start-line="25" selection-start-column="15" selection-end-line="25" selection-end-column="15" />
+            <state relative-caret-position="95">
+              <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="34" />
             </state>
           </provider>
           <provider editor-type-id="android-designer2" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/Frag3.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="32" column="71" selection-start-line="32" selection-start-column="71" selection-end-line="32" selection-end-column="71" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="33" column="17" lean-forward="true" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
+            <state relative-caret-position="722">
+              <caret line="38" column="31" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="31" />
             </state>
           </provider>
           <provider editor-type-id="android-manifest" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-<<<<<<< HEAD
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/LoginActivity.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="912">
-              <caret line="73" column="57" selection-start-line="73" selection-start-column="57" selection-end-line="73" selection-end-column="57" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-=======
+            <state relative-caret-position="152">
+              <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/black_radius.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="57">
-              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_store.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5358">
-              <caret line="282" column="43" selection-start-line="282" selection-start-column="43" selection-end-line="282" selection-end-column="43" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1083">
-              <caret line="57" selection-start-line="57" selection-end-line="57" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2" />
         </entry>
       </file>
     </leaf>
@@ -403,36 +308,11 @@
         <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/fragment/BindView.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/fragment/C_Fragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/fragment/A_Fragment.java" />
-<<<<<<< HEAD
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/frag1.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/frag2.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/frag3.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/Frag1.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/Frag2.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/Frag3.java" />
-=======
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_cusmanigi.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/CusManigiActivity.java" />
         <option value="$PROJECT_DIR$/app/src/debug/res/values/google_maps_api.xml" />
         <option value="$PROJECT_DIR$/app/src/release/res/values/google_maps_api.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_maps2.xml" />
-<<<<<<< HEAD
-        <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/LoginActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/MapsActivity2.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/activity/DBActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/db/DBTable.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/db/DBOpenHelper.java" />
-        <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_store.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/StoreActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/NetworkTask.java" />
-=======
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
@@ -442,28 +322,22 @@
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/black_radius.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/Frag1.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/Frag2.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/Frag3.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/frag2.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/frag3.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/Frag1.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/frag1.xml" />
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
+        <option value="$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/StoreActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_store.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-<<<<<<< HEAD
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
-=======
-    <option name="x" value="1304" />
-    <option name="width" value="623" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-7" />
+    <option name="width" value="974" />
     <option name="height" value="1047" />
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -471,17 +345,44 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
             <path>
-              <item name="app_mngr" type="b2602c69:ProjectViewProjectNode" />
-              <item name="app_mngr" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app_mngr" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
             </path>
             <path>
-              <item name="app_mngr" type="b2602c69:ProjectViewProjectNode" />
-              <item name="app_mngr" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app_mngr" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="app_mngr" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="libs" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="app_mngr" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="app_mngr" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="app_mngr" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="jniLibs" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -493,11 +394,6 @@
             <path>
               <item name="app_mngr" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="app_mngr" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
             </path>
             <path>
               <item name="app_mngr" type="1abcf292:AndroidViewProjectNode" />
@@ -523,15 +419,19 @@
             </path>
             <path>
               <item name="app_mngr" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="app_mngr" type="1abcf292:AndroidViewProjectNode" />
               <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-<<<<<<< HEAD
       <pane id="PackagesPane" />
-=======
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -615,51 +515,6 @@
           <select />
         </subPane>
       </pane>
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="app_mngr" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-            <path>
-              <item name="app_mngr" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="app_mngr" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="libs" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="app_mngr" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="app_mngr" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="app_mngr" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="jniLibs" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -672,7 +527,7 @@
     <property name="project.structure.last.edited" value="Dependencies" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
   </component>
   <component name="PsdUISettings">
     <option name="MODULE_TAB" value="Signing Configs" />
@@ -683,11 +538,7 @@
       <recent name="ticketzone.org.com.app_mngr" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-<<<<<<< HEAD
-      <recent name="C:\Users\bon300-14\Desktop\4Github\comma\app_mngr\app\src\main\res\drawable" />
-=======
       <recent name="C:\Users\bon300-15\Desktop\github\comma\app_mngr\app\src\main\res\drawable" />
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
       <recent name="C:\Users\bon300-15\Desktop\github\comma\app_mngr\app\libs" />
     </key>
     <key name="android.template.packageName">
@@ -878,58 +729,34 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-<<<<<<< HEAD
-    <editor active="true" />
+    <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.10394456" />
-=======
-    <layout>
-      <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.13219616" />
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.2713348" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Designer" order="6" />
       <window_info id="Capture Tool" order="7" />
-<<<<<<< HEAD
-      <window_info id="Resources Explorer" order="8" weight="0.26385927" />
-      <window_info anchor="bottom" id="Run" order="0" sideWeight="0.47702408" weight="0.32858709" />
-      <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.7571116" weight="0.21905805" />
-      <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.48249453" weight="0.3274918" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4989059" weight="0.32968238" />
-      <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.26492536" side_tool="true" visible="true" weight="0.19305857" />
-      <window_info anchor="bottom" id="Version Control" order="5" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.47921225" weight="0.33296824" />
-      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.73507464" visible="true" weight="0.19305857" />
-      <window_info anchor="bottom" id="Android Profiler" order="8" sideWeight="0.4989339" weight="0.329718" />
-=======
       <window_info id="Resources Explorer" order="8" />
       <window_info anchor="bottom" id="Run" order="0" sideWeight="0.47441363" weight="0.324295" />
       <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.7571116" weight="0.5049288" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.48140043" weight="0.3274918" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4989059" weight="0.32968238" />
-      <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.52558637" side_tool="true" visible="true" weight="0.324295" />
+      <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.49781182" side_tool="true" visible="true" weight="0.22124863" />
       <window_info anchor="bottom" id="Version Control" order="5" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.47811815" weight="0.33296824" />
-      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.50547045" weight="0.22015335" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.5021882" visible="true" weight="0.22124863" />
       <window_info anchor="bottom" id="Android Profiler" order="8" sideWeight="0.49781182" weight="0.32968238" />
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
       <window_info anchor="bottom" id="Find" order="9" sideWeight="0.49835706" weight="0.32968238" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
-      <window_info anchor="right" id="Gradle" order="2" weight="0.32889125" />
+      <window_info anchor="right" id="Gradle" order="2" weight="0.32932165" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-<<<<<<< HEAD
-      <window_info anchor="right" id="Preview" order="4" weight="0.18656716" />
-=======
-      <window_info anchor="right" id="Preview" order="4" visible="true" weight="0.16471216" />
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
+      <window_info anchor="right" id="Preview" order="4" weight="0.1619256" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
-      <window_info anchor="right" id="Assistant" order="6" weight="0.6772429" />
+      <window_info anchor="right" id="Assistant" order="6" weight="0.32995737" />
     </layout>
   </component>
   <component name="XDebuggerManager">
@@ -945,40 +772,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-<<<<<<< HEAD
-=======
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-28/data/res/values/ids.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1083">
-          <caret line="57" column="42" selection-start-line="57" selection-start-column="42" selection-end-line="57" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-28/data/res/layout/activity_list_item.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-228" />
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-28/data/res/layout/simple_list_item_1.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-57" />
-      </provider>
-      <provider editor-type-id="android-designer2" />
-<<<<<<< HEAD
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/AddCookiesInterceptor.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main_navigation_menu.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="31" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-=======
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/AddCookiesInterceptor.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_a.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_b.xml" />
@@ -987,43 +780,28 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/fragment/BindView.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/fragment/C_Fragment.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/fragment/A_Fragment.java" />
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag1.xml">
-=======
     <entry file="file://$USER_HOME$/HybridApp/www/local.html" />
     <entry file="jar://$PROJECT_DIR$/app/libs/libDaumMapAndroid.jar!/net/daum/mf/map/n/api/NativeThread.class" />
     <entry file="jar://$PROJECT_DIR$/app/libs/libDaumMapAndroid.jar!/net/daum/android/map/MapView.class" />
     <entry file="file://$PROJECT_DIR$/gradle.properties" />
     <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/android/os/Handler.java">
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
           <caret line="105" selection-start-line="105" selection-end-line="105" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
-<<<<<<< HEAD
-    <entry file="file://$USER_HOME$/HybridApp/www/local.html" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_sign_up.xml">
-=======
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/MapsActivity.java" />
     <entry file="file://$PROJECT_DIR$/build.gradle" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/MenuBar.java">
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="5" selection-end-column="1" />
         </state>
       </provider>
-<<<<<<< HEAD
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag2.xml">
-=======
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/release/res/values/google_maps_api.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -1033,7 +811,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/CusManigiActivity.java">
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="13" column="60" selection-start-line="13" selection-start-column="60" selection-end-line="13" selection-end-column="60" />
@@ -1042,19 +819,13 @@
           </folding>
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag3.xml">
-=======
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/SendDataSet.java">
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
           <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/77dc7a1c78820f81e3167f8d5cb7f25c/jars/classes.jar!/android/support/v7/app/AlertDialog.class" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/JsonArrayTask.java">
@@ -1064,13 +835,6 @@
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/MapsActivity.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/Frag1.java">
-=======
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/NetworkTask.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
@@ -1079,30 +843,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/SignUpActivity.java">
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
           <caret line="117" column="63" selection-start-line="117" selection-start-column="63" selection-end-line="117" selection-end-column="63" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/LoginActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="77" column="58" selection-start-line="77" selection-start-column="58" selection-end-line="77" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -1141,10 +887,6 @@
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/77dc7a1c78820f81e3167f8d5cb7f25c/jars/classes.jar!/android/support/v7/app/AlertDialog.class" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/MapsActivity2.java">
-=======
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/main_logo.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -1166,15 +908,6 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_sign_up.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -1183,101 +916,25 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/app/src/debug/res/values/google_maps_api.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="46" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/activity/DBActiviyu.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/SignUpActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="632">
-          <caret line="117" column="63" selection-start-line="117" selection-start-column="63" selection-end-line="117" selection-end-column="63" />
-=======
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/Frag1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="33" column="10" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_cusmanigi.xml">
-<<<<<<< HEAD
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_maps2.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" column="18" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
-=======
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
           <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag2.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+        <state relative-caret-position="342">
+          <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/activity/DBActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/test.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="32" column="14" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/JsonArrayTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/db/DBOpenHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
-=======
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/Frag2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
+        <state relative-caret-position="589">
           <caret line="37" column="5" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1285,69 +942,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="97" column="22" selection-start-line="97" selection-start-column="22" selection-end-line="97" selection-end-column="22" />
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2211#3169#0" expanded="true" />
-            <element signature="e#3168#3169#0" expanded="true" />
-            <element signature="e#3652#3653#0" expanded="true" />
-            <element signature="e#3683#3684#0" expanded="true" />
-            <element signature="e#3895#3896#0" expanded="true" />
-            <element signature="e#3927#3928#0" expanded="true" />
-            <element signature="e#4337#4338#0" expanded="true" />
-            <element signature="e#4386#4387#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/db/DBTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="51" selection-start-line="14" selection-start-column="51" selection-end-line="14" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1254">
-          <caret line="90" column="50" selection-start-line="90" selection-start-column="50" selection-end-line="90" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-=======
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/Frag3.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="32" column="71" selection-start-line="32" selection-start-column="71" selection-end-line="32" selection-end-column="71" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag2.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/LoginActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="912">
-          <caret line="73" column="57" selection-start-line="73" selection-start-column="57" selection-end-line="73" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-=======
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag3.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="475">
@@ -1356,78 +950,119 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/Frag3.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_store.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5358">
-          <caret line="282" column="43" selection-start-line="282" selection-start-column="43" selection-end-line="282" selection-end-column="43" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1083">
-          <caret line="57" selection-start-line="57" selection-end-line="57" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/StoreActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="68" column="41" selection-start-line="68" selection-start-column="41" selection-end-line="68" selection-end-column="41" />
+        <state relative-caret-position="494">
+          <caret line="32" column="71" selection-start-line="32" selection-start-column="71" selection-end-line="32" selection-end-column="71" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="31" column="33" lean-forward="true" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/NetworkTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="24" column="46" lean-forward="true" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
-=======
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="33" column="17" lean-forward="true" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/black_radius.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/android/content/Intent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="6107" column="11" selection-start-line="6107" selection-start-column="11" selection-end-line="6107" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="77" column="69" selection-start-line="77" selection-start-column="69" selection-end-line="77" selection-end-column="69" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1929#4054#0" expanded="true" />
+            <element signature="e#4053#4054#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="722">
+          <caret line="38" column="31" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="31" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/StoreActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="41" column="62" selection-start-line="41" selection-start-column="62" selection-end-line="41" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="34" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1195">
+          <caret line="31" column="29" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1848#1865#0" expanded="true" />
+            <element signature="e#1867#1884#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag1.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="48" lean-forward="true" selection-start-line="13" selection-start-column="48" selection-end-line="13" selection-end-column="48" />
->>>>>>> 2c923405a6178b986f4be046e07cbf1bf60e3184
+        <state relative-caret-position="323">
+          <caret line="17" column="41" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="41" />
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="47" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_store.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="27" column="17" lean-forward="true" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/ticketzone/org/com/app_mngr/Frag1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="38" column="40" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1229#1401#0" expanded="true" />
+            <element signature="e#1400#1401#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
