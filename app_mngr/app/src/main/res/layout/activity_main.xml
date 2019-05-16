@@ -17,26 +17,40 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
-<RelativeLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-        <me.relex.circleindicator.CircleIndicator
-            android:id="@+id/indicator"
-            app:ci_drawable="@drawable/black_radius"
-            app:ci_height="7dp"
-            app:ci_width="7dp"
-            app:ci_margin="4dp"
+        <RelativeLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="48dp"/>
+            android:layout_height="match_parent">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vpPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+            <me.relex.circleindicator.CircleIndicator
+                android:id="@+id/indicator"
+                android:layout_marginTop="460dp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:ci_drawable="@drawable/black_radius"
+                app:ci_height="7dp"
+                app:ci_margin="4dp"
+                app:ci_width="7dp" />
 
-</RelativeLayout>
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vpPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom">
+
+           <Button
+               android:layout_width="match_parent"
+               android:layout_height="100dp"
+               android:text="결제완료"/>
+
+        </RelativeLayout>
         <ListView
             android:id="@+id/drawer"
             android:layout_width="240dp"

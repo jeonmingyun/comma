@@ -31,8 +31,8 @@ public class Frag3 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.frag3, container, false);
-        EditText tvLabel = (EditText) view.findViewById(R.id.editText);
-        tvLabel.setText(page + " -- " + title);
+        //EditText tvLabel = (EditText) view.findViewById(R.id.editText);
+        //tvLabel.setText(page + " -- " + title);
 
         return view;
     }

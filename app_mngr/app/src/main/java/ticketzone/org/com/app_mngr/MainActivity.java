@@ -84,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+
     //스와이프
     private static class MyPagerAdater extends FragmentPagerAdapter {
         private static int NUM_ITEMS = 3;
@@ -106,6 +108,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+
+
+
         @Override
         public int getCount() {
             return NUM_ITEMS;
@@ -116,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
             return "Page " + position;
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
