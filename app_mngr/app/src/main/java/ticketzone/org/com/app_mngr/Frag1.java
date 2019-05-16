@@ -1,5 +1,6 @@
 package ticketzone.org.com.app_mngr;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 public class Frag1 extends Fragment {
     private String title;
@@ -31,6 +33,14 @@ public class Frag1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.frag1, container, false);
+        ImageButton imageButton = view.findViewById(R.id.imagebutton);
+        imageButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getActivity(), StoreActivity.class);
+                startActivity(intent);
+            }
+        });
         //EditText tvLabel = view.findViewById(R.id.editText);
         //tvLabel.setText(page + " -- " + title);
 
