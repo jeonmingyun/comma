@@ -1,12 +1,14 @@
 package ticketzone.org.com.app_mngr;
 
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TabHost;
 
@@ -31,6 +33,13 @@ public class StoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
+
+        //toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0x00FFFFFF));
+        getSupportActionBar().setTitle("번호요");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         TabHost host=(TabHost)findViewById(R.id.store);
         host.setup();
@@ -95,6 +104,17 @@ public class StoreActivity extends AppCompatActivity {
         lineChart.setDescription(description);
         lineChart.animateY(2000, Easing.EaseInCubic);
         lineChart.invalidate();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case android.R.id.home:{
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
