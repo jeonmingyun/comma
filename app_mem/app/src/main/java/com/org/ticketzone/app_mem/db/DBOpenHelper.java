@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 public class DBOpenHelper extends SQLiteOpenHelper{
 
-    private static final int DB_VERSION = 5;
+    private static final int DB_VERSION = 7;
     private static final String DB_NAME = "SQLite.db";
     public static SQLiteDatabase mdb;
 
@@ -125,7 +125,7 @@ public class DBOpenHelper extends SQLiteOpenHelper{
 
     // Store
     public Cursor selectAllStore() {
-        mdb = this.getReadableDatabase();
+        mdb = this.getWritableDatabase();
         String sql = "select * from store";
         Cursor member_list = mdb.rawQuery(sql, null);
 
@@ -147,6 +147,7 @@ public class DBOpenHelper extends SQLiteOpenHelper{
                 values.put("owner_id", jobj.getString("owner_id"));
                 values.put("store_tel", jobj.getString("store_tel"));
                 values.put("store_time", jobj.getString("store_time"));
+                values.put("store_name", jobj.getString("store_name"));
                 values.put("store_intro", jobj.getString("store_intro"));
                 values.put("address_name", jobj.getString("address_name"));
 
