@@ -28,6 +28,7 @@ button:hover {
 	display: flex;
 	flex-direction: row;
 	white-space: nowrap;
+	margin-left: 20px;
 }
 
 .mngrStore {
@@ -63,8 +64,8 @@ button:hover {
 }
 
 .store_register {
-	width: 80px;
-	height: 80px;
+	/* width: 80px;
+	height: 80px; */
 	background: transparent;
 	border: none;
 }

@@ -4,6 +4,10 @@
 	padding: 0;
 }
 
+html, body {
+	height: 100%;
+}
+
 #suggest_form h2 {
 	margin-top: 50px;
 }
@@ -25,7 +29,7 @@
 	text-align: center;
 	height: 834px;
 }
-
+                     
 #inquiry_table {
 	display: inline-block;
 }

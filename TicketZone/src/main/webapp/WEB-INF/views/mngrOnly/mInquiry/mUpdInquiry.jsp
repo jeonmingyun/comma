@@ -23,7 +23,7 @@
 	<div class="table_wapper">
 	<h1>문의글 수정</h1>
 	
-	<!-- <form method="post" action="/mUpdInquiryForm"> -->
+<form method="post" action="/mUpdInquiryForm">
 		<input type="hidden" value="${InquiryUpd[0].board_no}" name="board_no">
 		
 		<table class="cus_show">
@@ -73,6 +73,6 @@
 		<input id="inq_uploadpath" type="hidden" name="inq_uploadpath" value="${file[0].inq_uploadpath}">
 		<input id="inq_filename" type="hidden" name="inq_filename" value="${file[0].inq_filename}">		
 		</c:if>
-	<!-- </form> -->
+</form>
 </body>
 </html>
