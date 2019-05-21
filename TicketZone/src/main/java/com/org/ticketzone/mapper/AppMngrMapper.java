@@ -14,4 +14,9 @@ public interface AppMngrMapper {
 	public StoreMenuVO[] menuList();
 	public CategorieVO[] categorieList();
 	public NumberTicketVO[] ticketList();
+	public void M_issue_ticket(NumberTicketVO vo);
+	public String M_codeSelect();
+	public void M_firstCode();
+	public void M_makeTicket(NumberTicketVO vo);
+	public void M_plusTicket(NumberTicketVO vo);
 }

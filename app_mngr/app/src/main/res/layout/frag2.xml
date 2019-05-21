@@ -2,24 +2,26 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="575dp"
-        android:paddingTop="10dp">
+        android:layout_width="350dp"
+        android:layout_height="400dp"
+        android:layout_marginBottom="30dp">
 
-        <ImageView
+        <ImageButton
+            android:id="@+id/imagebutton2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/joongang" />
         <TextView
+            android:id="@+id/test2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="중앙떡볶이"
-            android:textSize="40dp"
-            android:paddingTop="40dp"/>
+            android:textSize="40dp" />
 
     </RelativeLayout>
 

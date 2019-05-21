@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 public class DBOpenHelper extends SQLiteOpenHelper {
 
-    private static final int DB_VERSION = 4;
+    private static final int DB_VERSION = 7;
     private static final String DB_NAME = "SQLite.db";
     public static SQLiteDatabase mngrdb;
 
@@ -28,6 +28,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         db.execSQL(DBTable.Categorie.CREATE_QUERY);
         db.execSQL(DBTable.Store.CREATE_QUERY);
         db.execSQL(DBTable.StoreMenu.CREATE_QUERY);
+//        db.execSQL(DBTable.NumberTicket.CREATE_QUERY);
     }
 
     @Override
@@ -36,6 +37,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         db.execSQL(DBTable.Store.DROP_QUERY);
         db.execSQL(DBTable.Categorie.DROP_QUERY);
         db.execSQL(DBTable.Owner.DROP_QUERY);
+//        db.execSQL(DBTable.NumberTicket.DROP_QUERY);
         onCreate(db);
     }
     public Cursor selectAllOwner() {
@@ -66,10 +68,12 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     public Cursor selectAllStore() {
         mngrdb = this.getReadableDatabase();
         String sql = "select * from store";
-        Cursor member_list = mngrdb.rawQuery(sql, null);
+        Cursor store_list = mngrdb.rawQuery(sql, null);
 
-        return member_list;
+        Log.e("storeList", store_list.getCount()+"");
+        return store_list;
     }
+
 
     public void insertStore(JSONArray storeList) {
         mngrdb = this.getWritableDatabase();
@@ -136,6 +140,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         return member_list;
     }
 
+
     public void insertStoreMenu(JSONArray menuList) {
         mngrdb = this.getWritableDatabase();
 
@@ -180,12 +185,42 @@ public class DBOpenHelper extends SQLiteOpenHelper {
             }
         }
     }
+    // NumberTicket
+    public Cursor selectAllTicket() {
+        mngrdb = this.getReadableDatabase();
+        String sql = "select * from numberticket";
+        Cursor member_list = mngrdb.rawQuery(sql, null);
+
+        return member_list;
+    }
+
+    public void insertTicket(JSONArray categorieList) {
+        mngrdb = this.getWritableDatabase();
+
+        for ( int i = 0; i < categorieList.length(); i++) {
+            try {
+                JSONObject jobj = new JSONObject(categorieList.get(i).toString());
+                ContentValues values = new ContentValues();
+                values.put("ticket_code", jobj.getString("ticket_code"));
+                values.put("wait_number", jobj.getString("wait_number"));
+                values.put("the_number", jobj.getString("the_number"));
+                values.put("license_number", jobj.getString("license_number"));
+                values.put("member_id", jobj.getString("member_id"));
+                values.put("ticket_status", jobj.getString("ticket_status"));
+                values.put("string_status", jobj.getString("string_status"));
+                mngrdb.insert(DBTable.NumberTicket.TABLENAME, null, values);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     public void deleteAllTable(){
         mngrdb = this.getWritableDatabase();
         mngrdb.delete(DBTable.Store.TABLENAME,null,null);
         mngrdb.delete(DBTable.StoreMenu.TABLENAME,null,null);
         mngrdb.delete(DBTable.Categorie.TABLENAME,null,null);
         mngrdb.delete(DBTable.Owner.TABLENAME,null,null);
+        mngrdb.delete(DBTable.NumberTicket.TABLENAME, null,null);
 
     }
 

@@ -34,7 +34,7 @@
 	<insert id="makeTicket">
 	<![CDATA[
 		insert into number_ticket
-		(ticket_code, wait_number, the_number, license_number, member_tel, ticket_status)
+		(ticket_code, wait_number, the_number, license_number, member_id, ticket_status)
 		values(
 		(select (code1 || code2) + 1 as code
 		from make_code
@@ -44,7 +44,7 @@
 		1,				
 		#{the_number}, 
 		#{license_number}, 
-		#{member_tel}, 
+		#{member_id}, 
 		0)
 		]]>
 	</insert>
@@ -53,7 +53,7 @@
 	<insert id="plusTicket">
 	<![CDATA[
 		insert into number_ticket
-		(ticket_code, wait_number, the_number, license_number, member_tel, ticket_status)
+		(ticket_code, wait_number, the_number, license_number, member_id, ticket_status)
 		values(
 		(select (ticket_code + 1) as ticket_code
 		from (select ticket_code from number_ticket 
@@ -73,7 +73,7 @@
 		where rownum <= 1),
 		#{the_number}, 
 		#{license_number}, 
-		#{member_tel}, 
+		#{member_id}, 
 		0)
 		]]>
 	</insert>
@@ -107,7 +107,7 @@
 		set ticket_status = 2
 		where ticket_code like to_char(sysdate,'yyyymmdd') ||
 		(select license_number from store where license_number = #{license_number}) || '%'
-		and member_tel = #{member_tel}
+		and member_id = #{member_id}
 	]]>
 	</update>
 	<!-- 부재중 -->
@@ -117,7 +117,7 @@
 		set ticket_status = 3
 		where ticket_code like to_char(sysdate,'yyyymmdd') ||
 		(select license_number from store where license_number = #{license_number}) || '%'
-		and member_tel = #{member_tel}
+		and member_id = #{member_id}
 	]]>
 	</update>
 	<!-- 취소나 부재시 티켓업데이트 -->
@@ -137,7 +137,7 @@
 		where to_number(ticket_code) >= 
 		(select to_number(ticket_code) from number_ticket where ticket_code like to_char(sysdate,'yyyymmdd') ||
 		(select license_number from store where license_number = #{license_number}) || '%'
-		and member_tel = #{member_tel})
+		and member_id = #{member_id})
 		and ticket_code like to_char(sysdate,'yyyymmdd') ||
 		(select license_number from store where license_number = #{license_number}) || '%')
 	]]>
@@ -200,7 +200,7 @@
 	<select id="waitList"
 		resultType="com.org.ticketzone.domain.NumberTicketVO">
 		select substr(ticket_code,19) as ticket_code, wait_number,
-		the_number, license_number, member_tel, ticket_status number_ticket
+		the_number, license_number, member_id, ticket_status number_ticket
 		from number_ticket
 		where license_number = #{license_number}
 		order by

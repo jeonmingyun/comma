@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -33,21 +34,23 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_login);
         mDBHelper = new DBOpenHelper(this);
 
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo("ticketzone.org.com.app_mngr", PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+
+//        try {
+//            PackageInfo info = getPackageManager().getPackageInfo("ticketzone.org.com.app_mngr", PackageManager.GET_SIGNATURES);
+//            for (Signature signature : info.signatures) {
+//                MessageDigest md = MessageDigest.getInstance("SHA");
+//                md.update(signature.toByteArray());
+//                Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+//            }
+//        } catch (PackageManager.NameNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//        }
 
         et_owner_id = (EditText) findViewById(R.id.owner_id);
         et_owner_password = (EditText) findViewById(R.id.owner_password);
@@ -81,6 +84,8 @@ public class LoginActivity extends AppCompatActivity {
                                         mDBHelper.insertCategorie(new JSONArray(jsonArray.get(1).toString()));
                                         mDBHelper.insertStoreMenu(new JSONArray(jsonArray.get(3).toString()));
                                         mDBHelper.insertStore(new JSONArray(jsonArray.get(2).toString()));
+//                                        mDBHelper.insertTicket(new JSONArray(jsonArray.get(4).toString()));
+
                                     } catch (JSONException e){
                                         e.printStackTrace();
                                     }
@@ -90,6 +95,7 @@ public class LoginActivity extends AppCompatActivity {
                             jat.execute(sds);
 
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
 //                            //owner_id값 송신
 //                            intent.putExtra("id",owner_id);
                             startActivity(intent);
