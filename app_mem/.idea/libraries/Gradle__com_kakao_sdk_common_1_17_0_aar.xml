@@ -1,8 +1,23 @@
 <component name="libraryTable">
   <library name="Gradle: com.kakao.sdk:common:1.17.0@aar">
     <CLASSES>
+<<<<<<< HEAD
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/94a1fc6f9e4c5ef78524f3061da48dca/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/94a1fc6f9e4c5ef78524f3061da48dca/jars/classes.jar!/" />
+=======
+<<<<<<< HEAD
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d27a7fd33ebe7738f259262ed39ba236/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d27a7fd33ebe7738f259262ed39ba236/jars/classes.jar!/" />
+=======
+<<<<<<< HEAD
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/68cae774782e950ba9abc6b0ed0dfc01/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/68cae774782e950ba9abc6b0ed0dfc01/jars/classes.jar!/" />
+=======
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/012639ee7f2f0e72955cf65f485190ab/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/012639ee7f2f0e72955cf65f485190ab/res" />
+>>>>>>> f50fd65ebbc190495930a30f582fefea46b9f7ba
+>>>>>>> 826c1d63d93e27cfffd99414857efd8a6fcb2c18
+>>>>>>> 279ee0d5d957ef2f1f385e42d673db44a01fef16
     </CLASSES>
     <JAVADOC />
     <SOURCES>

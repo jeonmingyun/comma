@@ -12,6 +12,7 @@
 
 </head>
 <body>
+<%@include file="/WEB-INF/views/include/Mngrheader.jsp"%>
 	<!-- 고객센터 문의글 작성 -->
 	<form name="suggest" method="post" action="/mInsertInquiry">
 		<div class="table_wapper">

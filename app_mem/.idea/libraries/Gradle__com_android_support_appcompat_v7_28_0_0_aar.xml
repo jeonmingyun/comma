@@ -1,11 +1,35 @@
 <component name="libraryTable">
   <library name="Gradle: com.android.support:appcompat-v7:28.0.0@aar">
     <ANNOTATIONS>
+<<<<<<< HEAD
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3e481446c677da89462989d0a1de6dcd/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3e481446c677da89462989d0a1de6dcd/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3e481446c677da89462989d0a1de6dcd/jars/classes.jar!/" />
+=======
+<<<<<<< HEAD
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5caadbd8c1e7d32a6656ed457372b8da/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5caadbd8c1e7d32a6656ed457372b8da/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5caadbd8c1e7d32a6656ed457372b8da/res" />
+=======
+<<<<<<< HEAD
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5e33927097f14b631b1e25993fc78b64/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5e33927097f14b631b1e25993fc78b64/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5e33927097f14b631b1e25993fc78b64/res" />
+=======
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3cfede86e3aca19fa917c5c5ffcf0373/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3cfede86e3aca19fa917c5c5ffcf0373/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3cfede86e3aca19fa917c5c5ffcf0373/res" />
+>>>>>>> f50fd65ebbc190495930a30f582fefea46b9f7ba
+>>>>>>> 826c1d63d93e27cfffd99414857efd8a6fcb2c18
+>>>>>>> 279ee0d5d957ef2f1f385e42d673db44a01fef16
     </CLASSES>
     <JAVADOC />
     <SOURCES />

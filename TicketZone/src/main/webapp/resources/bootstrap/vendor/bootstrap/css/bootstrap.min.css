@@ -7991,8 +7991,15 @@ supports ((position:-webkit-sticky ) or (position:sticky )){ .
 }
 
 .p-5 {
-	padding: 3rem !important
+	padding: 3rem !important;
 }
+
+/* .py-5 {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	left: 0;
+} */
 
 .pt-5, .py-5 {
 	padding-top: 2rem !important

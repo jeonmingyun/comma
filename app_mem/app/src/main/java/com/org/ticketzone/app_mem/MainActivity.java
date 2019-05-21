@@ -1,60 +1,119 @@
 package com.org.ticketzone.app_mem;
 
+import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
+import com.org.ticketzone.app_mem.listViewAdapter.CustomAdapter;
+import com.org.ticketzone.app_mem.vo.StoreVO;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    Toolbar toolbar;
-    DrawerLayout dlDrawer;
-    ActionBarDrawerToggle dtToggle;
-    ListView listview = null;
+    private Toolbar toolbar;
+    private DrawerLayout dlDrawer;
+    private ActionBarDrawerToggle dtToggle;
+    private ListView listview = null, storeListView;
     private DBOpenHelper mDBHelper;
-    private List storeList;
+    private ArrayList<StoreVO> storeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mDBHelper = new DBOpenHelper(this);
 
-        toolbar();
-        tabHost();
+        toolbar(); // menu toolbar
+        tabHost(); // LinearLayout 페이지 바꿔끼우기
+        selectAllStore(); // storeList = store table data select
+//        Log.e("eee", storeList.toString());
+        storeList(); // store tab에서 store list를 보여줌
     }
 
     // store list 생성
     protected void storeList() {
+        storeListView = (ListView)findViewById(R.id.store_list_view);
+        CustomAdapter<StoreVO> storeAdapter;
+
+        Toast.makeText(this, "storeList", Toast.LENGTH_SHORT).show();
+        storeAdapter = new CustomAdapter<StoreVO>(storeList) {
+            @Override
+            public View getView(int idx, View view, ViewGroup parent) {
+                view = getLayoutInflater().inflate(R.layout.store_list_item, null);
+
+//                ImageView storeImg = (ImageView)view.findViewById(R.id.store_img);
+                TextView storeName = (TextView)view.findViewById(R.id.store_name);
+                TextView store_address = (TextView)view.findViewById(R.id.store_address);
+                TextView waiting = (TextView)view.findViewById(R.id.waiting);
+                TextView bluetooth = (TextView)view.findViewById(R.id.bluetooth);
+                Button tagBtn = (Button)view.findViewById(R.id.tag_btn);
+
+//                storeImg.setBackgroundDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_launcher_background));
+                storeName.setText(storeList.get(idx).getStore_name());
+                store_address.setText(storeList.get(idx).getAddress_name());
+                waiting.setText("02");
+                bluetooth.setText("bluetooth status");
+                tagBtn.setText("발급 가능");
+
+                return view;
+            }
+        };
+
+        storeListView.setAdapter(storeAdapter);
+
+    }
+
+    private void selectAllStore() {
         Cursor cursor = mDBHelper.selectAllStore();
-        storeList = new ArrayList();
+        storeList = new ArrayList<>();
+        StoreVO storeVO;
 
         if(cursor.getCount() == 0) { // not found data
             Toast.makeText(this, "not found data", Toast.LENGTH_SHORT).show();
         }
 
         while(cursor.moveToNext()) {
+            Log.e("store_name", cursor.getString(8));
+            storeVO = new StoreVO();
+            storeVO.setLicense_number(cursor.getString(0));
+            storeVO.setR_name(cursor.getString(1));
+            storeVO.setMax_number(cursor.getString(2));
+            storeVO.setStore_status(cursor.getInt(3));
+            storeVO.setCate_code(cursor.getString(4));
+            storeVO.setOwner_id(cursor.getString(5));
+            storeVO.setStore_tel(cursor.getString(6));
+            storeVO.setStore_time(cursor.getString(7));
+            storeVO.setStore_name(cursor.getString(8));
+            storeVO.setStore_intro(cursor.getString(9));
+            storeVO.setAddress_name(cursor.getString(10));
 
+            storeList.add(storeVO);
         }
     }
 

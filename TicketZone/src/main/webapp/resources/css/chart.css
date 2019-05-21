@@ -1,19 +1,22 @@
 * {
 	margin: 0;
 	padding: 0;
-
 }
 
-h2 {
-	margin-top: 50px;
+body {
+	background-color: #fafafa !important; 
+}
+
+.chart_form h1 {
 	text-align: center;
-}
-
-.divider_1 .line {
-	width: 160px;
-	margin: 0 auto 60px; 
-	padding: 10px 0px 15px 0px;
-	border-bottom: 1px dashed #ccc;
+	margin: 50px auto;
+	font-size: 14px;
+	font-weight: normal;
+	text-align: center;
+	padding: 13px 0;
+	border-top: 1px solid #343a40;
+	border-bottom: 1px solid #343a40;
+	width: 250px; height: 100%;
 }
 
 /* 차트 테이블 */
@@ -44,7 +47,15 @@ h2 {
 	position:absolute;
 	width:800px;
 	height: 310px;
-	border: 1px solid green;
+	/* border: 1px solid green; */
+	background-color: #ffffff; 
+}
+
+/* < 이전버튼 다음버튼 > */ 
+#prev, #next {
+	background: transparent;
+	border: none;
+	color: #718dff;
 }
 
 /* 팀단위 */
@@ -53,7 +64,14 @@ h2 {
   	width:300px;
   	left:850px;
   	height:150px;
-  	border: 1px solid red;
+  	border-left: 3px solid #718dff;
+  	background-color: #ffffff; 
+}
+
+#chart_form h4 {
+	font-size: 20px;
+	font-weight: normal;
+	
 }
 
 /* 대기자 */
@@ -63,5 +81,6 @@ h2 {
 	width:300px;
 	left:850px;
 	height: 150px;
-	border: 1px solid gold;
+	border-left: 3px solid #718dff;
+	background-color: #ffffff; 
 }
