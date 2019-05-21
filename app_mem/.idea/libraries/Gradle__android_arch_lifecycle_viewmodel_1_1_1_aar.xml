@@ -2,12 +2,17 @@
   <library name="Gradle: android.arch.lifecycle:viewmodel:1.1.1@aar">
     <CLASSES>
 <<<<<<< HEAD
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a97bb259f83a2df38e1abaa4142bde6c/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a97bb259f83a2df38e1abaa4142bde6c/res" />
+=======
+<<<<<<< HEAD
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/687dff38da45819b1bf37da76d5ec0b5/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/687dff38da45819b1bf37da76d5ec0b5/res" />
 =======
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a69342debdb9fd10ffdef406122c9cea/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a69342debdb9fd10ffdef406122c9cea/res" />
 >>>>>>> f50fd65ebbc190495930a30f582fefea46b9f7ba
+>>>>>>> 826c1d63d93e27cfffd99414857efd8a6fcb2c18
     </CLASSES>
     <JAVADOC />
     <SOURCES>

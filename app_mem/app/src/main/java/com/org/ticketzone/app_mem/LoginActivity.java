@@ -94,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                     protected void onPostExecute(JSONArray jsonArray) {
                         super.onPostExecute(jsonArray);
                         try {
+                            Log.e("idx 3", jsonArray.get(3).toString());
                             mDBHelper.insertMember(ID, NICKNAME, BIRTH, GENDER, APP_RANGE);
                             mDBHelper.insertOwner(new JSONArray(jsonArray.get(0).toString()));
                             mDBHelper.insertCategorie(new JSONArray(jsonArray.get(1).toString()));

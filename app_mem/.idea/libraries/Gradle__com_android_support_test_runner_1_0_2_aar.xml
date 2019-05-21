@@ -2,12 +2,17 @@
   <library name="Gradle: com.android.support.test:runner:1.0.2@aar">
     <CLASSES>
 <<<<<<< HEAD
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8c3f21aebad51868ef80157eaafd2a07/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8c3f21aebad51868ef80157eaafd2a07/res" />
+=======
+<<<<<<< HEAD
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c938ae870a22ace86440cf73b40e66b9/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c938ae870a22ace86440cf73b40e66b9/jars/classes.jar!/" />
 =======
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/51e0b5a48aae916e9e6576dec9801a82/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/51e0b5a48aae916e9e6576dec9801a82/jars/classes.jar!/" />
 >>>>>>> f50fd65ebbc190495930a30f582fefea46b9f7ba
+>>>>>>> 826c1d63d93e27cfffd99414857efd8a6fcb2c18
     </CLASSES>
     <JAVADOC />
     <SOURCES>
