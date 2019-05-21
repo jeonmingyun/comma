@@ -101,4 +101,26 @@ public final class DBTable {
         public static final String DROP_QUERY = "drop table if exists " + TABLENAME;
     }
 
+    /*번호표*/
+    public static final class NumberTicket implements BaseColumns{
+        public static final String TICKET_CODE = "ticket_code";
+        public static final String WAIT_NUMBER = "wait_number";
+        public static final String THE_NUMBER = "the_number";
+        public static final String LICENSE_NUMBER = "license_number";
+        public static final String MEMBER_ID = "member_id";
+        public static final String TICKET_STATUS = "ticket_status";
+        public static final String STRING_STATUS = "string_status";
+        public static final String TABLENAME = "numberticket";
+        public static final String CREATE_QUERY = "create table " + TABLENAME + "("
+                + TICKET_CODE + " text primary key,"
+                + WAIT_NUMBER + " integer not null,"
+                + THE_NUMBER + " integer not null,"
+                + LICENSE_NUMBER + " text,"
+                + MEMBER_ID + " text,"
+                + TICKET_STATUS + " text,"
+                + STRING_STATUS + " text);";
+        public static final String DROP_QUERY = "drop table if exists " + TABLENAME;
+    }
+
+
 }

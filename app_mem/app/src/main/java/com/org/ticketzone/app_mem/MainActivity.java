@@ -1,7 +1,9 @@
 package com.org.ticketzone.app_mem;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -19,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView listview = null, storeListView;
     private DBOpenHelper mDBHelper;
     private ArrayList<StoreVO> storeList;
+    private Button tag_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,9 +81,40 @@ public class MainActivity extends AppCompatActivity {
 //                storeImg.setBackgroundDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_launcher_background));
                 storeName.setText(storeList.get(idx).getStore_name());
                 store_address.setText(storeList.get(idx).getAddress_name());
-                waiting.setText("02");
+                waiting.setText(storeList.size() + "명");
                 bluetooth.setText("bluetooth status");
                 tagBtn.setText("발급 가능");
+
+                tagBtn.setOnClickListener(new View.OnClickListener(){
+
+                    @Override
+                    public void onClick(View v) {
+                        final EditText et = new EditText(MainActivity.this);
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                        dialog.setTitle("인원 수 설정");
+                        dialog.setMessage("인원 수");
+                        dialog.setView(et);
+
+                        // 확인 버튼 이벤트
+                        dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String inputValue = et.getText().toString();
+                                Toast.makeText(MainActivity.this, inputValue + "명 입력되었습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                        //취소 버튼 이벤트
+                        dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        dialog.show();
+
+                    }
+                });
 
                 return view;
             }
