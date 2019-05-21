@@ -62,8 +62,6 @@ $(document).ready(function(){
 						store_note : store_note,
 						menu_cate : menu_cate
 				};
-				
-										
 			});
 			
 			$.ajax({
@@ -96,6 +94,7 @@ $(document).ready(function(){
 		}); */
 		
 		$("#DeleteMenu").click(function(){
+
 			var tdArr = [];
 			var checkbox = $("input[name='selectMenu']:checked");
 			var license_number = $("input[name='license_number']").val();

@@ -18,6 +18,7 @@
             android:background="#00FFFFFF"
             android:src="@drawable/house" />
         <TextView
+            android:id="@+id/test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="맛있는 집"

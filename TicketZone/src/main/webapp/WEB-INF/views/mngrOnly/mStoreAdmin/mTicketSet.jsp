@@ -12,10 +12,9 @@
 </head>
 <body>
 <%@include file="/WEB-INF/views/include/Mngrheader.jsp"%>
-<%@include file="/WEB-INF/views/include/storeAdmin.jsp" %>
+<%@include file="/WEB-INF/views/include/side.jsp" %>
 <h1>번호표 설정 페이지</h1>
 ${store[0].license_number}
 <input type="hidden" name="${license_number}" id="${license_number}">
-<%@include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>

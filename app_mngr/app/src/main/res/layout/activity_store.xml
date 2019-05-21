@@ -48,6 +48,7 @@
                     android:background="#FF000000" />
 
                 <TextView
+                    android:id="@+id/store_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="left"
@@ -56,6 +57,7 @@
                     android:textStyle="bold" />
 
                 <ImageView
+                    android:id="@+id/store_image"
                     android:layout_width="500dp"
                     android:layout_height="300dp"
                     android:layout_gravity="center"
@@ -70,6 +72,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/wait_number"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -137,6 +140,7 @@
                         android:padding="1dp">
 
                         <TextView
+                            android:id="@+id/t_wait"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="1dp"
@@ -146,6 +150,7 @@
                             android:textSize="12sp" />
 
                         <TextView
+                            android:id="@+id/t_absence"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="1dp"
@@ -155,6 +160,7 @@
                             android:textSize="12sp" />
 
                         <TextView
+                            android:id="@+id/t_cancel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="1dp"
@@ -164,6 +170,7 @@
                             android:textSize="12sp" />
 
                         <TextView
+                            android:id="@+id/t_success"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="1dp"
@@ -291,15 +298,42 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:text="전만규니"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/chart"
+                    android:text="번호표 발급"
+                    android:textSize="30dp"
+                    android:gravity="center"
+                    android:textStyle="bold"/>
+                <EditText
+                    android:id="@+id/member_tel"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content"
+                    android:hint="전화번호"/>
+                <EditText
+                    android:id="@+id/the_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="인원수"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="성명"/>
+                <Button
+                    android:id="@+id/issue_ticket"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="발급"/>
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="left"-->
+                    <!--android:text="전만규니"-->
+                    <!--android:textSize="20dp"-->
+                    <!--android:textStyle="bold" />-->
+
+                <!--<com.github.mikephil.charting.charts.LineChart-->
+                    <!--android:id="@+id/chart"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent" />-->
             </LinearLayout>
         </FrameLayout>
 

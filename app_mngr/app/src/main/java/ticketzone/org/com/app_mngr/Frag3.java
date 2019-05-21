@@ -11,7 +11,7 @@ import android.widget.EditText;
 public class Frag3 extends Fragment {
     private String title;
     private int page;
-
+    private ActivityManager am = ActivityManager.getInstance();
     public static Frag3 newInstance(int page, String title) {
         Frag3 frag3 = new Frag3();
         Bundle args = new Bundle();
@@ -26,6 +26,7 @@ public class Frag3 extends Fragment {
         super.onCreate(savedInstanceState);
         page = getArguments().getInt("someInt", 0);
         title = getArguments().getString("someTitle");
+        am.addActivity(getActivity());
     }
 
     @Override

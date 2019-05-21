@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.org.ticketzone.domain.NumberTicketVO;
 import com.org.ticketzone.domain.OwnerVO;
 import com.org.ticketzone.service.AppMngrService;
 import com.org.ticketzone.service.OwnerService;
@@ -66,17 +67,38 @@ public class MngrAppHomeController {
    @RequestMapping(value = "/mngr_db_login", method = RequestMethod.POST)
 	public JSONArray mngr_db_login(@RequestBody OwnerVO o) {
 		JSONArray arr = new JSONArray();
+		String owner_id = o.getOwner_id();
+		
 		arr.add(appMngrService.ownerList());
 		arr.add(appMngrService.categorieList());
-		arr.add(appMngrService.memberList());
-		arr.add(appMngrService.storeList());
+//		arr.add(appMngrService.memberList());
+		arr.add(appMngrService.storeList(owner_id));
 		arr.add(appMngrService.menuList());
 		arr.add(appMngrService.ticketList());
-		
+		System.out.println(appMngrService.storeList(owner_id));
 		return arr;
 	}
    
-   
+   //번호표 발급
+   @ResponseBody
+   @RequestMapping(value = "/M_issue_ticket", method = RequestMethod.POST)
+   public String id_check(@RequestBody NumberTicketVO vo) {
+//	   appMngrService.M_issue_ticket(vo);
+	   String codeMaker = appMngrService.M_codeSelect();
+		System.out.println(codeMaker + "code");
+		System.out.println(vo + "ticket");
+		if (codeMaker.equals("not")) {
+			System.out.println("코드를 발급해야합니다!");
+			appMngrService.M_firstCode();
+			appMngrService.M_makeTicket(vo);
+			
+		} else {
+			System.out.println("이미코드가 있습니다!");
+			appMngrService.M_plusTicket(vo);
+		}
+	   
+      return "1";
+   }
 
    /* json객체로 return 예시 / JsonArrayTask 사용*/
 //   @ResponseBody

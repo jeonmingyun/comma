@@ -20,5 +20,6 @@ public class NumberTicketVO {
 	private int team;
 	private String today;
 	private String day;
+	private String string_status;
 }
 
