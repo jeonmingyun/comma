@@ -1,8 +1,6 @@
 package com.org.ticketzone.app_mem;
 
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -22,7 +20,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -30,12 +27,13 @@ import android.widget.Toast;
 
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
+import com.org.ticketzone.app_mem.Task.NetworkTask;
+import com.org.ticketzone.app_mem.Task.SendDataSet;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
 import com.org.ticketzone.app_mem.listViewAdapter.CustomAdapter;
 import com.org.ticketzone.app_mem.vo.StoreVO;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     private ListView listview = null, storeListView;
     private DBOpenHelper mDBHelper;
     private ArrayList<StoreVO> storeList;
-    private Button tag_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar(); // menu toolbar
         tabHost(); // LinearLayout 페이지 바꿔끼우기
         selectAllStore(); // storeList = store table data select
-//        Log.e("eee", storeList.toString());
         storeList(); // store tab에서 store list를 보여줌
     }
 
@@ -65,11 +61,7 @@ public class MainActivity extends AppCompatActivity {
         storeListView = (ListView)findViewById(R.id.store_list_view);
         CustomAdapter<StoreVO> storeAdapter;
 
-        Toast.makeText(this, "storeList", Toast.LENGTH_SHORT).show();
         storeAdapter = new CustomAdapter<StoreVO>(storeList) {
-
-
-
             @Override
             public View getView(int idx, View view, ViewGroup parent) {
                 view = getLayoutInflater().inflate(R.layout.store_list_item, null);
@@ -96,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 tagBtn.setTag(idx);
                 tagBtn.setText("발급 가능");
 
+                // 발급 버튼 클릭
                 tagBtn.setOnClickListener(new View.OnClickListener(){
 
                     @Override
@@ -133,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, inputValue + "명 입력되었습니다.", Toast.LENGTH_SHORT).show();
                                 Intent numInfoIntent = new Intent(MainActivity.this, NumInfoActivity.class);
                                 //storeName.setText(store_name);
-                                Log.e("test",store_name);
                                 numInfoIntent.putExtra("storename",store_name);
                                 startActivity(numInfoIntent);
                             }

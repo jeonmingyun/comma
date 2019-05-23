@@ -1,4 +1,4 @@
-package com.org.ticketzone.app_mem;
+package com.org.ticketzone.app_mem.Task;
 
 public class SendDataSet {
     String key, value;
