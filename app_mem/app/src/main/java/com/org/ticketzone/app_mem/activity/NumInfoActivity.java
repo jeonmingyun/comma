@@ -1,4 +1,4 @@
-package com.org.ticketzone.app_mem;
+package com.org.ticketzone.app_mem.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -8,9 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import com.org.ticketzone.app_mem.R;
 
 public class NumInfoActivity extends AppCompatActivity {
 

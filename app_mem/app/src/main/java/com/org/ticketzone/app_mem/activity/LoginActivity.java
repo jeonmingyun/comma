@@ -1,4 +1,4 @@
-package com.org.ticketzone.app_mem;
+package com.org.ticketzone.app_mem.activity;
 
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -17,8 +17,9 @@ import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
-import com.org.ticketzone.app_mem.Task.JsonArrayTask;
-import com.org.ticketzone.app_mem.Task.SendDataSet;
+import com.org.ticketzone.app_mem.R;
+import com.org.ticketzone.app_mem.task.JsonArrayTask;
+import com.org.ticketzone.app_mem.task.SendDataSet;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
 
 import org.json.JSONArray;

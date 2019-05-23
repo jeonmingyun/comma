@@ -1,4 +1,4 @@
-package com.org.ticketzone.app_mem;
+package com.org.ticketzone.app_mem.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -27,8 +27,9 @@ import android.widget.Toast;
 
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
-import com.org.ticketzone.app_mem.Task.NetworkTask;
-import com.org.ticketzone.app_mem.Task.SendDataSet;
+import com.org.ticketzone.app_mem.R;
+import com.org.ticketzone.app_mem.task.NetworkTask;
+import com.org.ticketzone.app_mem.task.SendDataSet;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
 import com.org.ticketzone.app_mem.listViewAdapter.CustomAdapter;
 import com.org.ticketzone.app_mem.vo.StoreVO;
