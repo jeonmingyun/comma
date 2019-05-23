@@ -94,13 +94,14 @@ public class LoginActivity extends AppCompatActivity {
                     protected void onPostExecute(JSONArray jsonArray) {
                         super.onPostExecute(jsonArray);
                         try {
-                            Log.e("idx 3", jsonArray.get(3).toString());
+//                            Log.e("idx 3", jsonArray.get(5).toString());
                             mDBHelper.insertMember(ID, NICKNAME, BIRTH, GENDER, APP_RANGE);
                             mDBHelper.insertOwner(new JSONArray(jsonArray.get(0).toString()));
                             mDBHelper.insertCategorie(new JSONArray(jsonArray.get(1).toString()));
                             mDBHelper.insertStoreMenu(new JSONArray(jsonArray.get(4).toString()));
                             mDBHelper.insertStore(new JSONArray(jsonArray.get(3).toString()));
                             mDBHelper.insertCoordinates(new JSONArray(jsonArray.get(2).toString()));
+                            mDBHelper.insertTicket(new JSONArray(jsonArray.get(5).toString()));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

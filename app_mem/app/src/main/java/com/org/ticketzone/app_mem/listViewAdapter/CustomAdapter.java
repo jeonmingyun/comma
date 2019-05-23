@@ -21,7 +21,7 @@ public class CustomAdapter<T> extends BaseAdapter {
 
     @Override
     public Object getItem(int idx) {
-        return null;
+        return listItems.get(idx);
     }
 
     @Override

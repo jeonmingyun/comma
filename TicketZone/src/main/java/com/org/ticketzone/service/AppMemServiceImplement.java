@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.org.ticketzone.domain.CategorieVO;
 import com.org.ticketzone.domain.CoordinatesVO;
+import com.org.ticketzone.domain.NumberTicketVO;
 import com.org.ticketzone.domain.OwnerVO;
 import com.org.ticketzone.domain.StoreMenuVO;
 import com.org.ticketzone.domain.StoreVO;
@@ -39,6 +40,31 @@ public class AppMemServiceImplement implements AppMemService {
 	@Override
 	public CoordinatesVO[] coordinatesList() {
 		return mapper.coordinatesList();
+	}
+
+	@Override
+	public String Mem_codeSelect(NumberTicketVO vo) {
+		return mapper.Mem_codeSelect(vo);
+	}
+
+	@Override
+	public void Mem_firstCode(NumberTicketVO vo) {
+		mapper.Mem_firstCode(vo);
+	}
+
+	@Override
+	public void Mem_makeTicket(NumberTicketVO vo) {
+		mapper.Mem_makeTicket(vo);
+	}
+
+	@Override
+	public void Mem_plusTicket(NumberTicketVO vo) {
+		mapper.Mem_plusTicket(vo);
+	}
+
+	@Override
+	public NumberTicketVO[] NumberTicketList() {
+		return mapper.NumberTicketList();
 	}
 
 }

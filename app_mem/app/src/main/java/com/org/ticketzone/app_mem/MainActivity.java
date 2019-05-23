@@ -67,28 +67,42 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(this, "storeList", Toast.LENGTH_SHORT).show();
         storeAdapter = new CustomAdapter<StoreVO>(storeList) {
+
+
+
             @Override
             public View getView(int idx, View view, ViewGroup parent) {
                 view = getLayoutInflater().inflate(R.layout.store_list_item, null);
+                String license_number = storeList.get(idx).getLicense_number();
+                Cursor cursor = mDBHelper.countTeam(license_number);
+                String count = "";
 
+                while(cursor.moveToNext()){
+                    count = cursor.getString(0);
+                }
 //                ImageView storeImg = (ImageView)view.findViewById(R.id.store_img);
                 TextView storeName = (TextView)view.findViewById(R.id.store_name);
                 TextView store_address = (TextView)view.findViewById(R.id.store_address);
                 TextView waiting = (TextView)view.findViewById(R.id.waiting);
                 TextView bluetooth = (TextView)view.findViewById(R.id.bluetooth);
-                Button tagBtn = (Button)view.findViewById(R.id.tag_btn);
+                final Button tagBtn = (Button)view.findViewById(R.id.tag_btn);
 
 //                storeImg.setBackgroundDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_launcher_background));
                 storeName.setText(storeList.get(idx).getStore_name());
                 store_address.setText(storeList.get(idx).getAddress_name());
-                waiting.setText(storeList.size() + "명");
+                waiting.setText(count + "팀");
                 bluetooth.setText("bluetooth status");
+                view.setTag(idx);
+                tagBtn.setTag(idx);
                 tagBtn.setText("발급 가능");
 
                 tagBtn.setOnClickListener(new View.OnClickListener(){
 
                     @Override
                     public void onClick(View v) {
+                        v.setTag(tagBtn.getTag());
+                        int btnIndex = (Integer)tagBtn.getTag();
+                        final String license = storeList.get(btnIndex).getLicense_number();
                         final EditText et = new EditText(MainActivity.this);
                         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
                         dialog.setTitle("인원 수 설정");
@@ -100,6 +114,20 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String inputValue = et.getText().toString();
+                                Cursor cursor = mDBHelper.selectAllMember();
+                                String member_id = "";
+                                while(cursor.moveToNext()){
+                                    member_id = cursor.getString(0);
+                                }
+
+                                NetworkTask networkTask = new NetworkTask("Mem_issue_ticket") {
+
+                                };
+                                SendDataSet sds1 = new SendDataSet("member_id", member_id);
+                                SendDataSet sds2 = new SendDataSet("the_number", inputValue);
+                                SendDataSet sds3 = new SendDataSet("license_number", license);
+                                
+                                networkTask.execute(sds1, sds2, sds3);
                                 Toast.makeText(MainActivity.this, inputValue + "명 입력되었습니다.", Toast.LENGTH_SHORT).show();
                             }
                         });

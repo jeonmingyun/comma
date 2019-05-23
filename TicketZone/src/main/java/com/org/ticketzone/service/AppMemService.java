@@ -13,5 +13,10 @@ public interface AppMemService {
 	public StoreMenuVO[] menuList();
 	public CategorieVO[] categorieList();
 	public CoordinatesVO[] coordinatesList();
+	public NumberTicketVO[] NumberTicketList();
+	public String Mem_codeSelect(NumberTicketVO vo);
+	public void Mem_firstCode(NumberTicketVO vo);
+	public void Mem_makeTicket(NumberTicketVO vo);
+	public void Mem_plusTicket(NumberTicketVO vo);
 
 }
