@@ -2,6 +2,7 @@
 <%@ page session="false" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,11 +24,12 @@
 
 <body>
 	<%@include file="/WEB-INF/views/include/Mngrheader.jsp"%>
-<div class="chart_form">
+	<div>
 	
-	<h1>일별 시간대별 인원통계</h1>
+	<h2>일별 시간대별 인원통계</h2>
 	<div class="divider_1"><div class="line"></div></div>
-
+	
+	
 	<div>
 		<table id="chart_table">
 			<tbody>
@@ -64,12 +66,13 @@
 			<h4>팀</h4>
 		</div>
 		
-		<div id="waiting"> <!--대기자--> 
+		<div id="waiting"> <!--대기자-->
 			<h4>대기자</h4> 
 		</div>
 	</div>	<!-- chart_form -->
 </div>
 
+<%@include file="include/footer.jsp"%>
 <!-- =======
 <h1>일별 시간대별 인원통계</h1>
 <div id="today" style="text-align:center;"></div>

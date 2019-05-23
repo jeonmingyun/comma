@@ -21,7 +21,6 @@
 </script>
 </head>
 <body>
-<%@include file="/WEB-INF/views/include/Mngrheader.jsp"%>
 	<div class="minquiry_wapper">
 		<div class="page_title">
 			<h1>건의사항</h1>

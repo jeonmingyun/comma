@@ -11,7 +11,7 @@
 <!-- <link href="../resources/css/header.css" rel="stylesheet" /> -->
 
 <!-- Bootstrap core CSS -->
-<link href="../resources/bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../resources/bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
 <link href="../resources/bootstrap/css/modern-business.css" rel="stylesheet">

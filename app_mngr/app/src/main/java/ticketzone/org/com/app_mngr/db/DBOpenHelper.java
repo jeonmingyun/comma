@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,7 +12,7 @@ import org.json.JSONObject;
 
 public class DBOpenHelper extends SQLiteOpenHelper {
 
-    private static final int DB_VERSION = 7;
+    private static final int DB_VERSION = 5;
     private static final String DB_NAME = "SQLite.db";
     public static SQLiteDatabase mngrdb;
 
@@ -23,31 +22,56 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.e("create table", "create table");
         db.execSQL(DBTable.Owner.CREATE_QUERY);
         db.execSQL(DBTable.Categorie.CREATE_QUERY);
+        db.execSQL(DBTable.Member.CREATE_QUERY);
         db.execSQL(DBTable.Store.CREATE_QUERY);
         db.execSQL(DBTable.StoreMenu.CREATE_QUERY);
-//        db.execSQL(DBTable.NumberTicket.CREATE_QUERY);
+        db.execSQL(DBTable.Number_ticket.CREATE_QUERY);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(DBTable.StoreMenu.DROP_QUERY);
-        db.execSQL(DBTable.Store.DROP_QUERY);
-        db.execSQL(DBTable.Categorie.DROP_QUERY);
         db.execSQL(DBTable.Owner.DROP_QUERY);
-//        db.execSQL(DBTable.NumberTicket.DROP_QUERY);
+        db.execSQL(DBTable.Categorie.DROP_QUERY);
+        db.execSQL(DBTable.Member.DROP_QUERY);
+        db.execSQL(DBTable.Store.DROP_QUERY);
+        db.execSQL(DBTable.StoreMenu.DROP_QUERY);
+        db.execSQL(DBTable.Number_ticket.DROP_QUERY);
         onCreate(db);
     }
-    public Cursor selectAllOwner() {
+    // Owner
+    public Cursor selectAllOwner(){
         mngrdb = this.getReadableDatabase();
         String sql = "select * from owner";
-        Cursor member_list = mngrdb.rawQuery(sql, null);
+        Cursor owner_list = mngrdb.rawQuery(sql, null);
 
-        return member_list;
+        return owner_list;
+    }
+    public boolean updateOwner(String owner_id, String owner_password, String owner_tel, String email){
+        mngrdb = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("owner_password", owner_password);
+        values.put("owner_tel", owner_tel);
+        values.put("email", email);
+
+        int result = mngrdb.update(DBTable.Owner.TABLENAME, values, "owner_id=?", new String[] {owner_id} );
+
+        if( result == 0)
+            return false; // error
+        else
+            return true; // success
     }
 
+    public boolean deleteOwner(String owner_id){
+        mngrdb = this.getWritableDatabase();
+
+        int result = mngrdb.delete(DBTable.Owner.TABLENAME, "owner_id=?", new String[] {owner_id} );
+        if( result == 0)
+            return false; // error
+        else
+            return true; // success
+    }
     public void insertOwner(JSONArray ownerList) {
         mngrdb = this.getWritableDatabase();
         for(int i = 0; i < ownerList.length(); i++) {
@@ -55,7 +79,9 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 JSONObject jobj = new JSONObject(ownerList.get(i).toString());
                 ContentValues values = new ContentValues();
                 values.put("owner_id", jobj.getString("owner_id"));
-
+                values.put("owner_password", jobj.getString("owner_password"));
+                values.put("owner_name", jobj.getString("owner_name"));
+                values.put("owner_tel", jobj.getString("owner_tel"));
                 mngrdb.insert(DBTable.Owner.TABLENAME, null, values);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -63,17 +89,42 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         }
     }
 
+    //Categorie
+    public Cursor selectAllCategorie() {
+        mngrdb = this.getReadableDatabase();
+        String sql = "select * from categorie";
+        Cursor cate_list = mngrdb.rawQuery(sql, null);
 
-    // Store
-    public Cursor selectAllStore() {
+        return cate_list;
+    }
+
+    public void insertCategorie(JSONArray categorieList) {
+        mngrdb = this.getWritableDatabase();
+
+        for ( int i = 0; i < categorieList.length(); i++) {
+            try {
+                JSONObject jobj = new JSONObject(categorieList.get(i).toString());
+                ContentValues values = new ContentValues();
+                values.put("cate_code", jobj.getString("cate_code"));
+                values.put("cate_name", jobj.getString("cate_name"));
+
+                mngrdb.insert(DBTable.Categorie.TABLENAME, null, values);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
+    //Store
+    public Cursor selectAllStore(){
         mngrdb = this.getReadableDatabase();
         String sql = "select * from store";
         Cursor store_list = mngrdb.rawQuery(sql, null);
 
-        Log.e("storeList", store_list.getCount()+"");
         return store_list;
     }
-
 
     public void insertStore(JSONArray storeList) {
         mngrdb = this.getWritableDatabase();
@@ -88,7 +139,6 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 values.put("store_status", jobj.getString("store_status"));
                 values.put("cate_code", jobj.getString("cate_code"));
                 values.put("owner_id", jobj.getString("owner_id"));
-                values.put("store_name", jobj.getString("store_name"));
                 values.put("store_tel", jobj.getString("store_tel"));
                 values.put("store_time", jobj.getString("store_time"));
                 values.put("store_intro", jobj.getString("store_intro"));
@@ -111,7 +161,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         else
             return true; // success
     }
-
+    //매장 전체수정
     public boolean updateStore(String license_number, String max_number, String store_status, String cate_code, String store_tel, String store_time, String store_intro, String address_name) {
         mngrdb = this.getWritableDatabase();
         ContentValues values =  new ContentValues();
@@ -130,17 +180,48 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         else
             return true; // success
     }
+    //매장 번호표 설정(최대 발급인원 설정)
+    public boolean updateMaxNumber(String license_number, String max_number){
+        mngrdb = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("max_number", max_number);
+
+        int result = mngrdb.update(DBTable.Store.TABLENAME, values, "license_number=?",new String[] {license_number});
+
+        if( result == 0)
+            return false; // error
+        else
+            return true; // success
+    }
+    //매장 상태 설정(번호표 활성화 비활성화)
+    public boolean updateStatus(String license_number, String store_status){
+        mngrdb = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("store_status", store_status);
+        int result = mngrdb.update(DBTable.Store.TABLENAME, values, "license_number=?",new String[] {license_number});
+
+        if( result == 0)
+            return false; // error
+        else
+            return true; // success
+    }
 
     // StoreMenu
     public Cursor selectAllStoreMenu() {
         mngrdb = this.getReadableDatabase();
         String sql = "select * from store_menu";
-        Cursor member_list = mngrdb.rawQuery(sql, null);
+        Cursor menu_list = mngrdb.rawQuery(sql, null);
 
-        return member_list;
+        return menu_list;
     }
+    //메뉴의 카테고리 가져오기
+    public Cursor selectMenuCate(){
+        mngrdb = this.getReadableDatabase();
+        String sql = ""; // 수정해야함
+        Cursor cate_list = mngrdb.rawQuery(sql,null);
 
-
+        return cate_list;
+    }
     public void insertStoreMenu(JSONArray menuList) {
         mngrdb = this.getWritableDatabase();
 
@@ -149,6 +230,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 JSONObject jobj = new JSONObject(menuList.get(i).toString());
                 ContentValues values = new ContentValues();
                 values.put("menu_code", jobj.getString("menu_code"));
+                values.put("menu_cate", jobj.getString("menu_cate"));
                 values.put("menu_name", jobj.getString("menu_name"));
                 values.put("menu_price", jobj.getString("menu_price"));
                 values.put("store_note", jobj.getString("store_note"));
@@ -160,68 +242,32 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         }
     }
 
-    // Categorie
-    public Cursor selectAllCategorie() {
-        mngrdb = this.getReadableDatabase();
-        String sql = "select * from categorie";
-        Cursor member_list = mngrdb.rawQuery(sql, null);
-
-        return member_list;
-    }
-
-    public void insertCategorie(JSONArray categorieList) {
+    public boolean deleteStoreMenu(String menu_code){
         mngrdb = this.getWritableDatabase();
 
-        for ( int i = 0; i < categorieList.length(); i++) {
-            try {
-                JSONObject jobj = new JSONObject(categorieList.get(i).toString());
-                ContentValues values = new ContentValues();
-                values.put("cate_code", jobj.getString("cate_code"));
-                values.put("cate_name", jobj.getString("cate_name"));
+        int result = mngrdb.delete(DBTable.Store.TABLENAME, "menu_code=?", new String[] {menu_code} );
 
-                mngrdb.insert(DBTable.Categorie.TABLENAME, null, values);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
+        if( result == 0)
+            return false; // error
+        else
+            return true; // success
     }
-    // NumberTicket
-    public Cursor selectAllTicket() {
-        mngrdb = this.getReadableDatabase();
-        String sql = "select * from numberticket";
-        Cursor member_list = mngrdb.rawQuery(sql, null);
-
-        return member_list;
-    }
-
-    public void insertTicket(JSONArray categorieList) {
+    //메뉴수정
+    public boolean updateMenu(String menu_code, String menu_cate, String menu_name, String menu_price, String store_note){
         mngrdb = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("menu_cate", menu_cate);
+        values.put("menu_name", menu_name);
+        values.put("menu_price", menu_price);
+        values.put("store_note", store_note);
 
-        for ( int i = 0; i < categorieList.length(); i++) {
-            try {
-                JSONObject jobj = new JSONObject(categorieList.get(i).toString());
-                ContentValues values = new ContentValues();
-                values.put("ticket_code", jobj.getString("ticket_code"));
-                values.put("wait_number", jobj.getString("wait_number"));
-                values.put("the_number", jobj.getString("the_number"));
-                values.put("license_number", jobj.getString("license_number"));
-                values.put("member_id", jobj.getString("member_id"));
-                values.put("ticket_status", jobj.getString("ticket_status"));
-                values.put("string_status", jobj.getString("string_status"));
-                mngrdb.insert(DBTable.NumberTicket.TABLENAME, null, values);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    public void deleteAllTable(){
-        mngrdb = this.getWritableDatabase();
-        mngrdb.delete(DBTable.Store.TABLENAME,null,null);
-        mngrdb.delete(DBTable.StoreMenu.TABLENAME,null,null);
-        mngrdb.delete(DBTable.Categorie.TABLENAME,null,null);
-        mngrdb.delete(DBTable.Owner.TABLENAME,null,null);
-        mngrdb.delete(DBTable.NumberTicket.TABLENAME, null,null);
+        int result = mngrdb.update(DBTable.StoreMenu.TABLENAME, values, "menu_code=?", new String[] {menu_code});
 
+        if(result == 0)
+            return false;
+        else
+            return true;
     }
+
 
 }

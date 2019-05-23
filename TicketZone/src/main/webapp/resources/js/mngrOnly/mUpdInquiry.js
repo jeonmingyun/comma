@@ -6,7 +6,6 @@ $(function() {
 	});
 	
 	$('#update').click(function() {
-
 		var title = $('#title').val();
 		var content = $('#content').val();
 

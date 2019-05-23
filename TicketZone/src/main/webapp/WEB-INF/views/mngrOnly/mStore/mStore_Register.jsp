@@ -19,50 +19,50 @@
 <body>
 	<%@include file="/WEB-INF/views/include/Mngrheader.jsp"%>
 	<section>
-
-		<form id="insert_Store" method="post" action="/mStore_Reg">
-			<div class="table_wapper">
+		<div class="table_wapper">
+			<form id="insert_Store" method="post" action="/mStore_Reg">
 				<h1>매장 등록</h1>
 				<table class="mngr_show">
 					<tbody>
 						<tr>
-							<th><label for="store_name">매장이름</label></th>
-							<td><input type="text" name="store_name" id="store_name"></td>
+							<th>매장이름</th>
+							<td><input type="text" name="store_name"></td>
 						</tr>
 						<tr>
-							<th><label for="cate">업종</label></th>
-							<td><select name="cate_code" id="cate">
+							<th>업종</th>
+							<td><select name="cate_code">
 									<c:forEach var="c" items="${cate}">
 										<option value="${c.cate_code}">${c.cate_name}</option>
 									</c:forEach>
 							</select></td>
 						<tr>
-							<th><label for="r_name">대표자 이름</label></th>
-							<td><input type="text" name="r_name" id="r_name"></td>
+							<th>대표자 이름</th>
+							<td><input type="text" name="r_name"></td>
 						</tr>
 						<tr>
-							<th><label for="license_number">사업자 번호</label></th>
-							<td><input type="text" name="license_number" id="license_number"></td>
+							<th>사업자 번호</th>
+							<td><input type="text" name="license_number"></td>
 						</tr>
 						<tr>
-							<th><label for="store_tel">매장 전화번호</label></th>
-							<td><input type="text" name="store_tel" id="store_tel"></td>
+							<th>매장 전화번호</th>
+							<td><input type="text" name="store_tel"></td>
 						</tr>
 						<tr>
 							<th>영업 시간</th>
-							<td><input type="time" id="time" name="aaa"> - <input
-								type="time" id="time2" name="bbb"></td>
+							<td><input type="time" id="time" name="aaa">
+								- <input type="time" id="time2" name="bbb">
+							</td>
 						</tr>
 						<tr>
-							<th><label for="store_intro">매장 소개</label></th>
-							<td><textarea name="store_intro" id="store_intro"></textarea></td>
+							<th>매장 소개</th>
+							<td><textarea name="store_intro"></textarea></td>
 						</tr>
 						<tr>
 							<th>매장 주소</th>
 							<td><input type="text" id="sample5_address"
-								name="address_name" placeholder="주소"> 
-								<input type="button" onclick="sample5_execDaumPostcode()"
-								id="address_search" value="검색"><br>
+								name="address_name" placeholder="주소"> <input
+								type="button" onclick="sample5_execDaumPostcode()"
+								id="address_search" value="주소 검색"><br>
 								<div id="map"
 									style="width: 300px; height: 300px; margin-top: 10px; display: none"></div>
 							</td>
@@ -88,15 +88,14 @@
 				<div id="regi_button">
 					<input type="submit" id="regi" value="등록">
 				</div>
-				<!-- <button id="test">test</button> -->
-			</div>
-		</form>
-
+				<button id="test">test</button>
+			</form>
+		</div>
 		<!-- table_wapper -->
 
 		<!-- 지도 -->
 		<script src="../resources/js/mngrOnly/mStore_Register.js"></script>
 	</section>
-	<%-- <%@include file="/WEB-INF/views/include/footer.jsp"%> --%>
+	<%@include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>

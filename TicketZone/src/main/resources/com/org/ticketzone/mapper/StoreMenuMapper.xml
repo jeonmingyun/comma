@@ -55,7 +55,7 @@
 		<![CDATA[
 		insert into store_menu
 		values(#{license_number} || 'M' || 
-		(select max(to_number(substr(menu_code,(instr(menu_code,'M'))+1),9999))+1 as menu_code 
+		(select max(substr(menu_code,-1))+1 as menu_code
 		from store_menu
 		where menu_code like #{license_number} || '%'), #{menu_cate} || '-' || #{menu_name}, #{menu_price}, #{store_note})
 		]]>

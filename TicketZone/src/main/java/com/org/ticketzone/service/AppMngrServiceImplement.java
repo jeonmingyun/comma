@@ -28,8 +28,8 @@ public class AppMngrServiceImplement implements AppMngrService {
 	}
 
 	@Override
-	public StoreVO[] storeList(String owner_id) {
-		return mapper.storeList(owner_id);
+	public StoreVO[] storeList() {
+		return mapper.storeList();
 	}
 
 	@Override
@@ -45,33 +45,6 @@ public class AppMngrServiceImplement implements AppMngrService {
 	@Override
 	public NumberTicketVO[] ticketList() {
 		return mapper.ticketList();
-	}
-
-	@Override
-	public void M_issue_ticket(NumberTicketVO vo) {
-		mapper.M_issue_ticket(vo);
-		
-	}
-
-	@Override
-	public String M_codeSelect() {
-		return mapper.M_codeSelect();
-	}
-
-	@Override
-	public void M_firstCode() {
-		mapper.M_firstCode();
-		
-	}
-
-	@Override
-	public void M_makeTicket(NumberTicketVO vo) {
-		mapper.M_makeTicket(vo);
-	}
-
-	@Override
-	public void M_plusTicket(NumberTicketVO vo) {
-		mapper.M_plusTicket(vo);
 	}
 
 }

@@ -13,7 +13,7 @@
 	</select>
 	
 	<select id="storeList" resultType="com.org.ticketzone.domain.StoreVO">
-		select * from store where owner_id = #{owner_id}
+		select * from store
 	</select>
 	
 	<select id="menuList" resultType="com.org.ticketzone.domain.StoreMenuVO">
@@ -30,92 +30,6 @@
 	</select>
 	
 	<select id="ticketList" resultType="com.org.ticketzone.domain.NumberTicketVO">
-		select ticket_code, wait_number, the_number, license_number, member_id, ticket_status,
-   		 case when ticket_status = -1 then 'success'
-         	  when ticket_status = 0 then 'wait' 
-         	  when ticket_status = 1 then 'success'
-         	  when ticket_status = 2 then 'cancel'
-         	  when ticket_status = 3 then 'absence'
-         	  end as string_status
-    		  from number_ticket
-	</select>
-	
-	<insert id="M_issue_ticket">
-		insert into number_ticket(ticket_code, wait_number, the_number, license_number, member_id, ticket_status, ticket_reg)
-		values(201905201234578910001, 1, #{the_number}, 1234578910, #{member_id}, 0, sysdate)
-	</insert>
-	
-	<!-- 최초의 번호표인지 확인 -->
-	<select id="M_codeSelect" resultType="String">
-		<![CDATA[
-		select nvl(max(code1), 'not')
-		as code1
-		from make_code
-		where code1 like to_char(sysdate, 'yyyymmdd') || 
-		(select license_number 
-		from store where license_number = '1234578910')
-		|| '%'
-		]]>
-	</select>
-
-	<!-- 번호표 코드 최초생성 -->
-	<insert id="M_firstCode">
-		<![CDATA[
-		insert into make_code
-		values((select to_char(sysdate,
-		'yyyymmdd') from dual)
-		|| (select license_number
-		from store
-		where
-		license_number = '1234578910'), '000')
-		]]>
-	</insert>
-	
-	<!-- 001번 번호표 생성 -->
-	<insert id="M_makeTicket">
-		<![CDATA[
-		insert into number_ticket
-		(ticket_code, wait_number, the_number, license_number, member_id, ticket_status)
-		values(
-		(select (code1 || code2) + 1 as code
-		from make_code
-		where code1 like to_char(sysdate, 'yyyymmdd') ||
-		(select
-		license_number from store where license_number = '1234578910')), 
-		1,				
-		#{the_number}, 
-		'1234578910', 
-		#{member_id}, 
-		0)
-		]]>
-	</insert>
-	
-	<insert id="M_plusTicket">
-		<![CDATA[
-		insert into number_ticket
-		(ticket_code, wait_number, the_number, license_number, member_id, ticket_status)
-		values(
-		(select (ticket_code + 1) as ticket_code
-		from (select ticket_code from number_ticket 
-		where ticket_code like to_char(sysdate,'yyyymmdd') || 
-		(select license_number 
-		from store 
-		where license_number = '1234578910') || '%'
-		order by ticket_code desc)
-		where rownum <= 1),
-		(select (wait_number+1) as wait_number
-		from (select wait_number from number_ticket
-		where ticket_code like to_char(sysdate,'yyyymmdd') ||
-		(select license_number
-		from store
-		where license_number = '1234578910') || '%'
-		order by wait_number desc)
-		where rownum <= 1),
-		#{the_number}, 
-		'1234578910', 
-		#{member_id}, 
-		0)
-		]]>
-	</insert>
-		
+		select * from number_ticket
+	</select>	
 </mapper>
