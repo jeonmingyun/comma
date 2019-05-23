@@ -123,18 +123,21 @@ public class MainActivity extends AppCompatActivity {
                                 }
 
                                 NetworkTask networkTask = new NetworkTask("Mem_issue_ticket") {
-
+                                    @Override
+                                    protected void onPostExecute(String s) {
+                                        super.onPostExecute(s);
+                                        Log.e("1112", s);
+                                    }
                                 };
                                 SendDataSet sds1 = new SendDataSet("member_id", member_id);
                                 SendDataSet sds2 = new SendDataSet("the_number", inputValue);
                                 SendDataSet sds3 = new SendDataSet("license_number", license);
-
+                                Log.e("111", member_id+", "+ inputValue + ", " + license);
                                 networkTask.execute(sds1, sds2, sds3);
                                 Toast.makeText(MainActivity.this, inputValue + "명 입력되었습니다.", Toast.LENGTH_SHORT).show();
                                 Intent numInfoIntent = new Intent(MainActivity.this, NumInfoActivity.class);
-                                //storeName.setText(store_name);
                                 Log.e("test",store_name);
-                                numInfoIntent.putExtra("storename",store_name);
+                                numInfoIntent.putExtra("storename", store_name);
                                 startActivity(numInfoIntent);
                             }
                         });
