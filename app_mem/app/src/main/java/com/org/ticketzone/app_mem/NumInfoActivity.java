@@ -22,7 +22,10 @@ public class NumInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_num_info);
 
         Button CancelButton = (Button)findViewById(R.id.CancelButton);
-        TextView storeName = findViewById(R.id.store_name);
+        TextView storeName = findViewById(R.id.storeName);
+        Intent intent = getIntent();
+        String storename = intent.getExtras().getString("storename");
+        storeName.setText(storename);
         CancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
