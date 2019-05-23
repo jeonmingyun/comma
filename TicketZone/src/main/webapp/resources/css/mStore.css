@@ -1,0 +1,112 @@
+/* .store_container {
+	display: flex;
+	flex-direction: row;
+} */
+
+button:hover {
+	cursor: pointer;
+}
+
+.store_container {
+	margin: 0 0 150px;
+}
+
+.store_container h2 {
+	margin: 50px 0 0;
+	text-align: center;
+}
+
+/* 매장등록 밑에 선 */
+.divider_1 .line {
+	width: 160px;
+	margin: 0 auto 60px; 
+	padding: 10px 0px 15px 0px;
+	border-bottom: 1px dashed #ccc;
+}
+
+#StoreBox {
+	display: flex;
+	flex-direction: row;
+	white-space: nowrap;
+	margin-left: 20px;
+}
+
+.mngrStore {
+	width: 300px;
+	height: 500px;
+	margin: 0 10px;
+}
+
+.mngrStore h3 {
+	font-weight: normal;
+	font-size: 20px;
+	text-align: center;
+}
+
+.s_img {
+	width: 100%;
+	height: 100%;
+}
+
+.license_number {
+	width: 300px;
+	height: 500px;
+	background-color: transparent;
+	border: none;
+}
+
+/* 매장등록 버튼 */
+#StoreBox2 {
+	background-color: #e6e6e6;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.store_register {
+	/* width: 80px;
+	height: 80px; */
+	background: transparent;
+	border: none;
+}
+
+.store_register:hover {
+	cursor: pointer;
+}
+
+/* #StoreBox div{
+	position: relative;
+	display: inline-block;
+	width: 300px;
+	height: 550px;
+	margin: 0 auto;
+	margin-top: 1%;
+	margin-left: 1%;
+}
+
+#StoreBox2{
+	position: relative;
+	display: inline-block;
+	width: 300px;
+	height: 550px;
+	margin: 0 auto;
+	border: 1px solid;
+	text-align: center;
+}
+
+.store_register{
+	width: 80px;
+	height: 50px;
+	margin-top: 70%;
+}
+
+.license_number {
+	width: 300px;
+	height: 500px;
+	border: 0px;
+}
+
+.s_img {
+	width: 100%;
+	height: 100%;
+} */

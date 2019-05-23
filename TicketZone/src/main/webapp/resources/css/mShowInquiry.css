@@ -1,0 +1,90 @@
+* {
+	margin: 0;
+	padding: 0;
+	 
+}
+
+.minquiry_wapper {
+	margin: 0 auto;
+	width: 1200px; /*table  width크기랑 똑같이 */
+	height: 100%;
+	/* background-color:#ffffff;
+	padding: 10px 30px; */
+}
+/* 게시글 보기 */
+.minquiry_wapper h1 {
+	text-align: center;
+	margin: 50px auto;
+	font-size: 14px;
+	font-weight: normal;
+    text-align: center;
+    padding: 13px 0;
+    border-top: 1px solid #343a40;
+    border-bottom: 1px solid #343a40;
+    width: 250px; height: 100%;
+}
+
+/* 게시글 제목 */
+.minquiry_show h2 {
+	font-size: 20px;
+}
+
+/* 게시글 제목 */
+.minquiry_title {
+	border-bottom: 1px solid #BDBDBD;
+}
+
+.minquiry_title #title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 50px;
+    padding: 10px 20px;
+}
+
+/* 글쓴이, 날짜 */
+.minquiry_info {
+    float: right;
+    padding: 10px;
+    color:#BDBDBD;
+    font-size: 12px;
+}
+
+/* 글쓴이, 날짜 아이콘 */
+.minquiry_info svg {
+    vertical-align: middle;
+    fill: #BDBDBD;
+}
+
+/* 게시글 버튼 */
+.minquiry_btn {
+    float: right;
+}
+
+/* 게시글 내용 */
+.minquiry_content {
+    font-size: 18px;
+    padding: 30px 50px;
+    margin: 20px 0;
+    word-break: break-all;
+}
+
+/* 게시글 첨부파일 */
+.minquiry_file {
+	padding: 0 20px;
+	border-bottom: 1px solid #BDBDBD;
+}
+
+/* 수정,삭제 버튼 */
+.minquiry_btn button {
+    padding: 5px 15px;
+    border: 1px solid #BDBDBD;
+    background-color: #FFFFFF;
+    color: #000000;
+    outline: none;
+    font: 20px;
+}
+
+/* 버튼 클릭했을 때 */
+.minquiry_btn button:hover {
+    cursor: pointer;
+}

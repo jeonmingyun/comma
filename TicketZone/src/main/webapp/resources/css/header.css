@@ -1,0 +1,22 @@
+/* 로그아웃 버튼 */
+#log_out {
+/* 	border: none;
+	background-color: #718dff;
+	color: #fff;
+	border-radius: 5px;
+	vertical-align: middle;
+	padding: 8px;
+	margin-left: 10px; */
+	
+	border: none;
+	background: transparent;
+	color: #718dff;
+	padding: 8px;
+}
+
+#log_out:hover {
+	color: #fff;
+	outline: none;
+	cursor: pointer;
+	/* background-color: #b2c2ff;  */
+}
