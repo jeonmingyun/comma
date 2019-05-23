@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="com.org.ticketzone.mapper.AdminMapper">
-	<select id="adminLogin" resultType="com.org.ticketzone.domain.AdminVO">
-		select * from admin where admin_id = #{admin_id}
-	</select>
-</mapper>
