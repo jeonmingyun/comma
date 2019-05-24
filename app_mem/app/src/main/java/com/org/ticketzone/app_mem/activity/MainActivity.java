@@ -20,6 +20,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 while(cursor.moveToNext()){
                     count = cursor.getString(0);
                 }
-//                ImageView storeImg = (ImageView)view.findViewById(R.id.store_img);
+                ImageView storeImg = (ImageView)view.findViewById(R.id.store_img);
                 TextView storeName = (TextView)view.findViewById(R.id.store_name);
                 TextView store_address = (TextView)view.findViewById(R.id.store_address);
                 TextView waiting = (TextView)view.findViewById(R.id.waiting);
@@ -101,17 +103,17 @@ public class MainActivity extends AppCompatActivity {
                         final String store_name = storeList.get(btnIndex).getStore_name(); // 변수 설정 하는 법
 
 
-                        final EditText et = new EditText(MainActivity.this);
+                        final EditText ET = new EditText(MainActivity.this);
                         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
                         dialog.setTitle("인원 수 설정" + store_name);
                         dialog.setMessage("인원 수");
-                        dialog.setView(et);
+                        dialog.setView(ET);
 
                         // 확인 버튼 이벤트
                         dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                String inputValue = et.getText().toString();
+                                String inputValue = ET.getText().toString();
                                 Cursor cursor = mDBHelper.selectAllMember();
                                 TextView storeName = findViewById(R.id.storeName);
                                 String member_id = "";
@@ -129,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
                                 networkTask.execute(sds1, sds2, sds3);
                                 Toast.makeText(MainActivity.this, inputValue + "명 입력되었습니다.", Toast.LENGTH_SHORT).show();
                                 Intent numInfoIntent = new Intent(MainActivity.this, NumInfoActivity.class);
-
 
                                 numInfoIntent.putExtra("storename",store_name);
 
@@ -149,6 +150,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+                storeItemClicked(idx, view);
+
                 return view;
             }
         };
@@ -167,7 +170,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         while(cursor.moveToNext()) {
-            Log.e("store_name", cursor.getString(8));
             storeVO = new StoreVO();
             storeVO.setLicense_number(cursor.getString(0));
             storeVO.setR_name(cursor.getString(1));
@@ -285,5 +287,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void storeItemClicked( final int idx, View view) {
+        LinearLayout storeItem = view.findViewById(R.id.store_list_wrapper);
+
+        storeItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String license_number = storeList.get(idx).getLicense_number();
+
+                Intent intent = new Intent(MainActivity.this, StoreDetailActivity.class);
+                intent.putExtra("license_number", license_number);
+                startActivity(intent);
+            }
+        });
     }
 }
