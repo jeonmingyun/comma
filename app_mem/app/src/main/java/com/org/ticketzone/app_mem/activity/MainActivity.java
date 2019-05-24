@@ -97,7 +97,9 @@ public class MainActivity extends AppCompatActivity {
                         v.setTag(tagBtn.getTag());
                         int btnIndex = (Integer)tagBtn.getTag();  //인덱스 변수 선언
                         final String license = storeList.get(btnIndex).getLicense_number();
+
                         final String store_name = storeList.get(btnIndex).getStore_name(); // 변수 설정 하는 법
+
 
                         final EditText et = new EditText(MainActivity.this);
                         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
@@ -127,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
                                 networkTask.execute(sds1, sds2, sds3);
                                 Toast.makeText(MainActivity.this, inputValue + "명 입력되었습니다.", Toast.LENGTH_SHORT).show();
                                 Intent numInfoIntent = new Intent(MainActivity.this, NumInfoActivity.class);
+
 
                                 numInfoIntent.putExtra("storename",store_name);
 

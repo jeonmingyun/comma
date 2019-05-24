@@ -55,7 +55,6 @@ public class AppMemHomeController {
 			System.out.println("코드를 발급해야합니다!");
 			appMemService.Mem_firstCode(vo);
 			appMemService.Mem_makeTicket(vo);
-			
 		} else {
 			System.out.println("이미코드가 있습니다!");
 			appMemService.Mem_plusTicket(vo);
