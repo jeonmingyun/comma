@@ -25,6 +25,7 @@ public class NumInfoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String storename = intent.getExtras().getString("storename");
         storeName.setText(storename);
+
         CancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

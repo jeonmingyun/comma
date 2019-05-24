@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         storeAdapter = new CustomAdapter<StoreVO>(storeList) {
             @Override
-            public View getView(int idx, View view, ViewGroup parent) {
+            public View getView(final int idx, View view, ViewGroup parent) {
                 view = getLayoutInflater().inflate(R.layout.store_list_item, null);
                 String license_number = storeList.get(idx).getLicense_number();
                 Cursor cursor = mDBHelper.countTeam(license_number);
@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                         int btnIndex = (Integer)tagBtn.getTag();  //인덱스 변수 선언
                         final String license = storeList.get(btnIndex).getLicense_number();
                         final String store_name = storeList.get(btnIndex).getStore_name(); // 변수 설정 하는 법
+
                         final EditText et = new EditText(MainActivity.this);
                         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
                         dialog.setTitle("인원 수 설정" + store_name);
@@ -128,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
                                 Intent numInfoIntent = new Intent(MainActivity.this, NumInfoActivity.class);
 
                                 numInfoIntent.putExtra("storename",store_name);
+
                                 startActivity(numInfoIntent);
                             }
                         });
