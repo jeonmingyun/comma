@@ -50,8 +50,8 @@
 						</tr>
 						<tr>
 							<th>영업 시간</th>
-							<td><input type="time" id="time" name="aaa"> - <input
-								type="time" id="time2" name="bbb"></td>
+							<td><input type="time" id="time" name="time"> - <input
+								type="time" id="time2" name="time2"></td>
 						</tr>
 						<tr>
 							<th><label for="store_intro">매장 소개</label></th>

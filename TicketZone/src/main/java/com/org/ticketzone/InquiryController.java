@@ -52,13 +52,17 @@ public class InquiryController {
 	// 문의 글쓰기 처리
 	@RequestMapping(value = "/insertInquiry", method = RequestMethod.POST)
 	public String insertInquiry(Model model, BoardVO board, InqAttachVO inq, HttpServletRequest request) {
+		String content = board.getBoard_content();
+		content = content.replace("\n", "<br />");
+	
+		board.setBoard_content(content);
 		
-	if(inq.getInq_filename() == null) {	
-		boardService.boardInsert(board);
-	} else {
-		boardService.boardInsert(board);
-		inqAttachService.Inq_fileinsert(inq);
-	}
+		if(inq.getInq_filename() == null) {	
+			boardService.boardInsert(board);
+		} else {
+			boardService.boardInsert(board);
+			inqAttachService.Inq_fileinsert(inq);
+		}
 		return "redirect:/inquiry";
 	}
 	
@@ -108,7 +112,10 @@ public class InquiryController {
 	@ResponseBody
 	@RequestMapping(value = "/updInquiryForm", method = RequestMethod.POST)
 	public String updateBoard(BoardVO board, InqAttachVO inq) {
+		String content = board.getBoard_content();
+		content = content.replace("\n", "<br />");
 		
+		board.setBoard_content(content);
 		
 		if(inq.getInq_uuid() == null) {
 			System.out.println("파일없음");
@@ -146,6 +153,11 @@ public class InquiryController {
 	@RequestMapping(value = "/addReply", method = RequestMethod.POST)
 	public ArrayList<ReplyVO> searchCustomer(Model model, ReplyVO reply,HttpServletRequest request) {
 		String board_no = request.getParameter("board_no");
+		
+		String addReply_content = reply.getReply_content();
+		addReply_content = addReply_content.replace("\n","<br/>");
+		reply.setReply_content(addReply_content);
+		
 		includeService.addReply(reply); // insert
 		
 		return includeService.replyList(board_no); //select
@@ -164,12 +176,14 @@ public class InquiryController {
 	// 댓글 수정
 	@ResponseBody
 	@RequestMapping(value = "/reply_update", method = RequestMethod.POST)
-	public String replyUpdate(Model model, HttpServletRequest request) {
+	public ArrayList<ReplyVO> replyUpdate(Model model, HttpServletRequest request) {
 		String reply_content = request.getParameter("reply_content");
 		String board_no = request.getParameter("board_no");
+		
+		reply_content = reply_content.replace("\n","<br/>");
 		includeService.reply_update(reply_content, board_no);
 
-		return "";
+		return includeService.replyList(board_no);
 	}
 
 }

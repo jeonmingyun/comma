@@ -62,7 +62,7 @@
 #reply_content {
 	margin-top: 8px;
 	font-size: 16px;
-	white-space:pre-wrap;
+	/* white-space:pre-wrap; */
 }
 
 /*------- ´ñ±Û ¸®½ºÆ® -------*/

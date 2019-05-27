@@ -1,6 +1,6 @@
 package com.org.ticketzone.app_mem.activity;
 
-import android.app.AlertDialog;
+import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -20,15 +20,25 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.estimote.coresdk.common.requirements.SystemRequirementsChecker;
+import com.estimote.coresdk.observation.region.beacon.BeaconRegion;
+import com.estimote.coresdk.recognition.packets.Beacon;
+import com.estimote.coresdk.service.BeaconManager;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.org.ticketzone.app_mem.R;
+<<<<<<< HEAD
 import com.org.ticketzone.app_mem.task.JsonArrayTask;
+=======
+import com.org.ticketzone.app_mem.beacon.BeaconConnection;
+>>>>>>> 053a7c1c022cbcfbc74a35f156e50aae72e5c814
 import com.org.ticketzone.app_mem.task.NetworkTask;
 import com.org.ticketzone.app_mem.task.SendDataSet;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
@@ -39,6 +49,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,6 +60,12 @@ public class MainActivity extends AppCompatActivity {
     private ListView listview = null, storeListView;
     private DBOpenHelper mDBHelper;
     private ArrayList<StoreVO> storeList;
+
+    // 비콘
+    private BeaconManager beaconManager;
+    private BeaconRegion region;
+    private boolean isConnected;
+    //
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         tabHost(); // LinearLayout 페이지 바꿔끼우기
         selectAllStore(); // storeList = store table data select
         storeList(); // store tab에서 store list를 보여줌
+        beaconConnection();
+
     }
 
     // store list 생성
@@ -77,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 while(cursor.moveToNext()){
                     count = cursor.getString(0);
                 }
-//                ImageView storeImg = (ImageView)view.findViewById(R.id.store_img);
+                ImageView storeImg = (ImageView)view.findViewById(R.id.store_img);
                 TextView storeName = (TextView)view.findViewById(R.id.store_name);
                 TextView store_address = (TextView)view.findViewById(R.id.store_address);
                 TextView waiting = (TextView)view.findViewById(R.id.waiting);
@@ -93,11 +113,13 @@ public class MainActivity extends AppCompatActivity {
                 TAGBTN.setTag(idx);
                 TAGBTN.setText("발급 가능");
 
+
                 // 발급 버튼 클릭
                 TAGBTN.setOnClickListener(new View.OnClickListener(){
 
                     @Override
                     public void onClick(View v) {
+<<<<<<< HEAD
                         v.setTag(TAGBTN.getTag());
                         int btnIndex = (Integer)TAGBTN.getTag();  //인덱스 변수 선언
                         final String LICENSE = storeList.get(btnIndex).getLicense_number();
@@ -105,6 +127,13 @@ public class MainActivity extends AppCompatActivity {
                         final String STORE_NAME = storeList.get(btnIndex).getStore_name(); // 변수 설정 하는 법
 
 
+=======
+                        v.setTag(tagBtn.getTag());
+                        int btnIndex = (Integer)tagBtn.getTag();  //인덱스 변수 선언
+                        final String license = storeList.get(btnIndex).getLicense_number();
+                        final String store_name = storeList.get(btnIndex).getStore_name(); // 변수 설정 하는 법
+
+>>>>>>> 053a7c1c022cbcfbc74a35f156e50aae72e5c814
                         final EditText ET = new EditText(MainActivity.this);
                         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
                         dialog.setTitle("인원 수 설정");
@@ -133,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
                                 Log.e("111", member_id+", "+ inputValue + ", " + LICENSE);
                                 networkTask.execute(sds1, sds2, sds3);
                                 Toast.makeText(MainActivity.this, inputValue + "명 입력되었습니다.", Toast.LENGTH_SHORT).show();
+<<<<<<< HEAD
 
                                 JsonArrayTask jat = new JsonArrayTask("MyTicket"){
                                     @Override
@@ -150,6 +180,11 @@ public class MainActivity extends AppCompatActivity {
                                 SendDataSet sds5 = new SendDataSet("member_id", member_id);
                                 SendDataSet sds6 = new SendDataSet("license_number", LICENSE);
                                 jat.execute(sds5,sds6);
+=======
+                                Intent numInfoIntent = new Intent(MainActivity.this, NumInfoActivity.class);
+
+                                numInfoIntent.putExtra("storename",store_name);
+>>>>>>> 053a7c1c022cbcfbc74a35f156e50aae72e5c814
 
                                 Intent numInfoIntent = new Intent(MainActivity.this, NumInfoActivity.class);
                                 numInfoIntent.putExtra("member_id", member_id);
@@ -171,6 +206,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+                storeItemClicked(idx, view);
+
                 return view;
             }
         };
@@ -178,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
         storeListView.setAdapter(storeAdapter);
 
     }
+
 
     private void selectAllStore() { //StoreVO 에 값채우기
         Cursor cursor = mDBHelper.selectAllStore();
@@ -189,7 +227,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         while(cursor.moveToNext()) {
-            Log.e("store_name", cursor.getString(8));
             storeVO = new StoreVO();
             storeVO.setLicense_number(cursor.getString(0));
             storeVO.setR_name(cursor.getString(1));
@@ -295,6 +332,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume(){
+        super.onResume();
+
+        //블루투스 권환 승낙 및 블루투스 활성화
+        SystemRequirementsChecker.checkWithDefaultDialogs(this);
+
+        beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+            @Override
+            public void onServiceReady() {
+                beaconManager.startRanging(region);
+            }
+        });
+    }
+
+    @Override
+    protected void onPause(){
+        //beaconManager.stopRanging(region);
+        super.onPause();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 //        int id = item.getItemId();
 //
@@ -309,4 +367,65 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+<<<<<<< HEAD
+=======
+    private void beaconConnection() {
+//        Button tagBtn = view.findViewById(R.id.tag_btn);
+        // 비콘
+        // 비콘의 수신 범위를 갱신 받음
+        beaconManager = new BeaconManager(MainActivity.this);
+
+        beaconManager.setRangingListener(new BeaconManager.BeaconRangingListener() {
+            @Override
+            public void onBeaconsDiscovered(BeaconRegion beaconRegion, List<Beacon> list) {
+                if (!list.isEmpty()) {
+                    Beacon nearestBeacon = list.get(0);
+                    Log.e("Airport", "Nearest places: " + nearestBeacon.getRssi());
+
+                    if (!isConnected && nearestBeacon.getRssi() > -70) {
+                        isConnected = true;
+                        Toast.makeText(MainActivity.this, "버튼활성화", Toast.LENGTH_SHORT);
+                        //tagBtn.setEnabled(true);
+                        Log.e("test", "dddd");
+
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                        dialog.setTitle("알림")
+                                .setMessage("비콘이 연결되었습니다.")
+                                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+                                .create().show();
+                    } else if (isConnected && nearestBeacon.getRssi() < -70) {
+                        Toast.makeText(MainActivity.this, "연결이 끊어졌습니다.", Toast.LENGTH_SHORT);
+                        isConnected = true;
+                        //tagBtn.setEnabled(false);
+                        Log.e("test", "ddff");
+                    }
+                }
+            }
+        });
+
+        region = new BeaconRegion("ranged region",
+                UUID.fromString("74278bda-b644-4520-8f0c-720eaf059935"), 40001, 15383);
+        //비콘 //
+    }
+
+    private void storeItemClicked( final int idx, View view) {
+        LinearLayout storeItem = view.findViewById(R.id.store_list_wrapper);
+
+        storeItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String license_number = storeList.get(idx).getLicense_number();
+
+                Intent intent = new Intent(MainActivity.this, StoreDetailActivity.class);
+                intent.putExtra("license_number", license_number);
+                startActivity(intent);
+            }
+        });
+    }
+>>>>>>> 053a7c1c022cbcfbc74a35f156e50aae72e5c814
 }

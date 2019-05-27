@@ -128,9 +128,17 @@ public class DBOpenHelper extends SQLiteOpenHelper{
     public Cursor selectAllStore() {
         mdb = this.getWritableDatabase();
         String sql = "select * from store";
-        Cursor member_list = mdb.rawQuery(sql, null);
+        Cursor store_list = mdb.rawQuery(sql, null);
 
-        return member_list;
+        return store_list;
+    }
+
+    public Cursor selectStore(String license_number) {
+        mdb = this.getWritableDatabase();
+        String sql = "select * from store where license_number = "+ license_number;
+        Cursor store_list = mdb.rawQuery(sql, null);
+
+        return store_list;
     }
 
     public void insertStore(JSONArray storeList) {

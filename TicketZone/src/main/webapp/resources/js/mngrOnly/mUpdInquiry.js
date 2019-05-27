@@ -5,6 +5,14 @@ $(function() {
 		return false;
 	});
 	
+//	수정하기 엔터키
+	var a = $("#content").val();
+	var a = a.split('<br />').join("\r\n");
+	/*a = a.split('<br>').join("\r\n");*/
+	console.log(a);
+	$("#content").empty();
+	$("#content").append(a);
+	
 	$('#update').click(function() {
 
 		var title = $('#title').val();
