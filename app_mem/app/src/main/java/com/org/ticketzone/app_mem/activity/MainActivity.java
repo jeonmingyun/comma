@@ -1,6 +1,6 @@
 package com.org.ticketzone.app_mem.activity;
 
-import android.app.AlertDialog;
+import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -25,9 +25,14 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.estimote.coresdk.common.requirements.SystemRequirementsChecker;
+import com.estimote.coresdk.observation.region.beacon.BeaconRegion;
+import com.estimote.coresdk.recognition.packets.Beacon;
+import com.estimote.coresdk.service.BeaconManager;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.org.ticketzone.app_mem.R;
+import com.org.ticketzone.app_mem.beacon.BeaconConnection;
 import com.org.ticketzone.app_mem.task.NetworkTask;
 import com.org.ticketzone.app_mem.task.SendDataSet;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
@@ -35,6 +40,8 @@ import com.org.ticketzone.app_mem.listViewAdapter.CustomAdapter;
 import com.org.ticketzone.app_mem.vo.StoreVO;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
     private ListView listview = null, storeListView;
     private DBOpenHelper mDBHelper;
     private ArrayList<StoreVO> storeList;
+
+    // 비콘
+    private BeaconManager beaconManager;
+    private BeaconRegion region;
+    private boolean isConnected;
+    //
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
         tabHost(); // LinearLayout 페이지 바꿔끼우기
         selectAllStore(); // storeList = store table data select
         storeList(); // store tab에서 store list를 보여줌
+        beaconConnection();
+
     }
 
     // store list 생성
@@ -88,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 view.setTag(idx);   // 인덱스 저장
                 tagBtn.setTag(idx);
                 tagBtn.setText("발급 가능");
+
 
                 // 발급 버튼 클릭
                 tagBtn.setOnClickListener(new View.OnClickListener(){
@@ -151,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
         storeListView.setAdapter(storeAdapter);
 
     }
+
 
     private void selectAllStore() { //StoreVO 에 값채우기
         Cursor cursor = mDBHelper.selectAllStore();
@@ -268,6 +285,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume(){
+        super.onResume();
+
+        //블루투스 권환 승낙 및 블루투스 활성화
+        SystemRequirementsChecker.checkWithDefaultDialogs(this);
+
+        beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+            @Override
+            public void onServiceReady() {
+                beaconManager.startRanging(region);
+            }
+        });
+    }
+
+    @Override
+    protected void onPause(){
+        //beaconManager.stopRanging(region);
+        super.onPause();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 //        int id = item.getItemId();
 //
@@ -280,5 +318,49 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void beaconConnection() {
+//        Button tagBtn = view.findViewById(R.id.tag_btn);
+        // 비콘
+        // 비콘의 수신 범위를 갱신 받음
+        beaconManager = new BeaconManager(MainActivity.this);
+
+        beaconManager.setRangingListener(new BeaconManager.BeaconRangingListener(){
+            @Override
+            public void onBeaconsDiscovered(BeaconRegion beaconRegion, List<Beacon> list) {
+                if(!list.isEmpty()){
+                    Beacon nearestBeacon = list.get(0);
+                    Log.e("Airport", "Nearest places: " + nearestBeacon.getRssi());
+
+                    if(!isConnected && nearestBeacon.getRssi() > -70){
+                        isConnected = true;
+                        Toast.makeText(MainActivity.this, "버튼활성화", Toast.LENGTH_SHORT);
+                        //tagBtn.setEnabled(true);
+                        Log.e("test", "dddd");
+
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                        dialog.setTitle("알림")
+                                . setMessage("비콘이 연결되었습니다.")
+                                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+                                .create().show();
+                    }else if(isConnected && nearestBeacon.getRssi() < -70){
+                        Toast.makeText(MainActivity.this, "연결이 끊어졌습니다.", Toast.LENGTH_SHORT);
+                        isConnected = true;
+                        //tagBtn.setEnabled(false);
+                        Log.e("test", "ddff");
+                    }
+                }
+            }
+        });
+
+        region = new BeaconRegion("ranged region",
+                UUID.fromString("74278bda-b644-4520-8f0c-720eaf059935"), 40001, 15383);
+        //비콘 //
     }
 }
