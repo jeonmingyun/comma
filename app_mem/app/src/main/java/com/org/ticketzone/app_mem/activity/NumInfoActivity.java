@@ -53,6 +53,7 @@ public class NumInfoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String storename = intent.getExtras().getString("storename");
         storeName.setText(storename);
+
         CancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +100,7 @@ public class NumInfoActivity extends AppCompatActivity {
         numberTicketVO.setThe_number(cursor.getInt(2));
         numberTicketVO.setLicense_number(cursor.getString(3));
         numberTicketVO.setMember_id(cursor.getString(4));
-        numberTicketVO.setTicket_status(cursor.getInt(5));
+        numberTicketVO.setTicket_status(cursor.getString(5));
     }
 
 }

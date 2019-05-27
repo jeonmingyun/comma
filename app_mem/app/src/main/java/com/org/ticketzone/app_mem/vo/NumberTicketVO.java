@@ -9,5 +9,5 @@ public class NumberTicketVO {
     private int the_number;
     private String license_number;
     private String member_id;
-    private int ticket_status;
+    private String ticket_status;
 }
