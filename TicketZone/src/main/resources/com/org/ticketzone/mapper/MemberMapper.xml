@@ -13,7 +13,7 @@
 	<![CDATA[
 	select * 
 	from member 
-	where member_tel like '010-5555' || '%'
+	where member_id like '010-5555' || '%'
 	]]>
 	</select>
 

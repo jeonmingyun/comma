@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         callback = new SessionCallback();
         Session.getCurrentSession().addCallback(callback);
         Session.getCurrentSession().checkAndImplicitOpen();
-//        getKeyHash();
+        getKeyHash();
     }
 
     @Override
