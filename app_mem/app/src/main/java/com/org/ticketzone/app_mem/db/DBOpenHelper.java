@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,7 +12,7 @@ import org.json.JSONObject;
 
 public class DBOpenHelper extends SQLiteOpenHelper{
 
-    private static final int DB_VERSION = 9;
+    private static final int DB_VERSION = 11;
     private static final String DB_NAME = "SQLite.db";
     public static SQLiteDatabase mdb;
 
@@ -286,6 +285,14 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         return member_list;
     }
 
+    public Cursor MyTicket(String member_id, String license){
+        mdb = this.getReadableDatabase();
+        Cursor member_list = mdb.rawQuery("select * from numberticket where strftime('%Y/%m/%d', 'now') || '%' and member_id = ? and ticket_status = 0 and license_number = ?", new String[] {member_id, license});
+
+        return member_list;
+    }
+
+
     public void insertTicket(JSONArray NumberTicketList) {
         mdb = this.getWritableDatabase();
 
@@ -304,6 +311,39 @@ public class DBOpenHelper extends SQLiteOpenHelper{
                 e.printStackTrace();
             }
         }
+    }
+    public boolean cancelTicket(String ticket_code, String member_id, String license_number) {
+        mdb = this.getWritableDatabase();
+        ContentValues values =  new ContentValues();
+        values.put("ticket_status", 2);
+        values.put("wait_number", 0);
+
+
+        int result = mdb.update(DBTable.NumberTicket.TABLENAME, values, "ticket_code = ? and member_id=? and license_number=?",new String[] {ticket_code, member_id, license_number});
+
+        if( result == 0)
+            return false; // error
+        else
+            return true; // success
+    }
+
+
+
+    public void syncTicket(String ticket_code, String license_number){
+        mdb = this.getWritableDatabase();
+        String sqlUpdate = "update numberticket set wait_number = wait_number-1 where ticket_code > ? and ticket_status = 0 and license_number = ?";
+        mdb.execSQL(sqlUpdate, new String[] {ticket_code, license_number});
+    }
+
+    public void deleteAllTable(){
+        mdb = this.getWritableDatabase();
+        mdb.delete(DBTable.NumberTicket.TABLENAME,null,null);
+        mdb.delete(DBTable.Coordinates.TABLENAME,null,null);
+        mdb.delete(DBTable.Store.TABLENAME,null,null);
+        mdb.delete(DBTable.StoreMenu.TABLENAME,null,null);
+        mdb.delete(DBTable.Categorie.TABLENAME,null,null);
+        mdb.delete(DBTable.Owner.TABLENAME,null,null);
+        mdb.delete(DBTable.Member.TABLENAME,null,null);
     }
 
 }

@@ -62,4 +62,22 @@ public class AppMemHomeController {
 	   
      return "1";
   }
+  
+  @ResponseBody
+  @RequestMapping(value ="/MyTicket", method = RequestMethod.POST)
+  public JSONArray MyTicket(@RequestBody NumberTicketVO vo) {
+	  
+	  System.out.println(vo + "myTicket");
+	  JSONArray arr = new JSONArray();
+	  arr.add(appMemService.MyTicket(vo));
+	  
+	  return arr;
+  }
+  
+  @ResponseBody
+  @RequestMapping(value ="/TicketCancel", method = RequestMethod.POST)
+  public void CancelTicket(@RequestBody NumberTicketVO vo) {
+	  appMemService.TicketCancel(vo);
+	  appMemService.SyncTicket(vo);
+  }
 }

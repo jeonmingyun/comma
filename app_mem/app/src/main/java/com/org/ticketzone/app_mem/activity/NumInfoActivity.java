@@ -14,7 +14,13 @@ import android.widget.Toast;
 
 import com.org.ticketzone.app_mem.R;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
+import com.org.ticketzone.app_mem.task.JsonArrayTask;
+import com.org.ticketzone.app_mem.task.NetworkTask;
+import com.org.ticketzone.app_mem.task.SendDataSet;
 import com.org.ticketzone.app_mem.vo.NumberTicketVO;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 
@@ -27,7 +33,8 @@ public class NumInfoActivity extends AppCompatActivity {
     private TextView MyNumber;
     private TextView storeName;
     private TextView Time;
-
+    private TextView the_number;
+    String code;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,17 +48,32 @@ public class NumInfoActivity extends AppCompatActivity {
         Time = (TextView)findViewById(R.id.time);
         MyNumber = findViewById(R.id.myNumber);
         storeName = findViewById(R.id.storeName);
-
-        int wait_number = numberTicketVO.getWait_number(); // 현재 입장한 팀
-        int the_number = numberTicketVO.getThe_number(); //내 대기순번
-        String ticket_code = numberTicketVO.getTicket_code(); // 발급받은 시간
-
-        NowEnter.setText(wait_number+"");
-        MyNumber.setText(the_number+"");
-        Time.setText(ticket_code);
-
+        the_number = findViewById(R.id.the_number);
+        int wait_number = 0;
+        int the_number2 = 0;
+        String ticket_number = "";
+        code = "";
         Intent intent = getIntent();
         String storename = intent.getExtras().getString("storename");
+        final String member_id = intent.getExtras().getString("member_id");
+        final String license = intent.getExtras().getString("license");
+
+
+        Cursor cursor = mDBHelper.MyTicket(member_id,license);
+
+        while(cursor.moveToNext()) {
+            ticket_number = cursor.getString(0);
+            code = cursor.getString(0);
+            wait_number = cursor.getInt(1);
+            the_number2 = cursor.getInt(2);
+            ticket_number = ticket_number.substring(18);
+        }
+        NowEnter.setText(wait_number + "명");
+        MyNumber.setText(ticket_number + "번");
+        Time.setText(code + "테스트");
+        the_number.setText(the_number2 + "명");
+
+
         storeName.setText(storename);
 
         CancelButton.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +86,15 @@ public class NumInfoActivity extends AppCompatActivity {
                 dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        NetworkTask networkTask = new NetworkTask("TicketCancel"){
 
+                        };
+                        SendDataSet sds = new SendDataSet("member_id", member_id);
+                        SendDataSet sds2 = new SendDataSet("license_number", license);
+                        SendDataSet sds3 = new SendDataSet("ticket_code", code);
+                        networkTask.execute(sds,sds2,sds3);
+                        mDBHelper.cancelTicket(code , member_id , license);
+                        mDBHelper.syncTicket(code,license);
                         Intent numInfoIntent = new Intent(NumInfoActivity.this, MainActivity.class);
                         startActivity(numInfoIntent);
                     }
