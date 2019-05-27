@@ -298,7 +298,11 @@ public class MngrOnlyController {
 		return "/mngrOnly/mCustomer";
 	}
 	
-	
+	//부림이가 하는 테스트 페이지
+	@RequestMapping(value ="mMenuAdd", method = RequestMethod.GET)
+	public String mMenuAdd(Model model) {
+		return "/mngrOnly/mStoreAdmin/mMenuAdd";
+	}
 
 //	@RequestMapping(value = "/getLicense", method = RequestMethod.POST)
 //	public String getLicense(Model model, NumberTicketVO ticket) {

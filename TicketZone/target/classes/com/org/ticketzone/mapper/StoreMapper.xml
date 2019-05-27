@@ -21,8 +21,10 @@
 </select>
 
 <insert id="storeRegister">
+	<![CDATA[
 	insert into store
-	values(#{license_number}, #{r_name}, 0, 0, #{cate_code}, #{owner_id}, #{store_name}, #{store_tel}, #{store_time}, #{store_intro}, #{address_name})
+	values(#{license_number}, #{r_name}, 0, 0, #{cate_code}, #{owner_id}, #{store_name}, #{store_tel}, #{time} || '-' || #{time2}, #{store_intro}, #{address_name})
+	]]>	
 </insert>
 
 <select id="storeGet" resultType="com.org.ticketzone.domain.StoreVO">

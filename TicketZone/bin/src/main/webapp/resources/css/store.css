@@ -1,0 +1,25 @@
+* {
+        margin: 0;
+        padding: 0;
+    }
+
+    section {
+    margin-top: 10px;
+    border: 1px solid #000000;
+    padding: 5px 20px;
+    font-size: 15px;
+}
+
+    li {
+        list-style: none;
+        display: list-item;
+        text-align: center;
+    }
+
+    .search_form {
+        border-bottom: 1px solid #000000;
+    }
+
+    .search_box {
+        border: 1px solid #FF0000;
+    }

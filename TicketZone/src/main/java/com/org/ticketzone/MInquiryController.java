@@ -20,7 +20,7 @@ import lombok.AllArgsConstructor;
 public class MInquiryController {
 	private BoardService boardService;
 	private IncludeService includeService;
-	
+
 	// 관리자 건의 사항
 	@RequestMapping(value = "/mInquiry", method = RequestMethod.GET)
 	public String mInquiry(Model model, Criteria Cri) {
@@ -28,56 +28,64 @@ public class MInquiryController {
 		model.addAttribute("suggestList", boardService.boardList(Cri));
 		model.addAttribute("list", boardService.getListWithPaging(Cri));
 		model.addAttribute("pageMaker", new PageDTO(Cri, total));
-		
+
 		return "mngrOnly/mInquiry";
 	}
-	
+
 	// 건의사항 글쓰기 페이지 이동
-		@RequestMapping(value = "/mInquiryWrite", method = RequestMethod.GET)
-		public String mInquiryWrite(Model model) {
-			return "mngrOnly/mInquiry/mInquiryWrite";
-		}
-		
-		// 문의 글쓰기 처리
-		@RequestMapping(value = "/mInsertInquiry", method = RequestMethod.POST)
-		public String mInsertInquiry(Model model, BoardVO board) {
-			
-			boardService.boardInsert(board);
-			return "redirect:/mInquiry";
-		}	
-	
-		// 관리자 건의사항 상세보기
-		@RequestMapping(value = "/mShowInquiry", method = RequestMethod.GET)
-		public String mShowInquiry(Model model, HttpServletRequest request) {
-			String board_no = request.getParameter("board_no");
-			model.addAttribute("InquiryUpd", boardService.boardUpdInfo(board_no));
-			model.addAttribute("replyList", includeService.replyList(board_no));
-			return "mngrOnly/mInquiry/mShowInquiry";
-		}	
-		
-		// 문의글 수정페이지 이동
-		@RequestMapping(value = "/mUpdInquiry", method = RequestMethod.GET)
-		public String mUpdInquiry(Model model, HttpServletRequest request) {
-			String board_no = request.getParameter("board_no");
-			model.addAttribute("InquiryUpd", boardService.boardUpdInfo(board_no));
-			return "mngrOnly/mInquiry/mUpdInquiry";
-		}
-		
-		// 문의사항 수정처리
-		@RequestMapping(value = "/mUpdInquiryForm", method = RequestMethod.POST)
-		public String mUpdateBoard(BoardVO board) {
-			boardService.boardUpd(board);
+	@RequestMapping(value = "/mInquiryWrite", method = RequestMethod.GET)
+	public String mInquiryWrite(Model model) {
+		return "mngrOnly/mInquiry/mInquiryWrite";
+	}
 
-			return "redirect:/mInquiry";
-		}
-			
-		// 건의사항 삭제처리
-	  	
-		@RequestMapping(value = "/mDelInquiry", method = RequestMethod.GET) 
-		public String mDeleteInquiry(BoardVO board) { 
-			boardService.boardDel(board);
+	// 문의 글쓰기 처리
+	@RequestMapping(value = "/mInsertInquiry", method = RequestMethod.POST)
+	public String mInsertInquiry(Model model, BoardVO board) {
+		String content = board.getBoard_content();
+		content = content.replace("\n", "<br />");
 
-			return "redirect:/mInquiry"; 
-	 
-	  }
+		board.setBoard_content(content);
+
+		boardService.boardInsert(board);
+		return "redirect:/mInquiry";
+	}
+
+	// 관리자 건의사항 상세보기
+	@RequestMapping(value = "/mShowInquiry", method = RequestMethod.GET)
+	public String mShowInquiry(Model model, HttpServletRequest request) {
+		String board_no = request.getParameter("board_no");
+		model.addAttribute("InquiryUpd", boardService.boardUpdInfo(board_no));
+		model.addAttribute("replyList", includeService.replyList(board_no));
+		return "mngrOnly/mInquiry/mShowInquiry";
+	}
+
+	// 문의글 수정페이지 이동
+	@RequestMapping(value = "/mUpdInquiry", method = RequestMethod.GET)
+	public String mUpdInquiry(Model model, HttpServletRequest request) {
+		String board_no = request.getParameter("board_no");
+		model.addAttribute("InquiryUpd", boardService.boardUpdInfo(board_no));
+		return "mngrOnly/mInquiry/mUpdInquiry";
+	}
+
+	// 문의사항 수정처리
+	@RequestMapping(value = "/mUpdInquiryForm", method = RequestMethod.POST)
+	public String mUpdateBoard(BoardVO board) {
+		String content = board.getBoard_content();
+		content = content.replace("\n", "<br>");
+		
+		board.setBoard_content(content);
+		
+		boardService.boardUpd(board);
+		
+		return "redirect:/mInquiry";
+	}
+
+	// 건의사항 삭제처리
+	@RequestMapping(value = "/mDelInquiry", method = RequestMethod.GET)
+	public String mDeleteInquiry(BoardVO board) {
+		boardService.boardDel(board);
+
+		return "redirect:/mInquiry";
+
+	}
 }

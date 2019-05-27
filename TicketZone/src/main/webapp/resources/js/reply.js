@@ -15,16 +15,17 @@ $(function() {
 		}
 	})
 	
-/*	// 자동 높이 조절
+	// 자동 높이 조절
 	$("#addReply_content").on('keydown keyup', function() {
 		$(this).height(1).height( $(this).prop('scrollHeight')+12 );
-	})*/
+	})
 	
 	// 답글 등록
 	$(document).on('click', '.addReply_submit', function() {
 		var query = {
 			board_no : $('#board_no').val(),
 			reply_content : $('#addReply_content').val().trim()
+			
 		}
 		
 		/*답글 내용 미입력시*/
@@ -42,7 +43,7 @@ $(function() {
 			success: function(data) {
 				$('#addReply_content').val("");
 				$('#reply_head span').text(data[0].reply_reg);
-				$('#reply_content').text(data[0].reply_content);
+				$('#reply_content').html(data[0].reply_content);
 				$('.addReply_submit').toggleClass('addReply_submit updReply_submit');
 				$('#replyList').show();
 				$('#addReply').hide();
@@ -61,9 +62,10 @@ $(function() {
 			type: 'post',
 			url: 'reply_update',
 			data: query,
+			dataType: 'json',
 			success: function(data) {
 				$('#addReply_content').val("");
-				$('#reply_content').text(query.reply_content);
+				$('#reply_content').html(data[0].reply_content);
 				$('#replyList').show();
 				$('#addReply').hide();
 				$('#reply_button').css('display','none');
@@ -75,7 +77,10 @@ $(function() {
 
 //답글 수정 요청
 function reply_update_info(board_no) {
-	$('#addReply_content').val($('#reply_content').text().trim());
+	var upd_content = $('#reply_content').html().trim();
+	upd_content = upd_content.split('<br>').join("\r\n");
+	
+	$('#addReply_content').append(upd_content);
 	$('#replyList').hide();
 	$('#addReply').show();
 }

@@ -14,7 +14,7 @@
 <body>
 	<%@include file="../include/header.jsp"%>
 	<!-- 고객센터 문의글 작성 -->
-	<form name="suggest" id="suggest_form" method="post" action="/insertInquiry">
+	 <form name="suggest" id="suggest_form" method="post" action="/insertInquiry"> 
 		<div class="table_wapper">
 			<h1>문의글 작성</h1>
 			<table class="cus_show">
@@ -63,6 +63,6 @@
 				<button type="button" id="cancel">취소</button>
 			</div>
 		</div> <!-- table_wapper-->
-	</form>
+		</form> 
 </body>
 </html>

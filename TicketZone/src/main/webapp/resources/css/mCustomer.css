@@ -3,10 +3,6 @@
 	margin: 0;
 }
 
-html, body {
-	height: 100%;
-}
-
 #store_form {
 	width: 1200px;
 	margin: 0 auto;
@@ -94,6 +90,7 @@ html, body {
 #waiting {
 	position: relative;
 	top: 180px;
+	margin-bottom: 200px; 
 }
 /* 게시글 제목 클릭했을 때 */
 /* #customAdmin tr:hover td{
