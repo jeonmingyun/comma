@@ -206,6 +206,15 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         return member_list;
     }
 
+    public Cursor selectStoreMenu(String license_number) {
+        mdb = this.getWritableDatabase();
+        String menu_code = license_number+'%';
+        String sql = "select * from store_menu where menu_code like \'" + menu_code +"\'";
+        Cursor store_list = mdb.rawQuery(sql, null);
+
+        return store_list;
+    }
+
     public void insertStoreMenu(JSONArray menuList) {
         mdb = this.getWritableDatabase();
 

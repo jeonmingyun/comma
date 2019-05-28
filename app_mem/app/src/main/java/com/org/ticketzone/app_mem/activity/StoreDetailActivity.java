@@ -19,7 +19,10 @@ import com.org.ticketzone.app_mem.R;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
 import com.org.ticketzone.app_mem.task.NetworkTask;
 import com.org.ticketzone.app_mem.task.SendDataSet;
+import com.org.ticketzone.app_mem.vo.StoreMenuVO;
 import com.org.ticketzone.app_mem.vo.StoreVO;
+
+import java.util.ArrayList;
 
 public class StoreDetailActivity extends AppCompatActivity {
 
@@ -28,6 +31,7 @@ public class StoreDetailActivity extends AppCompatActivity {
     private Button issue_btn;
     private DBOpenHelper mDBHelper;
     private StoreVO storeVO;
+    private ArrayList<StoreMenuVO> menuList;
     private String license_number;
 
     @Override
@@ -42,8 +46,10 @@ public class StoreDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         license_number = intent.getExtras().getString("license_number");
-        selectAllTicket(license_number);
 
+        selectStore(license_number);
+        selectStoreMenu(license_number);
+        Log.e("dddd", menuList.toString());
         store_name.setText(storeVO.getStore_name());
 //        store_img.setImageURI();
 
@@ -92,7 +98,24 @@ public class StoreDetailActivity extends AppCompatActivity {
         });
     }
 
-    private void selectAllTicket(String license_number) {
+    // 메뉴 정보
+    private void selectStoreMenu(String license_number) {
+        menuList = new ArrayList<>();
+        StoreMenuVO storeMenuVO;
+        Cursor cursor = mDBHelper.selectStoreMenu(license_number);
+
+        while(cursor.moveToNext()) {
+            storeMenuVO = new StoreMenuVO();
+            storeMenuVO.setMenu_code(cursor.getString(0));
+            storeMenuVO.setMenu_name(cursor.getString(1));
+            storeMenuVO.setMenu_price(cursor.getString(2));
+            storeMenuVO.setStore_note(cursor.getString(3));
+            menuList.add(storeMenuVO);
+        }
+    }
+
+    // 가게 정보
+    private void selectStore(String license_number) {
         storeVO = new StoreVO();
         Cursor cursor = mDBHelper.selectStore(license_number);
 

@@ -1,40 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activity.StoreDetailActivity"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/store_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="매장이름"
-        android:textSize="30sp"
-        android:padding="10dp"/>
-
-    <ImageView
-        android:id="@+id/store_img"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:srcCompat="@drawable/kakaotalk_icon"/>
+    android:orientation="vertical"
+    tools:context=".activity.StoreDetailActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.9"
+        android:layout_weight="1"
         android:orientation="vertical">
+        <TextView
+            android:id="@+id/store_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="매장이름"
+            android:textSize="30sp"
+            android:padding="10dp"/>
 
+        <ImageView
+            android:id="@+id/store_img"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/kakaotalk_icon"/>
+
+        <TabHost
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></TabWidget>
+
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.9">
+
+                    <LinearLayout
+                        android:id="@+id/detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/store_tel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="매장 상세 정보"
+                            android:textSize="20sp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/menu"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="메뉴 리스트"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/graph"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="그래프"/>
+
+                    </LinearLayout>
+                </FrameLayout>
+            </LinearLayout>
+        </TabHost>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/issue_btn"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.05"
-        android:text="발급 가능"
-        android:textSize="25dp"/>
+        android:layout_height="wrap_content">
 
+        <Button
+            android:id="@+id/issue_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="발급 가능"
+            android:textSize="25dp" />
+
+    </LinearLayout>
 </LinearLayout>
+
+

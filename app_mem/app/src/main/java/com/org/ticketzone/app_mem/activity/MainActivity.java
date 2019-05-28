@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 TextView bluetooth = (TextView)view.findViewById(R.id.bluetooth);
                 final Button TAGBTN = (Button)view.findViewById(R.id.tag_btn);
 
-//                storeImg.setBackgroundDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_launcher_background));
+//                storeImg.setBackgroundDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_launcher_background));;
                 storeName.setText(storeList.get(idx).getStore_name());
                 store_address.setText(storeList.get(idx).getAddress_name());
                 waiting.setText(count + "팀");

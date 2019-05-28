@@ -109,13 +109,14 @@ public class LoginActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                        redirectMainActivity();
                     }
                 };
 
                 SendDataSet sds = new SendDataSet("member_tel", "010-1234-5678");
                 jat.execute(sds);
 
-                redirectMainActivity();
             }
 
             @Override
