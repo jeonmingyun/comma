@@ -60,7 +60,26 @@ public class AppMemHomeController {
 			System.out.println("이미코드가 있습니다!");
 			appMemService.Mem_plusTicket(vo);
 		}
+	   
+     return "1";
+  }
+  
+  @ResponseBody
+  @RequestMapping(value ="/MyTicket", method = RequestMethod.POST)
+  public JSONArray MyTicket(@RequestBody NumberTicketVO vo) {
+	  
+	  System.out.println(vo + "myTicket");
+	  JSONArray arr = new JSONArray();
+	  arr.add(appMemService.MyTicket(vo));
+	  
+	  return arr;
+  }
+  
+  @ResponseBody
+  @RequestMapping(value ="/TicketCancel", method = RequestMethod.POST)
+  public void CancelTicket(@RequestBody NumberTicketVO vo) {
+	  appMemService.TicketCancel(vo);
+	  appMemService.SyncTicket(vo);
+  }
 
-		return "1";
-	}
 }

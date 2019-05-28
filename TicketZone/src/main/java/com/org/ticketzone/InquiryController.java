@@ -68,7 +68,8 @@ public class InquiryController {
 	
 	// 문의 글쓰기 비번 체크
 	@RequestMapping(value = "/board_pass_form", method = RequestMethod.GET)
-	public String inquiry_pass_form() {
+	public String inquiry_pass_form(Model model) {
+		
 		return "interceptor/board_pass_form";
 	}
 		
@@ -80,7 +81,7 @@ public class InquiryController {
 		model.addAttribute("InquiryUpd", boardService.boardUpdInfo(board_no));
 		model.addAttribute("replyList", includeService.replyList(board_no));
 		model.addAttribute("board_no", board_no);
-		
+		model.addAttribute("file", inqAttachService.Inq_findByBoard_no(Integer.parseInt(board_no)));
 		if(board_pass_ck != null) { // pass 성공시
 			return "inquiry/showInquiry";
 		} else { // pass 실패시
@@ -96,6 +97,7 @@ public class InquiryController {
 		model.addAttribute("InquiryUpd", boardService.boardUpdInfo(board_no));
 		model.addAttribute("replyList", includeService.replyList(board_no));
 		model.addAttribute("file", inqAttachService.Inq_findByBoard_no(Integer.parseInt(board_no)));
+		System.out.println(inqAttachService.Inq_findByBoard_no(Integer.parseInt(board_no)));
 		return "inquiry/showInquiry";
 	}
 
