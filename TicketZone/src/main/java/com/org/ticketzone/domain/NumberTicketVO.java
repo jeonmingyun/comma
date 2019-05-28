@@ -9,7 +9,7 @@ public class NumberTicketVO {
 	private int wait_number; //대기 인원 수
 	private int the_number; // 입장 인원 수
 	private String license_number;
-	private String member_tel;
+	private String member_id;
 	private int ticket_status;
 	private String wait;
 	private String success;

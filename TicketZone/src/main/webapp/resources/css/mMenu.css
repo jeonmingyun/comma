@@ -1,62 +1,182 @@
 * {
-	padding: 0;
-	margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
-#menu {
-	width: 1200px;
-	margin: 0 auto;
-	border: 1px solid RED;
+body {
+    background-color: #fafafa
 }
 
-#menuTab {
-	border: 1px solid cyan;
-	width: 350px;
-	float: left;
+button:hover {
+    cursor: pointer;
+    outline: none;
 }
 
-.menu_box {
-	clear: both;
-	position: relative;
+.store_form h1 {
+    text-align: center;
+   margin: 50px auto;
+   font-size: 14px;
+   font-weight: normal;
+   text-align: center;
+   padding: 13px 0;
+   border-top: 1px solid #343a40;
+   border-bottom: 1px solid #343a40;
+   width: 250px; height: 100%;
 }
 
-#menuList {
-	border: 1px solid pink;
-	width: 800px;
-/* 	display: inline-block;
-	margin: 0 10px; */
-	float: left;
+.store_form {
+    width: 1200px;
+    height: 100%;
+    margin: 0 auto;
 }
 
-#menu h1 {
-	text-align: center;
-	margin: 50px auto;
-	font-size: 14px;
-	font-weight: normal;
-	text-align: center;
-	padding: 13px 0;
-	border-top: 1px solid #343a40;
-	border-bottom: 1px solid #343a40;
-	width: 250px; height: 100%;
+/* <<<카테고리 추가>>> */
+.left {
+    width: 250px;
+    margin-right: 10px;
+    /* border: 1px solid #000; */
+    /* border-right: 1px solid #e6e6e6; */
+    float: left;
+}
+
+.left ul {
+    list-style: none;
+    margin: 0;
+}
+
+.cate_add {
+    position: relative;
+    top: 20px;
+    text-align: center;
+}
+
+.cate_add button {
+    vertical-align: middle;
+    border: none;
+    background-color: transparent;
+}
+
+.cate_add button:hover {
+    cursor: pointer;
+}
+
+.cate_add input[type="text"] {
+    width: 150px;
+    height: 25px;
+}
+
+/* 아이콘 색깔 */
+.cate_add svg {
+    fill: #718dff;
+}
+
+.cate_add svg:hover {
+    fill: #343a40;
+}
+
+.cate_text {
+    text-align: center;
+    margin: 30px 10px;
+    background-color: #fff;
+    border-top: 1px solid #e6e6e6; 
+    border-bottom: 1px solid #e6e6e6;
+}
+
+/* 카테고리 */
+.cate_text h5 {
+    font-size: 18px;
+    margin: 0 15px;
+    padding: 10px;
+    border-bottom: 2px solid #718dff;
+}
+
+.cate_text button {
+    margin: 15px 0;
+    font-size: 16px; 
+    border: none;
+    background-color: transparent;
+}
+
+.cate_text button:hover {
+    color: #718dff;
+    cursor: pointer;
+}
+
+/* <<<메뉴 테이블>>> */
+.right {
+    width: 900px;
+    /* border: 1px solid red; */
+    float: left;
+}
+
+.menu_btn {
+    float: right;
+    margin: 12px 0;
+}
+
+.menu_btn button {
+    background-color: #fff;
+    border: 1px solid #BDBDBD;
+    padding: 5px 10px;
+}
+
+.menu_btn button:focus {
+    outline: none;   
 }
 
 /* 테이블 */
-.custom_table {
-	width: 800px;
-	margin: 20px auto;
+#customAdmin {
+    width: 900px;
+    /* border: 1px solid orange; */
+    clear: both;
     border-collapse: collapse;
+    text-align: center;
+    background-color: #fff;
 }
 
-.custom_table th {
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	border-bottom: 2px solid #718dff;
+#customAdmin th {
+    padding: 10px 0;
+    font-weight: bold;
+    border-top: 1px solid #e6e6e6;
+    border-bottom: 2px solid #718dff;
 }
 
-.custom_table td {
-	padding: 5px 0;
-	text-align: center;
-	border-bottom: 1px solid #e6e6e6;
+#customAdmin td {
+    padding: 10px 0;
+   text-align: center;
+   border-bottom: 1px solid #e6e6e6;
 }
 
+/* 메뉴 추가 버튼 눌렀을 때  input text, textarea*/
+.add_name {
+   width: 250px;
+   height: 30px;
+}
+
+.add_price {
+   width: 50px;
+   height: 30px;
+}
+
+.add_store_note {
+   resize: none;
+   height: 30px;
+   vertical-align: middle;
+}
+
+#TraddMenu {
+   float: right;
+   background-color: #fff;
+    border: 1px solid #BDBDBD;
+    padding: 5px 10px;
+    margin: 10px 0;
+}
+
+/* 메뉴 수정 눌렀을 때 */
+#UpdateMenu {
+   float: right;
+   background-color: #fff;
+    border: 1px solid #BDBDBD;
+    padding: 5px 10px;
+    margin: 10px 5px;
+}

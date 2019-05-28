@@ -91,13 +91,14 @@ public class LoginActivity extends AppCompatActivity {
                 final String BIRTH = response.getKakaoAccount().getBirthday()+"";
                 final String GENDER = response.getKakaoAccount().getGender()+"";
                 final String APP_RANGE = response.getKakaoAccount().getAgeRange()+"";
-
+                mDBHelper.deleteAllTable();
                 JsonArrayTask jat = new JsonArrayTask("mem_db_login"){
                     @Override
                     protected void onPostExecute(JSONArray jsonArray) {
                         super.onPostExecute(jsonArray);
                         try {
 //                            Log.e("idx 3", jsonArray.get(5).toString());
+
                             mDBHelper.insertMember(ID, NICKNAME, BIRTH, GENDER, APP_RANGE);
                             mDBHelper.insertOwner(new JSONArray(jsonArray.get(0).toString()));
                             mDBHelper.insertCategorie(new JSONArray(jsonArray.get(1).toString()));
