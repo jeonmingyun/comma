@@ -1,47 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+
+<beans
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<bean id="dataSource"
-		class="org.apache.commons.dbcp2.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName"
-			value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url"
-			value="jdbc:oracle:thin:@bon300-5:1521:orcl" />
-		<property name="username" value="team" />
-		<property name="password" value="team" />
+
+
+
+	<bean destroy-method="close"
+		class="org.apache.commons.dbcp2.BasicDataSource" id="dataSource">
+
+		<property value="oracle.jdbc.driver.OracleDriver"
+			name="driverClassName" />
+
+		<property
+			value="jdbc:oracle:thin:@ticketzone.cygquqbjpk6g.ap-northeast-2.rds.amazonaws.com:1521:ORCL"
+			name="url" />
+
+		<property value="ticketzone" name="username" />
+
+		<property value="ticketzone" name="password" />
+
 	</bean>
-	<bean id="sqlSessionFactory"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"></property>
+
+
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean"
+		id="sqlSessionFactory">
+
+		<property name="dataSource" ref="dataSource" />
+
 	</bean>
 
 	<mybatis-spring:scan
 		base-package="com.org.ticketzone.mapper" />
+
 	<context:component-scan
 		base-package="com.org.ticketzone.service" />
 
-	<bean id="mailSender"
-		class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.gmail.com" />
-		<property name="port" value="587" />
-		<property name="username" value="gusdnr0107@gmail.com" />
-		<property name="password" value="y1692828" />
+
+	<bean class="org.springframework.mail.javamail.JavaMailSenderImpl"
+		id="mailSender">
+
+		<property value="smtp.gmail.com" name="host" />
+
+		<property value="587" name="port" />
+
+		<property value="gusdnr0107@gmail.com" name="username" />
+
+		<property value="y1692828" name="password" />
+
+
 		<property name="javaMailProperties">
+
+
 			<props>
+
 				<prop key="mail.transport.protocol">smtp</prop>
+
 				<prop key="mail.smtp.auth">true</prop>
+
 				<prop key="mail.smtp.starttls.enable">true</prop>
+
 				<prop key="mail.debug">true</prop>
+
 			</props>
+
 		</property>
 
 	</bean>
+
 </beans>

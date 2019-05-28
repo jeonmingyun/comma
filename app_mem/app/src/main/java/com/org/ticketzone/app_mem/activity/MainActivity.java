@@ -34,11 +34,8 @@ import com.estimote.coresdk.service.BeaconManager;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.org.ticketzone.app_mem.R;
-<<<<<<< HEAD
 import com.org.ticketzone.app_mem.task.JsonArrayTask;
-=======
 import com.org.ticketzone.app_mem.beacon.BeaconConnection;
->>>>>>> 053a7c1c022cbcfbc74a35f156e50aae72e5c814
 import com.org.ticketzone.app_mem.task.NetworkTask;
 import com.org.ticketzone.app_mem.task.SendDataSet;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
@@ -119,21 +116,17 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onClick(View v) {
-<<<<<<< HEAD
                         v.setTag(TAGBTN.getTag());
                         int btnIndex = (Integer)TAGBTN.getTag();  //인덱스 변수 선언
                         final String LICENSE = storeList.get(btnIndex).getLicense_number();
-
                         final String STORE_NAME = storeList.get(btnIndex).getStore_name(); // 변수 설정 하는 법
 
 
-=======
-                        v.setTag(tagBtn.getTag());
-                        int btnIndex = (Integer)tagBtn.getTag();  //인덱스 변수 선언
-                        final String license = storeList.get(btnIndex).getLicense_number();
-                        final String store_name = storeList.get(btnIndex).getStore_name(); // 변수 설정 하는 법
+//                        v.setTag(TAGBTN.getTag());
+//                        int btnIndex = (Integer)TAGBTN.getTag();  //인덱스 변수 선언
+//                        final String LICENSE = storeList.get(btnIndex).getLicense_number();
+//                        final String store_name = storeList.get(btnIndex).getStore_name(); // 변수 설정 하는 법
 
->>>>>>> 053a7c1c022cbcfbc74a35f156e50aae72e5c814
                         final EditText ET = new EditText(MainActivity.this);
                         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
                         dialog.setTitle("인원 수 설정");
@@ -162,7 +155,6 @@ public class MainActivity extends AppCompatActivity {
                                 Log.e("111", member_id+", "+ inputValue + ", " + LICENSE);
                                 networkTask.execute(sds1, sds2, sds3);
                                 Toast.makeText(MainActivity.this, inputValue + "명 입력되었습니다.", Toast.LENGTH_SHORT).show();
-<<<<<<< HEAD
 
                                 JsonArrayTask jat = new JsonArrayTask("MyTicket"){
                                     @Override
@@ -180,11 +172,7 @@ public class MainActivity extends AppCompatActivity {
                                 SendDataSet sds5 = new SendDataSet("member_id", member_id);
                                 SendDataSet sds6 = new SendDataSet("license_number", LICENSE);
                                 jat.execute(sds5,sds6);
-=======
-                                Intent numInfoIntent = new Intent(MainActivity.this, NumInfoActivity.class);
 
-                                numInfoIntent.putExtra("storename",store_name);
->>>>>>> 053a7c1c022cbcfbc74a35f156e50aae72e5c814
 
                                 Intent numInfoIntent = new Intent(MainActivity.this, NumInfoActivity.class);
                                 numInfoIntent.putExtra("member_id", member_id);
@@ -367,8 +355,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-<<<<<<< HEAD
-=======
     private void beaconConnection() {
 //        Button tagBtn = view.findViewById(R.id.tag_btn);
         // 비콘
@@ -427,5 +413,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
->>>>>>> 053a7c1c022cbcfbc74a35f156e50aae72e5c814
 }

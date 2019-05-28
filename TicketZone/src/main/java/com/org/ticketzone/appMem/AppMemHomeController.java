@@ -60,7 +60,6 @@ public class AppMemHomeController {
 			System.out.println("이미코드가 있습니다!");
 			appMemService.Mem_plusTicket(vo);
 		}
-<<<<<<< HEAD
 	   
      return "1";
   }
@@ -82,10 +81,5 @@ public class AppMemHomeController {
 	  appMemService.TicketCancel(vo);
 	  appMemService.SyncTicket(vo);
   }
-}
-=======
 
-		return "1";
-	}
 }
->>>>>>> 053a7c1c022cbcfbc74a35f156e50aae72e5c814

@@ -67,7 +67,6 @@ public class AppMemServiceImplement implements AppMemService {
 		return mapper.NumberTicketList();
 	}
 
-<<<<<<< HEAD
 	@Override
 	public NumberTicketVO[] MyTicket(NumberTicketVO vo) {
 		return mapper.MyTicket(vo);
@@ -84,6 +83,3 @@ public class AppMemServiceImplement implements AppMemService {
 	}
 
 }
-=======
-}
->>>>>>> 053a7c1c022cbcfbc74a35f156e50aae72e5c814

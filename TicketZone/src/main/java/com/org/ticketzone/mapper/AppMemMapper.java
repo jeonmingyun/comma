@@ -18,12 +18,9 @@ public interface AppMemMapper {
 	public void Mem_firstCode(NumberTicketVO vo);
 	public void Mem_makeTicket(NumberTicketVO vo);
 	public void Mem_plusTicket(NumberTicketVO vo);
-<<<<<<< HEAD
 	public NumberTicketVO[] MyTicket(NumberTicketVO vo);
 	public void TicketCancel(NumberTicketVO vo);
 	public void SyncTicket(NumberTicketVO vo);
 	
 }
-=======
-}
->>>>>>> 053a7c1c022cbcfbc74a35f156e50aae72e5c814
+
