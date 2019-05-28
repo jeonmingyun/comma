@@ -23,7 +23,7 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
 		String board_no = request.getParameter("board_no");
 		ArrayList<BoardVO> board_arr = boardService.boardUpdInfo(board_no);
 		String board_password;
-		
+
 		if (board_arr != null) {
 			board_password = board_arr.get(0).getBoard_password();
 			if( board_password != null) {

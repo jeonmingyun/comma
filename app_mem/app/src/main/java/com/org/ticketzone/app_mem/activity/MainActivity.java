@@ -34,16 +34,12 @@ import com.estimote.coresdk.service.BeaconManager;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.org.ticketzone.app_mem.R;
-import com.org.ticketzone.app_mem.task.JsonArrayTask;
 import com.org.ticketzone.app_mem.beacon.BeaconConnection;
 import com.org.ticketzone.app_mem.task.NetworkTask;
 import com.org.ticketzone.app_mem.task.SendDataSet;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
 import com.org.ticketzone.app_mem.listViewAdapter.CustomAdapter;
 import com.org.ticketzone.app_mem.vo.StoreVO;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 TextView store_address = (TextView)view.findViewById(R.id.store_address);
                 TextView waiting = (TextView)view.findViewById(R.id.waiting);
                 TextView bluetooth = (TextView)view.findViewById(R.id.bluetooth);
-                final Button TAGBTN = (Button)view.findViewById(R.id.tag_btn);
+                final Button tagBtn = (Button)view.findViewById(R.id.tag_btn);
 
 //                storeImg.setBackgroundDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_launcher_background));
                 storeName.setText(storeList.get(idx).getStore_name());
@@ -107,29 +103,23 @@ public class MainActivity extends AppCompatActivity {
                 waiting.setText(count + "팀");
                 bluetooth.setText("bluetooth status");
                 view.setTag(idx);   // 인덱스 저장
-                TAGBTN.setTag(idx);
-                TAGBTN.setText("발급 가능");
+                tagBtn.setTag(idx);
+                tagBtn.setText("발급 가능");
 
 
                 // 발급 버튼 클릭
-                TAGBTN.setOnClickListener(new View.OnClickListener(){
+                tagBtn.setOnClickListener(new View.OnClickListener(){
 
                     @Override
                     public void onClick(View v) {
-                        v.setTag(TAGBTN.getTag());
-                        int btnIndex = (Integer)TAGBTN.getTag();  //인덱스 변수 선언
-                        final String LICENSE = storeList.get(btnIndex).getLicense_number();
-                        final String STORE_NAME = storeList.get(btnIndex).getStore_name(); // 변수 설정 하는 법
-
-
-//                        v.setTag(TAGBTN.getTag());
-//                        int btnIndex = (Integer)TAGBTN.getTag();  //인덱스 변수 선언
-//                        final String LICENSE = storeList.get(btnIndex).getLicense_number();
-//                        final String store_name = storeList.get(btnIndex).getStore_name(); // 변수 설정 하는 법
+                        v.setTag(tagBtn.getTag());
+                        int btnIndex = (Integer)tagBtn.getTag();  //인덱스 변수 선언
+                        final String license = storeList.get(btnIndex).getLicense_number();
+                        final String store_name = storeList.get(btnIndex).getStore_name(); // 변수 설정 하는 법
 
                         final EditText ET = new EditText(MainActivity.this);
                         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-                        dialog.setTitle("인원 수 설정");
+                        dialog.setTitle("인원 수 설정" + store_name);
                         dialog.setMessage("인원 수");
                         dialog.setView(ET);
 
@@ -141,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
                                 Cursor cursor = mDBHelper.selectAllMember();
                                 TextView storeName = findViewById(R.id.storeName);
                                 String member_id = "";
-
                                 while(cursor.moveToNext()){
                                     member_id = cursor.getString(0);
                                 }
@@ -151,33 +140,14 @@ public class MainActivity extends AppCompatActivity {
                                 };
                                 SendDataSet sds1 = new SendDataSet("member_id", member_id);
                                 SendDataSet sds2 = new SendDataSet("the_number", inputValue);
-                                SendDataSet sds3 = new SendDataSet("license_number", LICENSE);
-                                Log.e("111", member_id+", "+ inputValue + ", " + LICENSE);
+                                SendDataSet sds3 = new SendDataSet("license_number", license);
+                                Log.e("111", member_id+", "+ inputValue + ", " + license);
                                 networkTask.execute(sds1, sds2, sds3);
                                 Toast.makeText(MainActivity.this, inputValue + "명 입력되었습니다.", Toast.LENGTH_SHORT).show();
-
-                                JsonArrayTask jat = new JsonArrayTask("MyTicket"){
-                                    @Override
-                                    protected void onPostExecute(JSONArray jsonArray) {
-                                        super.onPostExecute(jsonArray);
-                                        try{
-                                            mDBHelper.insertTicket(new JSONArray(jsonArray.get(0).toString()));
-                                            Log.e("myTicket", jsonArray.get(0).toString());
-
-                                        } catch (JSONException e){
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                };
-                                SendDataSet sds5 = new SendDataSet("member_id", member_id);
-                                SendDataSet sds6 = new SendDataSet("license_number", LICENSE);
-                                jat.execute(sds5,sds6);
-
-
                                 Intent numInfoIntent = new Intent(MainActivity.this, NumInfoActivity.class);
-                                numInfoIntent.putExtra("member_id", member_id);
-                                numInfoIntent.putExtra("storename",STORE_NAME);
-                                numInfoIntent.putExtra("license", LICENSE);
+
+                                numInfoIntent.putExtra("storename",store_name);
+
                                 startActivity(numInfoIntent);
                             }
                         });

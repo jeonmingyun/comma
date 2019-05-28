@@ -67,19 +67,4 @@ public class AppMemServiceImplement implements AppMemService {
 		return mapper.NumberTicketList();
 	}
 
-	@Override
-	public NumberTicketVO[] MyTicket(NumberTicketVO vo) {
-		return mapper.MyTicket(vo);
-	}
-
-	@Override
-	public void TicketCancel(NumberTicketVO vo) {
-		mapper.TicketCancel(vo);
-	}
-
-	@Override
-	public void SyncTicket(NumberTicketVO vo) {
-		mapper.SyncTicket(vo);		
-	}
-
 }

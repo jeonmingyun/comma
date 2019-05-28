@@ -41,197 +41,197 @@ import com.org.ticketzone.service.NoticeAttachService;
 
 import lombok.AllArgsConstructor;
 
-   
+	
 
 @AllArgsConstructor
 @Controller
 public class UploadController {
-   private NoticeAttachService noticeAttachService;
-   private InqAttachService inqAttachService;
-   // 날짜별 폴더생성(2019/04/10)
-   private String getFolder() {
-      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-      Date date = new Date();
-      String str = sdf.format(date);
+	private NoticeAttachService noticeAttachService;
+	private InqAttachService inqAttachService;
+	// 날짜별 폴더생성(2019/04/10)
+	private String getFolder() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String str = sdf.format(date);
 
-      return str.replace("-", File.separator);
-   }
+		return str.replace("-", File.separator);
+	}
 
-   // 이미지 파일판단
-   private boolean checkImageType(File file) {
-      try {
-         String contentType = Files.probeContentType(file.toPath());
+	// 이미지 파일판단
+	private boolean checkImageType(File file) {
+		try {
+			String contentType = Files.probeContentType(file.toPath());
 
-         return contentType.startsWith("image");
-      } catch (IOException e) {
-         e.printStackTrace();
-      }
-      return false;
-   }
+			return contentType.startsWith("image");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 
-   // 코스
+	// 코스
 
-   @RequestMapping(value = "/cos", method = RequestMethod.GET)
-   public String cos(Model model) throws JsonProcessingException {
+	@RequestMapping(value = "/cos", method = RequestMethod.GET)
+	public String cos(Model model) throws JsonProcessingException {
 
-      return "cos";
-   }
+		return "cos";
+	}
 
-   @GetMapping("/uploadForm")
-   public void uploadForm() {
-      System.out.println("upload form");
+	@GetMapping("/uploadForm")
+	public void uploadForm() {
+		System.out.println("upload form");
 
-   }
+	}
 
-   @PostMapping("/uploadFormAction")
-   public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
+	@PostMapping("/uploadFormAction")
+	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
 
-      String uploadFolder = "/var/lib/apache-tomcat-9.0.20/webapps/ROOT/resources/img";
+		String uploadFolder = "C:\\Users\\bon300-14\\Desktop\\4Github\\comma\\TicketZone\\src\\main\\webapp\\resources\\img";
 
-      for (MultipartFile multipartFile : uploadFile) {
-         System.out.println("------------------------------------");
-         System.out.println("Upload File Name: " + multipartFile.getOriginalFilename());
-         System.out.println("Upload File Size: " + multipartFile.getSize());
+		for (MultipartFile multipartFile : uploadFile) {
+			System.out.println("------------------------------------");
+			System.out.println("Upload File Name: " + multipartFile.getOriginalFilename());
+			System.out.println("Upload File Size: " + multipartFile.getSize());
 
-         File saveFile = new File(uploadFolder, multipartFile.getOriginalFilename());
-         try {
-            multipartFile.transferTo(saveFile);
-         } catch (Exception e) {
-            System.out.println(e.getMessage());
-         }
-      }
-   }
+			File saveFile = new File(uploadFolder, multipartFile.getOriginalFilename());
+			try {
+				multipartFile.transferTo(saveFile);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
 
-   @GetMapping("/uploadAjax")
-   public void uploadAjax() {
-      System.out.println("upload ajax");
-   }
+	@GetMapping("/uploadAjax")
+	public void uploadAjax() {
+		System.out.println("upload ajax");
+	}
 
-   @PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-   @ResponseBody
-   public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
+	@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
 
-      List<AttachFileDTO> list = new ArrayList<>();
-      System.out.println("update ajax post........");
-      String uploadFolder = "/var/lib/apache-tomcat-9.0.20/webapps/ROOT/resources/img";
-      String uploadFolderPath = getFolder();
-      // make folder ---------------
-      File uploadPath = new File(uploadFolder, uploadFolderPath); // 파일경로
+		List<AttachFileDTO> list = new ArrayList<>();
+		System.out.println("update ajax post........");
+		String uploadFolder = "C:\\Users\\bon300-14\\Desktop\\4Github\\comma\\TicketZone\\src\\main\\webapp\\resources\\img"; // 업로드할 경로지정
+		String uploadFolderPath = getFolder();
+		// make folder ---------------
+		File uploadPath = new File(uploadFolder, uploadFolderPath); // 파일경로
 
-      System.out.println("upload path: " + uploadPath);
+		System.out.println("upload path: " + uploadPath);
 
-      if (uploadPath.exists() == false) { // 경로에 폴더가없으면 폴더생성
-         uploadPath.mkdirs();
-      }
-      // make yyyy/mm/dd folder
-      for (MultipartFile multipartFile : uploadFile) {
+		if (uploadPath.exists() == false) { // 경로에 폴더가없으면 폴더생성
+			uploadPath.mkdirs();
+		}
+		// make yyyy/mm/dd folder
+		for (MultipartFile multipartFile : uploadFile) {
 
-         AttachFileDTO attachDTO = new AttachFileDTO();
-//         System.out.println("Upload File Name: " + multipartFile.getOriginalFilename());
-//         System.out.println("Upload File Size: " + multipartFile.getSize());
+			AttachFileDTO attachDTO = new AttachFileDTO();
+//			System.out.println("Upload File Name: " + multipartFile.getOriginalFilename());
+//			System.out.println("Upload File Size: " + multipartFile.getSize());
 
-         String uploadFileName = multipartFile.getOriginalFilename();
+			String uploadFileName = multipartFile.getOriginalFilename();
 
-         uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("/") + 1);
-//         System.out.println("only file name: " + uploadFileName);
-         attachDTO.setFileName(uploadFileName);
-//         File saveFile = new File(uploadFolder, multipartFile.getOriginalFilename());
+			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
+//			System.out.println("only file name: " + uploadFileName);
+			attachDTO.setFileName(uploadFileName);
+//			File saveFile = new File(uploadFolder, multipartFile.getOriginalFilename());
 
-         UUID uuid = UUID.randomUUID();
-         uploadFileName = uuid.toString() + "_" + uploadFileName;
+			UUID uuid = UUID.randomUUID();
+			uploadFileName = uuid.toString() + "_" + uploadFileName;
 
-         try {
-            File saveFile = new File(uploadPath, uploadFileName);
-            multipartFile.transferTo(saveFile);
+			try {
+				File saveFile = new File(uploadPath, uploadFileName);
+				multipartFile.transferTo(saveFile);
 
-            attachDTO.setUuid(uuid.toString());
-            attachDTO.setUploadPath(uploadFolderPath);
+				attachDTO.setUuid(uuid.toString());
+				attachDTO.setUploadPath(uploadFolderPath);
 
-            // 이미지 파일 체크
-//            if (checkImageType(saveFile)) {
+				// 이미지 파일 체크
+//				if (checkImageType(saveFile)) {
 //
-//               attachDTO.setImage(true);
+//					attachDTO.setImage(true);
 //
-//               FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
-//               Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
+//					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
+//					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
 //
-//               thumbnail.close();
-//            }
-            list.add(attachDTO);
-         } catch (Exception e) {
-            e.printStackTrace();
-         }
-      }
-      System.out.println(list);
-      return new ResponseEntity<>(list, HttpStatus.OK);
-   }
+//					thumbnail.close();
+//				}
+				list.add(attachDTO);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println(list);
+		return new ResponseEntity<>(list, HttpStatus.OK);
+	}
 
-   // 다운로드
-   @GetMapping(value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-   @ResponseBody
-   public ResponseEntity<Resource> downloadFile(@RequestHeader("User-Agent") String userAgent, String fileName) {
-      System.out.println("download file: " + fileName);
+	// 다운로드
+	@GetMapping(value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@ResponseBody
+	public ResponseEntity<Resource> downloadFile(@RequestHeader("User-Agent") String userAgent, String fileName) {
+		System.out.println("download file: " + fileName);
 
-      Resource resource = new FileSystemResource("/var/lib/apache-tomcat-9.0.20/webapps/ROOT/resources/img/" + fileName);
-      System.out.println("resource: " + resource);
+		Resource resource = new FileSystemResource("C:\\Users\\bon300-14\\Desktop\\4Github\\comma\\TicketZone\\src\\main\\webapp\\resources\\img\\" + fileName);
+		System.out.println("resource: " + resource);
 
-      if (resource.exists() == false) {
-         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-      }
+		if (resource.exists() == false) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 
-      String resourceName = resource.getFilename();
-      String resourceOriginalName = resourceName.substring(resourceName.indexOf("_") + 1);
-      HttpHeaders headers = new HttpHeaders();
-      try {
-         String downloadName = null;
+		String resourceName = resource.getFilename();
+		String resourceOriginalName = resourceName.substring(resourceName.indexOf("_") + 1);
+		HttpHeaders headers = new HttpHeaders();
+		try {
+			String downloadName = null;
 
-         if (userAgent.contains("Trident")) {
-            System.out.println("IE browser");
-            downloadName = URLEncoder.encode(resourceOriginalName, "UTF-8").replaceAll("/", " ");
-         } else if (userAgent.contains("Edge")) {
-            System.out.println("Edge");
-            downloadName = URLEncoder.encode(resourceOriginalName, "UTF-8");
-         } else {
-            System.out.println("Chrome browser");
-            downloadName = new String(resourceOriginalName.getBytes("UTF-8"), "ISO-8859-1");
-         }
-         System.out.println("downloadName: " + downloadName);
-         headers.add("Content-Disposition", "attachment; filename=" + downloadName);
-      } catch (UnsupportedEncodingException e) {
-         e.printStackTrace();
-      }
-      return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
-   }
+			if (userAgent.contains("Trident")) {
+				System.out.println("IE browser");
+				downloadName = URLEncoder.encode(resourceOriginalName, "UTF-8").replaceAll("\\+", " ");
+			} else if (userAgent.contains("Edge")) {
+				System.out.println("Edge");
+				downloadName = URLEncoder.encode(resourceOriginalName, "UTF-8");
+			} else {
+				System.out.println("Chrome browser");
+				downloadName = new String(resourceOriginalName.getBytes("UTF-8"), "ISO-8859-1");
+			}
+			System.out.println("downloadName: " + downloadName);
+			headers.add("Content-Disposition", "attachment; filename=" + downloadName);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
+	}
 
-   // 파일삭제
-   @PostMapping("/deleteFile")
-   @ResponseBody
-   public ResponseEntity<String> deleteFile(String fileName, NoticeAttachVO vo, InqAttachVO inq) {
-      int notice_no = vo.getNotice_no();
-      int board_no = inq.getBoard_no();
-      System.out.println("deleteFile: " + fileName);
-      System.out.println(notice_no);
-      File file;
+	// 파일삭제
+	@PostMapping("/deleteFile")
+	@ResponseBody
+	public ResponseEntity<String> deleteFile(String fileName, NoticeAttachVO vo, InqAttachVO inq) {
+		int notice_no = vo.getNotice_no();
+		int board_no = inq.getBoard_no();
+		System.out.println("deleteFile: " + fileName);
+		System.out.println(notice_no);
+		File file;
 
-      try {
-         file = new File("/var/lib/apache-tomcat-9.0.20/webapps/ROOT/resources/img/" + URLDecoder.decode(fileName, "UTF-8"));
-         file.delete();
-         
-            String largeFileName = file.getAbsolutePath().replace("s_", "");
-            System.out.println("largeFileName: " + largeFileName);
-            file = new File(largeFileName);
-            file.delete();
-            if(vo.getUuid() != null) {
-               noticeAttachService.delete(notice_no);
-            } else {
-               inqAttachService.Inq_delete(board_no);
-            }
-         
-      } catch (UnsupportedEncodingException e) {
-         e.printStackTrace();
-         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-      }
-      return new ResponseEntity<String>("deleted", HttpStatus.OK);
+		try {
+			file = new File("C:\\Users\\bon300-14\\Desktop\\4Github\\comma\\TicketZone\\src\\main\\webapp\\resources\\img\\" + URLDecoder.decode(fileName, "UTF-8"));
+			file.delete();
+			
+				String largeFileName = file.getAbsolutePath().replace("s_", "");
+				System.out.println("largeFileName: " + largeFileName);
+				file = new File(largeFileName);
+				file.delete();
+				if(vo.getUuid() != null) {
+					noticeAttachService.delete(notice_no);
+				} else {
+					inqAttachService.Inq_delete(board_no);
+				}
+			
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 
-   }
+	}
 }
