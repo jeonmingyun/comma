@@ -28,6 +28,7 @@
             app:srcCompat="@drawable/kakaotalk_icon"/>
 
         <TabHost
+            android:id="@+id/host"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp">
@@ -39,7 +40,7 @@
                 <TabWidget
                     android:id="@android:id/tabs"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></TabWidget>
+                    android:layout_height="wrap_content"/>
 
                 <FrameLayout
                     android:id="@android:id/tabcontent"
@@ -52,12 +53,67 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/store_tel"
+                        <TableLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="매장 상세 정보"
-                            android:textSize="20sp"/>
+                            android:padding="10dp">
+                            <TableRow>
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight = "0.2"
+                                    android:text="연락처"
+                                    android:textSize="20sp"/>
+                                <TextView
+                                    android:id="@+id/store_tel"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight = "0.8"
+                                    android:textSize="20sp"/>
+                            </TableRow>
+                            <TableRow>
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight = "0.2"
+                                    android:text="영업 시간"
+                                    android:textSize="20sp"/>
+                                <TextView
+                                    android:id="@+id/store_time"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight = "0.8"
+                                    android:textSize="20sp"/>
+                            </TableRow>
+                            <TableRow>
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight = "0.2"
+                                    android:text="주소"
+                                    android:textSize="20sp"/>
+                                <TextView
+                                    android:id="@+id/address_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight = "0.8"
+                                    android:textSize="20sp"/>
+                            </TableRow>
+                            <TableRow>
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight = "0.2"
+                                    android:text="매장소개"
+                                    android:textSize="20sp"/>
+                                <TextView
+                                    android:id="@+id/store_intro"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight = "0.8"
+                                    android:textSize="20sp"/>
+                            </TableRow>
+                        </TableLayout>
 
                     </LinearLayout>
 
@@ -100,7 +156,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="발급 가능"
-            android:textSize="25dp" />
+            android:textSize="40sp" />
 
     </LinearLayout>
 </LinearLayout>
