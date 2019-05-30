@@ -22,6 +22,7 @@ public class BeaconConnection extends Activity {
     // 비콘
     private BeaconManager beaconManager;
     private BeaconRegion region;
+    private BeaconRegion region2;
     private boolean isConnected;
 
     public BeaconConnection(final Context context) {
@@ -31,7 +32,7 @@ public class BeaconConnection extends Activity {
 
             beaconManager.setRangingListener(new BeaconManager.BeaconRangingListener(){
             @Override
-            public void onBeaconsDiscovered(BeaconRegion beaconRegion, List< Beacon > list) {
+            public void onBeaconsDiscovered(BeaconRegion beaconRegion, List<Beacon> list) {
                 if(!list.isEmpty()){
                     Beacon nearestBeacon = list.get(0);
                     Log.e("Airport", "Nearest places: " + nearestBeacon.getRssi());
@@ -64,7 +65,10 @@ public class BeaconConnection extends Activity {
 
         region = new BeaconRegion("ranged region",
                                   UUID.fromString("74278bda-b644-4520-8f0c-720eaf059935"), 40001, 15383);
-        //비콘 //
+        region2 = new BeaconRegion("ranged region",
+                UUID.fromString("74278bda-b644-4520-8f0c-720eaf059935"), 40001, 15400);
+
+
     }
 
     @Override

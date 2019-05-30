@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.org.ticketzone.domain.CoordinatesVO;
 import com.org.ticketzone.domain.MemberVO;
 import com.org.ticketzone.domain.NumberTicketVO;
 import com.org.ticketzone.domain.OwnerVO;
@@ -41,6 +42,7 @@ public class AppMemHomeController {
 		arr.add(appMemService.storeList());
 		arr.add(appMemService.menuList());
 		arr.add(appMemService.NumberTicketList());
+		arr.add(appMemService.BeaconList());
 		return arr;
 	}
   //번호표 발급
@@ -62,4 +64,16 @@ public class AppMemHomeController {
 	   
      return "1";
   }
+  
+  @ResponseBody
+  @RequestMapping(value ="/gpsTest", method = RequestMethod.POST)
+  public JSONArray gpsTest(@RequestBody CoordinatesVO vo) {
+	  JSONArray arr = new JSONArray();
+	  
+	  arr.add(appMemService.gpsTest(vo));
+	  
+	  return arr;
+  }
+  
+  
 }

@@ -17,6 +17,7 @@ import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
+import com.org.ticketzone.app_mem.GpsTest;
 import com.org.ticketzone.app_mem.R;
 import com.org.ticketzone.app_mem.task.JsonArrayTask;
 import com.org.ticketzone.app_mem.task.SendDataSet;
@@ -91,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                 final String BIRTH = response.getKakaoAccount().getBirthday()+"";
                 final String GENDER = response.getKakaoAccount().getGender()+"";
                 final String APP_RANGE = response.getKakaoAccount().getAgeRange()+"";
-
+                mDBHelper.deleteAllTable();
                 JsonArrayTask jat = new JsonArrayTask("mem_db_login"){
                     @Override
                     protected void onPostExecute(JSONArray jsonArray) {
@@ -105,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                             mDBHelper.insertStore(new JSONArray(jsonArray.get(3).toString()));
                             mDBHelper.insertCoordinates(new JSONArray(jsonArray.get(2).toString()));
                             mDBHelper.insertTicket(new JSONArray(jsonArray.get(5).toString()));
+                            mDBHelper.insertBeacon(new JSONArray(jsonArray.get(6).toString()));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
