@@ -23,8 +23,8 @@ body {
 	font-weight: normal;
     text-align: center;
     padding: 13px 0;
-    border-top: 1px solid #EEB3A3;
-    border-bottom: 1px solid #EEB3A3;
+    border-top: 1px solid #343a40;
+    border-bottom: 1px solid #343a40;
     width: 250px; height: 100%;
 }
 
@@ -66,9 +66,8 @@ body {
 
 /* 게시글 내용 */
 .notice_content {
-    font-size: 16px;
+    font-size: 18px;
     padding: 30px 50px;
-    border-bottom: 1px solid #BDBDBD;
     margin: 20px 0;
     word-break: break-all;
 }
@@ -76,21 +75,19 @@ body {
 /* 게시글 첨부파일 */
 .notice_file {
 	padding: 0 20px;
+	border-bottom: 1px solid #BDBDBD;
 }
 
 /* 수정,삭제 버튼 */
 .notice_btn button {
     padding: 5px 15px;
-    border: none;
-    border-radius: 5px;
-    background-color: #000000;
-    color: #ffffff;
+    border: 1px solid #BDBDBD;
+    background-color: #FFFFFF;
+    color: #000000;
     outline: none;
-    font: 20px;
 }
 
 /* 버튼 클릭했을 때 */
 .notice_btn button:hover {
     cursor: pointer;
-    background-color: cornflowerblue;
 }

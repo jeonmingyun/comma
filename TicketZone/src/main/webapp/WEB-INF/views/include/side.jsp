@@ -43,7 +43,7 @@
 				<li><a href="/updmStore_Register?license_number=${license_number}">매장 정보</a></li>
 				<li><a href="/mTicketSet?license_number=${license_number}">번호표 설정</a></li>              
                 <li><a href="/mMenuAdmin?license_number=${license_number}">메뉴 관리</a></li>
-                <li><a href="/mMenuAdd?license_number=${license_number}">메뉴 관리(view만)</a></li>
+                <%-- <li><a href="/mMenuAdd?license_number=${license_number}">메뉴 관리(view만)</a></li> --%>
 				
             </ul>
          </nav>

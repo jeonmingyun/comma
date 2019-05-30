@@ -120,13 +120,6 @@ public class MainActivity extends AppCompatActivity {
                         int btnIndex = (Integer)TAGBTN.getTag();  //인덱스 변수 선언
                         final String LICENSE = storeList.get(btnIndex).getLicense_number();
                         final String STORE_NAME = storeList.get(btnIndex).getStore_name(); // 변수 설정 하는 법
-
-
-//                        v.setTag(TAGBTN.getTag());
-//                        int btnIndex = (Integer)TAGBTN.getTag();  //인덱스 변수 선언
-//                        final String LICENSE = storeList.get(btnIndex).getLicense_number();
-//                        final String store_name = storeList.get(btnIndex).getStore_name(); // 변수 설정 하는 법
-
                         final EditText ET = new EditText(MainActivity.this);
                         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
                         dialog.setTitle("인원 수 설정");
