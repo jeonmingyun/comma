@@ -34,8 +34,8 @@
 		<!-- Sidebar  -->
 		<nav id="sidebar">
 			<div class="sidebar-header">
-				<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" ><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
-				<h3>${updmStore.r_name}</h3><h4>　님</h4>
+				<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M20 4H4v2h16V4zm1 10v-2l-1-5H4l-1 5v2h1v6h10v-6h4v6h2v-6h1zm-9 4H6v-4h6v4z"/></svg>
+				<h3>${updmStore.store_name}</h3>
 			</div>
 
 			<ul class="list-unstyled components">
@@ -43,6 +43,7 @@
 				<li><a href="/updmStore_Register?license_number=${license_number}">매장 정보</a></li>
 				<li><a href="/mTicketSet?license_number=${license_number}">번호표 설정</a></li>              
                 <li><a href="/mMenuAdmin?license_number=${license_number}">메뉴 관리</a></li>
+                <li><a href="/mMenuAdd?license_number=${license_number}">메뉴 관리(view만)</a></li>
 				
             </ul>
          </nav>

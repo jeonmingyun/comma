@@ -19,56 +19,58 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Controller
 public class MngrAppHomeController {
-   OwnerService ownerService;
-   AppMngrService appMngrService;
-   @ResponseBody
-   @RequestMapping(value = "/login", method = RequestMethod.POST)
-   public String login(@RequestBody OwnerVO ownervo) {
-      String owner_id = ownervo.getOwner_id();
-      String owner_password = ownervo.getOwner_password();
-      ArrayList<OwnerVO> ownerList = ownerService.login(owner_id);
-      String db_owner_password;
-     System.out.println(ownervo);
-      if( ownerList.size() != 0) {
-         db_owner_password = ownerList.get(0).getOwner_password();
-         if( db_owner_password.equals(owner_password))       
-            return "1"; // login success
-         else  
-            return "0"; // pass wrong
-      } else {
-         return "-1"; // id wrong
-      }
-       
-   }
-   
-   @ResponseBody
-   @RequestMapping(value = "/id_check", method = RequestMethod.POST)
-   public String id_check(@RequestBody OwnerVO ownervo) {
-      String owner_id = ownervo.getOwner_id();
-      ArrayList<OwnerVO> ownerList = ownerService.login(owner_id);
-      
-      if( ownerList.size() != 0) {
-         return "0";
-      } else {
-         return "1";
-      }
-   }
-   // id가 있을때 0 return / id가 없을때 1 return 
-   //관리자 회원가입
-   @ResponseBody
-   @RequestMapping(value = "/appregister", method = RequestMethod.POST)
-   public String appregister(@RequestBody OwnerVO owner) {
-      ownerService.insertOwner(owner); 
+	OwnerService ownerService;
+	AppMngrService appMngrService;
 
-      return "1";
-   }
-   
-   @ResponseBody
-   @RequestMapping(value = "/mngr_db_login", method = RequestMethod.POST)
+	@ResponseBody
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(@RequestBody OwnerVO ownervo) {
+		String owner_id = ownervo.getOwner_id();
+		String owner_password = ownervo.getOwner_password();
+		ArrayList<OwnerVO> ownerList = ownerService.login(owner_id);
+		String db_owner_password;
+		System.out.println(ownervo);
+		if (ownerList.size() != 0) {
+			db_owner_password = ownerList.get(0).getOwner_password();
+			if (db_owner_password.equals(owner_password))
+				return "1"; // login success
+			else
+				return "0"; // pass wrong
+		} else {
+			return "-1"; // id wrong
+		}
+
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/id_check", method = RequestMethod.POST)
+	public String id_check(@RequestBody OwnerVO ownervo) {
+		String owner_id = ownervo.getOwner_id();
+		ArrayList<OwnerVO> ownerList = ownerService.login(owner_id);
+
+		if (ownerList.size() != 0) {
+			return "0";
+		} else {
+			return "1";
+		}
+	}
+
+	// id가 있을때 0 return / id가 없을때 1 return
+	// 관리자 회원가입
+	@ResponseBody
+	@RequestMapping(value = "/appregister", method = RequestMethod.POST)
+	public String appregister(@RequestBody OwnerVO owner) {
+		ownerService.insertOwner(owner);
+
+		return "1";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/mngr_db_login", method = RequestMethod.POST)
 	public JSONArray mngr_db_login(@RequestBody OwnerVO o) {
 		JSONArray arr = new JSONArray();
 		String owner_id = o.getOwner_id();
-		
+
 		arr.add(appMngrService.ownerList());
 		arr.add(appMngrService.categorieList());
 //		arr.add(appMngrService.memberList());
@@ -78,7 +80,7 @@ public class MngrAppHomeController {
 		System.out.println(appMngrService.storeList(owner_id));
 		return arr;
 	}
-   
+
 //   //번호표 발급
 //   @ResponseBody
 //   @RequestMapping(value = "/M_issue_ticket", method = RequestMethod.POST)
@@ -100,7 +102,7 @@ public class MngrAppHomeController {
 //      return "1";
 //   }
 
-   /* json객체로 return 예시 / JsonArrayTask 사용*/
+	/* json객체로 return 예시 / JsonArrayTask 사용 */
 //   @ResponseBody
 //   @RequestMapping(value = "/json_test", method = RequestMethod.POST)
 //   public OwnerVO json_test(@RequestBody OwnerVO ownervo) {
@@ -110,5 +112,5 @@ public class MngrAppHomeController {
 //      OwnerVO ownerList = new OwnerVO("moon", "moon");
 //      return ownerList;
 //   }
-   
+
 }

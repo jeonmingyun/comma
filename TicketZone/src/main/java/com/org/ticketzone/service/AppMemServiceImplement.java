@@ -70,14 +70,27 @@ public class AppMemServiceImplement implements AppMemService {
 
 	@Override
 	public BeaconVO[] BeaconList() {
-		// TODO Auto-generated method stub
 		return mapper.BeaconList();
 	}
 
 	@Override
 	public CoordinatesVO[] gpsTest(CoordinatesVO vo) {
-		// TODO Auto-generated method stub
 		return mapper.gpsTest(vo);
+	}
+
+	public NumberTicketVO[] MyTicket(NumberTicketVO vo) {
+		return mapper.MyTicket(vo);
+	}
+
+	@Override
+	public void TicketCancel(NumberTicketVO vo) {
+		mapper.TicketCancel(vo);
+	}
+
+	@Override
+	public void SyncTicket(NumberTicketVO vo) {
+		mapper.SyncTicket(vo);		
+
 	}
 
 }

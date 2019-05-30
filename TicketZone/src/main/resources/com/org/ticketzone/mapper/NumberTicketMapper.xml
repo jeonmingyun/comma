@@ -153,6 +153,7 @@
 		from number_ticket
 		where license_number = #{license_number}
 		and ticket_status = 0
+		and ticket_code like to_char(sysdate, 'yyyymmdd') || '%'
 		group by ticket_status
 		]]>
 	</select>
@@ -166,6 +167,7 @@
 		from number_ticket
 		where license_number = #{license_number}
 		and ticket_status = 1
+		and ticket_code like to_char(sysdate, 'yyyymmdd') || '%'
 		group by ticket_status
 		]]>
 	</select>
@@ -179,6 +181,7 @@
 		from number_ticket
 		where license_number = #{license_number}
 		and ticket_status = 2
+		and ticket_code like to_char(sysdate, 'yyyymmdd') || '%'
 		group by ticket_status
 		]]>
 	</select>
@@ -192,6 +195,7 @@
 		from number_ticket
 		where license_number = #{license_number}
 		and ticket_status = 3
+		and ticket_code like to_char(sysdate, 'yyyymmdd') || '%'
 		group by ticket_status
 		]]>
 	</select>
@@ -203,6 +207,7 @@
 		the_number, license_number, member_id, ticket_status number_ticket
 		from number_ticket
 		where license_number = #{license_number}
+		and ticket_code like to_char(sysdate, 'yyyymmdd') || '%'
 		order by
 		ticket_code
 	</select>

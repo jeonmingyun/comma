@@ -129,6 +129,7 @@
          </div>
      </div>
     </div>
+
 	
 	<!-- 공지사항 div -->
 	<div id="home">

@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         callback = new SessionCallback();
         Session.getCurrentSession().addCallback(callback);
         Session.getCurrentSession().checkAndImplicitOpen();
-//        getKeyHash();
+        getKeyHash();
     }
 
     @Override
@@ -99,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                         super.onPostExecute(jsonArray);
                         try {
 //                            Log.e("idx 3", jsonArray.get(5).toString());
+
                             mDBHelper.insertMember(ID, NICKNAME, BIRTH, GENDER, APP_RANGE);
                             mDBHelper.insertOwner(new JSONArray(jsonArray.get(0).toString()));
                             mDBHelper.insertCategorie(new JSONArray(jsonArray.get(1).toString()));
@@ -110,13 +111,14 @@ public class LoginActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                        redirectMainActivity();
                     }
                 };
 
                 SendDataSet sds = new SendDataSet("member_tel", "010-1234-5678");
                 jat.execute(sds);
 
-                redirectMainActivity();
             }
 
             @Override

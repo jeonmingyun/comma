@@ -21,23 +21,23 @@ import lombok.AllArgsConstructor;
 public class AppMemHomeController {
 	MemberService memberService;
 	AppMemService appMemService;
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/test", method = RequestMethod.POST)
-	public String test(@RequestBody OwnerVO o ) {
+	public String test(@RequestBody OwnerVO o) {
 		System.out.println(o.getOwner_id());
 
-		return o.getOwner_id() +"app";
+		return o.getOwner_id() + "app";
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/mem_db_login", method = RequestMethod.POST)
-	public JSONArray mem_db_login(@RequestBody MemberVO mvo ) {
+	public JSONArray mem_db_login(@RequestBody MemberVO mvo) {
 		System.out.println(mvo.getMember_id());
 		JSONArray arr = new JSONArray();
-		
+
 		arr.add(appMemService.ownerList());
-		arr.add(appMemService.categorieList()); //F만 가져와야하고
+		arr.add(appMemService.categorieList()); // F만 가져와야하고
 		arr.add(appMemService.coordinatesList());
 		arr.add(appMemService.storeList());
 		arr.add(appMemService.menuList());
@@ -45,12 +45,13 @@ public class AppMemHomeController {
 		arr.add(appMemService.BeaconList());
 		return arr;
 	}
-  //번호표 발급
-  @ResponseBody
-  @RequestMapping(value = "/Mem_issue_ticket", method = RequestMethod.POST)
-  public String id_check(@RequestBody NumberTicketVO vo) {
-//	   appMngrService.M_issue_ticket(vo);
-	   String codeMaker = appMemService.Mem_codeSelect(vo);
+
+	// 번호표 발급
+	@ResponseBody
+	@RequestMapping(value = "/Mem_issue_ticket", method = RequestMethod.POST)
+	public String id_check(@RequestBody NumberTicketVO vo) {
+//      appMngrService.M_issue_ticket(vo);
+		String codeMaker = appMemService.Mem_codeSelect(vo);
 		System.out.println(codeMaker + "code");
 		System.out.println(vo + "ticket");
 		if (codeMaker.equals("not")) {
@@ -71,9 +72,24 @@ public class AppMemHomeController {
 	  JSONArray arr = new JSONArray();
 	  
 	  arr.add(appMemService.gpsTest(vo));
+	  return arr;
+  }
+  @RequestMapping(value ="/MyTicket", method = RequestMethod.POST)
+  public JSONArray MyTicket(@RequestBody NumberTicketVO vo) {
+	  
+	  System.out.println(vo + "myTicket");
+	  JSONArray arr = new JSONArray();
+	  arr.add(appMemService.MyTicket(vo));
 	  
 	  return arr;
   }
   
   
+  @ResponseBody
+  @RequestMapping(value ="/TicketCancel", method = RequestMethod.POST)
+  public void CancelTicket(@RequestBody NumberTicketVO vo) {
+	  appMemService.TicketCancel(vo);
+	  appMemService.SyncTicket(vo);
+  }
+
 }

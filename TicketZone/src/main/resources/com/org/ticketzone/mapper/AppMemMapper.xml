@@ -117,6 +117,7 @@
 		]]>
 	</insert>
 	
+<<<<<<< HEAD
 	<select id="gpsTest" resultType="com.org.ticketzone.domain.CoordinatesVO">
 		<![CDATA[
 			select a.coor_x, a.coor_y,
@@ -142,4 +143,39 @@
 	</select>
 	
 	
+=======
+	<select id="MyTicket" resultType="com.org.ticketzone.domain.NumberTicketVO">
+		<![CDATA[
+		select * from number_ticket 
+		where ticket_code like to_char(sysdate, 'yyyymmdd') || '%'
+		and member_id = #{member_id}
+		and ticket_status = 0
+		and license_number = #{license_number}
+		]]>
+	</select>
+	
+	<update id="TicketCancel">
+		<![CDATA[
+			update number_ticket
+			set ticket_status = 2,
+			wait_number = 0
+			where ticket_code like to_char(sysdate, 'yyyymmdd') || '%'
+			and ticket_code = #{ticket_code}
+			and member_id = #{member_id}
+			and ticket_status = 0
+			and license_number = #{license_number}			
+		]]>
+	</update>
+	
+	<update id="SyncTicket">
+		<![CDATA[
+			update number_ticket
+			set wait_number = wait_number - 1
+			where ticket_code > #{ticket_code}
+			and ticket_status = 0
+			and license_number = #{license_number}
+		]]>
+	</update>
+
+>>>>>>> a5fbd665baf1a41e7abdb62e6556ad835147daba
 </mapper>

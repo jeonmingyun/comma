@@ -9,7 +9,7 @@ $(document).ready(function(){
 		//변수분리
 		var filePath = encodeURIComponent(uploadpath+"/" + uuid +"_"+filename);
 		var result = uploadpath+"/" + uuid +"_"+filename;
-		var a = $("img[name=s_img"+i+"]").attr("src", "/resources/img/"+result);
+		var a = $("img[name=s_img"+i+"]").attr("src", "http://15.164.115.73:8080/resources/img/"+result);
 		
 	});
 	/*매장 등록 버튼 누르면 매장등록 페이지로 이동*/
