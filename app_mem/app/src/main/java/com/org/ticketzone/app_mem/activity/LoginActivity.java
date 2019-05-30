@@ -17,6 +17,7 @@ import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
+import com.org.ticketzone.app_mem.GpsTest;
 import com.org.ticketzone.app_mem.R;
 import com.org.ticketzone.app_mem.task.JsonArrayTask;
 import com.org.ticketzone.app_mem.task.SendDataSet;
@@ -106,16 +107,18 @@ public class LoginActivity extends AppCompatActivity {
                             mDBHelper.insertStore(new JSONArray(jsonArray.get(3).toString()));
                             mDBHelper.insertCoordinates(new JSONArray(jsonArray.get(2).toString()));
                             mDBHelper.insertTicket(new JSONArray(jsonArray.get(5).toString()));
+                            mDBHelper.insertBeacon(new JSONArray(jsonArray.get(6).toString()));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                        redirectMainActivity();
                     }
                 };
 
                 SendDataSet sds = new SendDataSet("member_tel", "010-1234-5678");
                 jat.execute(sds);
 
-                redirectMainActivity();
             }
 
             @Override

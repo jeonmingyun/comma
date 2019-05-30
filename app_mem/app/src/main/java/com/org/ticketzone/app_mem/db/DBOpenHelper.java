@@ -12,7 +12,8 @@ import org.json.JSONObject;
 
 public class DBOpenHelper extends SQLiteOpenHelper{
 
-    private static final int DB_VERSION = 11;
+
+    private static final int DB_VERSION = 15;
     private static final String DB_NAME = "SQLite.db";
     public static SQLiteDatabase mdb;
 
@@ -29,6 +30,8 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         db.execSQL(DBTable.Store.CREATE_QUERY);
         db.execSQL(DBTable.Coordinates.CREATE_QUERY);
         db.execSQL(DBTable.NumberTicket.CREATE_QUERY);
+        db.execSQL(DBTable.Beacon.CREATE_QUERY);
+        db.execSQL(DBTable.GpsTest.CREATE_QUERY);
     }
 
     @Override
@@ -40,6 +43,8 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         db.execSQL(DBTable.Categorie.DROP_QUERY);
         db.execSQL(DBTable.StoreMenu.DROP_QUERY);
         db.execSQL(DBTable.NumberTicket.DROP_QUERY);
+        db.execSQL(DBTable.Beacon.DROP_QUERY);
+        db.execSQL(DBTable.GpsTest.DROP_QUERY);
         onCreate(db);
     }
 
@@ -132,6 +137,12 @@ public class DBOpenHelper extends SQLiteOpenHelper{
 
         return store_list;
     }
+    public Cursor selectGpsStore(String store_name){
+        mdb = this.getWritableDatabase();
+        Cursor store_list = mdb.rawQuery("select * from store where store_name = ?", new String[] {store_name});
+
+        return store_list;
+    }
 
     public Cursor selectStore(String license_number) {
         mdb = this.getWritableDatabase();
@@ -206,6 +217,15 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         return member_list;
     }
 
+    public Cursor selectStoreMenu(String license_number) {
+        mdb = this.getWritableDatabase();
+        String menu_code = license_number+'%';
+        String sql = "select * from store_menu where menu_code like \'" + menu_code +"\'";
+        Cursor store_list = mdb.rawQuery(sql, null);
+
+        return store_list;
+    }
+
     public void insertStoreMenu(JSONArray menuList) {
         mdb = this.getWritableDatabase();
 
@@ -278,6 +298,9 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         }
     }
 
+
+    // 번호표
+
     public Cursor selectAllTicket() {
         mdb = this.getReadableDatabase();
         String sql = "select * from numberticket";
@@ -343,15 +366,74 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         mdb.execSQL(sqlUpdate, new String[] {ticket_code, license_number});
     }
 
+
+
+    //비콘
+    public Cursor selectAllBeacon(){
+        mdb = this.getReadableDatabase();
+        String sql = "select * from beacon";
+        Cursor member_list = mdb.rawQuery(sql, null);
+
+        return member_list;
+    }
+
+    public void insertBeacon(JSONArray BeaconList) {
+        mdb = this.getWritableDatabase();
+
+        for ( int i = 0; i < BeaconList.length(); i++) {
+            try {
+                JSONObject jobj = new JSONObject(BeaconList.get(i).toString());
+                ContentValues values = new ContentValues();
+                values.put("b_code", jobj.getString("b_code"));
+                values.put("store_name", jobj.getString("store_name"));
+                values.put("license_number", jobj.getString("license_number"));
+                mdb.insert(DBTable.Beacon.TABLENAME, null, values);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void insertGpsTest(JSONArray gpsTest){
+        mdb = this.getWritableDatabase();
+
+        for(int i=0; i< gpsTest.length(); i++){
+            try{
+                JSONObject jobj = new JSONObject(gpsTest.get(i).toString());
+                ContentValues values = new ContentValues();
+                values.put("coor_x", jobj.getString("coor_x"));
+                values.put("coor_y", jobj.getString("coor_y"));
+                values.put("store_name", jobj.getString("store_name"));
+                values.put("distance", jobj.getString("distance"));
+                mdb.insert(DBTable.GpsTest.TABLENAME, null, values);
+            } catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    //gpsTest
+    public Cursor selectLocation(){
+        mdb = this.getReadableDatabase();
+        String sql = "select * from gpstest";
+        Cursor member_list = mdb.rawQuery(sql, null);
+
+        return member_list;
+    }
+
+
+
+
     public void deleteAllTable(){
         mdb = this.getWritableDatabase();
-        mdb.delete(DBTable.NumberTicket.TABLENAME,null,null);
-        mdb.delete(DBTable.Coordinates.TABLENAME,null,null);
         mdb.delete(DBTable.Store.TABLENAME,null,null);
-        mdb.delete(DBTable.StoreMenu.TABLENAME,null,null);
-        mdb.delete(DBTable.Categorie.TABLENAME,null,null);
-        mdb.delete(DBTable.Owner.TABLENAME,null,null);
         mdb.delete(DBTable.Member.TABLENAME,null,null);
+        mdb.delete(DBTable.Owner.TABLENAME,null,null);
+        mdb.delete(DBTable.Categorie.TABLENAME,null,null);
+        mdb.delete(DBTable.StoreMenu.TABLENAME,null,null);
+        mdb.delete(DBTable.NumberTicket.TABLENAME,null,null);
+        mdb.delete(DBTable.Beacon.TABLENAME,null,null);
+        mdb.delete(DBTable.GpsTest.TABLENAME,null,null);
+
     }
 
 }
