@@ -33,7 +33,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"></TabWidget>
-
+                <TextView
+                    android:id="@+id/addressWindow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:drawableLeft="@drawable/ic_location_on_black_24dp"
+                    android:text=""
+                    android:padding="10dp"
+                    android:textSize="15dp"/>
                 <FrameLayout
                     android:id="@android:id/tabcontent"
                     android:layout_width="match_parent"

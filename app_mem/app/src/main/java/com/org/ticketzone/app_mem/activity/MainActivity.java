@@ -111,9 +111,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
     private Double my_x;
     private Double my_y;
-    // Img
 
-    ;
+    // Img
+    private List<Address> addresses;
+    private String addr;
+    private TextView addressWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,6 +146,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         my_x = gpsTracker.getLatitude();
         my_y = gpsTracker.getLongitude();
         String address = getCurrentAddress(my_x, my_y);
+        addressWindow = findViewById(R.id.addressWindow);
+        addressWindow.setText(addr);
     }
 
     // store list 생성
@@ -571,9 +575,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
 
 
-        Toast.makeText(MainActivity.this, "현재위치 \n위도 " + my_x + "\n경도 " + my_y, Toast.LENGTH_LONG).show();
-
-        
+        //Toast.makeText(MainActivity.this, "현재위치 \n위도 " + my_x + "\n경도 " + my_y, Toast.LENGTH_LONG).show();
+        Log.e("test1",addr);
+        addressWindow=findViewById(R.id.addressWindow);
+        addressWindow.setText(addr);
         mSwipeRefreshLayout.setRefreshing(false);
 
     }
@@ -675,14 +680,23 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         //지오코더... GPS를 주소로 변환
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
 
-        List<Address> addresses;
+
 
         try {
+
+            latitude = Double.parseDouble(my_x.toString());
+            longitude = Double.parseDouble(my_y.toString());
 
             addresses = geocoder.getFromLocation(
                     latitude,
                     longitude,
-                    7);
+                    1);
+            Address a = addresses.get(0);
+
+            for(int i=0; i<=a.getMaxAddressLineIndex(); i++){
+                Log.e("test1234",a.getAddressLine(i));
+                addr = a.getAddressLine(i);
+            }
         } catch (IOException ioException) {
             //네트워크 문제
             Toast.makeText(this, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();
