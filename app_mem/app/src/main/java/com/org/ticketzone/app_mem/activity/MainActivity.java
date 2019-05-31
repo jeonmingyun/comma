@@ -1,11 +1,14 @@
 package com.org.ticketzone.app_mem.activity;
 
-
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -20,6 +23,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -37,6 +42,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.estimote.coresdk.common.requirements.SystemRequirementsChecker;
 import com.estimote.coresdk.observation.region.beacon.BeaconRegion;
 import com.estimote.coresdk.recognition.packets.Beacon;
@@ -44,9 +50,9 @@ import com.estimote.coresdk.service.BeaconManager;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
-import com.org.ticketzone.app_mem.GpsTest;
 import com.org.ticketzone.app_mem.GpsTracker;
 import com.org.ticketzone.app_mem.R;
+import com.org.ticketzone.app_mem.categorieCardView.RecyclerViewAdapter;
 import com.org.ticketzone.app_mem.task.JsonArrayTask;
 import com.org.ticketzone.app_mem.beacon.BeaconConnection;
 import com.org.ticketzone.app_mem.task.JsonArrayTask;
@@ -55,19 +61,14 @@ import com.org.ticketzone.app_mem.task.SendDataSet;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
 import com.org.ticketzone.app_mem.listViewAdapter.CustomAdapter;
 import com.org.ticketzone.app_mem.vo.BeaconVO;
+import com.org.ticketzone.app_mem.vo.CategorieVO;
 import com.org.ticketzone.app_mem.vo.StoreVO;
-
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,11 +91,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private BeaconRegion region2;
     private boolean isConnected;
 
+    private List<CategorieVO> cateList;
+
     //
     private int connect = 1;
     private int connect2=2;
     private String Minor = "";
-    private String Minor2 = "";
     private SwipeRefreshLayout mSwipeRefreshLayout;
     // GPS
     private GpsTracker gpsTracker;
@@ -103,6 +105,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
     private Double my_x;
     private Double my_y;
+
+    // Img
+    private List<Address> addresses;
+    private String addr;
+    private TextView addressWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,21 +124,48 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         toolbar(); // menu toolbar
         tabHost(); // LinearLayout 페이지 바꿔끼우기
         selectAllStore(); // storeList = store table data select
+        selectAllCate();
         selectAllBeacon(); // beaconList
         beaconConnection();
         storeList(); // store tab에서 store list를 보여줌
+        cateList();
+
     //gps
         if (!checkLocationServicesStatus()) {
-
             showDialogForLocationServiceSetting();
         }else {
-
             checkRunTimePermission();
         }
+
         gpsTracker = new GpsTracker(MainActivity.this);
         my_x = gpsTracker.getLatitude();
         my_y = gpsTracker.getLongitude();
         String address = getCurrentAddress(my_x, my_y);
+        addressWindow = findViewById(R.id.addressWindow);
+        addressWindow.setText(addr);
+    }
+
+    // select categorie table data from SQLite
+    private void selectAllCate() {
+        Cursor cursor = mDBHelper.selectAllCategorie();
+        CategorieVO categorieVO;
+
+        cateList = new ArrayList<>();
+
+        while(cursor.moveToNext()) {
+            categorieVO = new CategorieVO();
+            categorieVO.setCate_name(cursor.getString(1));
+
+            cateList.add(categorieVO);
+        }
+    }
+
+    // categorie list 생성
+    private void cateList() {
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        RecyclerViewAdapter recyclerAdapter = new RecyclerViewAdapter(cateList);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setAdapter(recyclerAdapter);
     }
 
     // store list 생성
@@ -139,12 +173,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         storeListView = findViewById(R.id.store_list_view);
         CustomAdapter<StoreVO> storeAdapter;
 
-
         storeAdapter = new CustomAdapter<StoreVO>(storeList) {
-
             @Override
             public View getView(final int idx, View view, ViewGroup parent) {
-
                 //notifyDataSetChanged();
                 view = getLayoutInflater().inflate(R.layout.store_list_item, null);
                 String license_number = storeList.get(idx).getLicense_number();
@@ -159,15 +190,15 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 TextView storeName = view.findViewById(R.id.store_name);
                 TextView store_address = view.findViewById(R.id.store_address);
                 TextView waiting = view.findViewById(R.id.waiting);
-                TextView bluetooth = view.findViewById(R.id.bluetooth);
                 final Button tagBtn = view.findViewById(R.id.tag_btn);
+                String imageUrl = "http://15.164.115.73:8080/resources/img/" + storeList.get(idx).getImg_uploadpath() + "/" + storeList.get(idx).getImg_uuid() + "_" + storeList.get(idx).getImg_filename();
 
-//                storeImg.setBackgroundDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_launcher_background));;
+                Glide.with(view).load(imageUrl).centerCrop().into(storeImg);
+                storeImg.setAlpha(130);
 
                 storeName.setText(storeList.get(idx).getStore_name());
                 store_address.setText(storeList.get(idx).getAddress_name());
                 waiting.setText(count + "팀");
-                bluetooth.setText("bluetooth status");
                 view.setTag(idx);   // 인덱스 저장
 
                 tagBtn.setTag(idx);
@@ -295,7 +326,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             storeVO.setStore_time(cursor.getString(7));
             storeVO.setStore_name(cursor.getString(8));
             storeVO.setStore_intro(cursor.getString(9));
-            storeVO.setAddress_name(cursor.getString(10));
+            storeVO.setImg_uuid(cursor.getString(10));
+            storeVO.setImg_uploadpath(cursor.getString(11));
+            storeVO.setImg_filename(cursor.getString(12));
+            storeVO.setAddress_name(cursor.getString(13));
 
             storeList.add(storeVO);
         }
@@ -334,18 +368,43 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     // tagHost 화면 Layout 바꿔끼우기
     protected void tabHost() {
-        TabHost host= findViewById(R.id.host);
+        final TabHost host= findViewById(R.id.host);
         host.setup();
+        host.getTabWidget().setBackgroundResource(R.drawable.non_selected_border);
 
-        TabHost.TabSpec spec = host.newTabSpec("store list");
-        spec.setIndicator("store list");
+        TabHost.TabSpec spec = host.newTabSpec("storeList");
+        spec.setIndicator("매장");
         spec.setContent(R.id.store_list);
         host.addTab(spec);
 
         spec = host.newTabSpec("categorie");
-        spec.setIndicator("categorie");
+        spec.setIndicator("카테고리");
         spec.setContent(R.id.categorie);
         host.addTab(spec);
+
+        // TabWidet의 background 설정
+        for (int i = 0; i < host.getTabWidget().getChildCount(); i++) {
+            View tabView = host.getTabWidget().getChildAt(i);
+
+            tabView.setBackgroundResource(R.drawable.non_selected_border); // unselected
+            tabView.getLayoutParams().height = 150;
+        }
+        host.getTabWidget().getChildAt(host.getCurrentTab())
+                .setBackgroundResource(R.drawable.selected_border); // selected
+
+        // TabWidet tab 클릭시 background 설정
+        host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String arg0) {
+                for (int i = 0; i < host.getTabWidget().getChildCount(); i++) {
+                    host.getTabWidget().getChildAt(i)
+                            .setBackgroundResource(R.drawable.non_selected_border); // unselected
+                }
+                host.getTabWidget().getChildAt(host.getCurrentTab())
+                        .setBackgroundResource(R.drawable.selected_border); // selected
+
+            }
+        });
     }
 
     // menu toolbar
@@ -496,6 +555,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     @Override
     public void onRefresh() {
         storeList.removeAll(storeList);
+
         if(connect == 1){
             connect2 = 1;
         }else if(connect == 2){
@@ -528,7 +588,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                             storeVO.setStore_time(cursor.getString(7));
                             storeVO.setStore_name(cursor.getString(8));
                             storeVO.setStore_intro(cursor.getString(9));
-                            storeVO.setAddress_name(cursor.getString(10));
+                            storeVO.setImg_uuid(cursor.getString(10));
+                            storeVO.setImg_uploadpath(cursor.getString(11));
+                            storeVO.setImg_filename(cursor.getString(12));
+                            storeVO.setAddress_name(cursor.getString(13));
 
                             storeList.add(storeVO);
                         }
@@ -542,14 +605,18 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         SendDataSet sds1 = new SendDataSet("my_x", my_x.toString());
         SendDataSet sds2 = new SendDataSet("my_y", my_y.toString());
-        Log.e("loca", my_y.toString());
+        Log.e("loca", my_y.toString() + ", " + my_x.toString());
+
         jat.execute(sds1, sds2);
-
-
-
+        gpsTracker = new GpsTracker(MainActivity.this);
+        my_x = gpsTracker.getLatitude();
+        my_y = gpsTracker.getLongitude();
+        getCurrentAddress(my_x,my_y);
         Toast.makeText(MainActivity.this, "현재위치 \n위도 " + my_x + "\n경도 " + my_y, Toast.LENGTH_LONG).show();
+        Log.e("test1",addr);
 
-        
+        addressWindow=findViewById(R.id.addressWindow);
+        addressWindow.setText(addr);
         mSwipeRefreshLayout.setRefreshing(false);
 
     }
@@ -651,14 +718,23 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         //지오코더... GPS를 주소로 변환
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
 
-        List<Address> addresses;
+
 
         try {
+
+            latitude = Double.parseDouble(my_x.toString());
+            longitude = Double.parseDouble(my_y.toString());
 
             addresses = geocoder.getFromLocation(
                     latitude,
                     longitude,
-                    7);
+                    1);
+            Address a = addresses.get(0);
+
+            for(int i=0; i<=a.getMaxAddressLineIndex(); i++){
+                Log.e("test1234",a.getAddressLine(i));
+                addr = a.getAddressLine(i);
+            }
         } catch (IOException ioException) {
             //네트워크 문제
             Toast.makeText(this, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();

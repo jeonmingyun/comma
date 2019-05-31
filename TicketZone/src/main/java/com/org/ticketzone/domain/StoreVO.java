@@ -23,4 +23,5 @@ public class StoreVO {
 	private String sigoon;
 	private String time;
 	private String time2;
+	
 }
