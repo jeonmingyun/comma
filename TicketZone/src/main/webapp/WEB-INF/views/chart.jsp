@@ -23,39 +23,31 @@
 
 <body>
 	<%@include file="/WEB-INF/views/include/Mngrheader.jsp"%>
-<div class="chart_form">
 	
-	<h1>일별 시간대별 인원통계</h1>
-	<div class="divider_1"><div class="line"></div></div>
+	<div class="chart_form">
 
-	<div>
-		<table id="chart_table">
-			<tbody>
-				<tr>
-					<th>웅앵웅</th>
-					<th>웅앵웅</th>
-					<th>웅앵웅</th>
-					<th>웅앵웅</th>
-					<th>웅앵웅</th>
-					<th>웅앵웅</th>
-				</tr>
-				<tr>
-					<td>웅앵웅</td>
-					<td>웅앵웅</td>
-					<td>웅앵웅</td>
-					<td>웅앵웅</td>
-					<td>웅앵웅</td>
-					<td>웅앵웅</td>
-				</tr>
-			</tbody>		
-		</table>
+		<input type="hidden" id="select_license_number"
+			value="${param.license_number}"> <select
+			name="license_number" id="storelist">
+			<c:forEach var="s" items="${store}" varStatus="status">
+				<option class="storeList_option" value="${s.license_number}">
+					${s.store_name}</option>
+			</c:forEach>
+		</select>
+	
+	
+	<div id="today_stats">
+		<a href="/mCustomer">현황판</a>&nbsp&nbsp&nbsp&nbsp<a href="/chart2">일별 통계</a>
 	</div>
+	
+	<h2>일별 시간대별 인원통계</h2>
+	<div class="divider_1"><div class="line"></div></div>
 	
 	<div id="chart_form">
 		<!-- chart -->
 		<div id="chart">
 			<div id="today" style="text-align: center;"></div>
-			<div id="myfirstchart" style="height: 250px;"></div>
+			<div id="myfirstchart" style="height: 300px;"></div>
 			<input type="hidden" id="Actoday" value="${param.today}">
 			<input type="hidden" id="To">
 		</div>

@@ -1,0 +1,130 @@
+/* 표(테이블) */
+
+.divider_1 .line {
+	width: 160px;
+	margin: 0 auto 60px;
+	padding: 10px 0px 15px 0px;
+	border-bottom: 1px dashed #ccc;
+}
+
+#home h2 {
+	margin-top: 50px;
+}
+
+#notice {
+	table-layout: fixed;
+	width : 1200px;
+	border-collapse: collapse;
+	text-align: center;
+	font-size: 16px;
+	margin: 20px auto;
+}
+
+#notice th {
+	color: #888888;
+	border-bottom: 2px solid #343a40;
+	padding: 5px 5px 10px;
+	font-size: 18px;
+	font-weight: normal;
+}
+
+#notice td {
+	color: #000000;
+	white-space: nowrap;
+	border-bottom: 1px solid #e6e6e6;
+	padding: 15px 10px;
+}
+
+#notice tr:hover td {
+	cursor: pointer;
+	background-color: #EBEBEB;
+}
+
+/* 전체 div */
+#home{
+	text-align: center;
+	height: 834px;
+}
+
+/* 테이블 인라인 블록 정렬 */
+#notice_table{
+	display: inline-block;
+}
+
+/* 글쓰기 버튼 정렬*/
+#writebutton{
+	float:right;
+}
+
+/* 글쓰기 버튼 */
+#noticeWrite {
+	padding: 5px 15px;
+    border: 1px solid #BDBDBD;
+    background-color: #FFFFFF;
+    color: #000000;
+    font: 20px;
+}
+
+/* 글쓰기 버튼 클릭했을 때 */
+#noticeWrite:hover {
+    cursor: pointer;
+}
+
+/* select선택 창 */
+#searchForm select {
+	ont-size: 14px;
+	vertical-align: middle;
+	height: 32px;
+}
+
+/* 검색 창 */
+#notice_table input[type="text"] {
+	vertical-align: middle;
+	height: 32px;
+}
+
+/* 검색 버튼 */
+.btn-default {
+	vertical-align: middle;
+	padding: 3px 10px;
+    border: 1px solid #BDBDBD;
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+/* 검색 버튼 클릭했을 때 */
+.btn-default:hover {
+    cursor: pointer;
+}
+
+.pull-right{
+	text-align: center;
+}
+
+/* pagination 정렬 */
+.pull-right {
+	margin: 50px 0px 30px;
+	text-align: center;
+}
+
+/* pagination */
+.pagination a {
+	padding: 8px 16px;
+	text-decoration: none;
+	color: black;
+}
+
+.pagination li {
+	position: relative;
+	display: inline-block;
+}
+/* 선택되지 않았을 때 */
+.pagination a:active {
+	border-bottom: 1px solid #000000;
+	color: #000000;
+	font-weight: bold;
+}
+
+.pagination a:hover {
+	background-color: #ddd;
+}

@@ -63,7 +63,7 @@ $(document).ready(function(){
 						menu_cate : menu_cate
 				};
 			});
-			
+			console.log(tdArr);
 			$.ajax({
 				type: 'post',
 				url: 'updateMenu',
@@ -143,18 +143,15 @@ $(document).ready(function(){
 			}); 			
 		});
 		
-		$("#addSetMenu").click(function(){
-			
-			
+		$("#addSetMenu").click(function(){			
 			var id = "test";
 			var item = $("#setMenu").val();
 			var rowItem = "<p>";
+			
 			rowItem += "<button class=aa>"+item+"</button></p>"
-			$("#menuTab").append(rowItem);
+			$(".cate_text").append(rowItem);
 			$(".aa").attr('id', id);
-			
-			
-			
+
 		});
 		
 		$(document).on("click", "#test", function() {
