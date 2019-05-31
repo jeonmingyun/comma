@@ -176,7 +176,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 TextView storeName = view.findViewById(R.id.store_name);
                 TextView store_address = view.findViewById(R.id.store_address);
                 TextView waiting = view.findViewById(R.id.waiting);
-                TextView bluetooth = view.findViewById(R.id.bluetooth);
                 final Button tagBtn = view.findViewById(R.id.tag_btn);
                 String imageUrl = "http://15.164.115.73:8080/resources/img/" + storeList.get(idx).getImg_uploadpath() + "/" + storeList.get(idx).getImg_uuid() + "_" + storeList.get(idx).getImg_filename();
 
@@ -187,7 +186,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 storeName.setText(storeList.get(idx).getStore_name());
                 store_address.setText(storeList.get(idx).getAddress_name());
                 waiting.setText(count + "팀");
-                bluetooth.setText("bluetooth status");
                 view.setTag(idx);   // 인덱스 저장
 
                 tagBtn.setTag(idx);

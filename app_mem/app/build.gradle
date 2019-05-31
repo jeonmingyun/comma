@@ -63,6 +63,10 @@ dependencies {
     /*비콘 estimote*/
     implementation 'com.estimote:sdk:1.0.12'
 
+    /*이미지로더*/
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+
     /*chart*/
     implementation 'com.github.PhilJay:MpAndroidChart:v3.0.2'
 
