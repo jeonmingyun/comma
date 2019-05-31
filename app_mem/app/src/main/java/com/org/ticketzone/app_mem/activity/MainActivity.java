@@ -3,9 +3,13 @@ package com.org.ticketzone.app_mem.activity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -37,6 +41,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.estimote.coresdk.common.requirements.SystemRequirementsChecker;
 import com.estimote.coresdk.observation.region.beacon.BeaconRegion;
 import com.estimote.coresdk.recognition.packets.Beacon;
@@ -69,6 +74,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -94,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private int connect = 1;
     private int connect2=2;
     private String Minor = "";
-    private String Minor2 = "";
     private SwipeRefreshLayout mSwipeRefreshLayout;
     // GPS
     private GpsTracker gpsTracker;
@@ -103,6 +111,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
     private Double my_x;
     private Double my_y;
+    // Img
+
+    ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         selectAllBeacon(); // beaconList
         beaconConnection();
         storeList(); // store tab에서 store list를 보여줌
+
     //gps
         if (!checkLocationServicesStatus()) {
 
@@ -155,14 +167,18 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     count = cursor.getString(0);
                 }
 
+
                 ImageView storeImg = view.findViewById(R.id.store_img);
                 TextView storeName = view.findViewById(R.id.store_name);
                 TextView store_address = view.findViewById(R.id.store_address);
                 TextView waiting = view.findViewById(R.id.waiting);
                 TextView bluetooth = view.findViewById(R.id.bluetooth);
                 final Button tagBtn = view.findViewById(R.id.tag_btn);
+                String imageUrl = "http://15.164.115.73:8080/resources/img/" + storeList.get(idx).getImg_uploadpath() + "/" + storeList.get(idx).getImg_uuid() + "_" + storeList.get(idx).getImg_filename();
 
-//                storeImg.setBackgroundDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_launcher_background));;
+                Glide.with(view).load(imageUrl).centerCrop().into(storeImg);
+                storeImg.setAlpha(130);
+
 
                 storeName.setText(storeList.get(idx).getStore_name());
                 store_address.setText(storeList.get(idx).getAddress_name());
@@ -274,6 +290,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         storeListView.setAdapter(storeAdapter);
     }
 
+
+
     private void selectAllStore() { //StoreVO 에 값채우기
         Cursor cursor = mDBHelper.selectAllStore();
         storeList = new ArrayList<>();
@@ -295,7 +313,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             storeVO.setStore_time(cursor.getString(7));
             storeVO.setStore_name(cursor.getString(8));
             storeVO.setStore_intro(cursor.getString(9));
-            storeVO.setAddress_name(cursor.getString(10));
+            storeVO.setImg_uuid(cursor.getString(10));
+            storeVO.setImg_uploadpath(cursor.getString(11));
+            storeVO.setImg_filename(cursor.getString(12));
+            storeVO.setAddress_name(cursor.getString(13));
 
             storeList.add(storeVO);
         }
@@ -528,7 +549,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                             storeVO.setStore_time(cursor.getString(7));
                             storeVO.setStore_name(cursor.getString(8));
                             storeVO.setStore_intro(cursor.getString(9));
-                            storeVO.setAddress_name(cursor.getString(10));
+                            storeVO.setImg_uuid(cursor.getString(10));
+                            storeVO.setImg_uploadpath(cursor.getString(11));
+                            storeVO.setImg_filename(cursor.getString(12));
+                            storeVO.setAddress_name(cursor.getString(13));
 
                             storeList.add(storeVO);
                         }
