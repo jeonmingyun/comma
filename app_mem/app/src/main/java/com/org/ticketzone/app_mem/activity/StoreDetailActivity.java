@@ -18,6 +18,12 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.org.ticketzone.app_mem.R;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
 import com.org.ticketzone.app_mem.expandableRecyclerview.MenuAdapter;
@@ -55,6 +61,9 @@ public class StoreDetailActivity extends AppCompatActivity {
         address_name = findViewById(R.id.address_name);
         store_intro = findViewById(R.id.store_intro);
 
+        //chart
+        LineChart lineChart = (LineChart) findViewById(R.id.chart);
+
         Intent intent = getIntent();
         license_number = intent.getExtras().getString("license_number");
 
@@ -64,6 +73,21 @@ public class StoreDetailActivity extends AppCompatActivity {
         setStoreDetail();
         setMenuList();
         Log.e("menu", menuList.toString());
+
+        //chart
+        int x = 0;
+        ArrayList<Entry> entries = new ArrayList<>();
+        for (int i = 0; i <12; i++) {
+            x++;
+            entries.add(new Entry(x, i));
+        }
+        LineDataSet dataset = new LineDataSet(entries, "속성명");
+
+        LineData data = new LineData(dataset);
+        //dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+
+        lineChart.setData(data);
+        lineChart.animateY(5000);
 
         store_name.setText(storeVO.getStore_name());
 //        store_img.setImageURI();
