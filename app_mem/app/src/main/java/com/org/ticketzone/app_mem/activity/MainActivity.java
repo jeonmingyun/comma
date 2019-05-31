@@ -521,6 +521,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     @Override
     public void onRefresh() {
         storeList.removeAll(storeList);
+
         if(connect == 1){
             connect2 = 1;
         }else if(connect == 2){
@@ -570,13 +571,16 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         SendDataSet sds1 = new SendDataSet("my_x", my_x.toString());
         SendDataSet sds2 = new SendDataSet("my_y", my_y.toString());
-        Log.e("loca", my_y.toString());
+        Log.e("loca", my_y.toString() + ", " + my_x.toString());
+
         jat.execute(sds1, sds2);
-
-
-
-        //Toast.makeText(MainActivity.this, "현재위치 \n위도 " + my_x + "\n경도 " + my_y, Toast.LENGTH_LONG).show();
+        gpsTracker = new GpsTracker(MainActivity.this);
+        my_x = gpsTracker.getLatitude();
+        my_y = gpsTracker.getLongitude();
+        getCurrentAddress(my_x,my_y);
+        Toast.makeText(MainActivity.this, "현재위치 \n위도 " + my_x + "\n경도 " + my_y, Toast.LENGTH_LONG).show();
         Log.e("test1",addr);
+
         addressWindow=findViewById(R.id.addressWindow);
         addressWindow.setText(addr);
         mSwipeRefreshLayout.setRefreshing(false);
