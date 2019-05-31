@@ -3,16 +3,21 @@ package com.org.ticketzone.app_mem.expandableRecyclerview;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.org.ticketzone.app_mem.vo.StoreMenuVO;
+
 public class MenuItem implements Parcelable {
 
-    public final String name;
+    public final String menu_name;
+    public final String menu_price;
 
-    public MenuItem(String name) {
-        this.name = name;
+    public MenuItem(StoreMenuVO storeMenuVO) {
+        this.menu_name = storeMenuVO.getMenu_name().split("-")[1];
+        this.menu_price = " " + storeMenuVO.getMenu_price() + "원";
     }
 
     protected MenuItem(Parcel in) {
-        name = in.readString();
+        menu_name = in.readString();
+        menu_price = in.readString();
     }
 
     public static final Creator<MenuItem> CREATOR = new Creator<MenuItem>() {
@@ -34,6 +39,7 @@ public class MenuItem implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
+        dest.writeString(menu_name);
+        dest.writeString(menu_price);
     }
 }

@@ -29,6 +29,10 @@ import com.org.ticketzone.app_mem.vo.StoreMenuVO;
 import com.org.ticketzone.app_mem.vo.StoreVO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 public class StoreDetailActivity extends AppCompatActivity {
 
@@ -121,37 +125,35 @@ public class StoreDetailActivity extends AppCompatActivity {
         ArrayList<MenuItem> menuItems;
         MenuTitle menuTitle;
         StoreMenuVO storeMenuVO;
+        Map<String,ArrayList<MenuItem>> menuHash = new HashMap<>();
+        Set set;// hashMap key 가져오기
+        Iterator iterator;
 
         for (int i = 0; i < menuList.size(); i++) {
             String[] categorie;
             storeMenuVO = menuList.get(i);
             categorie = storeMenuVO.getMenu_name().split("-");
+//            Log.e("ddd vo", storeMenuVO.toString());
 
-//            menuItems = new ArrayList<>();
-//            menuItems.add(new MenuItem(storeMenuVO));
+            if( menuHash.get(categorie[0]) == null) {
+                menuItems = new ArrayList<>();
+                menuHash.put(categorie[0], menuItems); // key : store license number, value : store menu items
+            }
+
+            menuItems = menuHash.get(categorie[0]);
+            menuItems.add(new MenuItem(storeMenuVO));// store menu item 추가
+            menuHash.put(categorie[0], menuItems);
 
         }
-//        menuTitle = new MenuTitle("A", menuItems);
-//        menuTitles.add(menuTitle);
 
-        for ( int i = 0; i < 3; i++) {
+        set = menuHash.keySet();// menuHash key 가져오기
+        iterator = set.iterator();
 
+        while(iterator.hasNext()) {
+            String key = (String) iterator.next();
+            menuTitle = new MenuTitle(key, menuHash.get(key));
+            menuTitles.add(menuTitle);
         }
-        menuItems = new ArrayList<>();
-        menuItems.add(new MenuItem("1"));
-        menuItems.add(new MenuItem("2"));
-        menuItems.add(new MenuItem("3"));
-
-        menuTitle = new MenuTitle("A", menuItems);
-        menuTitles.add(menuTitle);
-
-        menuItems = new ArrayList<>();
-        menuItems.add(new MenuItem("1"));
-        menuItems.add(new MenuItem("2"));
-        menuItems.add(new MenuItem("3"));
-
-        menuTitle = new MenuTitle("B", menuItems);
-        menuTitles.add(menuTitle);
 
         MenuAdapter adapter = new MenuAdapter(menuTitles);
         recyclerView.setAdapter(adapter);
