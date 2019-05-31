@@ -119,6 +119,32 @@ public final class DBTable {
                 + TICKET_STATUS + " text);";         
         public static final String DROP_QUERY = "drop table if exists " + TABLENAME;
     }
+    /*비콘*/
+    public static final class Beacon implements BaseColumns{
+        public static final String B_CODE = "b_code";
+        public static final String STORE_NAME = "store_name";
+        public static final String LICENSE_NUMBER = "license_number";
+        public static final String TABLENAME = "beacon";
+        public static final String CREATE_QUERY = "create table " + TABLENAME + "("
+                + B_CODE + " text primary key,"
+                + STORE_NAME + " text ,"
+                + LICENSE_NUMBER + " text)";
+        public static final String DROP_QUERY = "drop table if exists " + TABLENAME;
+    }
+    /*GPS*/
+    public static final class GpsTest implements BaseColumns{
+        public static final String COOR_X = "coor_x";
+        public static final String COOR_Y = "coor_y";
+        public static final String DISTANCE = "distance";
+        public static final String STORE_NAME = "store_name";
+        public static final String TABLENAME = "gpstest";
+        public static final String CREATE_QUERY = "create table " + TABLENAME + "("
+                + COOR_X + " text ,"
+                + COOR_Y + " text ,"
+                + DISTANCE + " text ,"
+                + STORE_NAME + " text)";
+        public static final String DROP_QUERY = "drop table if exists " + TABLENAME;
+    }
 
 
 }

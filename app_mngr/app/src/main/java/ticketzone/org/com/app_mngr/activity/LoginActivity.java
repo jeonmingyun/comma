@@ -50,8 +50,10 @@ public class LoginActivity extends AppCompatActivity {
         et_owner_password = (EditText) findViewById(R.id.owner_password);
         login = (Button) findViewById(R.id.login);
         sign_up = (Button)findViewById(R.id.sign_up);
-
         et_owner_id.requestFocus();
+
+
+
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override

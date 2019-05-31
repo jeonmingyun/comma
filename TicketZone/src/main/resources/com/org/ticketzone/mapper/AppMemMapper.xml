@@ -3,8 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.org.ticketzone.mapper.AppMemMapper">
-	
-	
+  
 	<select id="ownerList" resultType="com.org.ticketzone.domain.OwnerVO">
 		select * from owner
 	</select>
@@ -18,7 +17,12 @@
 		select * from store_menu
 	</select>
 	
-	
+	<!-- 비콘 리스트 출력 -->
+	<select id="BeaconList" resultType="com.org.ticketzone.domain.BeaconVO">
+		select a.b_code, b.store_name, a.license_number
+		from beacon a, store b
+		where a.license_number = b.license_number
+	</select>
 	
 	<select id="categorieList" resultType="com.org.ticketzone.domain.CategorieVO">
 		<![CDATA[
@@ -112,6 +116,31 @@
 		]]>
 	</insert>
 	
+	<select id="gpsTest" resultType="com.org.ticketzone.domain.CoordinatesVO">
+		<![CDATA[
+			select a.coor_x, a.coor_y,
+    		trunc(SQRT( power((#{my_x} - coor_y) * 110979.309, 2)
+        	+ power((#{my_y} - coor_x) * 88907.949, 2)
+        	)) || 'M' as distance , b.store_name
+    		from coordinates a,
+    		(select #{my_x} v_x
+            , #{my_y} v_y
+            , 110979.309 r_x
+            , 88907.949 r_y
+            , 500.000 v_z
+            from dual
+            ), store b
+   			where SQRT(power((v_x -a.coor_y) * r_x, 2)
+            + power((v_y -a.coor_x) * r_y, 2)
+            ) <= v_z
+        	and a.coor_y between v_x - v_z / r_x and v_x +  v_z / r_x
+        	and a.coor_x between v_y - v_z / r_y and v_y + v_z / r_y
+        	and a.license_number = b.license_number
+        	order by distance
+		]]>
+	</select>
+	
+	
 	<select id="MyTicket" resultType="com.org.ticketzone.domain.NumberTicketVO">
 		<![CDATA[
 		select * from number_ticket 
@@ -144,5 +173,4 @@
 			and license_number = #{license_number}
 		]]>
 	</update>
-
 </mapper>

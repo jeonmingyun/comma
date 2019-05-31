@@ -15,24 +15,27 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class NetworkTask extends AsyncTask<SendDataSet, Void, String> {
-    String ip ="39.127.7.45"; //학교 IP번호
-    String path = "http://"+ip+":8080/"; // 연결할 jsp주소
 
-    protected NetworkTask(String url) { this.path += url; }
+    private String ip = "15.164.115.73"; // 서버 IP
+    private String path = "http://" + ip + ":8080/"; // 연결할 jsp주소
+
+    protected NetworkTask(String url) {
+        this.path += url;
+    }
 
     @Override
     protected String doInBackground(SendDataSet... strings) {
-        String data ="";
+        String data = "";
         JSONObject jobj = new JSONObject();
 
         try {
-            for ( int i = 0; i < strings.length; i++) {
+            for (int i = 0; i < strings.length; i++) {
                 jobj.put(strings[i].key, strings[i].value);
             }
 
             /* 서버연결 */
             URL url = new URL(path);
-            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
             conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
             conn.setRequestProperty("Accept", "text/html; charset=utf-8");
@@ -57,7 +60,7 @@ public class NetworkTask extends AsyncTask<SendDataSet, Void, String> {
             String line = null;
 
             while ((line = br.readLine()) != null) {
-                sBuff.append(line +"\n");
+                sBuff.append(line + "\n");
             }
 
             data = sBuff.toString().trim();
@@ -68,7 +71,7 @@ public class NetworkTask extends AsyncTask<SendDataSet, Void, String> {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 

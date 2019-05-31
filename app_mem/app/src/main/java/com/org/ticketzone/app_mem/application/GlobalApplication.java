@@ -2,10 +2,15 @@ package com.org.ticketzone.app_mem.application;
 
 import android.app.Application;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
+import android.support.v4.app.NotificationCompat;
 
 import com.estimote.coresdk.observation.region.beacon.BeaconRegion;
 import com.estimote.coresdk.recognition.packets.Beacon;
@@ -16,6 +21,7 @@ import com.kakao.auth.IApplicationConfig;
 import com.kakao.auth.ISessionConfig;
 import com.kakao.auth.KakaoAdapter;
 import com.kakao.auth.KakaoSDK;
+import com.org.ticketzone.app_mem.R;
 import com.org.ticketzone.app_mem.activity.MainActivity;
 
 import java.util.List;
@@ -26,6 +32,7 @@ public class GlobalApplication extends Application {
 
     // 비콘
     private BeaconManager beaconManager;
+    private BeaconManager beaconManager2;
     //
     public static GlobalApplication getGlobalApplicationContext() {
         if (instance == null)
@@ -88,6 +95,7 @@ public class GlobalApplication extends Application {
 
         // 비콘
         beaconManager = new BeaconManager(getGlobalApplicationContext());
+        beaconManager2 = new BeaconManager(getGlobalApplicationContext());
 
         // Application 설치가 끝나면 Beacon Monitoring Service를 시작한다.
         // Application을 종료하더라도 Service가 계속 실행된다.
@@ -98,9 +106,19 @@ public class GlobalApplication extends Application {
                         "monitored region",
                         UUID.fromString("74278bda-b644-4520-8f0c-720eaf059935"),
                         40001, 15400));
+
             }
         });
-
+        beaconManager2.connect(new BeaconManager.ServiceReadyCallback() {
+            @Override
+            public void onServiceReady() {
+                beaconManager2.startMonitoring(new BeaconRegion(
+                        "monitored region",
+                        UUID.fromString("74278bda-b644-4520-8f0c-720eaf059935"),
+                        40001,15383
+                ));
+            }
+        });
         // Android 단말이 Beacon 의 송신 범위에 들어가거나, 나왔을 때 체크
         beaconManager.setMonitoringListener(new BeaconManager.BeaconMonitoringListener() {
             @Override
@@ -117,20 +135,28 @@ public class GlobalApplication extends Application {
 
     // 비콘
     public void showNotification(String title, String message) {
-        Intent notifyIntent = new Intent(this, MainActivity.class);
-        notifyIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivities(this, 0,
-                new Intent[] { notifyIntent }, PendingIntent.FLAG_UPDATE_CURRENT);
-        Notification notification = new Notification.Builder(this)
-                .setSmallIcon(android.R.drawable.ic_dialog_info)
-                .setContentTitle(title)
-                .setContentText(message)
-                .setAutoCancel(true)
-                .setContentIntent(pendingIntent)
-                .build();
-        notification.defaults |=Notification.DEFAULT_SOUND;
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        String channelId = getString(R.string.default_notification_channel_id);
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder notificationBuilder =
+                new NotificationCompat.Builder(this, channelId)
+                        .setSmallIcon(android.R.drawable.ic_dialog_info)
+                        .setContentTitle(title)
+                        .setContentText(message)
+                        .setAutoCancel(true)
+                        .setSound(defaultSoundUri)
+                        .setContentIntent(pendingIntent);
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(1, notification);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(channelId,
+                    "Channel human readable title", NotificationManager.IMPORTANCE_DEFAULT);
+            notificationManager.createNotificationChannel(channel);
+        }
+        notificationManager.notify(0, notificationBuilder.build());
     }
 }

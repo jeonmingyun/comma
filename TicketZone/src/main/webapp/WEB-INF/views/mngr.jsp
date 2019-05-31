@@ -47,7 +47,7 @@
 						</ul>
 						
 						<p><button id="login_btn" class="login_btn" name="login_btn">로그인</button>
-						<p><a href="/mngr_find">아이디 찾기</a> <a href="/mngr_passwd">비밀번호 찾기</a>
+						<div style="display:none;"><p><a href="/mngr_find">아이디 찾기</a> <a href="/mngr_passwd">비밀번호 찾기</a></div>
 				</div>
 					
 					<!-- <input type="button" name="login_btn" value="로그인">
