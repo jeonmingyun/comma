@@ -56,14 +56,6 @@
                             android:textSize="24sp"
                             android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/bluetooth"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="블루투스 인식 성공"
-                            android:textColor="#FFF"
-                            android:textSize="15sp" />
-
                         <Button
                             android:id="@+id/tag_btn"
                             android:layout_width="wrap_content"
