@@ -2,25 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/store_list_wrapper"
     android:layout_width="match_parent"
-    android:layout_height="140dp"
-    android:background="@drawable/ic_launcher_background"
-    android:padding="12dp"
-    >
+    android:layout_height="140dp">
 
-        <!--<RelativeLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent">-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/store_img"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="100dp"-->
-                    <!--android:background="@drawable/ic_launcher_background"/>-->
+                <ImageView
+                    android:id="@+id/store_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#000"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.4"
                     android:orientation="vertical"
+                    android:padding="12dp"
                     android:gravity="bottom">
                         <TextView
                             android:id="@+id/store_name"
@@ -28,6 +26,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom"
                             android:text="매장 이름"
+                            android:textColor="#FFF"
                             android:textSize="20sp"
                             android:textStyle="bold"/>
 
@@ -36,6 +35,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="매장 주소"
+                            android:textColor="#FFF"
                             android:textSize="16sp"/>
                 </LinearLayout>
 
@@ -43,30 +43,34 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.6"
+                    android:gravity="right"
                     android:orientation="vertical"
-                    android:gravity="right">
+                    android:padding="12dp">
+
                         <TextView
                             android:id="@+id/waiting"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="02"
+                            android:textColor="#FFF"
                             android:textSize="24sp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/bluetooth"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="블루투스 인식 성공"
-                            android:textSize="15sp"/>
+                            android:textColor="#FFF"
+                            android:textSize="15sp" />
 
                         <Button
                             android:id="@+id/tag_btn"
                             android:layout_width="wrap_content"
                             android:layout_height="60dp"
                             android:text="번호표 발급"
-                            android:textSize="16sp"/>
+                            android:textSize="16sp" />
                 </LinearLayout>
-        <!--</RelativeLayout>-->
+        </RelativeLayout>
 
 </LinearLayout>

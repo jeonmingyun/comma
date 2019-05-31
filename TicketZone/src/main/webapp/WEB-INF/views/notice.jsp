@@ -13,10 +13,10 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <!-- 기존의 CSS, JS -->
+
 <!-- <link href="resources/css/home.css" rel="stylesheet" /> -->
 <link href="resources/css/notice.css" rel="stylesheet" />
 <script src="resources/js/home.js"></script>
-
 
 <!-- Bootstrap core CSS -->
 <link href="../resources/bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">

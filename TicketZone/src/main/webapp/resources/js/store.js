@@ -15,7 +15,8 @@ $(document).ready(function() {
 		var uploadpath = $(".uploadpath"+i+"").val();
 		var result = uploadpath+"/" + uuid +"_"+filename;
 		
-		$("img[name=s_img"+i+"]").attr("src", "/resources/img/"+result);
+		$("img[name=s_img"+i+"]").attr("src", "http://15.164.115.73:8080/resources/img/"+result);
+		console.log(result);
 	});
 			
 	

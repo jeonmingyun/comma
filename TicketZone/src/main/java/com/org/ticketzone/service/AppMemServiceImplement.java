@@ -2,6 +2,7 @@ package com.org.ticketzone.service;
 
 import org.springframework.stereotype.Service;
 
+import com.org.ticketzone.domain.BeaconVO;
 import com.org.ticketzone.domain.CategorieVO;
 import com.org.ticketzone.domain.CoordinatesVO;
 import com.org.ticketzone.domain.NumberTicketVO;
@@ -65,6 +66,31 @@ public class AppMemServiceImplement implements AppMemService {
 	@Override
 	public NumberTicketVO[] NumberTicketList() {
 		return mapper.NumberTicketList();
+	}
+
+	@Override
+	public BeaconVO[] BeaconList() {
+		return mapper.BeaconList();
+	}
+
+	@Override
+	public CoordinatesVO[] gpsTest(CoordinatesVO vo) {
+		return mapper.gpsTest(vo);
+	}
+
+	public NumberTicketVO[] MyTicket(NumberTicketVO vo) {
+		return mapper.MyTicket(vo);
+	}
+
+	@Override
+	public void TicketCancel(NumberTicketVO vo) {
+		mapper.TicketCancel(vo);
+	}
+
+	@Override
+	public void SyncTicket(NumberTicketVO vo) {
+		mapper.SyncTicket(vo);		
+
 	}
 
 }

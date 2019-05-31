@@ -43,6 +43,9 @@ public final class DBTable {
         public static final String STORE_NAME = "store_name";
         public static final String STORE_INTRO = "store_intro";
         public static final String ADDRESS_NAME = "address_name";
+        public static final String IMG_UUID = "img_uuid";
+        public static final String IMG_UPLOADPATH = "img_uploadpath";
+        public static final String IMG_FILENAME = "img_filename";
         public static final String TABLENAME = "store";
         public static final String CREATE_QUERY = "create table " + TABLENAME + "("
                 + LICENSE_NUMBER + " text primary key,"
@@ -55,6 +58,9 @@ public final class DBTable {
                 + STORE_TIME + " text,"
                 + STORE_NAME + " text not null,"
                 + STORE_INTRO + " text,"
+                + IMG_UUID + " text, "
+                + IMG_UPLOADPATH + " text, "
+                + IMG_FILENAME + " text, "
                 + ADDRESS_NAME + " text not null,"
                 + "foreign key("+OWNER_ID+") references OWNER("+OWNER_ID+"),"
                 + " foreign key("+CATE_CODE+") references CATEGORIE("+CATE_CODE+"));";
@@ -117,6 +123,32 @@ public final class DBTable {
                 + LICENSE_NUMBER + " text,"
                 + MEMBER_ID + " text,"
                 + TICKET_STATUS + " text);";         
+        public static final String DROP_QUERY = "drop table if exists " + TABLENAME;
+    }
+    /*비콘*/
+    public static final class Beacon implements BaseColumns{
+        public static final String B_CODE = "b_code";
+        public static final String STORE_NAME = "store_name";
+        public static final String LICENSE_NUMBER = "license_number";
+        public static final String TABLENAME = "beacon";
+        public static final String CREATE_QUERY = "create table " + TABLENAME + "("
+                + B_CODE + " text primary key,"
+                + STORE_NAME + " text ,"
+                + LICENSE_NUMBER + " text)";
+        public static final String DROP_QUERY = "drop table if exists " + TABLENAME;
+    }
+    /*GPS*/
+    public static final class GpsTest implements BaseColumns{
+        public static final String COOR_X = "coor_x";
+        public static final String COOR_Y = "coor_y";
+        public static final String DISTANCE = "distance";
+        public static final String STORE_NAME = "store_name";
+        public static final String TABLENAME = "gpstest";
+        public static final String CREATE_QUERY = "create table " + TABLENAME + "("
+                + COOR_X + " text ,"
+                + COOR_Y + " text ,"
+                + DISTANCE + " text ,"
+                + STORE_NAME + " text)";
         public static final String DROP_QUERY = "drop table if exists " + TABLENAME;
     }
 

@@ -72,11 +72,10 @@
 	<select id="getListWithPaging"
 		resultType="com.org.ticketzone.domain.BoardVO">
 		<![CDATA[
-			select a.board_no, a.board_title, a.board_content, a.board_reg, a.board_password, b.cate_name
-			from
-			(select rownum rn, board_no, board_title, board_content, board_reg, board_password, cate_code
-			from board
-			where			
+			with
+			t_board as (
+			select a.board_no, a.board_title, a.board_content, a.board_reg, a.board_password, b.cate_name, rownum
+			from board a, categorie b
 		]]>
 			<trim prefix="(" suffix=") AND " prefixOverrides="OR">
 			<foreach item='type' collection="typeArr">
@@ -93,11 +92,13 @@
 			</foreach>
 		</trim>
 		<![CDATA[	
-			rownum <= #{pageNum} * #{amount}
-			) a, categorie b
-			where rn > (#{pageNum} -1) * #{amount}
-			and a.cate_code = b.cate_code
-			order by board_reg desc
+			where a.cate_code = b.cate_code
+			order by board_reg desc)
+			select board_no, board_title, board_content, board_reg, board_password, cate_name 
+			from t_board			
+			where rownum <= #{pageNum} * #{amount}
+			and rownum > (#{pageNum} -1) * #{amount}			
+			
 		]]>
 	</select>
 	

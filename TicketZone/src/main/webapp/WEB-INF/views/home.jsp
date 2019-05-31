@@ -198,7 +198,6 @@
          </div> -->
 	</div>
 
-
 	<footer>
 		<%@include file="include/footer.jsp"%>
 	</footer>

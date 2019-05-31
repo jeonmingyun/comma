@@ -56,15 +56,20 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/notice", method = RequestMethod.GET)
-	public String notice(Model model, Criteria Cri) {	
+
+	@RequestMapping(value ="/notice", method = RequestMethod.GET)
+	public String notice(Model model, Criteria Cri) {
+
 		int total = noticeBoardService.total(Cri);
 		model.addAttribute("noticeList", noticeBoardService.noticeBoardList(Cri));
 		model.addAttribute("list", noticeBoardService.getListWithPaging(Cri));
 		model.addAttribute("pageMaker", new PageDTO(Cri, total));
 
+
 		return "notice";
 	}
+
+	
 
 	// 공지사항 글쓰기 페이지 이동
 	@RequestMapping(value = "/noticeWrite", method = RequestMethod.GET)
