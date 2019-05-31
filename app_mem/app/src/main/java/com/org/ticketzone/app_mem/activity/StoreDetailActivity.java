@@ -18,12 +18,11 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.org.ticketzone.app_mem.R;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
 import com.org.ticketzone.app_mem.expandableRecyclerview.MenuAdapter;
@@ -36,6 +35,7 @@ import com.org.ticketzone.app_mem.vo.StoreVO;
 
 import java.util.ArrayList;
 
+
 public class StoreDetailActivity extends AppCompatActivity {
 
     private TextView store_name, store_tel, store_time, address_name, store_intro;
@@ -45,24 +45,35 @@ public class StoreDetailActivity extends AppCompatActivity {
     private StoreVO storeVO;
     private ArrayList<StoreMenuVO> menuList;
     private String license_number;
+    private int getWidth =0;
+    private int getHeight =0;
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        getWidth = store_img.getWidth();
+        getHeight = store_img.getHeight();
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_detail);
-        mDBHelper = new DBOpenHelper(this);
 
+        mDBHelper = new DBOpenHelper(this);
         store_name = findViewById(R.id.store_name);
         store_img = findViewById(R.id.store_img);
         issue_btn = findViewById(R.id.issue_btn);
-
         store_tel = findViewById(R.id.store_tel);
         store_time = findViewById(R.id.store_time);
         address_name = findViewById(R.id.address_name);
         store_intro = findViewById(R.id.store_intro);
 
+
         //chart
         LineChart lineChart = (LineChart) findViewById(R.id.chart);
+
+
+        String imageUrl;
 
         Intent intent = getIntent();
         license_number = intent.getExtras().getString("license_number");
@@ -89,6 +100,9 @@ public class StoreDetailActivity extends AppCompatActivity {
         lineChart.setData(data);
         lineChart.animateY(5000);
 
+        //서버 이미지 불러오기
+        imageUrl = "http://15.164.115.73:8080/resources/img/" + storeVO.getImg_uploadpath() + "/" + storeVO.getImg_uuid() + "_" + storeVO.getImg_filename();
+        Glide.with(this).load(imageUrl).centerCrop().into(store_img);
         store_name.setText(storeVO.getStore_name());
 //        store_img.setImageURI();
 
@@ -241,6 +255,9 @@ public class StoreDetailActivity extends AppCompatActivity {
         storeVO.setStore_time(cursor.getString(7));
         storeVO.setStore_name(cursor.getString(8));
         storeVO.setStore_intro(cursor.getString(9));
-        storeVO.setAddress_name(cursor.getString(10));
+        storeVO.setImg_uuid(cursor.getString(10));
+        storeVO.setImg_uploadpath(cursor.getString(11));
+        storeVO.setImg_filename(cursor.getString(12));
+        storeVO.setAddress_name(cursor.getString(13));
     }
 }

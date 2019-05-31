@@ -9,7 +9,9 @@
 	</select>
 	
 	<select id="storeList" resultType="com.org.ticketzone.domain.StoreVO">
-		select * from store
+		select a.*, b.img_uuid, b.img_uploadpath, b.img_filename
+		from store a, store_attach b
+		where a.license_number = b.license_number
 	</select>
 	
 	<!-- 전체 메뉴가져오기 -->

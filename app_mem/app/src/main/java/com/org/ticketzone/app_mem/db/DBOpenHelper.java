@@ -13,7 +13,7 @@ import org.json.JSONObject;
 public class DBOpenHelper extends SQLiteOpenHelper{
 
 
-    private static final int DB_VERSION = 15;
+    private static final int DB_VERSION = 16;
     private static final String DB_NAME = "SQLite.db";
     public static SQLiteDatabase mdb;
 
@@ -169,6 +169,9 @@ public class DBOpenHelper extends SQLiteOpenHelper{
                 values.put("store_time", jobj.getString("store_time"));
                 values.put("store_name", jobj.getString("store_name"));
                 values.put("store_intro", jobj.getString("store_intro"));
+                values.put("img_uuid", jobj.getString("img_uuid"));
+                values.put("img_uploadpath", jobj.getString("img_uploadpath"));
+                values.put("img_filename", jobj.getString("img_filename"));
                 values.put("address_name", jobj.getString("address_name"));
 
                 mdb.insert(DBTable.Store.TABLENAME, null, values);
