@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private BeaconManager beaconManager;
     private BeaconRegion region;
     private boolean isConnected;
+
     //
 
     @Override

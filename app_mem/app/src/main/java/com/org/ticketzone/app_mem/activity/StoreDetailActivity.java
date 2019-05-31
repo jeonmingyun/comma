@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +20,9 @@ import android.widget.Toast;
 
 import com.org.ticketzone.app_mem.R;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
+import com.org.ticketzone.app_mem.expandableRecyclerview.MenuAdapter;
+import com.org.ticketzone.app_mem.expandableRecyclerview.MenuItem;
+import com.org.ticketzone.app_mem.expandableRecyclerview.MenuTitle;
 import com.org.ticketzone.app_mem.task.NetworkTask;
 import com.org.ticketzone.app_mem.task.SendDataSet;
 import com.org.ticketzone.app_mem.vo.StoreMenuVO;
@@ -57,6 +62,8 @@ public class StoreDetailActivity extends AppCompatActivity {
         selectStore(license_number);
         selectStoreMenu(license_number);
         setStoreDetail();
+        setMenuList();
+        Log.e("menu", menuList.toString());
 
         store_name.setText(storeVO.getStore_name());
 //        store_img.setImageURI();
@@ -104,6 +111,50 @@ public class StoreDetailActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+    }
+
+    private void setMenuList() {
+        RecyclerView recyclerView = findViewById(R.id.menu_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        ArrayList<MenuTitle> menuTitles = new ArrayList<>();
+        ArrayList<MenuItem> menuItems;
+        MenuTitle menuTitle;
+        StoreMenuVO storeMenuVO;
+
+        for (int i = 0; i < menuList.size(); i++) {
+            String[] categorie;
+            storeMenuVO = menuList.get(i);
+            categorie = storeMenuVO.getMenu_name().split("-");
+
+//            menuItems = new ArrayList<>();
+//            menuItems.add(new MenuItem(storeMenuVO));
+
+        }
+//        menuTitle = new MenuTitle("A", menuItems);
+//        menuTitles.add(menuTitle);
+
+        for ( int i = 0; i < 3; i++) {
+
+        }
+        menuItems = new ArrayList<>();
+        menuItems.add(new MenuItem("1"));
+        menuItems.add(new MenuItem("2"));
+        menuItems.add(new MenuItem("3"));
+
+        menuTitle = new MenuTitle("A", menuItems);
+        menuTitles.add(menuTitle);
+
+        menuItems = new ArrayList<>();
+        menuItems.add(new MenuItem("1"));
+        menuItems.add(new MenuItem("2"));
+        menuItems.add(new MenuItem("3"));
+
+        menuTitle = new MenuTitle("B", menuItems);
+        menuTitles.add(menuTitle);
+
+        MenuAdapter adapter = new MenuAdapter(menuTitles);
+        recyclerView.setAdapter(adapter);
     }
 
     private void  setStoreDetail() {
