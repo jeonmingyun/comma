@@ -1,6 +1,5 @@
 package com.org.ticketzone.app_mem.activity;
 
-
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -24,6 +23,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -49,9 +50,9 @@ import com.estimote.coresdk.service.BeaconManager;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
-import com.org.ticketzone.app_mem.GpsTest;
 import com.org.ticketzone.app_mem.GpsTracker;
 import com.org.ticketzone.app_mem.R;
+import com.org.ticketzone.app_mem.categorieCardView.RecyclerViewAdapter;
 import com.org.ticketzone.app_mem.task.JsonArrayTask;
 import com.org.ticketzone.app_mem.beacon.BeaconConnection;
 import com.org.ticketzone.app_mem.task.JsonArrayTask;
@@ -60,9 +61,8 @@ import com.org.ticketzone.app_mem.task.SendDataSet;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
 import com.org.ticketzone.app_mem.listViewAdapter.CustomAdapter;
 import com.org.ticketzone.app_mem.vo.BeaconVO;
+import com.org.ticketzone.app_mem.vo.CategorieVO;
 import com.org.ticketzone.app_mem.vo.StoreVO;
-
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,14 +70,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
-
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -98,6 +90,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private BeaconRegion region;
     private BeaconRegion region2;
     private boolean isConnected;
+
+    private List<CategorieVO> cateList;
 
     //
     private int connect = 1;
@@ -130,18 +124,19 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         toolbar(); // menu toolbar
         tabHost(); // LinearLayout 페이지 바꿔끼우기
         selectAllStore(); // storeList = store table data select
+        selectAllCate();
         selectAllBeacon(); // beaconList
         beaconConnection();
         storeList(); // store tab에서 store list를 보여줌
+        cateList();
 
     //gps
         if (!checkLocationServicesStatus()) {
-
             showDialogForLocationServiceSetting();
         }else {
-
             checkRunTimePermission();
         }
+
         gpsTracker = new GpsTracker(MainActivity.this);
         my_x = gpsTracker.getLatitude();
         my_y = gpsTracker.getLongitude();
@@ -150,17 +145,37 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         addressWindow.setText(addr);
     }
 
+    // select categorie table data from SQLite
+    private void selectAllCate() {
+        Cursor cursor = mDBHelper.selectAllCategorie();
+        CategorieVO categorieVO;
+
+        cateList = new ArrayList<>();
+
+        while(cursor.moveToNext()) {
+            categorieVO = new CategorieVO();
+            categorieVO.setCate_name(cursor.getString(1));
+
+            cateList.add(categorieVO);
+        }
+    }
+
+    // categorie list 생성
+    private void cateList() {
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        RecyclerViewAdapter recyclerAdapter = new RecyclerViewAdapter(cateList);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setAdapter(recyclerAdapter);
+    }
+
     // store list 생성
     protected void storeList() {
         storeListView = findViewById(R.id.store_list_view);
         CustomAdapter<StoreVO> storeAdapter;
 
-
         storeAdapter = new CustomAdapter<StoreVO>(storeList) {
-
             @Override
             public View getView(final int idx, View view, ViewGroup parent) {
-
                 //notifyDataSetChanged();
                 view = getLayoutInflater().inflate(R.layout.store_list_item, null);
                 String license_number = storeList.get(idx).getLicense_number();
@@ -171,7 +186,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     count = cursor.getString(0);
                 }
 
-
                 ImageView storeImg = view.findViewById(R.id.store_img);
                 TextView storeName = view.findViewById(R.id.store_name);
                 TextView store_address = view.findViewById(R.id.store_address);
@@ -181,7 +195,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
                 Glide.with(view).load(imageUrl).centerCrop().into(storeImg);
                 storeImg.setAlpha(130);
-
 
                 storeName.setText(storeList.get(idx).getStore_name());
                 store_address.setText(storeList.get(idx).getAddress_name());
@@ -292,8 +305,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         storeListView.setAdapter(storeAdapter);
     }
 
-
-
     private void selectAllStore() { //StoreVO 에 값채우기
         Cursor cursor = mDBHelper.selectAllStore();
         storeList = new ArrayList<>();
@@ -357,18 +368,43 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     // tagHost 화면 Layout 바꿔끼우기
     protected void tabHost() {
-        TabHost host= findViewById(R.id.host);
+        final TabHost host= findViewById(R.id.host);
         host.setup();
+        host.getTabWidget().setBackgroundResource(R.drawable.non_selected_border);
 
-        TabHost.TabSpec spec = host.newTabSpec("store list");
-        spec.setIndicator("store list");
+        TabHost.TabSpec spec = host.newTabSpec("storeList");
+        spec.setIndicator("매장");
         spec.setContent(R.id.store_list);
         host.addTab(spec);
 
         spec = host.newTabSpec("categorie");
-        spec.setIndicator("categorie");
+        spec.setIndicator("카테고리");
         spec.setContent(R.id.categorie);
         host.addTab(spec);
+
+        // TabWidet의 background 설정
+        for (int i = 0; i < host.getTabWidget().getChildCount(); i++) {
+            View tabView = host.getTabWidget().getChildAt(i);
+
+            tabView.setBackgroundResource(R.drawable.non_selected_border); // unselected
+            tabView.getLayoutParams().height = 150;
+        }
+        host.getTabWidget().getChildAt(host.getCurrentTab())
+                .setBackgroundResource(R.drawable.selected_border); // selected
+
+        // TabWidet tab 클릭시 background 설정
+        host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String arg0) {
+                for (int i = 0; i < host.getTabWidget().getChildCount(); i++) {
+                    host.getTabWidget().getChildAt(i)
+                            .setBackgroundResource(R.drawable.non_selected_border); // unselected
+                }
+                host.getTabWidget().getChildAt(host.getCurrentTab())
+                        .setBackgroundResource(R.drawable.selected_border); // selected
+
+            }
+        });
     }
 
     // menu toolbar

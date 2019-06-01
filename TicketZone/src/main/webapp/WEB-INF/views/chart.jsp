@@ -34,15 +34,9 @@
 					${s.store_name}</option>
 			</c:forEach>
 		</select>
-	</div>
-	
 	
 	<div id="today_stats">
 		<a href="/mCustomer">현황판</a>&nbsp&nbsp&nbsp&nbsp<a href="/chart2">일별 통계</a>
-	<div>
-		<table id="chart_table">
-			
-		</table>
 	</div>
 	
 	<h2>일별 시간대별 인원통계</h2>
@@ -65,7 +59,8 @@
 			<h4>대기자</h4> 
 		</div>
 	</div>	<!-- chart_form -->
-</div>
+
+
 
 <!-- =======
 <h1>일별 시간대별 인원통계</h1>
