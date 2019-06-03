@@ -20,9 +20,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.org.ticketzone.app_mem.R;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
 import com.org.ticketzone.app_mem.expandableRecyclerview.MenuAdapter;
@@ -90,19 +94,38 @@ public class StoreDetailActivity extends AppCompatActivity {
         Log.e("menu", menuList.toString());
 
         //chart
-        int x = 0;
+//        int x = 0;
+//        ArrayList<Entry> entries = new ArrayList<>();
+//        for (int i = 0; i <12; i++) {
+//            x++;
+//            entries.add(new Entry(x, i));
+//        }
         ArrayList<Entry> entries = new ArrayList<>();
-        for (int i = 0; i <12; i++) {
-            x++;
-            entries.add(new Entry(x, i));
-        }
+        entries.add(new Entry(0,4));
+        entries.add(new Entry(1,1));
+        entries.add(new Entry(2,2));
+        entries.add(new Entry(3,4));
         LineDataSet dataset = new LineDataSet(entries, "속성명");
+
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        final String[] HI = new String[]{"1시", "2시", "3시", "4시"};
+        IAxisValueFormatter formatter = new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return HI[(int) value];
+            }
+        };
+        xAxis.setGranularity(1f);
+        xAxis.setValueFormatter(formatter);
+        YAxis yAxisRight = lineChart.getAxisRight();
+        yAxisRight.setGranularity(1f);
 
         LineData data = new LineData(dataset);
         //dataset.setColors(ColorTemplate.COLORFUL_COLORS);
-
         lineChart.setData(data);
         lineChart.animateY(5000);
+        lineChart.invalidate();
 
         //서버 이미지 불러오기
         imageUrl = "http://15.164.115.73:8080/resources/img/" + storeVO.getImg_uploadpath() + "/" + storeVO.getImg_uuid() + "_" + storeVO.getImg_filename();
