@@ -117,5 +117,22 @@
 		0)
 		]]>
 	</insert>
-		
+	<select id="M_chart" resultType="com.org.ticketzone.domain.NumberTicketVO">
+		<![CDATA[
+		with
+		chart as (
+		select substr(ticket_reg,10,2) as ticket_reg, sum(the_number) as the_number, count(ticket_code) as team
+		from number_ticket
+		where license_number = '1597530000' and
+		ticket_reg like to_char(to_date('19/04/30', 'yy/mm/dd')+1, 'yy/mm/dd') || '%'
+		and ticket_status = 1
+		group by substr(ticket_reg,10,2)
+		order by ticket_reg),
+		today as (
+		select to_char(to_date('19/04/30','yyyy/mm/dd')+1, 'yyyy/mm/dd') as today		
+		from dual)
+		select a.*, b.today 
+		from chart a, today b
+		]]>
+	</select>	
 </mapper>

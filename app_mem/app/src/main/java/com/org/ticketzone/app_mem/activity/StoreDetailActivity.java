@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -19,10 +20,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.org.ticketzone.app_mem.R;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
 import com.org.ticketzone.app_mem.expandableRecyclerview.MenuAdapter;
@@ -34,10 +44,12 @@ import com.org.ticketzone.app_mem.vo.StoreMenuVO;
 import com.org.ticketzone.app_mem.vo.StoreVO;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+
 
 
 public class StoreDetailActivity extends AppCompatActivity {
@@ -51,6 +63,11 @@ public class StoreDetailActivity extends AppCompatActivity {
     private String license_number;
     private int getWidth =0;
     private int getHeight =0;
+    private LineChart lineChart;
+    private List<Entry> entries;
+
+
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -73,10 +90,6 @@ public class StoreDetailActivity extends AppCompatActivity {
         store_intro = findViewById(R.id.store_intro);
 
 
-        //chart
-        LineChart lineChart = (LineChart) findViewById(R.id.chart);
-
-
         String imageUrl;
 
         Intent intent = getIntent();
@@ -90,19 +103,39 @@ public class StoreDetailActivity extends AppCompatActivity {
         Log.e("menu", menuList.toString());
 
         //chart
-        int x = 0;
+//        int x = 0;
+//        ArrayList<Entry> entries = new ArrayList<>();
+//        for (int i = 0; i <12; i++) {
+//            x++;
+//            entries.add(new Entry(x, i));
+//        }
         ArrayList<Entry> entries = new ArrayList<>();
-        for (int i = 0; i <12; i++) {
-            x++;
-            entries.add(new Entry(x, i));
-        }
+        entries.add(new Entry(0,4));
+        entries.add(new Entry(1,1));
+        entries.add(new Entry(2,2));
+        entries.add(new Entry(3,4));
         LineDataSet dataset = new LineDataSet(entries, "속성명");
+
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        final String[] HI = new String[]{"1시", "2시", "3시", "4시"};
+        IAxisValueFormatter formatter = new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return HI[(int) value];
+            }
+        };
+        xAxis.setGranularity(1f);
+        xAxis.setValueFormatter(formatter);
+        YAxis yAxisRight = lineChart.getAxisRight();
+        yAxisRight.setGranularity(1f);
 
         LineData data = new LineData(dataset);
         //dataset.setColors(ColorTemplate.COLORFUL_COLORS);
-
         lineChart.setData(data);
         lineChart.animateY(5000);
+        lineChart.invalidate();
+
 
         //서버 이미지 불러오기
         imageUrl = "http://15.164.115.73:8080/resources/img/" + storeVO.getImg_uploadpath() + "/" + storeVO.getImg_uuid() + "_" + storeVO.getImg_filename();
@@ -223,6 +256,19 @@ public class StoreDetailActivity extends AppCompatActivity {
         spec.setIndicator("통계");
         spec.setContent(R.id.graph);
         host.addTab(spec);
+        lineChart = findViewById(R.id.chart);
+
+        entries = new ArrayList<>();
+
+        Cursor cursor = mDBHelper.ChartTicket();
+        while(cursor.moveToNext()){
+            entries.add(new Entry(Integer.parseInt(cursor.getString(0)), Integer.parseInt(cursor.getString(1))));
+        }
+        LineDataSet dataset = new LineDataSet(entries, "속성명");
+        LineData data = new LineData(dataset);
+
+        lineChart.setData(data);
+        lineChart.animateY(5000);
 
         // TabWidet의 background 설정
         for (int i = 0; i < host.getTabWidget().getChildCount(); i++) {
