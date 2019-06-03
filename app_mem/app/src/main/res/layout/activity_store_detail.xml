@@ -23,7 +23,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="매장이름"
-                android:textSize="30sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="20sp"
                 android:padding="10dp"
                 android:background="#ffffff"/>
 
@@ -31,7 +33,6 @@
                 android:id="@+id/store_img"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                app:srcCompat="@drawable/kakaotalk_icon"
                 android:background="#ffffff"/>
 
             <TabHost
@@ -130,7 +131,11 @@
                             <com.github.mikephil.charting.charts.LineChart
                                 android:id="@+id/chart"
                                 android:layout_width="match_parent"
+
                                 android:layout_height="250dp" />
+
+                                android:layout_height="250dp"/>
+
 
                         </LinearLayout>
                     </FrameLayout>

@@ -7,6 +7,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -22,8 +23,12 @@ import com.kakao.auth.ISessionConfig;
 import com.kakao.auth.KakaoAdapter;
 import com.kakao.auth.KakaoSDK;
 import com.org.ticketzone.app_mem.R;
+import com.org.ticketzone.app_mem.activity.LoginActivity;
 import com.org.ticketzone.app_mem.activity.MainActivity;
+import com.org.ticketzone.app_mem.db.DBOpenHelper;
+import com.org.ticketzone.app_mem.vo.StoreVO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
