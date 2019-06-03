@@ -47,6 +47,7 @@ public class StoreDetailActivity extends AppCompatActivity {
     private String license_number;
     private int getWidth =0;
     private int getHeight =0;
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -69,10 +70,6 @@ public class StoreDetailActivity extends AppCompatActivity {
         store_intro = findViewById(R.id.store_intro);
 
 
-        //chart
-        LineChart lineChart = (LineChart) findViewById(R.id.chart);
-
-
         String imageUrl;
 
         Intent intent = getIntent();
@@ -84,21 +81,6 @@ public class StoreDetailActivity extends AppCompatActivity {
         setStoreDetail();
         setMenuList();
         Log.e("menu", menuList.toString());
-
-        //chart
-        int x = 0;
-        ArrayList<Entry> entries = new ArrayList<>();
-        for (int i = 0; i <12; i++) {
-            x++;
-            entries.add(new Entry(x, i));
-        }
-        LineDataSet dataset = new LineDataSet(entries, "속성명");
-
-        LineData data = new LineData(dataset);
-        //dataset.setColors(ColorTemplate.COLORFUL_COLORS);
-
-        lineChart.setData(data);
-        lineChart.animateY(5000);
 
         //서버 이미지 불러오기
         imageUrl = "http://15.164.115.73:8080/resources/img/" + storeVO.getImg_uploadpath() + "/" + storeVO.getImg_uuid() + "_" + storeVO.getImg_filename();
