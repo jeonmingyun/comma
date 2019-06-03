@@ -74,4 +74,10 @@ public class AppMngrServiceImplement implements AppMngrService {
 		mapper.M_plusTicket(vo);
 	}
 
+	@Override
+	public NumberTicketVO[] M_chart() {
+		// TODO Auto-generated method stub
+		return mapper.M_chart();
+	}
+
 }

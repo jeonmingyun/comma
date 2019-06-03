@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -20,6 +21,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.org.ticketzone.app_mem.R;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
 import com.org.ticketzone.app_mem.expandableRecyclerview.MenuAdapter;
@@ -31,6 +40,7 @@ import com.org.ticketzone.app_mem.vo.StoreMenuVO;
 import com.org.ticketzone.app_mem.vo.StoreVO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class StoreDetailActivity extends AppCompatActivity {
 
@@ -43,6 +53,8 @@ public class StoreDetailActivity extends AppCompatActivity {
     private String license_number;
     private int getWidth =0;
     private int getHeight =0;
+    private LineChart lineChart;
+    private List<Entry> entries;
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -196,6 +208,19 @@ public class StoreDetailActivity extends AppCompatActivity {
         spec.setIndicator("통계");
         spec.setContent(R.id.graph);
         host.addTab(spec);
+        lineChart = findViewById(R.id.chart);
+
+        entries = new ArrayList<>();
+
+        Cursor cursor = mDBHelper.ChartTicket();
+        while(cursor.moveToNext()){
+            entries.add(new Entry(Integer.parseInt(cursor.getString(0)), Integer.parseInt(cursor.getString(1))));
+        }
+        LineDataSet dataset = new LineDataSet(entries, "속성명");
+        LineData data = new LineData(dataset);
+
+        lineChart.setData(data);
+        lineChart.animateY(5000);
     }
 
     // 메뉴 정보
