@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private void cateList() {
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         RecyclerViewAdapter recyclerAdapter = new RecyclerViewAdapter(cateList);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         recyclerView.setAdapter(recyclerAdapter);
     }
 
