@@ -8,144 +8,138 @@
     android:orientation="vertical"
     tools:context=".activity.StoreDetailActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/store_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="매장이름"
-            android:textSize="30sp"
-            android:padding="10dp"/>
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
-        <ImageView
-            android:id="@+id/store_img"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            app:srcCompat="@drawable/kakaotalk_icon"/>
-
-        <TabHost
-            android:id="@+id/host"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp">
-            <LinearLayout
+            android:orientation="vertical"
+            android:background="#ececed">
+            <TextView
+                android:id="@+id/store_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="매장이름"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:padding="10dp"
+                android:background="#ffffff"/>
+
+            <ImageView
+                android:id="@+id/store_img"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="#ffffff"/>
+
+            <TabHost
+                android:id="@+id/host"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_marginTop="10dp"
+                android:background="#ffffff">
 
-                <TabWidget
-                    android:id="@android:id/tabs"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                <FrameLayout
-                    android:id="@android:id/tabcontent"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <LinearLayout
-                        android:id="@+id/detail"
+                    <TabWidget
+                        android:id="@android:id/tabs"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content"/>
 
-                        <TableLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp">
-                            <TableRow>
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight = "0.2"
-                                    android:text="연락처"
-                                    android:textSize="20sp"/>
-                                <TextView
-                                    android:id="@+id/store_tel"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight = "0.8"
-                                    android:textSize="20sp"/>
-                            </TableRow>
-                            <TableRow>
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight = "0.2"
-                                    android:text="영업 시간"
-                                    android:textSize="20sp"/>
-                                <TextView
-                                    android:id="@+id/store_time"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight = "0.8"
-                                    android:textSize="20sp"/>
-                            </TableRow>
-                            <TableRow>
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight = "0.2"
-                                    android:text="주소"
-                                    android:textSize="20sp"/>
-                                <TextView
-                                    android:id="@+id/address_name"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight = "0.8"
-                                    android:textSize="20sp"/>
-                            </TableRow>
-                            <TableRow>
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight = "0.2"
-                                    android:text="매장소개"
-                                    android:textSize="20sp"/>
-                                <TextView
-                                    android:id="@+id/store_intro"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight = "0.8"
-                                    android:textSize="20sp"/>
-                            </TableRow>
-                        </TableLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/menu"
+                    <FrameLayout
+                        android:id="@android:id/tabcontent"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent">
 
-                        <Button
+                        <LinearLayout
+                            android:id="@+id/detail"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="메뉴 리스트"/>
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
 
-                    </LinearLayout>
+                            <TextView
+                                style="@style/StoreDetailTextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="가게 소개"/>
+                            <TextView
+                                style="@style/StoreDetailTextViewItem"
+                                android:id="@+id/store_intro"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
 
-                    <LinearLayout
-                        android:id="@+id/graph"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+                            <TextView
+                                style="@style/StoreDetailTextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="연락처"/>
+                            <TextView
+                                style="@style/StoreDetailTextViewItem"
+                                android:id="@+id/store_tel"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
 
-                        <Button
+                            <TextView
+                                style="@style/StoreDetailTextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="영업 시간"/>
+                            <TextView
+                                style="@style/StoreDetailTextViewItem"
+                                android:id="@+id/store_time"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+
+                            <TextView
+                                style="@style/StoreDetailTextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="주소"/>
+                            <TextView
+                                style="@style/StoreDetailTextViewItem"
+                                android:id="@+id/address_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/menu"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="그래프"/>
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
 
-                    </LinearLayout>
-                </FrameLayout>
-            </LinearLayout>
-        </TabHost>
-    </LinearLayout>
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/menu_list"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/graph"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <com.github.mikephil.charting.charts.LineChart
+                                android:id="@+id/chart"
+                                android:layout_width="match_parent"
+                                android:layout_height="250dp"/>
+
+                        </LinearLayout>
+                    </FrameLayout>
+                </LinearLayout>
+            </TabHost>
+        </LinearLayout>
+
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -155,10 +149,12 @@
             android:id="@+id/issue_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             android:text="발급 가능"
-            android:textSize="40sp" />
+            android:textColor="#fff"
+            android:textSize="35sp"
+            android:padding="5dp"/>
 
     </LinearLayout>
+
 </LinearLayout>
-
-

@@ -74,7 +74,7 @@
 							<tr>
 								<td>${m.ticket_code}
 								<td>${m.wait_number}
-								<td>${m.member_tel}
+								<td>${m.member_id}
 								<td>${m.the_number}
 								<td>${m.ticket_status}
 							</tr>

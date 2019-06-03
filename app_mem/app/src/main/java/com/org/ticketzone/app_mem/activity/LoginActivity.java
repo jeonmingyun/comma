@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -19,6 +20,7 @@ import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
 import com.org.ticketzone.app_mem.GpsTest;
 import com.org.ticketzone.app_mem.R;
+import com.org.ticketzone.app_mem.application.GlobalApplication;
 import com.org.ticketzone.app_mem.task.JsonArrayTask;
 import com.org.ticketzone.app_mem.task.SendDataSet;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
@@ -40,10 +42,14 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         mDBHelper = new DBOpenHelper(this);
 
-        callback = new SessionCallback();
-        Session.getCurrentSession().addCallback(callback);
-        Session.getCurrentSession().checkAndImplicitOpen();
-        getKeyHash();
+//        if(selectAllMember() == true){
+//            redirectMainActivity();
+//        }else {
+            callback = new SessionCallback();
+            Session.getCurrentSession().addCallback(callback);
+            Session.getCurrentSession().checkAndImplicitOpen();
+//            getKeyHash();
+//        }
     }
 
     @Override
@@ -165,5 +171,12 @@ public class LoginActivity extends AppCompatActivity {
             // TODO Auto-generated catch block
             Log.e("name not found", e.toString());
         }
+    }
+
+    private boolean selectAllMember(){
+        Cursor cursor = mDBHelper.selectAllMember();
+
+         return cursor.moveToNext();
+
     }
 }

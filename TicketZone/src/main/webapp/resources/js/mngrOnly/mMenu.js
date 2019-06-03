@@ -150,7 +150,7 @@ $(document).ready(function(){
          var rowItem = "<p>";
          
          rowItem += "<button class=aa>"+item+"</button></p>"
-         $("#menuTab").append(rowItem);
+         $(".cate_text").append(rowItem);
          $(".aa").attr('id', id);
 
       });

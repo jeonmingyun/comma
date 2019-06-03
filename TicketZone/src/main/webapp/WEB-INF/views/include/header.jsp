@@ -27,6 +27,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
+      	<li class="nav-item">
+          <a class="nav-link" href="/notice">공지사항</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="/store">제휴매장</a>
         </li>

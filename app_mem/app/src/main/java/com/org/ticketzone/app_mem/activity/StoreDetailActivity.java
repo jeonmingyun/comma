@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,14 +18,27 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.org.ticketzone.app_mem.R;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
+import com.org.ticketzone.app_mem.expandableRecyclerview.MenuAdapter;
+import com.org.ticketzone.app_mem.expandableRecyclerview.MenuItem;
+import com.org.ticketzone.app_mem.expandableRecyclerview.MenuTitle;
 import com.org.ticketzone.app_mem.task.NetworkTask;
 import com.org.ticketzone.app_mem.task.SendDataSet;
 import com.org.ticketzone.app_mem.vo.StoreMenuVO;
 import com.org.ticketzone.app_mem.vo.StoreVO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
 
 public class StoreDetailActivity extends AppCompatActivity {
 
@@ -34,21 +49,32 @@ public class StoreDetailActivity extends AppCompatActivity {
     private StoreVO storeVO;
     private ArrayList<StoreMenuVO> menuList;
     private String license_number;
+    private int getWidth =0;
+    private int getHeight =0;
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        getWidth = store_img.getWidth();
+        getHeight = store_img.getHeight();
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_detail);
-        mDBHelper = new DBOpenHelper(this);
 
+        mDBHelper = new DBOpenHelper(this);
         store_name = findViewById(R.id.store_name);
         store_img = findViewById(R.id.store_img);
         issue_btn = findViewById(R.id.issue_btn);
-
         store_tel = findViewById(R.id.store_tel);
         store_time = findViewById(R.id.store_time);
         address_name = findViewById(R.id.address_name);
         store_intro = findViewById(R.id.store_intro);
+
+
+        String imageUrl;
 
         Intent intent = getIntent();
         license_number = intent.getExtras().getString("license_number");
@@ -57,7 +83,12 @@ public class StoreDetailActivity extends AppCompatActivity {
         selectStore(license_number);
         selectStoreMenu(license_number);
         setStoreDetail();
+        setMenuList();
+        Log.e("menu", menuList.toString());
 
+        //서버 이미지 불러오기
+        imageUrl = "http://15.164.115.73:8080/resources/img/" + storeVO.getImg_uploadpath() + "/" + storeVO.getImg_uuid() + "_" + storeVO.getImg_filename();
+        Glide.with(this).load(imageUrl).centerCrop().into(store_img);
         store_name.setText(storeVO.getStore_name());
 //        store_img.setImageURI();
 
@@ -106,6 +137,48 @@ public class StoreDetailActivity extends AppCompatActivity {
         });
     }
 
+    private void setMenuList() {
+        RecyclerView recyclerView = findViewById(R.id.menu_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        ArrayList<MenuTitle> menuTitles = new ArrayList<>();
+        ArrayList<MenuItem> menuItems;
+        MenuTitle menuTitle;
+        StoreMenuVO storeMenuVO;
+        Map<String,ArrayList<MenuItem>> menuHash = new HashMap<>();
+        Set set;// hashMap key 가져오기
+        Iterator iterator;
+
+        for (int i = 0; i < menuList.size(); i++) {
+            String[] categorie;
+            storeMenuVO = menuList.get(i);
+            categorie = storeMenuVO.getMenu_name().split("-");
+//            Log.e("ddd vo", storeMenuVO.toString());
+
+            if( menuHash.get(categorie[0]) == null) {
+                menuItems = new ArrayList<>();
+                menuHash.put(categorie[0], menuItems); // key : store license number, value : store menu items
+            }
+
+            menuItems = menuHash.get(categorie[0]);
+            menuItems.add(new MenuItem(storeMenuVO));// store menu item 추가
+            menuHash.put(categorie[0], menuItems);
+
+        }
+
+        set = menuHash.keySet();// menuHash key 가져오기
+        iterator = set.iterator();
+
+        while(iterator.hasNext()) {
+            String key = (String) iterator.next();
+            menuTitle = new MenuTitle(key, menuHash.get(key));
+            menuTitles.add(menuTitle);
+        }
+
+        MenuAdapter adapter = new MenuAdapter(menuTitles);
+        recyclerView.setAdapter(adapter);
+    }
+
     private void  setStoreDetail() {
         store_tel.setText(storeVO.getStore_tel());
         store_time.setText(storeVO.getStore_time());
@@ -115,7 +188,7 @@ public class StoreDetailActivity extends AppCompatActivity {
 
     // tagHost 화면 Layout 바꿔끼우기
     private void tabHost() {
-        TabHost host= findViewById(R.id.host);
+        final TabHost host= findViewById(R.id.host);
         host.setup();
 
         TabHost.TabSpec spec = host.newTabSpec("detail");
@@ -132,6 +205,30 @@ public class StoreDetailActivity extends AppCompatActivity {
         spec.setIndicator("통계");
         spec.setContent(R.id.graph);
         host.addTab(spec);
+
+        // TabWidet의 background 설정
+        for (int i = 0; i < host.getTabWidget().getChildCount(); i++) {
+            View tabView = host.getTabWidget().getChildAt(i);
+
+            tabView.setBackgroundResource(R.drawable.non_selected_border); // unselected
+            tabView.getLayoutParams().height = 150;
+        }
+        host.getTabWidget().getChildAt(host.getCurrentTab())
+                .setBackgroundResource(R.drawable.selected_border); // selected
+
+        // TabWidet tab 클릭시 background 설정
+        host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String arg0) {
+                for (int i = 0; i < host.getTabWidget().getChildCount(); i++) {
+                    host.getTabWidget().getChildAt(i)
+                            .setBackgroundResource(R.drawable.non_selected_border); // unselected
+                }
+                host.getTabWidget().getChildAt(host.getCurrentTab())
+                        .setBackgroundResource(R.drawable.selected_border); // selected
+
+            }
+        });
     }
 
     // 메뉴 정보
@@ -166,6 +263,9 @@ public class StoreDetailActivity extends AppCompatActivity {
         storeVO.setStore_time(cursor.getString(7));
         storeVO.setStore_name(cursor.getString(8));
         storeVO.setStore_intro(cursor.getString(9));
-        storeVO.setAddress_name(cursor.getString(10));
+        storeVO.setImg_uuid(cursor.getString(10));
+        storeVO.setImg_uploadpath(cursor.getString(11));
+        storeVO.setImg_filename(cursor.getString(12));
+        storeVO.setAddress_name(cursor.getString(13));
     }
 }

@@ -43,6 +43,9 @@ public final class DBTable {
         public static final String STORE_NAME = "store_name";
         public static final String STORE_INTRO = "store_intro";
         public static final String ADDRESS_NAME = "address_name";
+        public static final String IMG_UUID = "img_uuid";
+        public static final String IMG_UPLOADPATH = "img_uploadpath";
+        public static final String IMG_FILENAME = "img_filename";
         public static final String TABLENAME = "store";
         public static final String CREATE_QUERY = "create table " + TABLENAME + "("
                 + LICENSE_NUMBER + " text primary key,"
@@ -55,6 +58,9 @@ public final class DBTable {
                 + STORE_TIME + " text,"
                 + STORE_NAME + " text not null,"
                 + STORE_INTRO + " text,"
+                + IMG_UUID + " text, "
+                + IMG_UPLOADPATH + " text, "
+                + IMG_FILENAME + " text, "
                 + ADDRESS_NAME + " text not null,"
                 + "foreign key("+OWNER_ID+") references OWNER("+OWNER_ID+"),"
                 + " foreign key("+CATE_CODE+") references CATEGORIE("+CATE_CODE+"));";

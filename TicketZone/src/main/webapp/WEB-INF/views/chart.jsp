@@ -30,24 +30,7 @@
 
 	<div>
 		<table id="chart_table">
-			<tbody>
-				<tr>
-					<th>웅앵웅</th>
-					<th>웅앵웅</th>
-					<th>웅앵웅</th>
-					<th>웅앵웅</th>
-					<th>웅앵웅</th>
-					<th>웅앵웅</th>
-				</tr>
-				<tr>
-					<td>웅앵웅</td>
-					<td>웅앵웅</td>
-					<td>웅앵웅</td>
-					<td>웅앵웅</td>
-					<td>웅앵웅</td>
-					<td>웅앵웅</td>
-				</tr>
-			</tbody>		
+			
 		</table>
 	</div>
 	
