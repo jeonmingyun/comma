@@ -19,4 +19,5 @@ public interface AppMngrService {
 	public void M_firstCode();
 	public void M_makeTicket(NumberTicketVO vo);
 	public void M_plusTicket(NumberTicketVO vo);
+	public NumberTicketVO[] M_chart();
 }
