@@ -55,7 +55,7 @@
 			<div class="carousel-inner" role="listbox">
 				<!-- Slide One - Set the background image for this slide in the line below -->
 				<div class="carousel-item active"
-					style="background-image: url('../resources/img/메인사진1.png')">
+					style="background-image: url('../resources/img/메인베너2.jpg')">
 					
 					<!-- style="background-image: url('http://placehold.it/1900x1080')" -->
 					<div class="carousel-caption d-none d-md-block">
@@ -114,7 +114,7 @@
 				<div class="col">
 					<div class="info_icon">
 						<div class="icon">
-							<img src="../resources/icon/웨이팅.png" width="40px" height="40px">
+							<img src="../resources/icon/웨이팅2.png" width="40px" height="40px">
 						</div>
 						<h3>실시간 웨이팅 현황</h3>
 						<p>일 별, 시간대별로 매장을 이용하는 고객들의 수를 그래프로 제공합니다.</p>
