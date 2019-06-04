@@ -6,14 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     cardview:cardCornerRadius="5dp"
-    android:clickable="true"
-    android:layout_margin="5dp"
-    android:focusable="?android:attr/selectableItemBackground">
+    android:layout_margin="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackground">
 
         <ImageView
             android:id="@+id/cate_img"
