@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -20,15 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -46,9 +40,9 @@ import com.org.ticketzone.app_mem.vo.StoreMenuVO;
 import com.org.ticketzone.app_mem.vo.StoreVO;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -66,7 +60,6 @@ public class StoreDetailActivity extends AppCompatActivity {
     private int getWidth =0;
     private int getHeight =0;
     private LineChart lineChart;
-    private List<Entry> entries;
 
 
 
@@ -103,6 +96,10 @@ public class StoreDetailActivity extends AppCompatActivity {
         setStoreDetail();
         setMenuList();
         Log.e("menu", menuList.toString());
+
+
+
+
 
         //chart
         final ArrayList<Entry> entries = new ArrayList<>();
@@ -163,6 +160,7 @@ public class StoreDetailActivity extends AppCompatActivity {
         lineChart.setData(data);
         lineChart.animateY(2500);
         lineChart.invalidate();
+
 
 
         //서버 이미지 불러오기
@@ -284,20 +282,7 @@ public class StoreDetailActivity extends AppCompatActivity {
         spec.setIndicator("통계");
         spec.setContent(R.id.graph);
         host.addTab(spec);
-        lineChart = findViewById(R.id.chart);
-
-        entries = new ArrayList<>();
-
-        Cursor cursor = mDBHelper.ChartTicket();
-        while(cursor.moveToNext()){
-            entries.add(new Entry(Integer.parseInt(cursor.getString(0)), Integer.parseInt(cursor.getString(1))));
-        }
-        LineDataSet dataset = new LineDataSet(entries, "속성명");
-        LineData data = new LineData(dataset);
-
-        lineChart.setData(data);
-        lineChart.animateY(5000);
-
+        //차트
         // TabWidet의 background 설정
         for (int i = 0; i < host.getTabWidget().getChildCount(); i++) {
             View tabView = host.getTabWidget().getChildAt(i);
