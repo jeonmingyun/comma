@@ -13,7 +13,7 @@ import org.json.JSONObject;
 public class DBOpenHelper extends SQLiteOpenHelper{
 
 
-    private static final int DB_VERSION = 16;
+    private static final int DB_VERSION = 17;
     private static final String DB_NAME = "SQLite.db";
     public static SQLiteDatabase mdb;
 
@@ -326,6 +326,14 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         return member_list;
     }
 
+    public Cursor ChartTicket(){
+        mdb = this.getReadableDatabase();
+        String sql = "select substr(ticket_reg,12,2) as ticket_reg, sum(the_number) as the_number from numberticket where ticket_code like '20190430' || '%' group by substr(ticket_reg,12,2) order by substr(ticket_reg,12,2)";
+        Cursor member_list = mdb.rawQuery(sql, null);
+
+        return member_list;
+    }
+
 
     public void insertTicket(JSONArray NumberTicketList) {
         mdb = this.getWritableDatabase();
@@ -340,6 +348,7 @@ public class DBOpenHelper extends SQLiteOpenHelper{
                 values.put("license_number", jobj.getString("license_number"));
                 values.put("member_id", jobj.getString("member_id"));
                 values.put("ticket_status", jobj.getString("ticket_status"));
+                values.put("ticket_reg", jobj.getString("ticket_reg"));
                 mdb.insert(DBTable.NumberTicket.TABLENAME, null, values);
             } catch (JSONException e) {
                 e.printStackTrace();

@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     // Img
     private List<Address> addresses;
     private String addr;
-    private TextView addressWindow;
+    private Button addressWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,9 +140,17 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         gpsTracker = new GpsTracker(MainActivity.this);
         my_x = gpsTracker.getLatitude();
         my_y = gpsTracker.getLongitude();
+        Log.e("xx", my_x.toString());
         String address = getCurrentAddress(my_x, my_y);
         addressWindow = findViewById(R.id.addressWindow);
         addressWindow.setText(addr);
+        addressWindow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mapintent = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(mapintent);
+            }
+        });
     }
 
     // select categorie table data from SQLite
@@ -335,19 +343,21 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         }
     }
 
+
+
     private void selectAllBeacon(){
-        Cursor cursor = mDBHelper.selectAllBeacon();
-        beaconList = new ArrayList<>();
-        BeaconVO beaconVO;
+            Cursor cursor = mDBHelper.selectAllBeacon();
+            beaconList = new ArrayList<>();
+            BeaconVO beaconVO;
 
-        while (cursor.moveToNext()){
-            beaconVO = new BeaconVO();
-            beaconVO.setB_code(cursor.getString(0));
-            beaconVO.setStore_name(cursor.getString(1));
-            beaconVO.setLicense_number(cursor.getString(2));
+            while (cursor.moveToNext()){
+                beaconVO = new BeaconVO();
+                beaconVO.setB_code(cursor.getString(0));
+                beaconVO.setStore_name(cursor.getString(1));
+                beaconVO.setLicense_number(cursor.getString(2));
 
-            beaconList.add(beaconVO);
-        }
+                beaconList.add(beaconVO);
+            }
 
     }
 

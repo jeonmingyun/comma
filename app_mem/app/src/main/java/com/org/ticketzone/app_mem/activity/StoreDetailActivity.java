@@ -19,6 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.estimote.coresdk.common.requirements.SystemRequirementsChecker;
+import com.estimote.coresdk.observation.region.beacon.BeaconRegion;
+import com.estimote.coresdk.recognition.packets.Beacon;
+import com.estimote.coresdk.service.BeaconManager;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -30,14 +34,17 @@ import com.org.ticketzone.app_mem.expandableRecyclerview.MenuItem;
 import com.org.ticketzone.app_mem.expandableRecyclerview.MenuTitle;
 import com.org.ticketzone.app_mem.task.NetworkTask;
 import com.org.ticketzone.app_mem.task.SendDataSet;
+import com.org.ticketzone.app_mem.vo.BeaconVO;
 import com.org.ticketzone.app_mem.vo.StoreMenuVO;
 import com.org.ticketzone.app_mem.vo.StoreVO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 
 public class StoreDetailActivity extends AppCompatActivity {
@@ -48,9 +55,22 @@ public class StoreDetailActivity extends AppCompatActivity {
     private DBOpenHelper mDBHelper;
     private StoreVO storeVO;
     private ArrayList<StoreMenuVO> menuList;
+    private ArrayList<BeaconVO> beaconList;
     private String license_number;
     private int getWidth =0;
     private int getHeight =0;
+
+    // 비콘
+    private BeaconManager beaconManager;
+    private BeaconRegion region;
+    private boolean isConnected;
+    private int connect = 1;
+    private int connect2=2;
+    private String Minor = "";
+
+    //chart
+    private LineChart lineChart;
+    private List<Entry> entries;
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -63,7 +83,6 @@ public class StoreDetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_detail);
-
         mDBHelper = new DBOpenHelper(this);
         store_name = findViewById(R.id.store_name);
         store_img = findViewById(R.id.store_img);
@@ -73,7 +92,7 @@ public class StoreDetailActivity extends AppCompatActivity {
         address_name = findViewById(R.id.address_name);
         store_intro = findViewById(R.id.store_intro);
 
-
+        beaconConnection();
         String imageUrl;
 
         Intent intent = getIntent();
@@ -84,6 +103,8 @@ public class StoreDetailActivity extends AppCompatActivity {
         selectStoreMenu(license_number);
         setStoreDetail();
         setMenuList();
+        selectAllBeacon(); // beaconList
+
         Log.e("menu", menuList.toString());
 
         //서버 이미지 불러오기
@@ -91,6 +112,14 @@ public class StoreDetailActivity extends AppCompatActivity {
         Glide.with(this).load(imageUrl).centerCrop().into(store_img);
         store_name.setText(storeVO.getStore_name());
 //        store_img.setImageURI();
+
+        issue_btn.setText("발급불가");
+        issue_btn.setEnabled(false);
+
+
+
+
+
 
         issue_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,6 +214,21 @@ public class StoreDetailActivity extends AppCompatActivity {
         address_name.setText(storeVO.getAddress_name());
         store_intro.setText(storeVO.getStore_intro());
     }
+    private void selectAllBeacon(){
+        Cursor cursor = mDBHelper.selectAllBeacon();
+        beaconList = new ArrayList<>();
+        BeaconVO beaconVO;
+
+        while (cursor.moveToNext()){
+            beaconVO = new BeaconVO();
+            beaconVO.setB_code(cursor.getString(0));
+            beaconVO.setStore_name(cursor.getString(1));
+            beaconVO.setLicense_number(cursor.getString(2));
+
+            beaconList.add(beaconVO);
+        }
+
+    }
 
     // tagHost 화면 Layout 바꿔끼우기
     private void tabHost() {
@@ -206,6 +250,19 @@ public class StoreDetailActivity extends AppCompatActivity {
         spec.setContent(R.id.graph);
         host.addTab(spec);
 
+        lineChart = findViewById(R.id.chart);
+
+        entries = new ArrayList<>();
+
+        Cursor cursor = mDBHelper.ChartTicket();
+        while(cursor.moveToNext()){
+            entries.add(new Entry(Integer.parseInt(cursor.getString(0)), Integer.parseInt(cursor.getString(1))));
+        }
+        LineDataSet dataset = new LineDataSet(entries, "속성명");
+        LineData data = new LineData(dataset);
+
+        lineChart.setData(data);
+        lineChart.animateY(5000);
         // TabWidet의 background 설정
         for (int i = 0; i < host.getTabWidget().getChildCount(); i++) {
             View tabView = host.getTabWidget().getChildAt(i);
@@ -229,6 +286,75 @@ public class StoreDetailActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void beaconConnection() {
+        // 비콘
+        // 비콘의 수신 범위를 갱신 받음
+        beaconManager = new BeaconManager(StoreDetailActivity.this);
+        beaconManager.setRangingListener(new BeaconManager.BeaconRangingListener() {
+            @Override
+            public void onBeaconsDiscovered(BeaconRegion beaconRegion, List<Beacon> list) {
+                if (!list.isEmpty()) {
+                    Beacon nearestBeacon = list.get(0);
+                    Log.e("Airport3", "Nearest places: " + nearestBeacon.getRssi());
+
+
+                    if (nearestBeacon.getRssi() >  -90) {
+                        Toast.makeText(StoreDetailActivity.this, "버튼활성화", Toast.LENGTH_LONG);
+                        //tagBtn.setEnabled(true);
+                        Log.e("aaa", "Aaaaa");
+                        connect = nearestBeacon.getMinor();
+                        Minor = String.valueOf(connect);
+                        String B_name[] =  new String[beaconList.size()];
+                        String B_id[] = new String[beaconList.size()];
+
+                        for(int i =0; i<beaconList.size(); i++){
+                            B_name[i] = beaconList.get(i).getStore_name();
+                            B_id[i] = beaconList.get(i).getB_code().substring(41);
+
+                            if(B_name[i].equals(store_name.getText().toString()) && Minor.equals(B_id[i])){
+                                issue_btn.setText("발급가능");
+                                issue_btn.setEnabled(true);
+                            }
+                        }
+
+                    } else if (nearestBeacon.getRssi() < -90) {
+                        Toast.makeText(StoreDetailActivity.this, "연결이 끊어졌습니다.", Toast.LENGTH_SHORT);
+                        connect = 0;
+                    }
+                }
+
+            }
+
+        });
+
+
+        region = new BeaconRegion("ranged region",
+                UUID.fromString("74278bda-b644-4520-8f0c-720eaf059935"), 40001, 15383);
+        //비콘 //
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+        //블루투스 권환 승낙 및 블루투스 활성화
+        SystemRequirementsChecker.checkWithDefaultDialogs(this);
+
+        beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+            @Override
+            public void onServiceReady() {
+                beaconManager.startRanging(region);
+            }
+        });
+
+    }
+
+    @Override
+    protected void onPause(){
+        //beaconManager.stopRanging(region);
+        super.onPause();
     }
 
     // 메뉴 정보

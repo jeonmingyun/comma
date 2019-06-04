@@ -82,6 +82,11 @@ public class LoginActivity extends AppCompatActivity {
                                         mDBHelper.insertStore(new JSONArray(jsonArray.get(2).toString()));
 //                                        mDBHelper.insertTicket(new JSONArray(jsonArray.get(4).toString()));
 
+                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            //                            //owner_id값 송신
+            //                            intent.putExtra("id",owner_id);
+                                        startActivity(intent);
+
                                     } catch (JSONException e){
                                         e.printStackTrace();
                                     }
@@ -90,10 +95,6 @@ public class LoginActivity extends AppCompatActivity {
                             SendDataSet sds = new SendDataSet("owner_id", owner_id);
                             jat.execute(sds);
 
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                            //owner_id값 송신
-//                            intent.putExtra("id",owner_id);
-                            startActivity(intent);
                         } else if( data.equals("0")) { // pass wrong
                             Toast.makeText(LoginActivity.this, "비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show();
                             et_owner_password.setText("");
