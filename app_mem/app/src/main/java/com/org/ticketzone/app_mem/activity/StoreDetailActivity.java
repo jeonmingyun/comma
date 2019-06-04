@@ -83,6 +83,7 @@ public class StoreDetailActivity extends AppCompatActivity {
         store_time = findViewById(R.id.store_time);
         address_name = findViewById(R.id.address_name);
         store_intro = findViewById(R.id.store_intro);
+        lineChart = findViewById(R.id.chart);
 
 
         String imageUrl;
@@ -102,7 +103,7 @@ public class StoreDetailActivity extends AppCompatActivity {
 
 
         //chart
-        final ArrayList<Entry> entries = new ArrayList<>();
+        ArrayList<Entry> entries = new ArrayList<>();
         Cursor cursor = mDBHelper.ChartTicket();
         while(cursor.moveToNext()){
             entries.add(new Entry(Integer.parseInt(cursor.getString(0)),Integer.parseInt(cursor.getString(1))));
@@ -112,10 +113,7 @@ public class StoreDetailActivity extends AppCompatActivity {
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
-        final ArrayList<String> xLabel = new ArrayList<>();
-        for(int i=0; i<entries.size(); i++){
-            xLabel.add(entries.get(i).getX() + "시");
-        }
+
 
 
 
