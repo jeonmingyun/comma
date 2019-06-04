@@ -33,6 +33,8 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IValueFormatter;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.org.ticketzone.app_mem.R;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
 import com.org.ticketzone.app_mem.expandableRecyclerview.MenuAdapter;
@@ -103,37 +105,63 @@ public class StoreDetailActivity extends AppCompatActivity {
         Log.e("menu", menuList.toString());
 
         //chart
-//        int x = 0;
-//        ArrayList<Entry> entries = new ArrayList<>();
-//        for (int i = 0; i <12; i++) {
-//            x++;
-//            entries.add(new Entry(x, i));
-//        }
-        ArrayList<Entry> entries = new ArrayList<>();
-        entries.add(new Entry(0,4));
-        entries.add(new Entry(1,1));
-        entries.add(new Entry(2,2));
-        entries.add(new Entry(3,4));
-        LineDataSet dataset = new LineDataSet(entries, "속성명");
+        final ArrayList<Entry> entries = new ArrayList<>();
+        Cursor cursor = mDBHelper.ChartTicket();
+        while(cursor.moveToNext()){
+            entries.add(new Entry(Integer.parseInt(cursor.getString(0)),Integer.parseInt(cursor.getString(1))));
+        }
+        LineDataSet dataset = new LineDataSet(entries, "명");
 
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        final String[] HI = new String[]{"1시", "2시", "3시", "4시"};
+
+        final ArrayList<String> xLabel = new ArrayList<>();
+        for(int i=0; i<entries.size(); i++){
+            xLabel.add(entries.get(i).getX() + "시");
+        }
+
+
+
+
         IAxisValueFormatter formatter = new IAxisValueFormatter() {
+
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                return HI[(int) value];
+
+                return (int)value + "시";
             }
         };
+
+        IAxisValueFormatter formatter2 = new IAxisValueFormatter() {
+
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+
+                return (int)value + "명";
+            }
+        };
+
+        IValueFormatter formatter3 = new IValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+                return (int)value + "명";
+            }
+        };
+
+
         xAxis.setGranularity(1f);
         xAxis.setValueFormatter(formatter);
         YAxis yAxisRight = lineChart.getAxisRight();
+        YAxis yAxisLeft = lineChart.getAxisLeft();
+        yAxisLeft.setValueFormatter(formatter2);
         yAxisRight.setGranularity(1f);
 
         LineData data = new LineData(dataset);
+        data.setValueFormatter(formatter3);
+        data.setValueTextSize(10f);
         //dataset.setColors(ColorTemplate.COLORFUL_COLORS);
         lineChart.setData(data);
-        lineChart.animateY(5000);
+        lineChart.animateY(2500);
         lineChart.invalidate();
 
 
