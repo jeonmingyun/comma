@@ -159,6 +159,7 @@ public class MngrOnlyController {
 	public String menuUpdate(@RequestBody ArrayList<StoreMenuVO> menu, HttpServletRequest request) {
 		
 		
+		
 		storeMenuService.updateMenu(menu);
 		
 		return menu.get(0).getMenu_cate();

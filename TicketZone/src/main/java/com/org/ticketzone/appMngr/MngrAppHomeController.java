@@ -81,36 +81,13 @@ public class MngrAppHomeController {
 		return arr;
 	}
 
-//   //번호표 발급
-//   @ResponseBody
-//   @RequestMapping(value = "/M_issue_ticket", method = RequestMethod.POST)
-//   public String id_check(@RequestBody NumberTicketVO vo) {
-////	   appMngrService.M_issue_ticket(vo);
-//	   String codeMaker = appMngrService.M_codeSelect();
-//		System.out.println(codeMaker + "code");
-//		System.out.println(vo + "ticket");
-//		if (codeMaker.equals("not")) {
-//			System.out.println("코드를 발급해야합니다!");
-//			appMngrService.M_firstCode();
-//			appMngrService.M_makeTicket(vo);
-//			
-//		} else {
-//			System.out.println("이미코드가 있습니다!");
-//			appMngrService.M_plusTicket(vo);
-//		}
-//	   
-//      return "1";
-//   }
-
-	/* json객체로 return 예시 / JsonArrayTask 사용 */
-//   @ResponseBody
-//   @RequestMapping(value = "/json_test", method = RequestMethod.POST)
-//   public OwnerVO json_test(@RequestBody OwnerVO ownervo) {
-//      System.out.println(ownervo);
-//      
-//      // VO를 리턴하면 자동으로 json객체로 변환
-//      OwnerVO ownerList = new OwnerVO("moon", "moon");
-//      return ownerList;
-//   }
+	@ResponseBody
+	@RequestMapping(value = "/m_chart", method = RequestMethod.POST)
+	public JSONArray m_chart() {
+		JSONArray arr = new JSONArray();
+		arr.add(appMngrService.M_chart());
+		System.out.println("도착");
+		return arr;		
+	}
 
 }

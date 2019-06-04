@@ -108,6 +108,7 @@
 		where ticket_code like to_char(sysdate,'yyyymmdd') ||
 		(select license_number from store where license_number = #{license_number}) || '%'
 		and member_id = #{member_id}
+		
 	]]>
 	</update>
 	<!-- 부재중 -->
@@ -203,6 +204,7 @@
 
 	<select id="waitList"
 		resultType="com.org.ticketzone.domain.NumberTicketVO">
+		<![CDATA[
 		select substr(ticket_code,19) as ticket_code, wait_number,
 		the_number, license_number, member_id, ticket_status number_ticket
 		from number_ticket
@@ -210,6 +212,7 @@
 		and ticket_code like to_char(sysdate, 'yyyymmdd') || '%'
 		order by
 		ticket_code
+		]]>
 	</select>
 
 	<!-- 방문자수통계 -->
