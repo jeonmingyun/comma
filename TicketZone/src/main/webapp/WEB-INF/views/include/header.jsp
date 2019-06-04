@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Document</title>
-<!-- <link href="../resources/css/header.css" rel="stylesheet" /> -->
+<!-- <script src="../resources/js/header.js"></script> -->
 
 <!-- Bootstrap core CSS -->
 <link href="../resources/bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -21,12 +21,14 @@
 <!-- Navigation -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="/"><img id="mainLogo" src="../resources/img/mainLogo.png" height="40px;"></a>
+    <a class="navbar-brand" href="/"><img id="mainLogo" src="../resources/img/Logo.png" height="30px;"></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
+      	 <li class="nav-item">
+
       	<li class="nav-item">
           <a class="nav-link" href="/notice">공지사항</a>
         </li>

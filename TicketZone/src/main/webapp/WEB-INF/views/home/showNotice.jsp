@@ -71,12 +71,14 @@
 		<input id="fileName" type="hidden" name="fileName" value="${file[0].fileName}">
 	</c:if>
 	</div> <!-- notice_view -->		
-		
+	
+	<p>	
 	<div class="notice_btn">
 		<button type="button" id="btnUpdate"
 			onclick="updNotice(${noticeUpd[0].notice_no})">수정</button>
 		<button type="button" id="btnDelete">삭제</button>			
 	</div> <!-- notice_btn -->
+	
 </div> <!-- notice_wapper -->
 	<input type="hidden" id="notice_no" name="notice_no" value="${noticeUpd[0].notice_no}">
 </body>
