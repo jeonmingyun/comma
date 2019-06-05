@@ -24,6 +24,14 @@
             android:layout_height="wrap_content"
             android:text="맛있는 집"
             android:textSize="30sp" />
+        <Switch
+            android:id="@+id/switchView"
+            android:layout_width="wrap_content"
+            android:layout_height="31dp"
+            android:track="@drawable/switch_track_selector"
+            android:thumb="@drawable/switch_thumb"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="330dp"/>
     </RelativeLayout>
 
 </LinearLayout>
