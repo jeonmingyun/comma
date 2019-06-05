@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 public class DBOpenHelper extends SQLiteOpenHelper {
 
-    private static final int DB_VERSION = 10;
+    private static final int DB_VERSION = 12;
     private static final String DB_NAME = "SQLite.db";
     public static SQLiteDatabase mngrdb;
 
@@ -77,6 +77,12 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         return member_list;
     }
 
+    public Cursor selectStore(String store_name){
+        mngrdb = this.getWritableDatabase();
+        Cursor store_list = mngrdb.rawQuery("select * from store where store_name = ?", new String[] {store_name});
+
+        return store_list;
+    }
 
     public void insertStore(JSONArray storeList) {
         mngrdb = this.getWritableDatabase();
@@ -91,10 +97,13 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 values.put("store_status", jobj.getString("store_status"));
                 values.put("cate_code", jobj.getString("cate_code"));
                 values.put("owner_id", jobj.getString("owner_id"));
-                values.put("store_name", jobj.getString("store_name"));
                 values.put("store_tel", jobj.getString("store_tel"));
                 values.put("store_time", jobj.getString("store_time"));
+                values.put("store_name", jobj.getString("store_name"));
                 values.put("store_intro", jobj.getString("store_intro"));
+                values.put("img_uuid", jobj.getString("img_uuid"));
+                values.put("img_uploadpath", jobj.getString("img_uploadpath"));
+                values.put("img_filename", jobj.getString("img_filename"));
                 values.put("address_name", jobj.getString("address_name"));
 
                 mngrdb.insert(DBTable.Store.TABLENAME, null, values);
@@ -225,7 +234,6 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         mngrdb.delete(DBTable.Categorie.TABLENAME,null,null);
         mngrdb.delete(DBTable.Owner.TABLENAME,null,null);
 //        mngrdb.delete(DBTable.NumberTicket.TABLENAME, null,null);
-
     }
 
 }

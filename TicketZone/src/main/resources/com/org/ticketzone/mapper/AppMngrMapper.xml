@@ -13,7 +13,10 @@
 	</select>
 	
 	<select id="storeList" resultType="com.org.ticketzone.domain.StoreVO">
-		select * from store where owner_id = #{owner_id}
+		select a.*, b.img_uuid, b.img_uploadpath, b.img_filename 
+		from store a, store_attach b 
+		where owner_id = #{owner_id} 
+		and a.license_number = b.license_number
 	</select>
 	
 	<select id="menuList" resultType="com.org.ticketzone.domain.StoreMenuVO">

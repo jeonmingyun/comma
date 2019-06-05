@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     protected void onPostExecute(String data) {
                         super.onPostExecute(data);
+                        mDBHelper.deleteAllTable();
                         Log.d(getClass().getName(), data);
                         if( data.equals("1")) { // login success
                             JsonArrayTask jat = new JsonArrayTask("mngr_db_login"){
