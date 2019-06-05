@@ -18,6 +18,7 @@
             app:titleTextColor="@color/color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             android:minHeight="?attr/actionBarSize"/>
 
         <android.support.v4.widget.DrawerLayout
@@ -36,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0"></TabWidget>
 
-                <TextView
+                <Button
                     android:id="@+id/addressWindow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

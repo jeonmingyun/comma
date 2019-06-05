@@ -21,8 +21,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+
 import android.widget.TextView;
+
+import android.widget.Switch;
+
 import android.widget.Toast;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -45,7 +50,11 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager storeViewPager;
     private FragmentStatePagerAdapter storeAdapter;
     private ArrayList<String> storeList;
+
     private TextView store_name;
+
+    private Switch switchView;
+
 //    private FragmentPagerAdapter adapterViewPager;
 
     @Override
@@ -56,6 +65,19 @@ public class MainActivity extends AppCompatActivity {
 
         selectAllStore();
         setStoreViewPager(); //Store view pager;
+
+//        switchView = findViewById(R.id.switchView);
+//        switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if(isChecked){
+//                    Toast.makeText(MainActivity.this,"OFF", Toast.LENGTH_SHORT);
+//                }else {
+//                    Toast.makeText(MainActivity.this, "ON", Toast.LENGTH_SHORT);
+//                }
+//            }
+//        });
+
         //menu toolbar
         toolbar = findViewById(R.id.toolbar);
         dlDrawer = findViewById(R.id.drawer_layout);
@@ -95,6 +117,8 @@ public class MainActivity extends AppCompatActivity {
                 drawer.closeDrawer(Gravity.LEFT);
             }
         });
+
+
     }
 
 

@@ -29,6 +29,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:background="@color/colorPrimary"></TabWidget>
 
         <FrameLayout
             android:id="@android:id/tabcontent"
@@ -304,13 +310,6 @@
                     android:layout_height="match_parent" />
             </LinearLayout>
         </FrameLayout>
-
-        <TabWidget
-            android:id="@android:id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:background="@color/colorPrimary"></TabWidget>
     </LinearLayout>
 </TabHost>
 </LinearLayout>

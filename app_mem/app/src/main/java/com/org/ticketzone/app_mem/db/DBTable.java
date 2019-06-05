@@ -123,7 +123,7 @@ public final class DBTable {
                 + THE_NUMBER + " integer not null,"
                 + LICENSE_NUMBER + " text,"
                 + MEMBER_ID + " text,"
-                + TICKET_STATUS + " text, "
+                + TICKET_STATUS + " text,"
                 + TICKET_REG + " text);";
         public static final String DROP_QUERY = "drop table if exists " + TABLENAME;
     }
