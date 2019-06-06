@@ -17,12 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activity.StoreManageActivity"></activity>
         <activity
             android:name=".activity.StoreActivity"
             android:label="@string/title_activity_store"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -38,7 +37,6 @@
         <activity
             android:name=".activity.MapsActivity2"
             android:label="@string/title_activity_maps2" />
-
         <activity
             android:name=".activity.LoginActivity"
             android:clearTaskOnLaunch="true">
@@ -47,10 +45,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
         </activity>
-
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.SignUpActivity" />
     </application>
