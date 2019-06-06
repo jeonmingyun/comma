@@ -140,11 +140,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     @Override
                     public void onComplete(@NonNull Task<InstanceIdResult> task) {
                         if (!task.isSuccessful()) {
-                            Log.w("MAIN", "getInstanceId failed", task.getException());
+                            Log.e("MAIN", "getInstanceId failed", task.getException());
                             return;
                         }
                         String token = task.getResult().getToken();
-                        Log.d("MAIN-TOKEN", token);
+
+                        Log.e("MAIN-TOKEN", token);
                         Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
                     }
                 });

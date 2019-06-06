@@ -20,7 +20,7 @@ public class MyFMService extends FirebaseMessagingService {
     @Override
     public void onNewToken(String s) {
         super.onNewToken(s);
-        Log.d(TAG, "Refreshed token: " + s);
+        Log.e(TAG, "Refreshed token: " + s);
     }
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
