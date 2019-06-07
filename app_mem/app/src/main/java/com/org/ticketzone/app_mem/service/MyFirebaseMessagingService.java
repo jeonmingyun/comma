@@ -8,6 +8,8 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
+
 import com.google.firebase.messaging.RemoteMessage;
 import com.org.ticketzone.app_mem.R;
 import com.org.ticketzone.app_mem.activity.MainActivity;
@@ -18,8 +20,10 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
     // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+//        if (remoteMessage.getNotification() != null) {
+//            sendNotification(remoteMessage.getNotification().getBody());
+//        }
 
-        //추가한것
         sendNotification(remoteMessage.getData().get("message"));
     }
 

@@ -39,8 +39,6 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
     }
 
     private void sendRegistrationToServer(String token) {
-        // Add custom implementation, as needed.
-
         // OKHTTP를 이용해 웹서버로 토큰값을 날려준다.
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
@@ -49,7 +47,7 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
 
         //request
         Request request = new Request.Builder()
-                .url("토큰 저장할라고 보낼 URL")
+                .url("http://39.127.7.43:8080/mem_set_fcm_token")
                 .post(body)
                 .build();
 

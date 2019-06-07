@@ -36,7 +36,7 @@
 		<div class="divider_1"><div class="line"></div></div>
 		
 		<div id="notice_table">
-		<form id="searchForm" method="get" action = "notice">
+		<form id="searchForm" method="get" action = "/">
 		<select name="type">
 			<option value="T">제목</option>
 			<option value="C">내용</option>

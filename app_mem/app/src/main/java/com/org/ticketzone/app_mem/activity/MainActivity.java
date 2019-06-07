@@ -124,7 +124,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         mSwipeRefreshLayout = findViewById(R.id.swipe_layout);
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
-        
+
+//        fcmTocken(); // FCM tocken 발급
         toolbar(); // menu toolbar
         tabHost(); // LinearLayout 페이지 바꿔끼우기
         selectAllStore(); // storeList = store table data select
@@ -133,23 +134,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         beaconConnection();
         storeList(); // store tab에서 store list를 보여줌
         cateList();
-
-     //파이어베이스
-        FirebaseInstanceId.getInstance().getInstanceId() // 현재 기기의 아이디
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (!task.isSuccessful()) {
-                            Log.e("MAIN", "getInstanceId failed", task.getException());
-                            return;
-                        }
-                        String token = task.getResult().getToken();
-
-                        Log.e("MAIN-TOKEN", token);
-                        Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
-                    }
-                });
-
 
     //gps
         if (!checkLocationServicesStatus()) {
@@ -172,6 +156,23 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 startActivity(mapintent);
             }
         });
+    }
+
+    private void fcmTocken() {
+        FirebaseInstanceId.getInstance().getInstanceId() // 현재 기기의 아이디
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.e("MAIN", "getInstanceId failed", task.getException());
+                            return;
+                        }
+                        String token = task.getResult().getToken();
+
+                        Log.e("MAIN-TOKEN", token);
+                        Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     // select categorie table data from SQLite
