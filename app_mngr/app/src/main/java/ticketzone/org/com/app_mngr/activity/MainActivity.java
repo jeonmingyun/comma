@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         dtToggle = new ActionBarDrawerToggle(this, dlDrawer, R.string.app_name, R.string.app_name);
         dlDrawer.addDrawerListener(dtToggle);
 
-        final String[] items = {"홈", "지도", "logout"};
+        final String[] items = {"홈", "지도", "매장관리", "logout"};
         ArrayAdapter adater = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
 
         listview = findViewById(R.id.drawer);
@@ -106,6 +106,10 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(mapIntent);
                         break;
                     case 2:
+                        Intent storemanageIntent = new Intent(v.getContext(), StoreManageActivity.class);
+                        startActivity(storemanageIntent);
+                        break;
+                    case 3:
                         mDBHelper.deleteAllTable();
                         Intent logoutIntent = new Intent(v.getContext(), LoginActivity.class);
                         logoutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
