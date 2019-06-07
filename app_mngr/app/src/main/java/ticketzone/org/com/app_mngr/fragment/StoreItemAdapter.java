@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class StoreItemAdapter extends FragmentStatePagerAdapter {
 
     public StoreItemAdapter(FragmentManager fm, ArrayList<String> storeList) {
         super(fm);
+        Log.e("aa", storeList + "?");
         this.storeList = storeList;
     }
 

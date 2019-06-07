@@ -150,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     }
                 });
 
+
     //gps
         if (!checkLocationServicesStatus()) {
             showDialogForLocationServiceSetting();

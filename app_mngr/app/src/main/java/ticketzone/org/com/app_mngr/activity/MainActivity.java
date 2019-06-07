@@ -21,7 +21,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+
+import android.widget.TextView;
+
+import android.widget.Switch;
+
 import android.widget.Toast;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -44,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager storeViewPager;
     private FragmentStatePagerAdapter storeAdapter;
     private ArrayList<String> storeList;
+
+    private TextView store_name;
+
+    private Switch switchView;
+
 //    private FragmentPagerAdapter adapterViewPager;
 
     @Override
@@ -54,14 +65,25 @@ public class MainActivity extends AppCompatActivity {
 
         selectAllStore();
         setStoreViewPager(); //Store view pager;
+
+//        switchView = findViewById(R.id.switchView);
+//        switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if(isChecked){
+//                    Toast.makeText(MainActivity.this,"OFF", Toast.LENGTH_SHORT);
+//                }else {
+//                    Toast.makeText(MainActivity.this, "ON", Toast.LENGTH_SHORT);
+//                }
+//            }
+//        });
+
         //menu toolbar
         toolbar = findViewById(R.id.toolbar);
         dlDrawer = findViewById(R.id.drawer_layout);
-
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
-
         dtToggle = new ActionBarDrawerToggle(this, dlDrawer, R.string.app_name, R.string.app_name);
         dlDrawer.addDrawerListener(dtToggle);
 
@@ -95,6 +117,8 @@ public class MainActivity extends AppCompatActivity {
                 drawer.closeDrawer(Gravity.LEFT);
             }
         });
+
+
     }
 
 
@@ -171,11 +195,15 @@ public class MainActivity extends AppCompatActivity {
                 storeVO.setStore_status(cursor.getInt(3));
                 storeVO.setCate_code(cursor.getString(4));
                 storeVO.setOwner_id(cursor.getString(5));
-                storeVO.setStore_name(cursor.getString(6));
-                storeVO.setStore_tel(cursor.getString(7));
-                storeVO.setStore_time(cursor.getString(8));
+                storeVO.setStore_tel(cursor.getString(6));
+                storeVO.setStore_time(cursor.getString(7));
+                storeVO.setStore_name(cursor.getString(8));
                 storeVO.setStore_intro(cursor.getString(9));
-                storeVO.setAddress_name(cursor.getString(10));
+                storeVO.setImg_uuid(cursor.getString(10));
+                storeVO.setImg_uploadpath(cursor.getString(11));
+                storeVO.setImg_filename(cursor.getString(12));
+                storeVO.setAddress_name(cursor.getString(13));
+
 
                 String storeJson = mapper.writeValueAsString(storeVO); // jackson : Object to Json
                 Log.e("store", storeJson);

@@ -18,9 +18,7 @@ import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
-import com.org.ticketzone.app_mem.GpsTest;
 import com.org.ticketzone.app_mem.R;
-import com.org.ticketzone.app_mem.application.GlobalApplication;
 import com.org.ticketzone.app_mem.task.JsonArrayTask;
 import com.org.ticketzone.app_mem.task.SendDataSet;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
@@ -40,6 +38,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Intent loadingintent = new Intent(this, LoadingActivity.class);
+        startActivity(loadingintent);
+
         mDBHelper = new DBOpenHelper(this);
 
 //        if(selectAllMember() == true){

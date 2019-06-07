@@ -38,6 +38,8 @@
         <activity android:name=".GpsTest"></activity>
         <activity android:name=".activity.StoreDetailActivity" />
         <activity android:name=".activity.NumInfoActivity" />
+        <activity android:name=".activity.LoadingActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.LoginActivity">
             <intent-filter>
@@ -75,7 +77,7 @@
         </activity>
 
         <!--파이어베이스-->
-        <service android:name=".service.MyFMService">
+        <service android:name=".service.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

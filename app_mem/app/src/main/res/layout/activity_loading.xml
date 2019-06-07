@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
+    android:gravity="center">
+
+    <LinearLayout
+        android:id="@+id/Loadinglayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+    <ImageView
+        android:id="@+id/loadingimage"
+        android:layout_width="203dp"
+        android:layout_height="149dp"
+        android:tint="@color/color"
+        android:src="@drawable/main_logo"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="간편하게 번호표를 발급 받으세요"
+        android:textColor="@color/color"/>
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Loding..."
+        android:textColor="@color/color"
+        android:textSize="30dp"/>
+    </LinearLayout>
+</LinearLayout>
