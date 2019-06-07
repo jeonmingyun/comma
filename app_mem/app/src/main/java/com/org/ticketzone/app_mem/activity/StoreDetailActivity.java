@@ -91,7 +91,6 @@ public class StoreDetailActivity extends AppCompatActivity {
         store_time = findViewById(R.id.store_time);
         address_name = findViewById(R.id.address_name);
         store_intro = findViewById(R.id.store_intro);
-        lineChart = findViewById(R.id.chart);
 
         beaconConnection();
         String imageUrl;
@@ -104,32 +103,7 @@ public class StoreDetailActivity extends AppCompatActivity {
         selectStoreMenu(license_number);
         setStoreDetail();
         setMenuList();
-        Log.e("menu", menuList.toString());
-
-
-
-
-
-        //chart
-        ArrayList<Entry> entries = new ArrayList<>();
-        Cursor cursor = mDBHelper.ChartTicket();
-        while(cursor.moveToNext()){
-            entries.add(new Entry(Integer.parseInt(cursor.getString(0)),Integer.parseInt(cursor.getString(1))));
-        }
-        LineDataSet dataset = new LineDataSet(entries, "명");
-
-        XAxis xAxis = lineChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-
-
-
-
-
-
-        IAxisValueFormatter formatter = new IAxisValueFormatter() {
-
         selectAllBeacon(); // beaconList
-
 
         Log.e("menu", menuList.toString());
 
