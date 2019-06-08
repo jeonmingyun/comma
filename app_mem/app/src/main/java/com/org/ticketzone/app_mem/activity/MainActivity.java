@@ -115,6 +115,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private String addr;
     private Button addressWindow;
 
+    private Button fmc_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
-//        fcmTocken(); // FCM tocken 발급
+        fcmTocken(); // FCM tocken 발급
         toolbar(); // menu toolbar
         tabHost(); // LinearLayout 페이지 바꿔끼우기
         selectAllStore(); // storeList = store table data select
@@ -134,6 +136,26 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         beaconConnection();
         storeList(); // store tab에서 store list를 보여줌
         cateList();
+
+        fmc_btn = findViewById(R.id.fmc_btn);
+        fmc_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "dfdf", Toast.LENGTH_SHORT).show();
+                NetworkTask task = new NetworkTask("mem_send_fcm") {
+                    @Override
+                    protected void onPostExecute(String s) {
+                        super.onPostExecute(s);
+                        Log.e("ddd", s);
+                    }
+
+                };
+
+//                SendDataSet sds = new SendDataSet("token", "dfdfdfdfdf");
+                SendDataSet sds = new SendDataSet("token", "dfdfdfdfdf");
+                task.execute(sds);
+            }
+        });
 
     //gps
         if (!checkLocationServicesStatus()) {

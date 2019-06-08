@@ -16,7 +16,7 @@ import java.net.URL;
 
 public class NetworkTask extends AsyncTask<SendDataSet, Void, String> {
 
-    private String ip = "15.164.115.73"; // 서버 IP
+    private String ip = "39.127.7.42"; // 서버 IP
     private String path = "http://" + ip + ":8080/"; // 연결할 jsp주소
 
     protected NetworkTask(String url) {
@@ -51,13 +51,13 @@ public class NetworkTask extends AsyncTask<SendDataSet, Void, String> {
             owr.close();
 
             /* 서버 -> 안드로이드 파라메터값 전달 */
-            InputStream is = null;
-            BufferedReader br = null;
+            InputStream is;
+            BufferedReader br;
 
             is = conn.getInputStream();
             br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
             StringBuffer sBuff = new StringBuffer();
-            String line = null;
+            String line;
 
             while ((line = br.readLine()) != null) {
                 sBuff.append(line + "\n");
