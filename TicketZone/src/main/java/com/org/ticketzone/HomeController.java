@@ -94,7 +94,7 @@ public class HomeController {
 			noticeAttachService.Fileinsert(attach);			
 	}
 
-		return "redirect:/";
+		return "redirect:notice";
 	}
 
 	// 공지사항 상세보기
@@ -137,24 +137,17 @@ public class HomeController {
 
 	// 공지사항 삭제처리
 	@RequestMapping(value = "/delNotice", method = RequestMethod.GET)
-	public String deleteNotice(NoticeBoardVO notice) {
+	public String deleteNotice(NoticeBoardVO notice, Model model, Criteria Cri) {
 		noticeBoardService.noticeBoardDel(notice);
-
+		int total = noticeBoardService.total(Cri);
+		model.addAttribute("noticeList", noticeBoardService.noticeBoardList(Cri));
+		model.addAttribute("list", noticeBoardService.getListWithPaging(Cri));
+		model.addAttribute("pageMaker", new PageDTO(Cri, total));
+		
 
 		return "notice";
 	}
 
-	// 공지사항 검색
-//	@RequestMapping(value = "/searchKeyword", method = RequestMethod.GET)
-//	public String searchNotice(Model model, NoticeBoardVO notice, Criteria Cri) {
-//		int count = noticeBoardService.SearchCount(Cri);
-//		model.addAttribute("noticeList", noticeBoardService.noticeSearch(notice));
-//		model.addAttribute("list", noticeBoardService.getListWithPaging(Cri));
-//		model.addAttribute("pageMaker", new PageDTO(Cri, count));
-//		
-//		
-//		return "redirect:/";
-//	}
 
 	// 테스트용
 

@@ -76,7 +76,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -120,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private String addr;
     private Button addressWindow;
 
-    private Button fmc_btn;
+    private Button fcm_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,13 +141,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         storeList(); // store tab에서 store list를 보여줌
         cateList();
 
-        fmc_btn = findViewById(R.id.fmc_btn);
-        fmc_btn.setOnClickListener(new View.OnClickListener() {
+        fcm_btn = findViewById(R.id.fcm_btn);
+        fcm_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "dfdf", Toast.LENGTH_SHORT).show();
                 NetworkTask task = new NetworkTask("mem_send_fcm") {
-
                     @Override
                     protected void onPostExecute(String s) {
                         super.onPostExecute(s);
@@ -157,12 +155,13 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
                 };
 
+//                SendDataSet sds = new SendDataSet("token", "dfdfdfdfdf");
                 SendDataSet sds = new SendDataSet("token", "dfdfdfdfdf");
                 task.execute(sds);
             }
         });
 
-        //gps
+    //gps
         if (!checkLocationServicesStatus()) {
             showDialogForLocationServiceSetting();
         }else {
@@ -184,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             }
         });
 
+
     }
 
     private void fcmTocken() {
@@ -202,6 +202,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     }
                 });
     }
+
 
     // select categorie table data from SQLite
     private void selectAllCate() {
@@ -401,18 +402,18 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
 
     private void selectAllBeacon(){
-        Cursor cursor = mDBHelper.selectAllBeacon();
-        beaconList = new ArrayList<>();
-        BeaconVO beaconVO;
+            Cursor cursor = mDBHelper.selectAllBeacon();
+            beaconList = new ArrayList<>();
+            BeaconVO beaconVO;
 
-        while (cursor.moveToNext()) {
-            beaconVO = new BeaconVO();
-            beaconVO.setB_code(cursor.getString(0));
-            beaconVO.setStore_name(cursor.getString(1));
-            beaconVO.setLicense_number(cursor.getString(2));
+            while (cursor.moveToNext()){
+                beaconVO = new BeaconVO();
+                beaconVO.setB_code(cursor.getString(0));
+                beaconVO.setStore_name(cursor.getString(1));
+                beaconVO.setLicense_number(cursor.getString(2));
 
-            beaconList.add(beaconVO);
-        }
+                beaconList.add(beaconVO);
+            }
 
     }
 
@@ -447,8 +448,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         spec.setContent(R.id.categorie);
         host.addTab(spec);
 
-
-
         // TabWidet의 background 설정
         for (int i = 0; i < host.getTabWidget().getChildCount(); i++) {
             View tabView = host.getTabWidget().getChildAt(i);
@@ -469,7 +468,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 }
                 host.getTabWidget().getChildAt(host.getCurrentTab())
                         .setBackgroundResource(R.drawable.selected_border); // selected
-
             }
         });
     }

@@ -15,12 +15,13 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             app:titleTextColor="@color/color"
+            android:background="@color/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"/>
 
         <Button
-            android:id="@+id/fmc_btn"
+            android:id="@+id/fcm_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="FCM"/>

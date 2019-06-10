@@ -68,6 +68,11 @@
 				</div>
 				<!-- store_row -->
 			</c:forEach>
+			<c:if test="${empty list}">
+			
+				<p>검색결과가없습니다.</p>
+			
+			</c:if>		
 		</div>
 		<!-- store_form-->
 
