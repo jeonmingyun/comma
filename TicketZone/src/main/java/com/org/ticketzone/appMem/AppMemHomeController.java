@@ -30,7 +30,6 @@ public class AppMemHomeController {
       return o.getOwner_id() +"app";
    }
 
-
    @ResponseBody
    @RequestMapping(value = "/mem_db_login", method = RequestMethod.POST)
    public JSONArray mem_db_login(@RequestBody MemberVO mvo ) {

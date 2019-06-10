@@ -43,8 +43,8 @@ public class AppMngrServiceImplement implements AppMngrService {
 	}
 
 	@Override
-	public NumberTicketVO[] ticketList() {
-		return mapper.ticketList();
+	public NumberTicketVO[] NumberTicketList() {
+		return mapper.NumberTicketList();
 	}
 
 	@Override

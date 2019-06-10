@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 public class DBOpenHelper extends SQLiteOpenHelper {
 
-    private static final int DB_VERSION = 12;
+    private static final int DB_VERSION = 15;
     private static final String DB_NAME = "SQLite.db";
     public static SQLiteDatabase mngrdb;
 
@@ -28,7 +28,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         db.execSQL(DBTable.Categorie.CREATE_QUERY);
         db.execSQL(DBTable.Store.CREATE_QUERY);
         db.execSQL(DBTable.StoreMenu.CREATE_QUERY);
-//        db.execSQL(DBTable.NumberTicket.CREATE_QUERY);
+        db.execSQL(DBTable.NumberTicket.CREATE_QUERY);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         db.execSQL(DBTable.Store.DROP_QUERY);
         db.execSQL(DBTable.Categorie.DROP_QUERY);
         db.execSQL(DBTable.Owner.DROP_QUERY);
-//        db.execSQL(DBTable.NumberTicket.DROP_QUERY);
+        db.execSQL(DBTable.NumberTicket.DROP_QUERY);
         onCreate(db);
     }
     public Cursor selectAllOwner() {
@@ -207,21 +207,41 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         return member_list;
     }
 
-    public void insertTicket(JSONArray categorieList) {
+    public Cursor selectWating(String license_number){
+         mngrdb = this.getWritableDatabase();
+        Cursor member_list = mngrdb.rawQuery("select max(substr(ticket_code,19)) as ticket_code from numberticket where ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ?", new String[] {license_number});
+        return member_list;
+    }
+
+    public Cursor ticketStatus(String license_number){
+        mngrdb = this.getWritableDatabase();
+        Cursor member_list = mngrdb.rawQuery("WITH\n" +
+                "wait as\n" +
+                "(select count(string_status) as wait from numberticket where string_status = 'wait' and ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ?),\n" +
+                "success as (select count(string_status) as success from numberticket where string_status = 'success' and ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ?),\n" +
+                "cancel as (select count(string_status) as cancel from numberticket where string_status = 'cancel' and ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ?),\n" +
+                "absence as (select count(string_status) as absence from numberticket where string_status = 'absence' and ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ?)\n" +
+                "select a.*,b.*,c.*,d.*\n" +
+                "from wait a, success b, cancel c, absence d", new String[] {license_number});
+        return  member_list;
+    }
+
+    public void insertTicket(JSONArray NumberTicketList) {
         mngrdb = this.getWritableDatabase();
 
-        for ( int i = 0; i < categorieList.length(); i++) {
+        for ( int i = 0; i < NumberTicketList.length(); i++) {
             try {
-                JSONObject jobj = new JSONObject(categorieList.get(i).toString());
+                JSONObject jobj = new JSONObject(NumberTicketList.get(i).toString());
                 ContentValues values = new ContentValues();
                 values.put("ticket_code", jobj.getString("ticket_code"));
                 values.put("wait_number", jobj.getString("wait_number"));
                 values.put("the_number", jobj.getString("the_number"));
                 values.put("license_number", jobj.getString("license_number"));
-                values.put("member_tel", jobj.getString("member_tel"));
+                values.put("member_id", jobj.getString("member_id"));
                 values.put("ticket_status", jobj.getString("ticket_status"));
-                values.put("string_status", jobj.getString("string_status"));
-//                mngrdb.insert(DBTable.NumberTicket.TABLENAME, null, values);
+                values.put("ticket_reg", jobj.getString("ticket_reg"));
+                values.put("string_status",jobj.getString("string_status"));
+                mngrdb.insert(DBTable.NumberTicket.TABLENAME, null, values);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -233,7 +253,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         mngrdb.delete(DBTable.StoreMenu.TABLENAME,null,null);
         mngrdb.delete(DBTable.Categorie.TABLENAME,null,null);
         mngrdb.delete(DBTable.Owner.TABLENAME,null,null);
-//        mngrdb.delete(DBTable.NumberTicket.TABLENAME, null,null);
+        mngrdb.delete(DBTable.NumberTicket.TABLENAME, null,null);
     }
 
 }

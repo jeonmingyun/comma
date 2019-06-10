@@ -229,8 +229,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 view.setTag(idx);   // 인덱스 저장
 
                 tagBtn.setTag(idx);
-                tagBtn.setText("발급불가");
-                tagBtn.setEnabled(false);
+//                tagBtn.setText("발급불가");
+//                tagBtn.setEnabled(false);
 
                 String B_name[] =  new String[beaconList.size()];
                 String B_id[] = new String[beaconList.size()];
@@ -336,7 +336,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         Cursor cursor = mDBHelper.selectAllStore();
         storeList = new ArrayList<>();
         StoreVO storeVO;
-
+        gpsTracker = new GpsTracker(MainActivity.this);
+        my_x = gpsTracker.getLatitude();
+        my_y = gpsTracker.getLongitude();
+        Log.e("my_x", my_x.toString());
         if(cursor.getCount() == 0) { // not found data
             Toast.makeText(this, "not found data", Toast.LENGTH_SHORT).show();
         }
@@ -528,7 +531,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         // 비콘
         // 비콘의 수신 범위를 갱신 받음
         beaconManager = new BeaconManager(MainActivity.this);
-        beaconManager2 = new BeaconManager(MainActivity.this);
         beaconManager.setRangingListener(new BeaconManager.BeaconRangingListener() {
             @Override
             public void onBeaconsDiscovered(BeaconRegion beaconRegion, List<Beacon> list) {

@@ -67,11 +67,12 @@ public class NumInfoActivity extends AppCompatActivity {
             wait_number = cursor.getInt(1);
             the_number2 = cursor.getInt(2);
             ticket_number = ticket_number.substring(18);
+            NowEnter.setText(wait_number + "명");
+            MyNumber.setText(ticket_number + "번");
+            Time.setText(code + "테스트");
+            the_number.setText(the_number2 + "명");
         }
-        NowEnter.setText(wait_number + "명");
-        MyNumber.setText(ticket_number + "번");
-        Time.setText(code + "테스트");
-        the_number.setText(the_number2 + "명");
+
 
 
         storeName.setText(storename);

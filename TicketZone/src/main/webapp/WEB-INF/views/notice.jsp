@@ -54,7 +54,7 @@
 				<th style="width:30%;">제목</th>
 				<th style="width:10%;">작성자</th>
 				<th style="width:20%;">날짜</th>
-			</tr>
+			</tr>			
 		 	<c:forEach var="nl" items="${noticeList}">
 				<tr onclick="showNotice(${nl.notice_no})">
 					<td>${nl.notice_no}
@@ -62,7 +62,12 @@
 					<td>관리자
 					<td><fmt:formatDate value="${nl.notice_reg}" pattern="yyyy.MM.dd"/>
 				</tr>
-			</c:forEach>			
+			</c:forEach>
+			<c:if test="${empty list}">
+			
+				<td>검색결과가없습니다.
+			
+			</c:if>			
 		</table>
 		<c:if test="${!empty sessionScope.admin}">
 		<div id="writebutton">

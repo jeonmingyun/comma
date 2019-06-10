@@ -16,7 +16,7 @@
 	
 $(function() {	
 	$('#cancel').click(function() {
-		$(location).attr('href', "/");
+		$(location).attr('href', "notice");
 	});
 	
 	$('#update').click(function() {
@@ -65,7 +65,7 @@ $(function() {
 			dataType : 'text',
 			type: 'POST',
 			success: function(data){
-				$(location).attr('href', "/");
+				$(location).attr('href', "notice");
 			}
 		});
 	});
