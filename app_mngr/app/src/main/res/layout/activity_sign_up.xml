@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".activity.SignUpActivity"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/signup">
 
     <ImageView
         android:layout_width="150dp"
@@ -22,12 +23,14 @@
             android:id="@+id/owner_id"
             android:layout_width="143dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/textlines2"
             android:hint="아이디" />
 
         <Button
             android:id="@+id/id_check"
             android:layout_width="118dp"
-            android:layout_height="wrap_content"
+            android:layout_height="32dp"
+            android:background="@drawable/loginbutton"
             android:text="중복확인" />
 
     </LinearLayout>
@@ -37,6 +40,7 @@
         android:layout_width="262dp"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
+        android:background="@drawable/textlines2"
         android:hint="비밀번호"/>
 
     <EditText
@@ -44,30 +48,35 @@
         android:layout_width="262dp"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
+        android:background="@drawable/textlines2"
         android:hint="비밀번호 확인"/>
 
     <EditText
         android:id="@+id/owner_name"
         android:layout_width="262dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/textlines2"
         android:hint="이름"/>
 
     <EditText
         android:id="@+id/owner_tel"
         android:layout_width="262dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/textlines2"
         android:hint="연락처"/>
 
     <EditText
         android:id="@+id/email"
         android:layout_width="262dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/textlines2"
         android:hint="이메일"/>
 
     <Button
         android:id="@+id/join"
         android:layout_width="262dp"
-        android:layout_height="wrap_content"
-        android:text="가입하기"/>
+        android:layout_height="32dp"
+        android:background="@drawable/loginbutton"
+        android:text="SIGN UP"/>
 
 </LinearLayout>
