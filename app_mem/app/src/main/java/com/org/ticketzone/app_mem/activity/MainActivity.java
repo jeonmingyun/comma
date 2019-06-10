@@ -155,13 +155,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
                 };
 
-//                SendDataSet sds = new SendDataSet("token", "dfdfdfdfdf");
                 SendDataSet sds = new SendDataSet("token", "dfdfdfdfdf");
                 task.execute(sds);
             }
         });
 
-    //gps
+        //gps
         if (!checkLocationServicesStatus()) {
             showDialogForLocationServiceSetting();
         }else {

@@ -1,6 +1,6 @@
 package com.org.ticketzone.appMem;
 
-import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -37,8 +37,8 @@ public class AppMemFMService {
 	@RequestMapping(value = "/mem_send_fcm", method = RequestMethod.POST)
 	// 구글 인증 서버
 	public String pushFCMNotification() throws Exception {
-		String API_KEY = "AIzaSyAfXJUsLsL-Kf8KTq7WB9yXpn7PiOUYqGs";
-		String token = "fiSOH8FIm4g:APA91bEWhjN29G2ZmfFfh-5-zM1ZeBsbX86hW7onF6kf1Qftwn8LXAvmbupXg120Jra1ttjQt-Lg4Sr2-L_ta1fAif3_QAH186_6sfBqLcPstgbZimHtF6-BQLmBPeHrUyJkJyKjqc1X";
+		String API_KEY = "AAAAmzUb7vI:APA91bGojWKNi-FXv5coHWtMOPz0-Em5c5LomZGDWa54xPy81aoQ7e-1ArcCWh8xQdFcohSRUeXFtSbIpAgAda7LJYCnjodFk5q-jGCsrOsIIEjejNUzUYvkcXjb734RK4GxhdhADeEF";
+		String token = "ft1mhicUqZU:APA91bFxz4KECTQYJ-XL5sRdKgcKouajgAqhc6zzt6HKEhiDcd3e8oy5rm8UO_TmoqHLVO4pFX25MerUaKScBMZ77rAZkh0PEzIaDHUIB6uTab05NmYrauThgUBxKvdmTMaQyla30BSh";
 
 		// if(pushKeyAuth()){
 		URL url = new URL("https://fcm.googleapis.com/fcm/send");
@@ -51,26 +51,19 @@ public class AppMemFMService {
 		conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
 		// 일반 텍스트 전달시 Content-Type , application/x-www-form-urlencoded;charset=UTF-8
 
-		// 알림 + 데이터 메세지 형태의 전달
-		System.out.println("1818181881818");
-		JSONObject notification = new JSONObject(); 
-		JSONObject message = new JSONObject();
-		notification.put("body", "alert body");
-		notification.put("title", "alert title");
+		// 알림 + 데이터 메세지 형태의 전달		
+		JSONObject infoJson = new JSONObject();
+		JSONObject json = new JSONObject();
+		infoJson.put("title", "alert title");
+		infoJson.put("body", "alert body");
+		json.put("to", token.trim());
+		json.put("notification", infoJson);
 
-		message.put("to", "/topics/all");
-		message.put("notification", notification);
-		System.out.println(message.toString());
-//		OutputStreamWriter owr = new OutputStreamWriter(conn.getOutputStream(), "utf-8");
-//		owr.write(message.toString());
-//		owr.flush();
-//		owr.close();
-		
-		 OutputStream os = conn.getOutputStream();
         // 서버에서 날려서 한글 깨지는 사람은 아래처럼  UTF-8로 인코딩해서 날려주자
-        os.write(message.toString().getBytes("UTF-8"));
-        os.flush();
-        os.close();
+		OutputStreamWriter owr = new OutputStreamWriter(conn.getOutputStream(), "utf-8");
+		owr.write(json.toString());
+		owr.flush();
+		owr.close();
         
 		if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
 			System.out.println("Output from Server : " + conn.getResponseCode());
@@ -80,7 +73,7 @@ public class AppMemFMService {
 		}
         conn.disconnect();
         
-        return message.toString();
+        return json.toString();
 	}
 	
 //	/* send FCM */

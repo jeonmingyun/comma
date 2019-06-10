@@ -70,20 +70,18 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
     // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        Log.d(TAG, "안됑");
-
         Log.d(TAG, "From: " + remoteMessage.getFrom());
         if (remoteMessage.getNotification() != null) {
+            Log.d(TAG, remoteMessage.getData()+"");
+
             Log.d(TAG, remoteMessage.getNotification().getBody() +"// "
                     +remoteMessage.getNotification().getTitle());
 
             sendNotification(remoteMessage.getNotification());
         }
-
-//        sendNotification(remoteMessage.getData().get("message"));
     }
 
-    private void sendNotification(RemoteMessage.Notification message) {
+    private void sendNotification(RemoteMessage.Notification notification) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
@@ -94,8 +92,8 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
                         .setSmallIcon(R.drawable.ic_launcher_foreground)
-                        .setContentTitle(message.getTitle())
-                        .setContentText(message.getBody())
+                        .setContentTitle(notification.getTitle())
+                        .setContentText(notification.getBody())
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
                         .setContentIntent(pendingIntent);
