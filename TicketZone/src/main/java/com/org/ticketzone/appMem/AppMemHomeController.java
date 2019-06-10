@@ -45,11 +45,11 @@ public class AppMemHomeController {
       arr.add(appMemService.BeaconList());
       return arr;
    }
- 	
-	// 번호표 발급
-	@ResponseBody
-	@RequestMapping(value = "/Mem_issue_ticket", method = RequestMethod.POST)
-	public String id_check(@RequestBody NumberTicketVO vo) {
+    
+   // 번호표 발급
+   @ResponseBody
+   @RequestMapping(value = "/Mem_issue_ticket", method = RequestMethod.POST)
+   public String id_check(@RequestBody NumberTicketVO vo) {
 //      appMngrService.M_issue_ticket(vo);
       String codeMaker = appMemService.Mem_codeSelect(vo);
       System.out.println(codeMaker + "code");
@@ -78,20 +78,20 @@ public class AppMemHomeController {
   
   @RequestMapping(value ="/MyTicket", method = RequestMethod.POST)
   public JSONArray MyTicket(@RequestBody NumberTicketVO vo) {
-	  
-	  System.out.println(vo + "myTicket");
-	  JSONArray arr = new JSONArray();
-	  arr.add(appMemService.MyTicket(vo));
-	  
-	  return arr;
+     
+     System.out.println(vo + "myTicket");
+     JSONArray arr = new JSONArray();
+     arr.add(appMemService.MyTicket(vo));
+     
+     return arr;
   }
   
   
   @ResponseBody
   @RequestMapping(value ="/TicketCancel", method = RequestMethod.POST)
   public void CancelTicket(@RequestBody NumberTicketVO vo) {
-	  appMemService.TicketCancel(vo);
-	  appMemService.SyncTicket(vo);
+     appMemService.TicketCancel(vo);
+     appMemService.SyncTicket(vo);
   }
 
 }

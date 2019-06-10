@@ -74,6 +74,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -115,6 +116,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private String addr;
     private Button addressWindow;
 
+    private Button fmc_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
-//        fcmTocken(); // FCM tocken 발급
+        fcmTocken(); // FCM tocken 발급
         toolbar(); // menu toolbar
         tabHost(); // LinearLayout 페이지 바꿔끼우기
         selectAllStore(); // storeList = store table data select
@@ -135,7 +138,28 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         storeList(); // store tab에서 store list를 보여줌
         cateList();
 
-    //gps
+        fmc_btn = findViewById(R.id.fmc_btn);
+        fmc_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "dfdf", Toast.LENGTH_SHORT).show();
+                NetworkTask task = new NetworkTask("mem_send_fcm") {
+
+                    @Override
+                    protected void onPostExecute(String s) {
+                        super.onPostExecute(s);
+                        Log.e("ddd", s);
+                    }
+
+                };
+
+//                SendDataSet sds = new SendDataSet("token", "dfdfdfdfdf");
+                SendDataSet sds = new SendDataSet("token", "dfdfdfdfdf");
+                task.execute(sds);
+            }
+        });
+
+        //gps
         if (!checkLocationServicesStatus()) {
             showDialogForLocationServiceSetting();
         }else {
@@ -368,18 +392,18 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
 
     private void selectAllBeacon(){
-            Cursor cursor = mDBHelper.selectAllBeacon();
-            beaconList = new ArrayList<>();
-            BeaconVO beaconVO;
+        Cursor cursor = mDBHelper.selectAllBeacon();
+        beaconList = new ArrayList<>();
+        BeaconVO beaconVO;
 
-            while (cursor.moveToNext()){
-                beaconVO = new BeaconVO();
-                beaconVO.setB_code(cursor.getString(0));
-                beaconVO.setStore_name(cursor.getString(1));
-                beaconVO.setLicense_number(cursor.getString(2));
+        while (cursor.moveToNext()){
+            beaconVO = new BeaconVO();
+            beaconVO.setB_code(cursor.getString(0));
+            beaconVO.setStore_name(cursor.getString(1));
+            beaconVO.setLicense_number(cursor.getString(2));
 
-                beaconList.add(beaconVO);
-            }
+            beaconList.add(beaconVO);
+        }
 
     }
 
