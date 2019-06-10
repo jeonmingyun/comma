@@ -76,6 +76,7 @@
 			from
 			(select rownum rn, a.board_no, a.board_title, a.board_content, a.board_reg, a.board_password, b.cate_name
 			from board a, categorie b
+			where 	
 		]]>
 			<trim prefix="(" suffix=") AND " prefixOverrides="OR">
 			<foreach item='type' collection="typeArr">
@@ -91,14 +92,11 @@
 				</trim>
 			</foreach>
 		</trim>
-		<![CDATA[	
-			where a.cate_code = b.cate_code
-			order by board_reg desc)
-			select board_no, board_title, board_content, board_reg, board_password, cate_name 
-			from t_board			
-			where rownum <= #{pageNum} * #{amount}
-			and rownum > (#{pageNum} -1) * #{amount}			
-			
+		<![CDATA[
+			a.cate_code = b.cate_code
+			and rownum <= #{pageNum} * #{amount}
+			order by board_reg desc)										
+			where rn > (#{pageNum} -1) * #{amount}			
 		]]>
 	</select>
 	

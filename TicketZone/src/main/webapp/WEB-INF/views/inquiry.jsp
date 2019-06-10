@@ -60,6 +60,11 @@
                      <td><fmt:formatDate value="${sl.board_reg}" pattern="yyyy.MM.dd"/>
                   </tr>
                </c:forEach>
+               <c:if test="${empty suggestList}">
+			
+				<td>검색결과가없습니다.
+			
+			</c:if>		
             </table>
             <div id="writebutton">
             <button type="button" id="btnwrite">글쓰기</button>

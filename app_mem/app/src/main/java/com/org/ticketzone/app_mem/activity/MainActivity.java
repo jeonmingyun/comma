@@ -186,10 +186,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     }
 
-<<<<<<< HEAD
-
-
-=======
     private void fcmTocken() {
         FirebaseInstanceId.getInstance().getInstanceId() // 현재 기기의 아이디
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
@@ -206,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     }
                 });
     }
->>>>>>> 1888cd90e2adc22755c1d1f7717959f4b2cb37d3
+
 
     // select categorie table data from SQLite
     private void selectAllCate() {
