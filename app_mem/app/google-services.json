@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "1059650415827",
-    "firebase_url": "https://fcmtest-4559a.firebaseio.com",
-    "project_id": "fcmtest-4559a",
-    "storage_bucket": "fcmtest-4559a.appspot.com"
+    "project_number": "666610953970",
+    "firebase_url": "https://smartwait-3cb6a.firebaseio.com",
+    "project_id": "smartwait-3cb6a",
+    "storage_bucket": "smartwait-3cb6a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1059650415827:android:ee4d754aab0525d3",
+        "mobilesdk_app_id": "1:666610953970:android:ee4d754aab0525d3",
         "android_client_info": {
           "package_name": "com.org.ticketzone.app_mem"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1059650415827-0ph01udlftknb0kjdm9eg1i50qodsetq.apps.googleusercontent.com",
+          "client_id": "666610953970-snq1udu84mgvgpcbi54rchs1bc6498n7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBGe5NY1owbyLy1OseKE_mzyh687OM36m0"
+          "current_key": "AIzaSyA5sB2qHxlU3eiRAv4zRvOgrk03oF88X9w"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1059650415827-0ph01udlftknb0kjdm9eg1i50qodsetq.apps.googleusercontent.com",
+              "client_id": "666610953970-snq1udu84mgvgpcbi54rchs1bc6498n7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

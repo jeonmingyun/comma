@@ -74,8 +74,15 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+<<<<<<< HEAD
         </activity> <!-- 파이어베이스 -->
         <service android:name=".service.MyFMService">
+=======
+        </activity>
+
+        <!--파이어베이스-->
+        <service android:name=".service.MyFirebaseInstanceIDService">
+>>>>>>> 1888cd90e2adc22755c1d1f7717959f4b2cb37d3
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

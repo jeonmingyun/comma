@@ -54,14 +54,26 @@
 			data-ride="carousel">
 			<div class="carousel-inner" role="listbox">
 				<!-- Slide One - Set the background image for this slide in the line below -->
-				<div class="carousel-item active"
-					style="background-image: url('../resources/img/메인베너2.jpg')">
+				<!-- <div class="carousel-item active"
+					style="background-image: url('../resources/img/main4.png')"> -->
+				<div class="main_img"
+				style="background-image: url('../resources/img/main.png')">
+					
+					<div class="main_info">
+						<h1>번호요</h1>
+						<h3>줄 서서 기다리지 마세요.<br />
+						번호요가 당신에게 시간을 선물합니다.</h3>
+					</div>
+					
+					<div class="main_down">
+						<button on>DOWNLOAD</button>
+					</div>
 					
 					<!-- style="background-image: url('http://placehold.it/1900x1080')" -->
-					<div class="carousel-caption d-none d-md-block">
-						<!-- <h3>First Slide</h3>
-						<p>This is a description for the first slide.</p> -->
-					</div>
+					<!-- <div class="carousel-caption d-none d-md-block">
+						<h3>First Slide</h3>
+						<p>This is a description for the first slide.</p>
+					</div> -->
 				</div>
 			</div>
 		</div>

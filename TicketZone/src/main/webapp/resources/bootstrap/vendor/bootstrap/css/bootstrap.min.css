@@ -26,9 +26,9 @@
 	-danger: #dc3545; -
 	-light: #f8f9fa; -
 	-dark: #343a40; -
-	-breakpoint-xs: 0; -
+	/* -breakpoint-xs: 0; -
 	-breakpoint-sm: 576px; -
-	-breakpoint-md: 768px; -
+	-breakpoint-md: 768px; - */
 	-breakpoint-lg: 992px; -
 	-breakpoint-xl: 1200px; -
 	-font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -522,7 +522,7 @@ pre code {
 	margin-left: auto
 }
 
-@media ( min-width :576px) {
+/* @media ( min-width :576px) {
 	.container {
 		max-width: 540px
 	}
@@ -532,7 +532,7 @@ pre code {
 	.container {
 		max-width: 720px
 	}
-}
+} */
 
 @media ( min-width :992px) {
 	.container {
@@ -796,7 +796,7 @@ pre code {
 	margin-left: 91.666667%
 }
 
-@media ( min-width :576px) {
+/* @media ( min-width :576px) {
 	.col-sm {
 		-ms-flex-preferred-size: 0;
 		flex-basis: 0;
@@ -1138,7 +1138,7 @@ pre code {
 	.offset-md-11 {
 		margin-left: 91.666667%
 	}
-}
+} */
 
 @media ( min-width :992px) {
 	.col-lg {
@@ -3073,7 +3073,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 	left: auto
 }
 
-@media ( min-width :576px) {
+/* @media ( min-width :576px) {
 	.dropdown-menu-sm-right {
 		right: 0;
 		left: auto
@@ -3085,7 +3085,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 		right: 0;
 		left: auto
 	}
-}
+} */
 
 @media ( min-width :992px) {
 	.dropdown-menu-lg-right {
@@ -3106,7 +3106,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 	left: 0
 }
 
-@media ( min-width :576px) {
+/* @media ( min-width :576px) {
 	.dropdown-menu-sm-left {
 		right: auto;
 		left: 0
@@ -3118,7 +3118,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 		right: auto;
 		left: 0
 	}
-}
+} */
 
 @media ( min-width :992px) {
 	.dropdown-menu-lg-left {
@@ -4258,7 +4258,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 	background-size: 100% 100%
 }
 
-@media ( max-width :575.98px) {
+/* @media ( max-width :575.98px) {
 	.navbar-expand-sm>.container, .navbar-expand-sm>.container-fluid {
 		padding-right: 0;
 		padding-left: 0
@@ -4303,9 +4303,9 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 		padding-right: 0;
 		padding-left: 0
 	}
-}
+} */
 
-@media ( min-width :768px) {
+/* @media ( min-width :768px) {
 	.navbar-expand-md {
 		-ms-flex-flow: row nowrap;
 		flex-flow: row nowrap;
@@ -4343,7 +4343,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 		padding-right: 0;
 		padding-left: 0
 	}
-}
+} */
 
 @media ( min-width :992px) {
 	.navbar-expand-lg {
@@ -6629,7 +6629,7 @@ a.bg-dark:focus, a.bg-dark:hover, button.bg-dark:focus, button.bg-dark:hover
 	display: inline-flex !important
 }
 
-@media ( min-width :576px) {
+/* @media ( min-width :576px) {
 	.d-sm-none {
 		display: none !important
 	}
@@ -6691,7 +6691,7 @@ a.bg-dark:focus, a.bg-dark:hover, button.bg-dark:focus, button.bg-dark:hover
 		display: -ms-inline-flexbox !important;
 		display: inline-flex !important
 	}
-}
+} */
 
 @media ( min-width :992px) {
 	.d-lg-none {
@@ -7000,7 +7000,7 @@ a.bg-dark:focus, a.bg-dark:hover, button.bg-dark:focus, button.bg-dark:hover
 	align-self: stretch !important
 }
 
-@media ( min-width :576px) {
+/* @media ( min-width :576px) {
 	.flex-sm-row {
 		-ms-flex-direction: row !important;
 		flex-direction: row !important
@@ -7276,7 +7276,7 @@ a.bg-dark:focus, a.bg-dark:hover, button.bg-dark:focus, button.bg-dark:hover
 		-ms-flex-item-align: stretch !important;
 		align-self: stretch !important
 	}
-}
+} */
 
 @media ( min-width :992px) {
 	.flex-lg-row {
@@ -7568,7 +7568,7 @@ a.bg-dark:focus, a.bg-dark:hover, button.bg-dark:focus, button.bg-dark:hover
 	float: none !important
 }
 
-@media ( min-width :576px) {
+/* @media ( min-width :576px) {
 	.float-sm-left {
 		float: left !important
 	}
@@ -7590,7 +7590,7 @@ a.bg-dark:focus, a.bg-dark:hover, button.bg-dark:focus, button.bg-dark:hover
 	.float-md-none {
 		float: none !important
 	}
-}
+} */
 
 @media ( min-width :992px) {
 	.float-lg-left {
@@ -8130,7 +8130,7 @@ supports ((position:-webkit-sticky ) or (position:sticky )){ .
 .ml-auto, .mx-auto {
 	margin-left: auto !important
 }
-
+/* 
 @media ( min-width :576px) {
 	.m-sm-0 {
 		margin: 0 !important
@@ -8675,7 +8675,7 @@ supports ((position:-webkit-sticky ) or (position:sticky )){ .
 	.ml-md-auto, .mx-md-auto {
 		margin-left: auto !important
 	}
-}
+} */
 
 @media ( min-width :992px) {
 	.m-lg-0 {
@@ -9258,7 +9258,7 @@ supports ((position:-webkit-sticky ) or (position:sticky )){ .
 	text-align: center !important
 }
 
-@media ( min-width :576px) {
+/* @media ( min-width :576px) {
 	.text-sm-left {
 		text-align: left !important
 	}
@@ -9280,7 +9280,7 @@ supports ((position:-webkit-sticky ) or (position:sticky )){ .
 	.text-md-center {
 		text-align: center !important
 	}
-}
+} */
 
 @media ( min-width :992px) {
 	.text-lg-left {

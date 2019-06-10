@@ -5,11 +5,11 @@
 }
 
 /* 메인 이미지 */
-/* .main_img {
-	width: 1900px;
-	height: 758px;
+.main_img {
+	width: 1920px;
+	height: 680px;
 }
- */
+
 /* 메인 서비스 */
 .main_row {
 	margin-top: 70px; 
@@ -58,8 +58,41 @@
 	text-align: center;
 }
 
+/* 메인베너 소개 */
+.main_info {
+	color: #fff;
+	position: relative;
+	top: 200px;
+	left: 350px;
+}
+
+.main_info h3 {
+	padding-top: 20px;
+	color:  #e6e6e6;
+}
+
 /* 다운로드 */
 .download h2{
 	text-align: center;
 	margin: 50px auto 0;
 	padding: 0px 15px;
+}
+
+.main_down {
+	position: relative;
+	top: 300px;
+	left: 350px;
+}
+
+.main_down button{
+	border: 2px solid #fff;
+	border-radius: 50px;
+	background-color: transparent;
+	color: #fff;
+	padding: 10px 20px;
+	font-size: 22px;
+}
+
+.main_down button:hover {
+	cursor: pointer;
+}

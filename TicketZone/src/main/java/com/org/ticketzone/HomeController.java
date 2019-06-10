@@ -94,7 +94,7 @@ public class HomeController {
 			noticeAttachService.Fileinsert(attach);			
 	}
 
-		return "redirect:notice";
+		return "redirect:/";
 	}
 
 	// 공지사항 상세보기
@@ -140,7 +140,7 @@ public class HomeController {
 	public String deleteNotice(NoticeBoardVO notice) {
 		noticeBoardService.noticeBoardDel(notice);
 
-		return "redirect:notice";
+		return "redirect:/";
 	}
 
 	// 공지사항 검색
@@ -192,6 +192,43 @@ public class HomeController {
 	}
 	
 	
+	@RequestMapping(value = "/kakao", produces = "application/json", method=RequestMethod.GET)
+//	public String kakao(@RequestParam("code") String code, RedirectAttributes ra, HttpSession session, Model model)
+		public String kakao(Model model){
+//		System.out.println("kakao:" + code);
+		return "test";
+	}
+	
+	@RequestMapping(value ="/kakaoLogin", produces = "application/json", method=RequestMethod.GET)
+	public String kakaoLogin(@RequestParam("code") String code, RedirectAttributes ra, HttpSession session, HttpServletResponse response) throws IOException {
+		System.out.println("kakao code : " + code);
+		JsonNode jsonToken = KakaoAccessToken.getKakaoAccessToken(code);
+        // 여러 json객체 중 access_token을 가져온다
+        JsonNode accessToken = jsonToken.get("access_token");
+ 
+        System.out.println("access_token : " + accessToken);
+        
+        JsonNode userInfo = KakaoUserInfo.getKakaoUserInfo(accessToken);
+        
+        // Get id
+        String id = userInfo.path("id").asText();
+        String name = null;
+        String email = null;
+ 
+        // 유저정보 카카오에서 가져오기 Get properties
+        JsonNode properties = userInfo.path("properties");
+        JsonNode kakao_account = userInfo.path("kakao_account");
+ 
+        name = properties.path("nickname").asText();
+        email = kakao_account.path("email").asText();
+ 
+        System.out.println("id : " + id);
+        System.out.println("name : " + name);
+        System.out.println("email : " + email);
+
+
+		return "test2";				
+	}
 	
 	@RequestMapping(value ="/admin", method=RequestMethod.GET)
 	public String admin(Model model) {

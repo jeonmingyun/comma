@@ -100,9 +100,13 @@ public class StoreDetailActivity extends AppCompatActivity {
         store_time = findViewById(R.id.store_time);
         address_name = findViewById(R.id.address_name);
         store_intro = findViewById(R.id.store_intro);
+<<<<<<< HEAD
         prev = findViewById(R.id.prev);
         s_date = findViewById(R.id.s_date);
         next = findViewById(R.id.next);
+=======
+
+>>>>>>> 1888cd90e2adc22755c1d1f7717959f4b2cb37d3
         beaconConnection();
         String imageUrl;
 

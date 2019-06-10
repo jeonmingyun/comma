@@ -119,6 +119,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private String addr;
     private Button addressWindow;
 
+    private Button fmc_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,7 +130,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         mSwipeRefreshLayout = findViewById(R.id.swipe_layout);
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
-        
+
+        fcmTocken(); // FCM tocken 발급
         toolbar(); // menu toolbar
         tabHost(); // LinearLayout 페이지 바꿔끼우기
         selectAllStore(); // storeList = store table data select
@@ -138,20 +141,25 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         storeList(); // store tab에서 store list를 보여줌
         cateList();
 
-     //파이어베이스
-        FirebaseInstanceId.getInstance().getInstanceId() // 현재 기기의 아이디
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+        fmc_btn = findViewById(R.id.fmc_btn);
+        fmc_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "dfdf", Toast.LENGTH_SHORT).show();
+                NetworkTask task = new NetworkTask("mem_send_fcm") {
                     @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w("MAIN", "getInstanceId failed", task.getException());
-                            return;
-                        }
-                        String token = task.getResult().getToken();
-                        Log.d("MAIN-TOKEN", token);
-                        Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
+                    protected void onPostExecute(String s) {
+                        super.onPostExecute(s);
+                        Log.e("ddd", s);
                     }
-                });
+
+                };
+
+//                SendDataSet sds = new SendDataSet("token", "dfdfdfdfdf");
+                SendDataSet sds = new SendDataSet("token", "dfdfdfdfdf");
+                task.execute(sds);
+            }
+        });
 
     //gps
         if (!checkLocationServicesStatus()) {
@@ -178,8 +186,27 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     }
 
+<<<<<<< HEAD
 
 
+=======
+    private void fcmTocken() {
+        FirebaseInstanceId.getInstance().getInstanceId() // 현재 기기의 아이디
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.e("MAIN", "getInstanceId failed", task.getException());
+                            return;
+                        }
+                        String token = task.getResult().getToken();
+
+                        Log.e("MAIN-TOKEN", token);
+                        Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+>>>>>>> 1888cd90e2adc22755c1d1f7717959f4b2cb37d3
 
     // select categorie table data from SQLite
     private void selectAllCate() {
