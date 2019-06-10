@@ -5,6 +5,7 @@
     android:layout_height="140dp">
 
     <RelativeLayout
+        android:id="@+id/Rl"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -56,10 +57,10 @@
 
             <Button
                 android:id="@+id/tag_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="13dp"
-                android:text="번호표 발급"
+                android:background="@drawable/buttoncolor"
                 android:textSize="16sp" />
         </LinearLayout>
     </RelativeLayout>

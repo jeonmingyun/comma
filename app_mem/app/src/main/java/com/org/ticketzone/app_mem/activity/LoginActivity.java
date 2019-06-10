@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Intent loadingintent = new Intent(this, LoadingActivity.class);
+        Intent loadingintent = new Intent(LoginActivity.this, LoadingActivity.class);
         startActivity(loadingintent);
 
         mDBHelper = new DBOpenHelper(this);
@@ -100,6 +100,8 @@ public class LoginActivity extends AppCompatActivity {
                 final String GENDER = response.getKakaoAccount().getGender()+"";
                 final String APP_RANGE = response.getKakaoAccount().getAgeRange()+"";
                 mDBHelper.deleteAllTable();
+                Intent loadingintent = new Intent(LoginActivity.this, LoadingActivity.class);
+                startActivity(loadingintent);
                 JsonArrayTask jat = new JsonArrayTask("mem_db_login"){
                     @Override
                     protected void onPostExecute(JSONArray jsonArray) {

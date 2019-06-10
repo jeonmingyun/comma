@@ -326,10 +326,9 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         return member_list;
     }
 
-    public Cursor ChartTicket(){
+    public Cursor ChartTicket(String C_date){
         mdb = this.getReadableDatabase();
-        String sql = "select substr(ticket_reg,12,2) as ticket_reg, sum(the_number) as the_number from numberticket where ticket_code like '20190430' || '%' group by substr(ticket_reg,12,2) order by substr(ticket_reg,12,2)";
-        Cursor member_list = mdb.rawQuery(sql, null);
+        Cursor member_list = mdb.rawQuery ("select substr(ticket_reg,10,2) as ticket_reg, sum(the_number) as the_number from numberticket where ticket_code like ? ||'1111111112' ||'%' group by substr(ticket_reg,10,2) order by substr(ticket_reg,10,2)", new String[] {C_date});
 
         return member_list;
     }

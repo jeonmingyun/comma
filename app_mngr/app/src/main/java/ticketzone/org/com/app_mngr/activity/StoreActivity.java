@@ -71,6 +71,7 @@ public class StoreActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("번호요");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //TabHost
         TabHost host=(TabHost)findViewById(R.id.store);
         host.setup();
 
