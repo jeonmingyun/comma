@@ -13,7 +13,7 @@ public interface AppMngrMapper {
 	public StoreVO[] storeList(String owner_id);
 	public StoreMenuVO[] menuList();
 	public CategorieVO[] categorieList();
-	public NumberTicketVO[] ticketList();
+	public NumberTicketVO[] NumberTicketList();
 	public void M_issue_ticket(NumberTicketVO vo);
 	public String M_codeSelect();
 	public void M_firstCode();

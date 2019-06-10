@@ -103,23 +103,25 @@ public final class DBTable {
     }
 
     /*번호표*/
-    public static final class Number_ticket implements BaseColumns{
+    public static final class NumberTicket implements BaseColumns{
         public static final String TICKET_CODE = "ticket_code";
         public static final String WAIT_NUMBER = "wait_number";
         public static final String THE_NUMBER = "the_number";
         public static final String LICENSE_NUMBER = "license_number";
-        public static final String MEMBER_TEL = "member_tel";
+        public static final String MEMBER_ID = "member_id";
         public static final String TICKET_STATUS = "ticket_status";
-        public static final String TABLENAME = "number_ticket";
+        public static final String TICKET_REG = "ticket_reg";
+        public static final String STRING_STATUS = "string_status";
+        public static final String TABLENAME = "numberticket";
         public static final String CREATE_QUERY = "create table " + TABLENAME + "("
                 + TICKET_CODE + " text primary key,"
                 + WAIT_NUMBER + " integer not null,"
                 + THE_NUMBER + " integer not null,"
                 + LICENSE_NUMBER + " text,"
-                + MEMBER_TEL + " text,"
-                + TICKET_STATUS + "integer default 0,"
-                + "foreign key("+LICENSE_NUMBER+") references STORE("+LICENSE_NUMBER+"),"
-                + "foreign key("+MEMBER_TEL+") references MEMBER("+MEMBER_TEL+"));";
-        public static final String DROP_QUERY = "drop table if exists "+ TABLENAME;
+                + MEMBER_ID + " text,"
+                + TICKET_STATUS + " text,"
+                + TICKET_REG + " text,"
+                + STRING_STATUS + " text);";
+        public static final String DROP_QUERY = "drop table if exists " + TABLENAME;
     }
 }

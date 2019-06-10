@@ -76,7 +76,7 @@ public class MngrAppHomeController {
 //		arr.add(appMngrService.memberList());
 		arr.add(appMngrService.storeList(owner_id));
 		arr.add(appMngrService.menuList());
-		arr.add(appMngrService.ticketList());
+		arr.add(appMngrService.NumberTicketList());
 		System.out.println(appMngrService.storeList(owner_id));
 		return arr;
 	}

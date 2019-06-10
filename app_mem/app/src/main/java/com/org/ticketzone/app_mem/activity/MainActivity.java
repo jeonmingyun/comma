@@ -38,6 +38,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +57,7 @@ import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
 import com.org.ticketzone.app_mem.GpsTracker;
 import com.org.ticketzone.app_mem.R;
+import com.org.ticketzone.app_mem.categorieCardView.CateItemViewHolder;
 import com.org.ticketzone.app_mem.categorieCardView.RecyclerViewAdapter;
 import com.org.ticketzone.app_mem.task.JsonArrayTask;
 import com.org.ticketzone.app_mem.beacon.BeaconConnection;
@@ -96,8 +98,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private BeaconRegion region2;
     private boolean isConnected;
 
+    //카테고리
     private List<CategorieVO> cateList;
-
+    private ImageView cate_img;
     //
     private int connect = 1;
     private int connect2=2;
@@ -110,7 +113,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
     private Double my_x;
     private Double my_y;
-
+    //버튼
+    private RelativeLayout RL;
     // Img
     private List<Address> addresses;
     private String addr;
@@ -153,7 +157,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
                 };
 
-//                SendDataSet sds = new SendDataSet("token", "dfdfdfdfdf");
                 SendDataSet sds = new SendDataSet("token", "dfdfdfdfdf");
                 task.execute(sds);
             }
@@ -180,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 startActivity(mapintent);
             }
         });
+
     }
 
     private void fcmTocken() {
@@ -220,6 +224,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         RecyclerViewAdapter recyclerAdapter = new RecyclerViewAdapter(cateList);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         recyclerView.setAdapter(recyclerAdapter);
+
     }
 
     // store list 생성
@@ -254,10 +259,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 store_address.setText(storeList.get(idx).getAddress_name());
                 waiting.setText(count + "팀");
                 view.setTag(idx);   // 인덱스 저장
-
                 tagBtn.setTag(idx);
-                tagBtn.setText("발급불가");
-                tagBtn.setEnabled(false);
+//                tagBtn.setText("발급불가");
+//                tagBtn.setEnabled(false);
+
+
 
                 String B_name[] =  new String[beaconList.size()];
                 String B_id[] = new String[beaconList.size()];
@@ -270,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 for(int i =0; i<B_name.length; i++) {
                     if (storeName.getText().equals(B_name[i]) && Minor.equals(B_id[i])) {
                         tagBtn.setEnabled(true);
-                        tagBtn.setText("발급가능");
+                        tagBtn.setText("");
                     }
                 }
 
@@ -363,7 +369,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         Cursor cursor = mDBHelper.selectAllStore();
         storeList = new ArrayList<>();
         StoreVO storeVO;
-
+        gpsTracker = new GpsTracker(MainActivity.this);
+        my_x = gpsTracker.getLatitude();
+        my_y = gpsTracker.getLongitude();
+        Log.e("my_x", my_x.toString());
         if(cursor.getCount() == 0) { // not found data
             Toast.makeText(this, "not found data", Toast.LENGTH_SHORT).show();
         }
@@ -396,7 +405,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         beaconList = new ArrayList<>();
         BeaconVO beaconVO;
 
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             beaconVO = new BeaconVO();
             beaconVO.setB_code(cursor.getString(0));
             beaconVO.setStore_name(cursor.getString(1));
@@ -437,6 +446,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         spec.setIndicator("카테고리");
         spec.setContent(R.id.categorie);
         host.addTab(spec);
+
+
 
         // TabWidet의 background 설정
         for (int i = 0; i < host.getTabWidget().getChildCount(); i++) {
@@ -555,7 +566,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         // 비콘
         // 비콘의 수신 범위를 갱신 받음
         beaconManager = new BeaconManager(MainActivity.this);
-        beaconManager2 = new BeaconManager(MainActivity.this);
         beaconManager.setRangingListener(new BeaconManager.BeaconRangingListener() {
             @Override
             public void onBeaconsDiscovered(BeaconRegion beaconRegion, List<Beacon> list) {

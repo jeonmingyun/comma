@@ -17,14 +17,13 @@
             app:titleTextColor="@color/color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
             android:minHeight="?attr/actionBarSize"/>
 
         <Button
             android:id="@+id/fmc_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="FMC"/>
+            android:text="FCM"/>
 
         <android.support.v4.widget.DrawerLayout
             android:id="@+id/drawer_layout"

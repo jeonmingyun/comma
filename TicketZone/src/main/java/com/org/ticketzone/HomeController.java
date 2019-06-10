@@ -64,7 +64,7 @@ public class HomeController {
 		model.addAttribute("noticeList", noticeBoardService.noticeBoardList(Cri));
 		model.addAttribute("list", noticeBoardService.getListWithPaging(Cri));
 		model.addAttribute("pageMaker", new PageDTO(Cri, total));
-
+		System.out.println(noticeBoardService.getListWithPaging(Cri));
 
 		return "notice";
 	}
@@ -140,7 +140,8 @@ public class HomeController {
 	public String deleteNotice(NoticeBoardVO notice) {
 		noticeBoardService.noticeBoardDel(notice);
 
-		return "redirect:/";
+
+		return "notice";
 	}
 
 	// 공지사항 검색

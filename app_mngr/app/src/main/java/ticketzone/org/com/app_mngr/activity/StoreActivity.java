@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,11 +12,17 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TabHost;
+import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
@@ -41,14 +48,22 @@ import ticketzone.org.com.app_mngr.db.DBOpenHelper;
 public class StoreActivity extends AppCompatActivity {
     private LineChart lineChart;
     private List<Entry> entries;
-    private TextView store_name;
+    private TextView store_name, wait_count, t_wait, t_success, t_absence, t_cancel;
     private DBOpenHelper mDBHelper;
+    private ImageView storeimg;
+    private String license_number;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDBHelper = new DBOpenHelper(this);
         setContentView(R.layout.activity_store);
         store_name = findViewById(R.id.store_name);
+        storeimg = findViewById(R.id.storeimg);
+        wait_count = findViewById(R.id.wait_count);
+        t_wait = findViewById(R.id.t_wait);
+        t_absence = findViewById(R.id.t_absence);
+        t_cancel = findViewById(R.id.t_cancel);
+        t_success = findViewById(R.id.t_success);
         //toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -61,27 +76,48 @@ public class StoreActivity extends AppCompatActivity {
         host.setup();
 
         TabHost.TabSpec spec = host.newTabSpec("tab1");
-        spec.setIndicator(null, ResourcesCompat.getDrawable(getResources(),R.drawable.ic_launcher_background, null));
+        spec.setIndicator("메인");
         spec.setContent(R.id.tab_content1);
         host.addTab(spec);
+
+        /*이미지 불러오기*/
         Intent intent = getIntent();
         String s_name = intent.getExtras().getString("store_name");
+        String url = "http://15.164.115.73:8080/resources/img/";
+        /*이미지 적용*/
         Cursor cursor = mDBHelper.selectStore(s_name);
         while(cursor.moveToNext()){
             store_name.setText(cursor.getString(8));
-
+            license_number = cursor.getString(0);
+            Glide.with(this).load(url + cursor.getString(11) + "/" + cursor.getString(10) + "_" + cursor.getString(12)).into(storeimg);
+        }
+        /*대기인원 확인*/
+        Cursor cursor1 = mDBHelper.selectWating(license_number);
+        while(cursor1.moveToNext()){
+            wait_count.setText(cursor1.getString(0));
+        }
+        /*테이블 채우는 작업*/
+        Cursor cursor2 = mDBHelper.ticketStatus(license_number);
+        while (cursor2.moveToNext()){
+            t_wait.setText(cursor2.getString(0));
+            t_success.setText(cursor2.getString(1));
+            t_cancel.setText(cursor2.getString(2));
+            t_absence.setText(cursor2.getString(3));
         }
 
 
 
-
         spec = host.newTabSpec("tab2");
-        spec.setIndicator(null, ResourcesCompat.getDrawable(getResources(),R.drawable.ic_launcher_foreground, null));
+        spec.setIndicator("대기 현황");
         spec.setContent(R.id.tab_content2);
         host.addTab(spec);
+        /*테이블 동적 생성*/
+
+
+
 
         spec = host.newTabSpec("tab3");
-        spec.setIndicator(null, ResourcesCompat.getDrawable(getResources(),R.drawable.test, null));
+        spec.setIndicator("통계");
         spec.setContent(R.id.tab_content3);
         host.addTab(spec);
 

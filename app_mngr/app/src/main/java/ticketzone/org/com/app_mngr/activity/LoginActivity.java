@@ -77,11 +77,12 @@ public class LoginActivity extends AppCompatActivity {
                                         Log.e("insertCategorie", jsonArray.get(1).toString());
                                         Log.e("insertStoreMenu", jsonArray.get(3).toString());
                                         Log.e("insertStore", jsonArray.get(2).toString());
+                                        Log.e("abc", jsonArray.get(4).toString());
                                         mDBHelper.insertOwner(new JSONArray(jsonArray.get(0).toString()));
                                         mDBHelper.insertCategorie(new JSONArray(jsonArray.get(1).toString()));
                                         mDBHelper.insertStoreMenu(new JSONArray(jsonArray.get(3).toString()));
                                         mDBHelper.insertStore(new JSONArray(jsonArray.get(2).toString()));
-//                                        mDBHelper.insertTicket(new JSONArray(jsonArray.get(4).toString()));
+                                        mDBHelper.insertTicket(new JSONArray(jsonArray.get(4).toString()));
 
                                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             //                            //owner_id값 송신
