@@ -1,12 +1,11 @@
 package ticketzone.org.com.app_mngr.activity;
 
-import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TabHost;
@@ -17,6 +16,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import ticketzone.org.com.app_mngr.R;
+import ticketzone.org.com.app_mngr.db.DBOpenHelper;
 
 public class StoreManageActivity extends AppCompatActivity {
 
@@ -25,19 +25,24 @@ public class StoreManageActivity extends AppCompatActivity {
     private int T;
     private int mHour, mMinute;
     private TimePickerDialog.OnTimeSetListener mTimeSetListener;
+    private DBOpenHelper mDBHelper;
+    private TextView storename;
+    private String store_time;
+    private String store_time2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_manage);
-
+        mDBHelper = new DBOpenHelper(this);
+        TimeText = findViewById(R.id.TimeText);
+        TimeText2 = findViewById(R.id.TimeText2);
         //toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0x00FFFFFF));
         getSupportActionBar().setTitle("번호요");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         TabHost();
         TimeSet();
 
@@ -56,6 +61,9 @@ public class StoreManageActivity extends AppCompatActivity {
     }
 
     private void TabHost(){
+        Intent intent = getIntent();
+        String s_name = intent.getExtras().getString("store_name");
+        storename = findViewById(R.id.storename);
         //TabHost
         TabHost host=(TabHost)findViewById(R.id.storemanage);
         host.setup();
@@ -64,7 +72,14 @@ public class StoreManageActivity extends AppCompatActivity {
         spec.setIndicator("매장관리", null);
         spec.setContent(R.id.tab_content1);
         host.addTab(spec);
-
+        Cursor cursor = mDBHelper.selectStore(s_name);
+        while (cursor.moveToNext()){
+            storename.setText(cursor.getString(8));
+            store_time = cursor.getString(7).substring(0,5);//6,11
+            store_time2 = cursor.getString(7).substring(6,11);
+            TimeText.setText(store_time);
+            TimeText2.setText(store_time2);
+        }
         spec = host.newTabSpec("번호표 발급 설정");
         spec.setIndicator("번호표 발급 설정", null);
         spec.setContent(R.id.tab_content2);
@@ -77,9 +92,6 @@ public class StoreManageActivity extends AppCompatActivity {
     }
 
     private void TimeSet(){
-        TimeText = findViewById(R.id.TimeText);
-        TimeText2 = findViewById(R.id.TimeText2);
-
         Calendar cal = new GregorianCalendar();
         mHour = cal.get(Calendar.HOUR_OF_DAY);
         mMinute = cal.get(Calendar.MINUTE);
