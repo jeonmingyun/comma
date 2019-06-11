@@ -261,7 +261,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 view.setTag(idx);   // 인덱스 저장
                 tagBtn.setTag(idx);
 //                tagBtn.setText("발급불가");
-//                tagBtn.setEnabled(false);
+                tagBtn.setEnabled(false);
 
 
 

@@ -4,20 +4,17 @@
     <item>
         <layer-list>
             <!-- shadow (밑으로) : 그림자 -->
-            <item android:top="10dp">
+            <item>
                 <shape>
-                    <corners android:radius="10dp" />
-                    <solid android:color="#33bec5e4"/>
+                    <corners android:radius="20dp" />
+                    <solid android:color="#0DCCD0E4"/>
 
                 </shape>
             </item>
             <!-- background (위로) -->
-            <item android:bottom="5dp">
+            <item android:top="3dp" android:right="3dp" android:left="3dp" android:bottom="3dp">
                 <shape>
-                    <corners android:bottomRightRadius="20dp"
-                        android:bottomLeftRadius="20dp"
-                        android:topLeftRadius="20dp"
-                        android:topRightRadius="20dp"/>
+                    <corners android:radius="20dp" />
                     <solid android:color="#FFFFFF" />
                     <stroke android:width="2dp" android:color="#FFFFFF" />
                 </shape>

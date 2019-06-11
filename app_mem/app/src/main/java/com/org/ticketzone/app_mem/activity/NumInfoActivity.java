@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 
 public class NumInfoActivity extends AppCompatActivity {
 
-    private Button CancelButton;
+    private ImageButton CancelButton;
     private TextView NowEnter;
     private NumberTicketVO numberTicketVO;
     private DBOpenHelper mDBHelper;
@@ -43,7 +44,7 @@ public class NumInfoActivity extends AppCompatActivity {
 
         selectAllTicket(); // Ticket 정보
 
-        CancelButton = (Button)findViewById(R.id.CancelButton);
+        CancelButton =                                                                                                              findViewById(R.id.CancelButton);
         NowEnter = (TextView)findViewById(R.id.nowEnter);
         Time = (TextView)findViewById(R.id.time);
         MyNumber = findViewById(R.id.myNumber);

@@ -1,39 +1,34 @@
 package ticketzone.org.com.app_mngr.activity;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
 import android.widget.ListView;
-
-import android.widget.TextView;
-
 import android.widget.Switch;
-
-import android.widget.Toast;
+import android.widget.TextView;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator;
 import ticketzone.org.com.app_mngr.R;
@@ -50,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager storeViewPager;
     private FragmentStatePagerAdapter storeAdapter;
     private ArrayList<String> storeList;
-
+    private StoreVO storeVO;
     private TextView store_name;
 
     private Switch switchView;
@@ -77,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
+
 
         //menu toolbar
         toolbar = findViewById(R.id.toolbar);
@@ -106,8 +102,29 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(mapIntent);
                         break;
                     case 2:
-                        Intent storemanageIntent = new Intent(v.getContext(), StoreManageActivity.class);
-                        startActivity(storemanageIntent);
+                        final List<String> ListItems = new ArrayList<>();
+                        Cursor cursor = mDBHelper.selectAllStore();
+                        while(cursor.moveToNext()){
+                            ListItems.add(cursor.getString(8));
+                        }
+                        final String[] items2 = new String[ListItems.size()];
+                        for(int i=0; i<ListItems.size(); i++){
+                            items2[i] = ListItems.get(i);
+                        }
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+                        alertDialogBuilder.setTitle("매장");
+                        alertDialogBuilder.setItems(items2, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent storemanageintent = new Intent(MainActivity.this, StoreManageActivity.class);
+                                storemanageintent.putExtra("store_name",items2[id]);
+                                startActivity(storemanageintent);
+                            }
+                        });
+
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+
+                        alertDialog.show();
                         break;
                     case 3:
                         mDBHelper.deleteAllTable();
