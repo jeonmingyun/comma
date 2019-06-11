@@ -23,10 +23,12 @@ import com.org.ticketzone.domain.NoticeAttachVO;
 import com.org.ticketzone.domain.NoticeBoardVO;
 import com.org.ticketzone.domain.NumberTicketVO;
 import com.org.ticketzone.domain.PageDTO;
+import com.org.ticketzone.domain.StoreVO;
 import com.org.ticketzone.service.AdminService;
 import com.org.ticketzone.service.NoticeAttachService;
 import com.org.ticketzone.service.NoticeBoardService;
 import com.org.ticketzone.service.NumberTicketService;
+import com.org.ticketzone.service.StoreService;
 
 import lombok.AllArgsConstructor;
 
@@ -41,6 +43,7 @@ public class HomeController {
 	private NoticeAttachService noticeAttachService;
 	private NumberTicketService numberTicketService;
 	private AdminService adminService;
+	private StoreService storeSerivce;
 
 	
 
@@ -153,18 +156,22 @@ public class HomeController {
 
 	@ResponseBody
 	@RequestMapping(value = "/chart")
-	public ArrayList<NumberTicketVO> test(HttpServletRequest request) {
+	public ArrayList<NumberTicketVO> test(Model model, HttpServletRequest request) {
 		String today = request.getParameter("today");
 		
-		System.out.println(today);
+				
 		 
 		return numberTicketService.getTotal();
 	}
 	
+	
+		
 	@RequestMapping(value = "/chart2")
-	public String test2(Model model) {
-		model.addAttribute("today", numberTicketService.today());
-		return "chart";
+	public String test2(Model model, HttpServletRequest request) {
+		String owner_id = request.getParameter("onwer_id");
+		System.out.println(owner_id + "¿Ã∞‘≥Œ?");
+		model.addAttribute("today", numberTicketService.today());				
+		return "/mngrOnly/chart";
 	}
 	
 	@ResponseBody

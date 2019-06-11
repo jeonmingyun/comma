@@ -66,17 +66,7 @@ public class MainActivity extends AppCompatActivity {
         selectAllStore();
         setStoreViewPager(); //Store view pager;
 
-//        switchView = findViewById(R.id.switchView);
-//        switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if(isChecked){
-//                    Toast.makeText(MainActivity.this,"OFF", Toast.LENGTH_SHORT);
-//                }else {
-//                    Toast.makeText(MainActivity.this, "ON", Toast.LENGTH_SHORT);
-//                }
-//            }
-//        });
+
 
         //menu toolbar
         toolbar = findViewById(R.id.toolbar);

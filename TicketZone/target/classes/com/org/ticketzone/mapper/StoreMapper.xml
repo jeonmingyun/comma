@@ -97,7 +97,8 @@
 			from
 			(select rownum rn, license_number, store_name, address_name, store_time, store_tel
 			from store
-			where address_name like #{sido} || ' ' || #{sigoon} || '%'											
+			where address_name like #{sido} || '%' 
+			or address_name like '%' || #{sigoon} || '%'											
 			and rownum <= #{pageNum} * #{amount}
 			) a, store_attach b
 			where rn > (#{pageNum} -1) * #{amount}

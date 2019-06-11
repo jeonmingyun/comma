@@ -26,10 +26,10 @@
 					${s.store_name}</option>
 			</c:forEach>
 		</select>
-
-
+				
+		
 		<div id="today_stats">
-			<a href="#">현황판</a>&nbsp&nbsp&nbsp&nbsp<a href="/chart2">일별 통계</a>
+			<a href="#">현황판</a>&nbsp&nbsp&nbsp&nbsp<a href="chart2">일별 통계</a>
 		</div>
 
 		<div id="today">
@@ -84,7 +84,7 @@
 		</div>
 	</div>
 
-
+	
 	<input type="hidden" id="check" value="${id}">
 
 

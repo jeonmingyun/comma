@@ -256,7 +256,7 @@
 	chart as (
 		select substr(ticket_reg,9,3) as ticket_reg, sum(the_number) as the_number, count(ticket_code) as team
 		from number_ticket
-		where license_number = '1597530000' and
+		where license_number = '1111111112' and
 		ticket_reg like to_char(to_date(#{today}, 'yy/mm/dd')+1, 'yy/mm/dd') || '%'
 		and ticket_status = 1
 		group by substr(ticket_reg,9,3)
@@ -275,7 +275,7 @@
 	chart as (
 		select substr(ticket_reg,9,3) as ticket_reg, sum(the_number) as the_number, count(ticket_code) as team
 		from number_ticket
-		where license_number = '1597530000' and
+		where license_number = '1111111112' and
 		ticket_reg like to_char(to_date(#{today}, 'yy/mm/dd')-1, 'yy/mm/dd') || '%'
 		and ticket_status = 1
 		group by substr(ticket_reg,9,3)

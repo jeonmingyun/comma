@@ -16,7 +16,8 @@ $(document).ready(function(){
 	}
 	today = yyyy+'/'+mm+'/'+dd;
 	var str = "";
-	
+	var t_sum = 0;
+	var w_sum = 0;
 	console.log(today);
 	$.ajax({
 		type: "post",
@@ -29,6 +30,8 @@ $(document).ready(function(){
 						ticket_reg : data[i].ticket_reg.trim() + '시',
 						인원수 : data[i].the_number
 				};
+				t_sum += data[i].team;
+				w_sum += data[i].the_number;				
 			}
 
 			str += "<button id='prev'><</button>&nbsp&nbsp";
@@ -37,6 +40,13 @@ $(document).ready(function(){
 			$("#today").append(str);
 			$("#To").attr('value', today);
 			$("#Actoday").attr('value', today);
+			console.log(t_sum + "널?");
+			var team = "";			
+			team += t_sum +"팀";			
+			var waiting = "";			
+			waiting += w_sum +"명";			
+			$("#waiting").append(waiting);
+			$("#team").append(team);
 			var obj = JSON.stringify(test);
 			json = JSON.parse(obj);
 			new Morris.Line({
@@ -59,6 +69,9 @@ $(document).ready(function(){
 			console.log("error");
 		} 
 	});
+	var query = {owner_id : $("#onwer_id").val()};
+	
+	
 	$(document).on("click", '#prev', function(){
 		
 		
