@@ -27,8 +27,53 @@ public class AppMemFMService {
 	@RequestMapping(value = "/mem_set_fcm_token", method = RequestMethod.POST)
 	public String setFCM(HttpServletRequest request) {
         String token = request.getParameter("Token");
+        // 설치 후 최초 실행시만 접속한 유저 token반환
+        // 최초 실행시 외에는 null반환
 		System.out.println(token);
 	    return "jsonView";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/mem_send_fcm", method = RequestMethod.POST)
+	// 구글 인증 서버
+	public String pushFCMNotification() throws Exception {
+		String API_KEY = "AAAAmzUb7vI:APA91bGojWKNi-FXv5coHWtMOPz0-Em5c5LomZGDWa54xPy81aoQ7e-1ArcCWh8xQdFcohSRUeXFtSbIpAgAda7LJYCnjodFk5q-jGCsrOsIIEjejNUzUYvkcXjb734RK4GxhdhADeEF";
+		String token = "ft1mhicUqZU:APA91bFxz4KECTQYJ-XL5sRdKgcKouajgAqhc6zzt6HKEhiDcd3e8oy5rm8UO_TmoqHLVO4pFX25MerUaKScBMZ77rAZkh0PEzIaDHUIB6uTab05NmYrauThgUBxKvdmTMaQyla30BSh";
+
+		// if(pushKeyAuth()){
+		URL url = new URL("https://fcm.googleapis.com/fcm/send");
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setUseCaches(false);
+		conn.setDoInput(true);
+		conn.setDoOutput(true);
+		conn.setRequestMethod("POST");
+		conn.setRequestProperty("Authorization", "key=" + API_KEY);
+		conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+		// 일반 텍스트 전달시 Content-Type , application/x-www-form-urlencoded;charset=UTF-8
+
+		// 알림 + 데이터 메세지 형태의 전달		
+		JSONObject infoJson = new JSONObject();
+		JSONObject json = new JSONObject();
+		infoJson.put("title", "alert title");
+		infoJson.put("body", "alert body");
+		json.put("to", token.trim());
+		json.put("notification", infoJson);
+
+        // 서버에서 날려서 한글 깨지는 사람은 아래처럼  UTF-8로 인코딩해서 날려주자
+		OutputStreamWriter owr = new OutputStreamWriter(conn.getOutputStream(), "utf-8");
+		owr.write(json.toString());
+		owr.flush();
+		owr.close();
+        
+		if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+			System.out.println("Output from Server : " + conn.getResponseCode());
+		} else {
+			// 400, 401, 500 등
+			System.out.println("Failed : HTTP error code : " + conn.getResponseCode());			
+		}
+        conn.disconnect();
+        
+        return json.toString();
 	}
 	
 //	/* send FCM */
@@ -89,49 +134,5 @@ public class AppMemFMService {
 //            e.printStackTrace();
 //        }
 //    }
-
-	@ResponseBody
-	@RequestMapping(value = "/mem_send_fcm", method = RequestMethod.POST)
-	// 구글 인증 서버
-	public void pushFCMNotification() throws Exception {
-		System.out.println("181dd8");
-		String API_KEY = "AIzaSyAfXJUsLsL-Kf8KTq7WB9yXpn7PiOUYqGs";
-		String token = "fiSOH8FIm4g:APA91bEWhjN29G2ZmfFfh-5-zM1ZeBsbX86hW7onF6kf1Qftwn8LXAvmbupXg120Jra1ttjQt-Lg4Sr2-L_ta1fAif3_QAH186_6sfBqLcPstgbZimHtF6-BQLmBPeHrUyJkJyKjqc1X";
-
-		// if(pushKeyAuth()){
-		URL url = new URL("https://fcm.googleapis.com/fcm/send");
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		conn.setUseCaches(false);
-		conn.setDoInput(true);
-		conn.setDoOutput(true);
-		conn.setRequestMethod("POST");
-		conn.setRequestProperty("Authorization", "key=" + API_KEY);
-		conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-		// 일반 텍스트 전달시 Content-Type , application/x-www-form-urlencoded;charset=UTF-8
-
-		// 알림 + 데이터 메세지 형태의 전달
-		System.out.println("1818181881818");
-		JSONObject notification = new JSONObject(); 
-		JSONObject message = new JSONObject();
-		notification.put("body", "alert body");
-		notification.put("title", "alert title");
-
-		message.put("to", token);
-		message.put("notification", notification);
-		System.out.println(message.toString());
-		OutputStreamWriter owr = new OutputStreamWriter(conn.getOutputStream(), "utf-8");
-		owr.write(message.toString());
-		owr.flush();
-		owr.close();
-
-		if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-			// 400, 401, 500 등
-			System.out.println("Failed : HTTP error code : " + conn.getResponseCode());
-		} else {
-			System.out.println("Output from Server .... \n");
-		}
-        conn.disconnect();
-	}
-
-
+	
 }

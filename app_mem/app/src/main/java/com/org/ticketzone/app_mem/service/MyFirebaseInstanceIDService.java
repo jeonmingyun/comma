@@ -40,7 +40,6 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
     public void onNewToken(String s) {
         // 설치할때 여기서 토큰을 자동으로 만들어 준다
         super.onNewToken(s);
-        Log.d(TAG, "Refreshed token: " + s);
 
         // 생성한 토큰을 서버로 날려서 저장하기 위해서 만든거
         sendRegistrationToServer(s);
@@ -56,7 +55,7 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
 
         //request
         Request request = new Request.Builder()
-                .url("http://39.127.7.43:8080/mem_set_fcm_token")
+                .url("http://39.127.7.42:8080/mem_set_fcm_token")
                 .post(body)
                 .build();
 
@@ -73,16 +72,16 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         Log.d(TAG, "From: " + remoteMessage.getFrom());
         if (remoteMessage.getNotification() != null) {
+            Log.d(TAG, remoteMessage.getData()+"");
+
             Log.d(TAG, remoteMessage.getNotification().getBody() +"// "
                     +remoteMessage.getNotification().getTitle());
 
             sendNotification(remoteMessage.getNotification());
         }
-
-//        sendNotification(remoteMessage.getData().get("message"));
     }
 
-    private void sendNotification(RemoteMessage.Notification message) {
+    private void sendNotification(RemoteMessage.Notification notification) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
@@ -93,8 +92,8 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
                         .setSmallIcon(R.drawable.ic_launcher_foreground)
-                        .setContentTitle(message.getTitle())
-                        .setContentText(message.getBody())
+                        .setContentTitle(notification.getTitle())
+                        .setContentText(notification.getBody())
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
                         .setContentIntent(pendingIntent);
