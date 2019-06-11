@@ -435,7 +435,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     protected void tabHost() {
         final TabHost host= findViewById(R.id.host);
         host.setup();
-        host.getTabWidget().setBackgroundResource(R.drawable.non_selected_border);
+//        host.getTabWidget().setBackgroundResource(R.drawable.non_selected_border);
+//        host.getLayoutParams().height = 150; // TabHost 높이
 
         TabHost.TabSpec spec = host.newTabSpec("storeList");
         spec.setIndicator("매장");
@@ -452,7 +453,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             View tabView = host.getTabWidget().getChildAt(i);
 
             tabView.setBackgroundResource(R.drawable.non_selected_border); // unselected
-            tabView.getLayoutParams().height = 150;
+            tabView.getLayoutParams().height = 150; // TabHost 높이
         }
         host.getTabWidget().getChildAt(host.getCurrentTab())
                 .setBackgroundResource(R.drawable.selected_border); // selected
