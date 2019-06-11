@@ -143,6 +143,20 @@ public class DBOpenHelper extends SQLiteOpenHelper {
             return true; // success
     }
 
+    public void updateStore_time(String license_number, String store_time, String store_time2){
+        mngrdb = this.getWritableDatabase();
+        String sqlUpdate = "update store set store_time = ? || '-' || ? where license_number = ?";
+        mngrdb.execSQL(sqlUpdate, new String[] {store_time, store_time2, license_number});
+    }
+
+    public void updateStore_maxnum(String license_number, String max_num){
+        mngrdb = this.getWritableDatabase();
+        String sqlUpdate = "update store set max_number = ? where license_number = ?";
+        mngrdb.execSQL(sqlUpdate, new String[] {max_num, license_number});
+    }
+
+
+
     // StoreMenu
     public Cursor selectAllStoreMenu() {
         mngrdb = this.getWritableDatabase();
