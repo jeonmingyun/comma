@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private String addr;
     private Button addressWindow;
 
-    private Button fmc_btn;
+    private Button fcm_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,8 +141,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         storeList(); // store tab에서 store list를 보여줌
         cateList();
 
-        fmc_btn = findViewById(R.id.fmc_btn);
-        fmc_btn.setOnClickListener(new View.OnClickListener() {
+        fcm_btn = findViewById(R.id.fcm_btn);
+        fcm_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "dfdf", Toast.LENGTH_SHORT).show();
@@ -155,13 +155,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
                 };
 
-//                SendDataSet sds = new SendDataSet("token", "dfdfdfdfdf");
                 SendDataSet sds = new SendDataSet("token", "dfdfdfdfdf");
                 task.execute(sds);
             }
         });
 
-    //gps
+        //gps
         if (!checkLocationServicesStatus()) {
             showDialogForLocationServiceSetting();
         }else {
@@ -262,7 +261,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 view.setTag(idx);   // 인덱스 저장
                 tagBtn.setTag(idx);
 //                tagBtn.setText("발급불가");
-//                tagBtn.setEnabled(false);
+                tagBtn.setEnabled(false);
 
 
 
@@ -436,7 +435,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     protected void tabHost() {
         final TabHost host= findViewById(R.id.host);
         host.setup();
-        host.getTabWidget().setBackgroundResource(R.drawable.non_selected_border);
+//        host.getTabWidget().setBackgroundResource(R.drawable.non_selected_border);
+//        host.getLayoutParams().height = 150; // TabHost 높이
 
         TabHost.TabSpec spec = host.newTabSpec("storeList");
         spec.setIndicator("매장");
@@ -448,14 +448,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         spec.setContent(R.id.categorie);
         host.addTab(spec);
 
-
-
         // TabWidet의 background 설정
         for (int i = 0; i < host.getTabWidget().getChildCount(); i++) {
             View tabView = host.getTabWidget().getChildAt(i);
 
             tabView.setBackgroundResource(R.drawable.non_selected_border); // unselected
-            tabView.getLayoutParams().height = 150;
+            tabView.getLayoutParams().height = 150; // TabHost 높이
         }
         host.getTabWidget().getChildAt(host.getCurrentTab())
                 .setBackgroundResource(R.drawable.selected_border); // selected
@@ -470,7 +468,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 }
                 host.getTabWidget().getChildAt(host.getCurrentTab())
                         .setBackgroundResource(R.drawable.selected_border); // selected
-
             }
         });
     }
