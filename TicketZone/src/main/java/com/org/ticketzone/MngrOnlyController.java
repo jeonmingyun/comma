@@ -195,10 +195,11 @@ public class MngrOnlyController {
 	// 매장등록 처리(insert)
 	@RequestMapping(value = "/mStore_Reg", method = RequestMethod.POST)
 	public String Register(Model model, StoreVO store, CoordinatesVO coor,StoreAttachVO vo) {
-					
+		
 		storeService.storeRegister(store);
 		coordinatesService.insertXY(coor);
 		storeAttachService.StoreImgInsert(vo);
+		model.addAttribute("store", storeService.storeGet(store.getOwner_id()));
 		System.out.println(store);
 		System.out.println(vo);
 		System.out.println(coor);
@@ -305,9 +306,5 @@ public class MngrOnlyController {
 		return "/mngrOnly/mStoreAdmin/mMenuAdd";
 	}
 
-//	@RequestMapping(value = "/getLicense", method = RequestMethod.POST)
-//	public String getLicense(Model model, NumberTicketVO ticket) {
-//		model.addAttribute("ticket", numberTicketService.waitList(ticket));
-//		return "/mngrOnly/mCustomer";
-//	}
+				
 }

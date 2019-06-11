@@ -8,9 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -29,14 +31,24 @@ public class StoreManageActivity extends AppCompatActivity {
     private TextView storename;
     private String store_time;
     private String store_time2;
+    private Button TimeUpdate_button;
+    private Button MaxnumUpdate_button;
+    private TextView MaxNum;
+    private String license_number;
+    private String max_number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_manage);
         mDBHelper = new DBOpenHelper(this);
+        //TabHost 매장관리
         TimeText = findViewById(R.id.TimeText);
         TimeText2 = findViewById(R.id.TimeText2);
+        TimeUpdate_button = findViewById(R.id.TimeUpdate_button);
+        //TabHost 번호표 발급 설정
+        MaxnumUpdate_button = findViewById(R.id.MaxnumUpdate_button);
+        MaxNum = findViewById(R.id.MaxNum);
         //toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -75,15 +87,36 @@ public class StoreManageActivity extends AppCompatActivity {
         Cursor cursor = mDBHelper.selectStore(s_name);
         while (cursor.moveToNext()){
             storename.setText(cursor.getString(8));
+            license_number = cursor.getString(0);
+            max_number = cursor.getString(2);
             store_time = cursor.getString(7).substring(0,5);//6,11
             store_time2 = cursor.getString(7).substring(6,11);
             TimeText.setText(store_time);
             TimeText2.setText(store_time2);
         }
+        //Task 동기화 해야함
+        TimeUpdate_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mDBHelper.updateStore_time(license_number,TimeText.getText().toString(),TimeText2.getText().toString());
+                Toast.makeText(StoreManageActivity.this, "수정되었습니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
+
         spec = host.newTabSpec("번호표 발급 설정");
         spec.setIndicator("번호표 발급 설정", null);
         spec.setContent(R.id.tab_content2);
         host.addTab(spec);
+        MaxNum.setText(max_number);
+        //Task 동기화 해야함
+        MaxnumUpdate_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDBHelper.updateStore_maxnum(license_number,MaxNum.getText().toString());
+                Toast.makeText(StoreManageActivity.this, "수정되었습니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
 
         spec = host.newTabSpec("메뉴설정");
         spec.setIndicator("메뉴설정",null);
@@ -99,7 +132,7 @@ public class StoreManageActivity extends AppCompatActivity {
         TimeText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new TimePickerDialog(StoreManageActivity.this, mTimeSetListener, mHour, mMinute, false).show();
+                new TimePickerDialog(StoreManageActivity.this, mTimeSetListener, mHour, mMinute, true).show();
                 T = 1;
             }
         });
@@ -107,7 +140,7 @@ public class StoreManageActivity extends AppCompatActivity {
         TimeText2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new TimePickerDialog(StoreManageActivity.this, mTimeSetListener, mHour, mMinute, false).show();
+                new TimePickerDialog(StoreManageActivity.this, mTimeSetListener, mHour, mMinute, true).show();
                 T = 2;
             }
         });

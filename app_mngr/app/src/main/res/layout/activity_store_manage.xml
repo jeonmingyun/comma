@@ -110,6 +110,7 @@
                         android:paddingRight="40dp">
 
                         <Button
+                            android:id="@+id/TimeUpdate_button"
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:text="수정" />
@@ -138,6 +139,7 @@
                         android:paddingLeft="30dp">
 
                         <EditText
+                            android:id="@+id/MaxNum"
                             android:layout_width="60dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/textlines"
@@ -160,6 +162,7 @@
                         android:paddingRight="40dp">
 
                         <Button
+                            android:id="@+id/MaxnumUpdate_button"
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:text="수정" />

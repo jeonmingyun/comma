@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false" contentType="text/html; charset=utf-8"
+<%@ page session="true" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 
 <!DOCTYPE html>
@@ -61,7 +61,7 @@
 	</div>	<!-- chart_form -->
 
 
-
+	
 <!-- =======
 <h1>일별 시간대별 인원통계</h1>
 <div id="today" style="text-align:center;"></div>

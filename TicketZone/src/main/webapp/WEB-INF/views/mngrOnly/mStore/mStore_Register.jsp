@@ -20,7 +20,7 @@
 	<%@include file="/WEB-INF/views/include/Mngrheader.jsp"%>
 	<section>
 
-		<form id="insert_Store" method="post" action="/mStore_Reg">
+			<form id="insert_Store" method="post" action="/mStore_Reg"> 
 			<div class="table_wapper">
 				<h1>매장 등록</h1>
 				<table class="mngr_show">
@@ -86,11 +86,12 @@
 					type="hidden" id="coor_y" name="coor_y">
 				<!-- 등록 버튼 -->
 				<div id="regi_button">
-					<input type="submit" id="regi" value="등록">
+					<input type="submit" id="regi" value="등록"> 					
 				</div>
+				
 				<!-- <button id="test">test</button> -->
 			</div>
-		</form>
+				 </form> 
 
 		<!-- table_wapper -->
 

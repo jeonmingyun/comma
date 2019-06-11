@@ -26,7 +26,7 @@
 		<c:forEach var="s" items="${storeList}">
 			<div id="store_info" class="${s.address_name} store_row">
 
-				<h2 id="store_name">${s.store_name}</h2>
+				<h2 id="store_name">${s.store_name}</h2>				
 				<div class="divider_sh">
 					<div class="line"></div>
 				</div>

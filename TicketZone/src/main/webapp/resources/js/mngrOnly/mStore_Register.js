@@ -78,15 +78,14 @@ function sample5_execDaumPostcode() {
 	}
 	
 	}
-	$(document).ready(function(){
-		
+	$(document).ready(function(){			
 		
 		
 		var formObj = $("#insert_Store");
 
-		$("input[type='submit']").on("click", function(e){
-			e.preventDefault();
-			console.log("submit clicked");
+		$("input[type='submit']").on("click", function(e){			
+			e.preventDefault();						
+			console.log("submit clicked");			
 			var str = "";
 			formObj.submit();
 			
