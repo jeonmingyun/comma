@@ -17,11 +17,13 @@
 
     <EditText
         android:id="@+id/owner_id"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="56dp"
         android:layout_marginBottom="12dp"
         android:paddingLeft="15dp"
-        android:layout_width="297dp"
-        android:layout_height="32dp"
         android:drawableLeft="@drawable/id"
         android:background="@drawable/textlines2"
         android:hint="  Admin" />
@@ -29,8 +31,10 @@
     <EditText
         android:id="@+id/owner_password"
         android:paddingLeft="15dp"
-        android:layout_width="297dp"
+        android:layout_width="match_parent"
         android:layout_height="32dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
         android:inputType="textPassword"
         android:background="@drawable/textlines2"
         android:drawableLeft="@drawable/password"
@@ -38,23 +42,25 @@
 
         <Button
             android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="52dp"
             android:layout_marginBottom="12dp"
-            android:layout_width="297dp"
-            android:layout_height="32dp"
             android:background="@drawable/loginbutton"
             android:textColor="#c9c9c9"
             android:text="SIGN IN" />
 
         <Button
             android:id="@+id/sign_up"
-            android:backgroundTint="#e5e5e5"
-            android:layout_width="297dp"
+            android:layout_width="match_parent"
             android:layout_height="32dp"
-            android:textColor="#c9c9c9"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:textColor="@color/colorPrimaryDark"
             android:background="@drawable/loginbutton"
+            android:backgroundTint="#e5e5e5"
             android:text="SIGN UP" />
-
-
 
 </LinearLayout>
