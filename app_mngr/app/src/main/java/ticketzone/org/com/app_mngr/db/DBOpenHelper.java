@@ -221,6 +221,13 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         return member_list;
     }
 
+    public Cursor ChartTicket(String C_date){
+        mngrdb = this.getReadableDatabase();
+        Cursor member_list = mngrdb.rawQuery ("select substr(ticket_reg,10,2) as ticket_reg, sum(the_number) as the_number from numberticket where ticket_code like ? ||'1111111112' ||'%' group by substr(ticket_reg,10,2) order by substr(ticket_reg,10,2)", new String[] {C_date});
+
+        return member_list;
+    }
+
     public Cursor selectWating(String license_number){
          mngrdb = this.getWritableDatabase();
         Cursor member_list = mngrdb.rawQuery("select max(substr(ticket_code,19)) as ticket_code from numberticket where ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ?", new String[] {license_number});

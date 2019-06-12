@@ -121,6 +121,9 @@ public class StoreActivity extends AppCompatActivity {
 
         lineChart = (LineChart)findViewById(R.id.chart);
 
+
+
+
         waitingTable(); // 고객 대기현황 표 생성
     }
 

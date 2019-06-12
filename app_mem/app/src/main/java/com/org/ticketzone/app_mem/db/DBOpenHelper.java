@@ -13,7 +13,7 @@ import org.json.JSONObject;
 public class DBOpenHelper extends SQLiteOpenHelper{
 
 
-    private static final int DB_VERSION = 17;
+    private static final int DB_VERSION = 18;
     private static final String DB_NAME = "SQLite.db";
     public static SQLiteDatabase mdb;
 
@@ -68,7 +68,6 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         values.put("member_birth", member_birth);
         values.put("member_gender", member_gender);
         values.put("member_age_range", member_age_range);
-
         long result = mdb.insert(DBTable.Member.TABLENAME, null, values);
 
         if(result == -1)
@@ -173,7 +172,7 @@ public class DBOpenHelper extends SQLiteOpenHelper{
                 values.put("img_uploadpath", jobj.getString("img_uploadpath"));
                 values.put("img_filename", jobj.getString("img_filename"));
                 values.put("address_name", jobj.getString("address_name"));
-
+                values.put("reg_date", jobj.getString("reg_date"));
                 mdb.insert(DBTable.Store.TABLENAME, null, values);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -266,7 +265,7 @@ public class DBOpenHelper extends SQLiteOpenHelper{
                 ContentValues values = new ContentValues();
                 values.put("cate_code", jobj.getString("cate_code"));
                 values.put("cate_name", jobj.getString("cate_name"));
-
+                values.put("reg_date", jobj.getString("reg_date"));
                 mdb.insert(DBTable.Categorie.TABLENAME, null, values);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -293,7 +292,7 @@ public class DBOpenHelper extends SQLiteOpenHelper{
                 values.put("coor_x", jobj.getString("coor_x"));
                 values.put("coor_y", jobj.getString("coor_y"));
                 values.put("license_number", jobj.getString("license_number"));
-
+                values.put("reg_date", jobj.getString("reg_date"));
                 mdb.insert(DBTable.Coordinates.TABLENAME, null, values);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -398,6 +397,7 @@ public class DBOpenHelper extends SQLiteOpenHelper{
                 values.put("b_code", jobj.getString("b_code"));
                 values.put("store_name", jobj.getString("store_name"));
                 values.put("license_number", jobj.getString("license_number"));
+                values.put("reg_date", jobj.getString("reg_date"));
                 mdb.insert(DBTable.Beacon.TABLENAME, null, values);
             } catch (JSONException e) {
                 e.printStackTrace();

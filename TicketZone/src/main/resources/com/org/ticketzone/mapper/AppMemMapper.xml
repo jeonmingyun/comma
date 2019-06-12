@@ -12,6 +12,7 @@
 		select a.*, b.img_uuid, b.img_uploadpath, b.img_filename
 		from store a, store_attach b
 		where a.license_number = b.license_number
+		
 	</select>
 	
 	<!-- 전체 메뉴가져오기 -->
@@ -21,9 +22,10 @@
 	
 	<!-- 비콘 리스트 출력 -->
 	<select id="BeaconList" resultType="com.org.ticketzone.domain.BeaconVO">
-		select a.b_code, b.store_name, a.license_number
+		select a.b_code, b.store_name, a.license_number, a.reg_date
 		from beacon a, store b
 		where a.license_number = b.license_number
+		
 	</select>
 	
 	<select id="categorieList" resultType="com.org.ticketzone.domain.CategorieVO">

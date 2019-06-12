@@ -20,11 +20,11 @@
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"/>
 
-        <Button
+        <!--<Button
             android:id="@+id/fcm_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="FCM"/>
+            android:text="FCM"/>-->
 
         <android.support.v4.widget.DrawerLayout
             android:id="@+id/drawer_layout"

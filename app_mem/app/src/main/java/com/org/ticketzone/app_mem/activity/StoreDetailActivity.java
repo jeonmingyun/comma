@@ -46,7 +46,9 @@ import com.org.ticketzone.app_mem.vo.BeaconVO;
 import com.org.ticketzone.app_mem.vo.StoreMenuVO;
 import com.org.ticketzone.app_mem.vo.StoreVO;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -261,6 +263,10 @@ public class StoreDetailActivity extends AppCompatActivity {
         spec.setIndicator("통계");
         spec.setContent(R.id.graph);
         host.addTab(spec);
+        SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy/MM/dd");
+        Date time = new Date();
+        String time1 = format1.format(time);
+        s_date.setText(time1);
 
         lineChart = findViewById(R.id.chart);
 

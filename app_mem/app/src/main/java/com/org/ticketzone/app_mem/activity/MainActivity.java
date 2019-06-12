@@ -134,24 +134,24 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         storeList(); // store tab에서 store list를 보여줌
         cateList();
 
-        fcm_btn = findViewById(R.id.fcm_btn);
-        fcm_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "dfdf", Toast.LENGTH_SHORT).show();
-                NetworkTask task = new NetworkTask("mem_send_fcm") {
-                    @Override
-                    protected void onPostExecute(String s) {
-                        super.onPostExecute(s);
-                        Log.e("ddd", s);
-                    }
-
-                };
-
-                SendDataSet sds = new SendDataSet("token", "dfdfdfdfdf");
-                task.execute(sds);
-            }
-        });
+//        fcm_btn = findViewById(R.id.fcm_btn);
+//        fcm_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(MainActivity.this, "dfdf", Toast.LENGTH_SHORT).show();
+//                NetworkTask task = new NetworkTask("mem_send_fcm") {
+//                    @Override
+//                    protected void onPostExecute(String s) {
+//                        super.onPostExecute(s);
+//                        Log.e("ddd", s);
+//                    }
+//
+//                };
+//
+//                SendDataSet sds = new SendDataSet("token", "dfdfdfdfdf");
+//                task.execute(sds);
+//            }
+//        });
 
         //gps
         if (!checkLocationServicesStatus()) {
@@ -254,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 view.setTag(idx);   // 인덱스 저장
                 tagBtn.setTag(idx);
 //                tagBtn.setText("발급불가");
-//                tagBtn.setEnabled(false);
+                tagBtn.setEnabled(false);
 
 
 
