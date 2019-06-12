@@ -54,10 +54,10 @@
 			data-ride="carousel">
 			<div class="carousel-inner" role="listbox">
 				<!-- Slide One - Set the background image for this slide in the line below -->
-				<!-- <div class="carousel-item active"
-					style="background-image: url('../resources/img/main4.png')"> -->
-				<div class="main_img"
-				style="background-image: url('../resources/img/main.png')">
+				<div class="carousel-item active"
+					style="background-image: url('../resources/img/main_1.png')">
+				<!-- <div class="main_img"
+				style="background-image: url('../resources/img/main.png')"> -->
 					
 					<div class="main_info">
 						<h1>번호요</h1>
