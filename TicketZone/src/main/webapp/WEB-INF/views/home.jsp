@@ -136,17 +136,7 @@
 		</div>
 
 		<!-- 다운로드 -->
-		<div class="features-container section-container">
-			<div class="main_row">
-				<div class="download">
-					<h2>Download</h2>
-					<div class="divider_1">
-						<div class="line"></div>
-					</div>
-
-				</div>
-			</div>
-		</div>
+		
 	</div>
 
 	<footer>

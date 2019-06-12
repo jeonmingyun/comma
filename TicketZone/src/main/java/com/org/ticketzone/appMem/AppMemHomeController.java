@@ -76,6 +76,7 @@ public class AppMemHomeController {
      return arr;
   }
   
+  @ResponseBody
   @RequestMapping(value ="/MyTicket", method = RequestMethod.POST)
   public JSONArray MyTicket(@RequestBody NumberTicketVO vo) {
      

@@ -2,13 +2,9 @@ package com.org.ticketzone.app_mem.activity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -57,10 +53,7 @@ import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
 import com.org.ticketzone.app_mem.GpsTracker;
 import com.org.ticketzone.app_mem.R;
-import com.org.ticketzone.app_mem.categorieCardView.CateItemViewHolder;
 import com.org.ticketzone.app_mem.categorieCardView.RecyclerViewAdapter;
-import com.org.ticketzone.app_mem.task.JsonArrayTask;
-import com.org.ticketzone.app_mem.beacon.BeaconConnection;
 import com.org.ticketzone.app_mem.task.JsonArrayTask;
 import com.org.ticketzone.app_mem.task.NetworkTask;
 import com.org.ticketzone.app_mem.task.SendDataSet;
@@ -261,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 view.setTag(idx);   // 인덱스 저장
                 tagBtn.setTag(idx);
 //                tagBtn.setText("발급불가");
-                tagBtn.setEnabled(false);
+//                tagBtn.setEnabled(false);
 
 
 
@@ -303,12 +296,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                                 String inputValue = ET.getText().toString();
                                 Cursor cursor = mDBHelper.selectAllMember();
                                 TextView storeName = findViewById(R.id.storeName);
-                                String member_id = "";
+                                 String member_id = "";
 
                                 while(cursor.moveToNext()){
                                     member_id = cursor.getString(0);
                                 }
-
+                                final String MEMBER = member_id;
                                 NetworkTask networkTask = new NetworkTask("Mem_issue_ticket") {
 
                                 };
@@ -319,6 +312,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                                 networkTask.execute(sds1, sds2, sds3);
                                 Toast.makeText(MainActivity.this, inputValue + "명 입력되었습니다.", Toast.LENGTH_SHORT).show();
 
+
                                 JsonArrayTask jat = new JsonArrayTask("MyTicket"){
                                     @Override
                                     protected void onPostExecute(JSONArray jsonArray) {
@@ -326,7 +320,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                                         try{
                                             mDBHelper.insertTicket(new JSONArray(jsonArray.get(0).toString()));
                                             Log.e("myTicket", jsonArray.get(0).toString());
-
+                                            Intent numInfoIntent = new Intent(MainActivity.this, NumInfoActivity.class);
+                                            numInfoIntent.putExtra("member_id", MEMBER);
+                                            numInfoIntent.putExtra("storename",STORE_NAME);
+                                            numInfoIntent.putExtra("license", LICENSE);
+                                            startActivity(numInfoIntent);
                                         } catch (JSONException e){
                                             e.printStackTrace();
                                         }
@@ -336,11 +334,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                                 SendDataSet sds6 = new SendDataSet("license_number", LICENSE);
                                 jat.execute(sds5,sds6);
 
-                                Intent numInfoIntent = new Intent(MainActivity.this, NumInfoActivity.class);
-                                numInfoIntent.putExtra("member_id", member_id);
-                                numInfoIntent.putExtra("storename",STORE_NAME);
-                                numInfoIntent.putExtra("license", LICENSE);
-                                startActivity(numInfoIntent);
+
                             }
                         });
 
