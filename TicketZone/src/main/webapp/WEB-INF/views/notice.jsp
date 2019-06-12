@@ -94,7 +94,7 @@
 			</c:if>
 		</ul>
 	</div>
-	<form id='actionForm' action='/' method='get'>
+	<form id='actionForm' action='notice' method='get'>
 		<input type="hidden" id="efg" name="pageNum" value = "${pageMaker.cri.pageNum}">
 		<input type="hidden" id="abcd" name="amout" value = "${pageMaker.cri.amount}">
 		<input type="hidden" name="type" value='<c:out value="${pageMaker.cri.type}"/>'>
