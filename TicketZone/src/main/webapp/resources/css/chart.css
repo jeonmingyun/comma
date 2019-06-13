@@ -109,3 +109,29 @@
 	height: 130px;
 	border-left: 3px solid #718dff;
 }
+.divider_sh .line {
+	margin: 30px auto 20px;
+	width: 1200px;
+	border: 1px solid #343a40;
+	clear: both;
+}
+.menu {
+	float: right;
+	list-style: none;
+}
+
+.menu li {
+	float: left;
+}
+
+.menu button {
+	background-color: transparent;
+	border: none;
+}
+
+.menu button:hover{
+	background-color: transparent;
+	border: none;
+	color: #718dff;
+	cursor: pointer;
+}

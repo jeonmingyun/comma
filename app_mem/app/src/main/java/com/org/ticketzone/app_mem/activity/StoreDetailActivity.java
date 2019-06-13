@@ -268,7 +268,7 @@ public class StoreDetailActivity extends AppCompatActivity {
         spec.setContent(R.id.graph);
         host.addTab(spec);
 
-        
+
         SimpleDateFormat format2 = new SimpleDateFormat ( "yyyy/MM/dd(E)");
         Date time = new Date();
         String time2 = format2.format(time);

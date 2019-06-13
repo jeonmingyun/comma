@@ -19,9 +19,9 @@ import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
 import com.org.ticketzone.app_mem.R;
+import com.org.ticketzone.app_mem.db.DBOpenHelper;
 import com.org.ticketzone.app_mem.task.JsonArrayTask;
 import com.org.ticketzone.app_mem.task.SendDataSet;
-import com.org.ticketzone.app_mem.db.DBOpenHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;

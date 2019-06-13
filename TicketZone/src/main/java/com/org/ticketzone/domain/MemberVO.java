@@ -9,5 +9,6 @@ public class MemberVO {
 	private String gender;
 	private String age_range;
 	private String token;
-	
+	private String reg_date;
+
 }

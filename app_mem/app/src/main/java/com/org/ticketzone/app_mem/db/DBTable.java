@@ -24,11 +24,9 @@ public final class DBTable {
     /*점주*/
     public static final class Owner implements  BaseColumns{
         public static final String OWNER_ID = "owner_id";
-        public static final String REG_DATE = "reg_date";
         public static final String TABLENAME = "owner";
         public static final String CREATE_QUERY = "create table IF NOT EXISTS " + TABLENAME + "("
-                + OWNER_ID + " text primary key,"
-                + REG_DATE + " text );";
+                + OWNER_ID + " text primary key);";
         public static final String DROP_QUERY = "drop table if exists " + TABLENAME;
     }
 
@@ -48,7 +46,6 @@ public final class DBTable {
         public static final String IMG_UUID = "img_uuid";
         public static final String IMG_UPLOADPATH = "img_uploadpath";
         public static final String IMG_FILENAME = "img_filename";
-        public static final String REG_DATE = "reg_date";
         public static final String TABLENAME = "store";
         public static final String CREATE_QUERY = "create table " + TABLENAME + "("
                 + LICENSE_NUMBER + " text primary key,"
@@ -65,7 +62,6 @@ public final class DBTable {
                 + IMG_UPLOADPATH + " text, "
                 + IMG_FILENAME + " text, "
                 + ADDRESS_NAME + " text not null,"
-                + REG_DATE + "text, "
                 + "foreign key("+OWNER_ID+") references OWNER("+OWNER_ID+"),"
                 + " foreign key("+CATE_CODE+") references CATEGORIE("+CATE_CODE+"));";
         public static final String DROP_QUERY= "drop table if exists " + TABLENAME;
@@ -77,14 +73,12 @@ public final class DBTable {
         public static final String MENU_NAME = "menu_name";
         public static final String MENU_PRICE = "menu_price";
         public static final String STORE_NOTE = "store_note";
-        public static final String REG_DATE = "reg_date";
         public static final String TABLENAME = "store_menu";
         public static final String CREATE_QUERY = "create table " + TABLENAME + "("
                 + MENU_CODE + " text primary key,"
                 + MENU_NAME + " text not null,"
                 + MENU_PRICE + " text not null,"
-                + STORE_NOTE + " text, "
-                + REG_DATE + " text );";
+                + STORE_NOTE + " text );";
         public static final String DROP_QUERY = "drop table if exists " + TABLENAME;
     }
 
@@ -92,12 +86,10 @@ public final class DBTable {
     public static final class Categorie implements BaseColumns{
         public static final String CATE_CODE = "cate_code";
         public static final String CATE_NAME = "cate_name";
-        public static final String REG_DATE = "reg_date";
         public static final String TABLENAME = "categorie";
         public static final String CREATE_QUERY = "create table " + TABLENAME + "("
                 + CATE_CODE + " text primary key,"
-                + CATE_NAME + " text not null, "
-                + REG_DATE + " text );";
+                + CATE_NAME + " text not null);";
         public static final String DROP_QUERY = "drop table if exists "+ TABLENAME;
     }
 
@@ -106,13 +98,11 @@ public final class DBTable {
         public static final String COOR_X = "coor_x";
         public static final String COOR_Y = "coor_y";
         public static final String LICENSE_NUMBER = "license_number";
-        public static final String REG_DATE = "reg_date";
         public static final String TABLENAME = "coordinates";
         public static final String CREATE_QUERY = "create table " + TABLENAME + "("
                 + COOR_X + " text not null,"
                 + COOR_Y + " text not null,"
                 + LICENSE_NUMBER + " text,"
-                + REG_DATE + " text,"
                 + " foreign key("+LICENSE_NUMBER+") references STORE("+LICENSE_NUMBER+"));";
         public static final String DROP_QUERY = "drop table if exists " + TABLENAME;
     }
@@ -142,13 +132,11 @@ public final class DBTable {
         public static final String B_CODE = "b_code";
         public static final String STORE_NAME = "store_name";
         public static final String LICENSE_NUMBER = "license_number";
-        public static final String REG_DATE = "reg_date";
         public static final String TABLENAME = "beacon";
         public static final String CREATE_QUERY = "create table " + TABLENAME + "("
                 + B_CODE + " text primary key,"
                 + STORE_NAME + " text ,"
-                + LICENSE_NUMBER + " text, "
-                + REG_DATE + " text)";
+                + LICENSE_NUMBER + " text)";
         public static final String DROP_QUERY = "drop table if exists " + TABLENAME;
     }
     /*GPS*/

@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Document</title>
-<link href="resources/css/chart.css" rel="stylesheet" />
+<link href="../resources/css/chart.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
@@ -22,24 +22,24 @@
 </head>
 
 <body>
-	<%@include file="/WEB-INF/views/include/Mngrheader.jsp"%>
+	<%@include file="/WEB-INF/views/include/header.jsp"%>
 	
 	<div class="chart_form">
-
-		<input type="hidden" id="select_license_number"
-			value="${param.license_number}"> <select
-			name="license_number" id="storelist">
-			<c:forEach var="s" items="${store}" varStatus="status">
-				<option class="storeList_option" value="${s.license_number}">
-					${s.store_name}</option>
-			</c:forEach>
-		</select>
-	
-	<div id="today_stats">
-		<a href="/mCustomer">현황판</a>&nbsp&nbsp&nbsp&nbsp<a href="/chart2">일별 통계</a>
-	</div>
-	
-	<h2>일별 시간대별 인원통계</h2>
+	<input type="hidden" id="s_name" value="${param.store_name}">
+		<div class="store_form">	
+    		<div id="tab_menu">
+			<h2 id="store_name">${param.store_name}</h2>
+				<nav>
+					<ul class="menu">
+					<li><button id="goInfo">매장정보</button></li>
+					<li><button id="goMenu">메뉴</button></li>
+					<li><button id="goChart">통계</button></li>
+					</ul>
+				</nav>
+		</div>
+		<div class="divider_sh">
+			<div class="line"></div>
+		</div>	
 	<div class="divider_1"><div class="line"></div></div>
 	
 	<div id="chart_form">
@@ -59,10 +59,11 @@
 			<h4>대기자</h4> 
 		</div>
 	</div>	<!-- chart_form -->
-
+	<input type="hidden" id="license_number" value="${param.license_number}">
+	
 
 	
 
-<script src="resources/js/chart/index.js"></script>
+<script src="../resources/js/store_chart.js"></script>
 </body>
 </html>
