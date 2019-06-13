@@ -118,9 +118,9 @@ public class StoreDetailActivity extends AppCompatActivity {
 
         tabHost();
         selectStore(license_number);
-        selectStoreMenu(license_number);
+        selectStoreMenu(license_number);// 메뉴 정보를 가져옴
         setStoreDetail();
-        setMenuList();
+        setMenuList();// 메뉴 리스트 화면에 그리기
         selectAllBeacon(); // beaconList
 
         Log.e("menu", menuList.toString());
@@ -133,11 +133,6 @@ public class StoreDetailActivity extends AppCompatActivity {
 
         issue_btn.setText("발급불가");
         issue_btn.setEnabled(false);
-
-
-
-
-
 
         issue_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,7 +195,7 @@ public class StoreDetailActivity extends AppCompatActivity {
             String[] categorie;
             storeMenuVO = menuList.get(i);
             categorie = storeMenuVO.getMenu_name().split("-");
-//            Log.e("ddd vo", storeMenuVO.toString());
+            Log.e("ddd vo", storeMenuVO.toString());
 
             if( menuHash.get(categorie[0]) == null) {
                 menuItems = new ArrayList<>();
@@ -501,7 +496,6 @@ public class StoreDetailActivity extends AppCompatActivity {
             }
 
         });
-
 
         region = new BeaconRegion("ranged region",
                 UUID.fromString("74278bda-b644-4520-8f0c-720eaf059935"), 40001, 15383);

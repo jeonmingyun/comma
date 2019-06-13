@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 public class DBOpenHelper extends SQLiteOpenHelper {
 
-    private static final int DB_VERSION = 15;
+    private static final int DB_VERSION = 16;
     private static final String DB_NAME = "SQLite.db";
     public static SQLiteDatabase mngrdb;
 
@@ -161,8 +161,6 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         mngrdb.execSQL(sqlUpdate, new String[] {store_status, license_number});
     }
 
-
-
     // StoreMenu
     public Cursor selectAllStoreMenu() {
         mngrdb = this.getWritableDatabase();
@@ -172,6 +170,14 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         return member_list;
     }
 
+    public Cursor selectStoreMenu(String license_number) {
+        mngrdb = this.getWritableDatabase();
+        String menu_code = license_number+'%';
+        String sql = "select * from store_menu where menu_code like \'" + menu_code +"\'";
+        Cursor store_list = mngrdb.rawQuery(sql, null);
+
+        return store_list;
+    }
 
     public void insertStoreMenu(JSONArray menuList) {
         mngrdb = this.getWritableDatabase();
@@ -181,7 +187,6 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 JSONObject jobj = new JSONObject(menuList.get(i).toString());
                 ContentValues values = new ContentValues();
                 values.put("menu_code", jobj.getString("menu_code"));
-                values.put("menu_cate", jobj.getString("menu_cate"));
                 values.put("menu_name", jobj.getString("menu_name"));
                 values.put("menu_price", jobj.getString("menu_price"));
                 values.put("store_note", jobj.getString("store_note"));
@@ -236,21 +241,54 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
     public Cursor selectWating(String license_number){
          mngrdb = this.getWritableDatabase();
-        Cursor member_list = mngrdb.rawQuery("select max(substr(ticket_code,19)) as ticket_code from numberticket where ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ?", new String[] {license_number});
+        Cursor member_list = mngrdb.rawQuery("select count(ticket_code) || '팀' as ticket_code from numberticket where ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ? and ticket_status = 0", new String[] {license_number});
         return member_list;
     }
 
-    public Cursor ticketStatus(String license_number){
+    public Cursor t_wait(String license_number){
         mngrdb = this.getWritableDatabase();
-        Cursor member_list = mngrdb.rawQuery("WITH\n" +
-                "wait as\n" +
-                "(select count(string_status) as wait from numberticket where string_status = 'wait' and ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ?),\n" +
-                "success as (select count(string_status) as success from numberticket where string_status = 'success' and ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ?),\n" +
-                "cancel as (select count(string_status) as cancel from numberticket where string_status = 'cancel' and ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ?),\n" +
-                "absence as (select count(string_status) as absence from numberticket where string_status = 'absence' and ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ?)\n" +
-                "select a.*,b.*,c.*,d.*\n" +
-                "from wait a, success b, cancel c, absence d", new String[] {license_number});
+        Cursor member_list = mngrdb.rawQuery("select count(string_status) as wait from numberticket where string_status = 'wait' and ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ?", new String[] {license_number});
         return  member_list;
+    }
+
+    public Cursor t_success(String license_number){
+        mngrdb = this.getWritableDatabase();
+        Cursor member_list = mngrdb.rawQuery("select count(string_status) as success from numberticket where string_status = 'success' and ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ?", new String[] {license_number});
+        return  member_list;
+    }
+
+    public Cursor t_absence(String license_number){
+        mngrdb = this.getWritableDatabase();
+        Cursor member_list = mngrdb.rawQuery("select count(string_status) as absence from numberticket where string_status = 'absence' and ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ?", new String[] {license_number});
+        return  member_list;
+    }
+
+    public Cursor t_cancel(String license_number){
+        mngrdb = this.getWritableDatabase();
+        Cursor member_list = mngrdb.rawQuery("select count(string_status) as cancel from numberticket where string_status = 'cancel' and ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ?", new String[] {license_number});
+        return  member_list;
+    }
+
+    public Cursor wait_list(String license_number){
+        mngrdb = this.getWritableDatabase();
+        Cursor member_list = mngrdb.rawQuery("select substr(ticket_code, 19) as ticket_code, wait_number, substr(member_id,5) as member_id, the_number || '명' as the_number, string_status\n" +
+                "from numberticket\n" +
+                "where ticket_code like strftime('%Y%m%d', 'now') || '%' \n" +
+                "and license_number = ?\n" +
+                "and ticket_status = 0\n" +
+                "order by ticket_code", new String[] {license_number});
+        return member_list;
+    }
+
+    public Cursor absence_list(String license_number){
+        mngrdb = this.getWritableDatabase();
+        Cursor member_list = mngrdb.rawQuery("select substr(ticket_code, 19) as ticket_code, wait_number, substr(member_id,5) as member_id, the_number || '명' as the_number, string_status\n" +
+                "from numberticket\n" +
+                "where ticket_code like strftime('%Y%m%d', 'now') || '%' \n" +
+                "and license_number = ?\n" +
+                "and ticket_status in (2,3)\n" +
+                "order by ticket_code", new String[] {license_number});
+        return member_list;
     }
 
     public void insertTicket(JSONArray NumberTicketList) {

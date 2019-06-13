@@ -1,63 +1,63 @@
 /* * {
-	padding: 0;
-	margin: 0;
+   padding: 0;
+   margin: 0;
 }
 
 #menu {
-	width: 1200px;
-	margin: 0 auto;
-	border: 1px solid RED;
+   width: 1200px;
+   margin: 0 auto;
+   border: 1px solid RED;
 }
 
 #menuTab {
-	border: 1px solid cyan;
-	width: 350px;
-	float: left;
+   border: 1px solid cyan;
+   width: 350px;
+   float: left;
 }
 
 .menu_box {
-	clear: both;
-	position: relative;
+   clear: both;
+   position: relative;
 }
 
 #menuList {
-	border: 1px solid pink;
-	width: 800px;
-	display: inline-block;
-	margin: 0 10px;
-	float: left;
+   border: 1px solid pink;
+   width: 800px;
+   display: inline-block;
+   margin: 0 10px;
+   float: left;
 }
 
 #menu h1 {
-	text-align: center;
-	margin: 50px auto;
-	font-size: 14px;
-	font-weight: normal;
-	text-align: center;
-	padding: 13px 0;
-	border-top: 1px solid #343a40;
-	border-bottom: 1px solid #343a40;
-	width: 250px; height: 100%;
+   text-align: center;
+   margin: 50px auto;
+   font-size: 14px;
+   font-weight: normal;
+   text-align: center;
+   padding: 13px 0;
+   border-top: 1px solid #343a40;
+   border-bottom: 1px solid #343a40;
+   width: 250px; height: 100%;
 }
 
 테이블
 .custom_table {
-	width: 800px;
-	margin: 20px auto;
+   width: 800px;
+   margin: 20px auto;
     border-collapse: collapse;
 }
 
 .custom_table th {
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	border-bottom: 2px solid #718dff;
+   padding: 10px 0;
+   text-align: center;
+   font-weight: bold;
+   border-bottom: 2px solid #718dff;
 }
 
 .custom_table td {
-	padding: 5px 0;
-	text-align: center;
-	border-bottom: 1px solid #e6e6e6;
+   padding: 5px 0;
+   text-align: center;
+   border-bottom: 1px solid #e6e6e6;
 }
 
  */
@@ -80,14 +80,14 @@ button:hover {
 
 .store_form h1 {
     text-align: center;
-	margin: 50px auto;
-	font-size: 14px;
-	font-weight: normal;
-	text-align: center;
-	padding: 13px 0;
-	border-top: 1px solid #343a40;
-	border-bottom: 1px solid #343a40;
-	width: 250px; height: 100%;
+   margin: 50px auto;
+   font-size: 14px;
+   font-weight: normal;
+   text-align: center;
+   padding: 13px 0;
+   border-top: 1px solid #343a40;
+   border-bottom: 1px solid #343a40;
+   width: 250px; height: 100%;
 }
 
 .store_form {
@@ -209,30 +209,30 @@ button:hover {
 
 #customAdmin td {
     padding: 10px 0;
-	text-align: center;
-	border-bottom: 1px solid #e6e6e6;
+   text-align: center;
+   border-bottom: 1px solid #e6e6e6;
 }
 
 /* 메뉴 추가 버튼 눌렀을 때  input text, textarea*/
 .add_name {
-	width: 250px;
-	height: 30px;
+   width: 250px;
+   height: 30px;
 }
 
 .add_price {
-	width: 50px;
-	height: 30px;
+   width: 50px;
+   height: 30px;
 }
 
 .add_store_note {
-	resize: none;
-	height: 30px;
-	vertical-align: middle;
+   resize: none;
+   height: 30px;
+   vertical-align: middle;
 }
 
 #TraddMenu {
-	float: right;
-	background-color: #fff;
+   float: right;
+   background-color: #fff;
     border: 1px solid #BDBDBD;
     padding: 5px 10px;
     margin: 10px 0;
@@ -240,35 +240,35 @@ button:hover {
 
 /* 메뉴 수정 눌렀을 때 */
 #UpdateMenu {
-	float: right;
-	background-color: #fff;
+   float: right;
+   background-color: #fff;
     border: 1px solid #BDBDBD;
     padding: 5px 10px;
     margin: 10px 5px;
 }
 .divider_sh .line {
-	margin: 30px auto 20px;
-	width: 1200px;
-	border: 1px solid #343a40;
-	clear: both;
+   margin: 30px auto 20px;
+   width: 1200px;
+   border: 1px solid #343a40;
+   clear: both;
 }
 .menu {
-	float: right;
-	list-style: none;
+   float: right;
+   list-style: none;
 }
 
 .menu li {
-	float: left;
+   float: left;
 }
 
 .menu button {
-	background-color: transparent;
-	border: none;
+   background-color: transparent;
+   border: none;
 }
 
 .menu button:hover{
-	background-color: transparent;
-	border: none;
-	color: #718dff;
-	cursor: pointer;
+   background-color: transparent;
+   border: none;
+   color: #718dff;
+   cursor: pointer;
 }

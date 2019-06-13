@@ -1,0 +1,145 @@
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+/* 매장탭 */
+#store_name {
+	float: left;
+}
+
+.divider_sh .line {
+	margin: 30px auto 0;
+	width: 1200px;
+	border: 1px solid #343a40;
+	clear: both;
+}
+
+button:hover {
+    cursor: pointer;
+    outline: none;
+}
+
+.store_form {
+    width: 1200px;
+    height: 100%;
+    margin: 50px auto;
+}
+
+/* <<<카테고리 추가>>> */
+.left {
+    width: 250px;
+    position:relative;
+    bottom: 30px;
+    margin-right: 10px;  
+    float: left;
+}
+
+.left ul {
+    list-style: none;
+    margin: 0;
+}
+
+.cate_add {
+    position: relative;
+    top: 20px;
+    text-align: center;
+}
+
+.cate_add button {
+    vertical-align: middle;
+    border: none;
+    background-color: transparent;
+}
+
+.cate_add button:hover {
+    cursor: pointer;
+}
+
+.cate_add input[type="text"] {
+    width: 150px;
+    height: 25px;
+}
+
+.cate_text {
+    text-align: center;
+    margin: 30px 10px;
+    background-color: #fff;
+/*     border-top: 1px solid #e6e6e6;  */
+    border-bottom: 1px solid #e6e6e6;
+}
+
+/* 카테고리 */
+.cate_text h5 {
+    font-size: 18px;
+    margin: 0 15px;
+    padding: 10px;
+    border-bottom: 2px solid #718dff;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.cate_text button {
+    margin: 15px 0;
+    font-size: 16px; 
+    border: none;
+    background-color: transparent;
+}
+
+.cate_text button:hover {
+    color: #718dff;
+    cursor: pointer;
+}
+
+/* <<<메뉴 테이블>>> */
+.right {
+    width: 900px;
+    float: left;
+}
+
+/* 테이블 */
+#customAdmin {
+    width: 900px;
+    /* border: 1px solid orange; */
+    clear: both;
+    border-collapse: collapse;
+    text-align: center;
+    background-color: #fff;
+}
+
+#customAdmin th {
+    padding: 10px 0;
+    font-weight: bold;
+   /*  border-top: 1px solid #e6e6e6; */
+    border-bottom: 2px solid #718dff;
+    font-size: 16px;
+}
+
+#customAdmin td {
+    padding: 10px 0;
+	text-align: center;
+	border-bottom: 1px solid #e6e6e6;
+}
+
+.menu {
+	float: right;
+	list-style: none;
+}
+
+.menu li {
+	float: left;
+}
+
+.menu button {
+	background-color: transparent;
+	border: none;
+	padding: 0 6px;
+}
+
+.menu button:hover{
+	background-color: transparent;
+	border: none;
+	color: #718dff;
+	cursor: pointer;
+}

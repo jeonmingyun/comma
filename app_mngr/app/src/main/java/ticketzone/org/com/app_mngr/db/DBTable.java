@@ -77,14 +77,12 @@ public final class DBTable {
     /*메뉴*/
     public static final class StoreMenu implements  BaseColumns{
         public static final String MENU_CODE = "menu_code";
-        public static final String MENU_CATE = "menu_cate";
         public static final String MENU_NAME = "menu_name";
         public static final String MENU_PRICE = "menu_price";
         public static final String STORE_NOTE = "store_note";
         public static final String TABLENAME = "store_menu";
         public static final String CREATE_QUERY = "create table " + TABLENAME + "("
                 + MENU_CODE + " text primary key,"
-                + MENU_CATE + " text not null,"
                 + MENU_NAME + " text not null,"
                 + MENU_PRICE + " text not null,"
                 + STORE_NOTE + " text );";
