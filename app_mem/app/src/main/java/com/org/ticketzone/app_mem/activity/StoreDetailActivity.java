@@ -46,7 +46,10 @@ import com.org.ticketzone.app_mem.vo.BeaconVO;
 import com.org.ticketzone.app_mem.vo.StoreMenuVO;
 import com.org.ticketzone.app_mem.vo.StoreVO;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -68,6 +71,8 @@ public class StoreDetailActivity extends AppCompatActivity {
     private String license_number;
     private int getWidth =0;
     private int getHeight =0;
+    private Date AddDate;
+    private Date DelDate;
 
     // 비콘
     private BeaconManager beaconManager;
@@ -100,7 +105,8 @@ public class StoreDetailActivity extends AppCompatActivity {
         store_time = findViewById(R.id.store_time);
         address_name = findViewById(R.id.address_name);
         store_intro = findViewById(R.id.store_intro);
-
+        AddDate = new Date();
+        DelDate = new Date();
         prev = findViewById(R.id.prev);
         s_date = findViewById(R.id.s_date);
         next = findViewById(R.id.next);
@@ -262,10 +268,16 @@ public class StoreDetailActivity extends AppCompatActivity {
         spec.setContent(R.id.graph);
         host.addTab(spec);
 
+
+        SimpleDateFormat format2 = new SimpleDateFormat ( "yyyy/MM/dd(E)");
+        Date time = new Date();
+        String time2 = format2.format(time);
+        s_date.setText(time2);
         lineChart = findViewById(R.id.chart);
 
         entries = new ArrayList<>();
-        final String a_date = s_date.getText().toString().replaceAll("/","");
+        final String a_date = s_date.getText().toString().replaceAll("/","").substring(0,8);
+
         Cursor cursor = mDBHelper.ChartTicket(a_date);
         while(cursor.moveToNext()){
             entries.add(new Entry(Integer.parseInt(cursor.getString(0)), Integer.parseInt(cursor.getString(1))));
@@ -313,7 +325,7 @@ public class StoreDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 entries.removeAll(entries);
-                int c_date = Integer.parseInt(s_date.getText().toString().replaceAll("/","")) -1;
+                int c_date = Integer.parseInt(s_date.getText().toString().replaceAll("/","").substring(0,8)) -1;
                 Cursor cursor2 = mDBHelper.ChartTicket(Integer.toString(c_date));
                 while(cursor2.moveToNext()){
                     entries.add(new Entry(Integer.parseInt(cursor2.getString(0)), Integer.parseInt(cursor2.getString(1))));
@@ -357,7 +369,12 @@ public class StoreDetailActivity extends AppCompatActivity {
 
                 lineChart.setData(data);
                 lineChart.animateY(1000);
-                s_date.setText(Integer.toString(c_date).substring(0,4) + "/" + Integer.toString(c_date).substring(4,6) + "/" +  Integer.toString(c_date).substring(6,8));
+                SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy/MM/dd(E)");
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(DelDate);
+                cal.add(Calendar.DATE, -1);
+                String time1 = format1.format(cal.getTime());
+                s_date.setText(Integer.toString(c_date).substring(0,4) + "/" + Integer.toString(c_date).substring(4,6) + "/" +  Integer.toString(c_date).substring(6,8) + time1.substring(10));
             }
         });
         //증가
@@ -365,7 +382,7 @@ public class StoreDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 entries.removeAll(entries);
-                int c_date = Integer.parseInt(s_date.getText().toString().replaceAll("/","")) +1;
+                int c_date = Integer.parseInt(s_date.getText().toString().replaceAll("/","").substring(0,8)) +1;
                 Cursor cursor2 = mDBHelper.ChartTicket(Integer.toString(c_date));
                 while(cursor2.moveToNext()){
                     entries.add(new Entry(Integer.parseInt(cursor2.getString(0)), Integer.parseInt(cursor2.getString(1))));
@@ -408,7 +425,12 @@ public class StoreDetailActivity extends AppCompatActivity {
                 dataset.setLineWidth(3);
                 lineChart.setData(data);
                 lineChart.animateY(1000);
-                s_date.setText(Integer.toString(c_date).substring(0,4) + "/" + Integer.toString(c_date).substring(4,6) + "/" +  Integer.toString(c_date).substring(6,8));
+                SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy/MM/dd(E)");
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(AddDate);
+                cal.add(Calendar.DATE, +1);
+                String time1 = format1.format(cal.getTime());
+                s_date.setText(Integer.toString(c_date).substring(0,4) + "/" + Integer.toString(c_date).substring(4,6) + "/" +  Integer.toString(c_date).substring(6,8) + time1.substring(10));
             }
         });
 

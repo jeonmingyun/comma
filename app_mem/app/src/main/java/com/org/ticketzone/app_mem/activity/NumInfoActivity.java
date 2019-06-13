@@ -6,24 +6,16 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.org.ticketzone.app_mem.R;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
-import com.org.ticketzone.app_mem.task.JsonArrayTask;
 import com.org.ticketzone.app_mem.task.NetworkTask;
 import com.org.ticketzone.app_mem.task.SendDataSet;
 import com.org.ticketzone.app_mem.vo.NumberTicketVO;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.util.ArrayList;
 
 public class NumInfoActivity extends AppCompatActivity {
 
@@ -45,20 +37,19 @@ public class NumInfoActivity extends AppCompatActivity {
         selectAllTicket(); // Ticket 정보
 
         CancelButton = findViewById(R.id.CancelButton);
-        NowEnter = (TextView)findViewById(R.id.nowEnter);
-        Time = (TextView)findViewById(R.id.time);
+        NowEnter = findViewById(R.id.nowEnter);
+        Time = findViewById(R.id.time);
         MyNumber = findViewById(R.id.myNumber);
         storeName = findViewById(R.id.storeName);
         the_number = findViewById(R.id.the_number);
         int wait_number = 0;
         int the_number2 = 0;
         String ticket_number = "";
-        code = "";
+        String ticket_reg = "";
         Intent intent = getIntent();
         String storename = intent.getExtras().getString("storename");
         final String member_id = intent.getExtras().getString("member_id");
         final String license = intent.getExtras().getString("license");
-
 
         Cursor cursor = mDBHelper.MyTicket(member_id,license);
 
@@ -67,10 +58,11 @@ public class NumInfoActivity extends AppCompatActivity {
             code = cursor.getString(0);
             wait_number = cursor.getInt(1);
             the_number2 = cursor.getInt(2);
+            ticket_reg = cursor.getString(6);
             ticket_number = ticket_number.substring(18);
             NowEnter.setText(wait_number + "명");
             MyNumber.setText(ticket_number + "번");
-            Time.setText(code + "테스트");
+            Time.setText(ticket_reg);
             the_number.setText(the_number2 + "명");
         }
 

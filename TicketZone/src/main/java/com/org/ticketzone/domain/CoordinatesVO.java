@@ -1,5 +1,6 @@
 package com.org.ticketzone.domain;
 
+
 import lombok.Data;
 
 @Data
@@ -12,4 +13,6 @@ public class CoordinatesVO {
    private String distance;
    private String my_x;
    private String my_y;
+   private String reg_date;
+   
 }

@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
+import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
@@ -52,6 +53,7 @@ public class StoreActivity extends AppCompatActivity {
     private DBOpenHelper mDBHelper;
     private ImageView storeimg;
     private String license_number;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +66,7 @@ public class StoreActivity extends AppCompatActivity {
         t_absence = findViewById(R.id.t_absence);
         t_cancel = findViewById(R.id.t_cancel);
         t_success = findViewById(R.id.t_success);
+
         //toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -80,10 +83,21 @@ public class StoreActivity extends AppCompatActivity {
         spec.setContent(R.id.tab_content1);
         host.addTab(spec);
 
+        spec = host.newTabSpec("tab2");
+        spec.setIndicator("대기 현황");
+        spec.setContent(R.id.tab_content2);
+        host.addTab(spec);
+
+        spec = host.newTabSpec("tab3");
+        spec.setIndicator("통계");
+        spec.setContent(R.id.tab_content3);
+        host.addTab(spec);
+
         /*이미지 불러오기*/
         Intent intent = getIntent();
         String s_name = intent.getExtras().getString("store_name");
         String url = "http://15.164.115.73:8080/resources/img/";
+
         /*이미지 적용*/
         Cursor cursor = mDBHelper.selectStore(s_name);
         while(cursor.moveToNext()){
@@ -105,23 +119,63 @@ public class StoreActivity extends AppCompatActivity {
             t_absence.setText(cursor2.getString(3));
         }
 
-
-
-        spec = host.newTabSpec("tab2");
-        spec.setIndicator("대기 현황");
-        spec.setContent(R.id.tab_content2);
-        host.addTab(spec);
-        /*테이블 동적 생성*/
-
-
-
-
-        spec = host.newTabSpec("tab3");
-        spec.setIndicator("통계");
-        spec.setContent(R.id.tab_content3);
-        host.addTab(spec);
-
         lineChart = (LineChart)findViewById(R.id.chart);
+
+
+
+
+        waitingTable(); // 고객 대기현황 표 생성
+    }
+
+    private void waitingTable() {
+        TableLayout tableLayout = findViewById(R.id.waiting_table);
+        TableRow tableRow;
+        TextView wait_num, customer, count, status;
+
+        TableRow.LayoutParams tableRowParams = new TableRow.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+
+        TableRow.LayoutParams cellParams = new TableRow.LayoutParams(
+                0,
+                TableRow.LayoutParams.MATCH_PARENT
+        );
+//        LinearLayout.LayoutParams tableRowParams = new LinearLayout.LayoutParams(
+//                LinearLayout.LayoutParams.MATCH_PARENT,
+//                LinearLayout.LayoutParams.WRAP_CONTENT
+//        );
+
+
+        for ( int i = 0; i < 3; i++) {
+            tableRow = new TableRow(this);
+            tableRow.setLayoutParams(tableRowParams);
+
+            wait_num = new TextView(this);
+            wait_num.setLayoutParams(cellParams);
+
+            customer = new TextView(this);
+            wait_num.setLayoutParams(cellParams);
+
+            count = new TextView(this);
+            wait_num.setLayoutParams(cellParams);
+
+            status = new TextView(this);
+            wait_num.setLayoutParams(cellParams);
+
+            wait_num.setText(i);
+            customer.setText("11");
+            count.setText("11");
+            status.setText("11");
+
+            tableRow.addView(wait_num);
+            tableRow.addView(customer);
+            tableRow.addView(count);
+            tableRow.addView(status);
+
+            tableLayout.addView(tableRow);
+        }
+
     }
 
     @Override
@@ -134,7 +188,5 @@ public class StoreActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 
 }

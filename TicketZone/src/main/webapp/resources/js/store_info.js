@@ -1,10 +1,27 @@
 $(document).ready(function(){
+	$("#store_menu").hide();
 	var uuid = $("#uuid").val();
 	var uploadpath = $("#uploadpath").val();
 	var filename = $("#filename").val();
 	var filePath = encodeURIComponent(uploadpath+"/" + uuid +"_"+filename);
 	var result = uploadpath+"/" + uuid +"_"+filename;
 	var a = $("img[name=store_img]").attr("src", "/resources/img/"+result);
+	$("#goMenu").click(function(){
+		var license_number = $("#license_number").val();
+		var store_name = $("#s_name").val();
+		$(location).attr('href',"/goMenu?license_number="+license_number+"&store_name="+store_name);
+		
+	});
+	$("#goChart").click(function(){
+		var store_name = $("#s_name").val();
+		var license_number = $("#license_number").val();
+		$(location).attr('href', "/store_chart?store_name="+store_name+"&license_number="+license_number);
+	});
+	$("#goInfo").click(function(){
+		
+		location.reload();
+		
+	});
 });
 $(function() {
 	var mapContainer = document.getElementById('map'), // 지도를

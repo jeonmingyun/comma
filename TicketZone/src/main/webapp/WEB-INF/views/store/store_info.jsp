@@ -22,28 +22,47 @@
 	<section>
 
 		<div id="store_name" style="display: none;">${storeList[0].store_name}</div>
-
+		
 		<c:forEach var="s" items="${storeList}">
 			<div id="store_info" class="${s.address_name} store_row">
 
-				<h2 id="store_name">${s.store_name}</h2>				
+				<div id="tab_menu">
+					<h2 id="store_name">${s.store_name}</h2>
+					<nav>
+						<ul class="menu">
+							<li><button id="goMenu">메뉴</button></li>
+							<li><button id="goChart">통계</button></li>
+							<li><button id="goInfo">매장정보</button></li>
+						</ul>
+					</nav>
+				</div>
+				
 				<div class="divider_sh">
 					<div class="line"></div>
 				</div>
-				
-					<div class="left">
-						<img name="store_img">
-					</div>
-	
-					<div class="right">
-						<p><font>연락처</font> ${s.store_tel}<p>
-						<p><font>매장주소</font> ${s.address_name}</p>
-						<p><font>영업시간</font> ${s.store_time}</p>
-						<p><font>매장소개</font> ${s.store_intro}</p>
-					</div>
+
+				<div class="left">
+					<img name="store_img">
+				</div>
+
+				<div class="right">
+				<dl>
+					<dt>연락처
+					<dd>${s.store_tel}
+					
+					<dt>매장주소
+					<dd>${s.address_name}
+					
+					<dt>영업시간
+					<dd>${s.store_time}
+					
+					<dt>매장소개
+					<dd>${s.store_intro}
+				</dl>
+				</div>
 			</div>
-
-
+			<input type="hidden" id="s_name" value="${storeList[0].store_name}">
+			<input type="hidden" id="license_number" value="${storeList[0].license_number}">
 			<input type="hidden" id="uuid" value="${s.img_uuid}">
 			<input type="hidden" id="uploadpath" value="${s.img_uploadpath}">
 			<input type="hidden" id="filename" value="${s.img_filename}">
@@ -55,7 +74,10 @@
 			<h3>매장 오시는 길</h3>
 			<div id="map"></div>
 		</div>
+		
+		
 	</section>
+	
 	<!-- store_form -->
 
 	<%@include file="/WEB-INF/views/include/footer.jsp"%>
