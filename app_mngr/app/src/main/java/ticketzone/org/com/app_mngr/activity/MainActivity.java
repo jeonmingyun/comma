@@ -61,9 +61,6 @@ public class MainActivity extends AppCompatActivity {
         selectAllStore();
         setStoreViewPager(); //Store view pager;
 
-
-
-
         //menu toolbar
         toolbar = findViewById(R.id.toolbar);
         dlDrawer = findViewById(R.id.drawer_layout);
@@ -234,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
         storeViewPager.setAdapter(storeAdapter);
         storeViewPager.setOffscreenPageLimit(6);
         storeViewPager.setPageMargin(70);
+
         storeViewPager.setPageTransformer(false, new ViewPager.PageTransformer(){
 
             @Override
