@@ -155,6 +155,12 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         mngrdb.execSQL(sqlUpdate, new String[] {max_num, license_number});
     }
 
+    public void updateStore_status(String license_number, String store_status){
+        mngrdb = this.getWritableDatabase();
+        String sqlUpdate = "update store set store_status = ? where license_number = ?";
+        mngrdb.execSQL(sqlUpdate, new String[] {store_status, license_number});
+    }
+
 
 
     // StoreMenu
