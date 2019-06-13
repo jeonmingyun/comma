@@ -8,14 +8,17 @@ import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.style.BackgroundColorSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
@@ -26,33 +29,46 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IValueFormatter;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Entity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.crypto.BadPaddingException;
 
 import ticketzone.org.com.app_mngr.R;
 import ticketzone.org.com.app_mngr.Task.JsonArrayTask;
 import ticketzone.org.com.app_mngr.db.DBOpenHelper;
+import ticketzone.org.com.app_mngr.db.DBTable;
+import ticketzone.org.com.app_mngr.vo.NumberTicketVO;
 
 public class StoreActivity extends AppCompatActivity {
     private LineChart lineChart;
     private List<Entry> entries;
-    private TextView store_name, wait_count, t_wait, t_success, t_absence, t_cancel;
+    private List<NumberTicketVO> waitList, absenceList;
+    private TextView store_name, wait_count, t_wait, t_success, t_absence, t_cancel, s_date;
     private DBOpenHelper mDBHelper;
     private ImageView storeimg;
     private String license_number;
+    private ImageButton prev, next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +82,9 @@ public class StoreActivity extends AppCompatActivity {
         t_absence = findViewById(R.id.t_absence);
         t_cancel = findViewById(R.id.t_cancel);
         t_success = findViewById(R.id.t_success);
+        prev = findViewById(R.id.prev);
+        next = findViewById(R.id.next);
+        s_date = findViewById(R.id.s_date);
 
         //toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -111,20 +130,274 @@ public class StoreActivity extends AppCompatActivity {
             wait_count.setText(cursor1.getString(0));
         }
         /*테이블 채우는 작업*/
-        Cursor cursor2 = mDBHelper.ticketStatus(license_number);
-        while (cursor2.moveToNext()){
-            t_wait.setText(cursor2.getString(0));
-            t_success.setText(cursor2.getString(1));
-            t_cancel.setText(cursor2.getString(2));
-            t_absence.setText(cursor2.getString(3));
+        Cursor ticket_wait = mDBHelper.t_wait(license_number);
+        ticket_wait.moveToNext();
+        t_wait.setText(ticket_wait.getString(0));
+
+        Cursor ticket_success = mDBHelper.t_success(license_number);
+        ticket_success.moveToNext();
+        t_success.setText(ticket_success.getString(0));
+
+        Cursor ticket_absence = mDBHelper.t_absence(license_number);
+        ticket_absence.moveToNext();
+        t_absence.setText(ticket_absence.getString(0));
+
+        Cursor ticket_cancel = mDBHelper.t_cancel(license_number);
+        ticket_cancel.moveToNext();
+        t_cancel.setText(ticket_cancel.getString(0));
+
+        lineChart = findViewById(R.id.chart);
+        /* 라인차트 */
+        SimpleDateFormat format2 = new SimpleDateFormat ( "yyyy/MM/dd");
+        Date time = new Date();
+        String time2 = format2.format(time);
+        s_date.setText(time2);
+        entries = new ArrayList<>();
+        final String a_date = s_date.getText().toString().replaceAll("/","").substring(0,8);
+
+        Cursor cursor3 = mDBHelper.ChartTicket(a_date);
+        while(cursor3.moveToNext()){
+            entries.add(new Entry(Integer.parseInt(cursor3.getString(0)), Integer.parseInt(cursor3.getString(1))));
         }
+        IAxisValueFormatter xformater = new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return (int)value + "시";
+            }
+        };
+        IAxisValueFormatter yformatter = new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return (int)value + "명";
+            }
+        };
+        IValueFormatter iValueFormatter = new IValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+                return (int)value + "명";
+            }
+        };
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setTextSize(13.0f);
+        xAxis.setValueFormatter(xformater);
+        YAxis yAxisRight = lineChart.getAxisRight();
+        YAxis yAxisLeft = lineChart.getAxisLeft();
+        yAxisRight.setDrawLabels(false);
+        yAxisRight.setDrawAxisLine(false);
+        yAxisRight.setDrawGridLines(false);
+        yAxisLeft.setTextSize(13.0f);
+        yAxisLeft.setValueFormatter(yformatter);
+        LineDataSet dataset = new LineDataSet(entries, "명");
+        dataset.setValueFormatter(iValueFormatter);
+        LineData data = new LineData(dataset);
+        dataset.setColor(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
+        dataset.setCircleColor(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
+        dataset.setValueTextSize(10.0f);
+        dataset.setLineWidth(3);
+        lineChart.setData(data);
+        lineChart.animateY(1000);
+        //감소
+        prev.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                entries.removeAll(entries);
+                int c_date = Integer.parseInt(s_date.getText().toString().replaceAll("/","").substring(0,8)) -1;
+                Cursor cursor2 = mDBHelper.ChartTicket(Integer.toString(c_date));
+                while(cursor2.moveToNext()){
+                    entries.add(new Entry(Integer.parseInt(cursor2.getString(0)), Integer.parseInt(cursor2.getString(1))));
+                }
+                IAxisValueFormatter xformatter = new IAxisValueFormatter() {
+                    @Override
+                    public String getFormattedValue(float value, AxisBase axis) {
+                        return (int)value + "시";
+                    }
+                };
+                IAxisValueFormatter yformatter = new IAxisValueFormatter() {
+                    @Override
+                    public String getFormattedValue(float value, AxisBase axis) {
+                        return (int)value + "명";
+                    }
+                };
+                IValueFormatter iValueFormatter = new IValueFormatter() {
+                    @Override
+                    public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+                        return (int)value + "명";
+                    }
+                };
+                XAxis xAxis = lineChart.getXAxis();
+                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+                xAxis.setTextSize(13.0f);
+                xAxis.setValueFormatter(xformatter);
+                YAxis yAxisRight = lineChart.getAxisRight();
+                YAxis yAxisLeft = lineChart.getAxisLeft();
+                yAxisRight.setDrawLabels(false);
+                yAxisRight.setDrawAxisLine(false);
+                yAxisRight.setDrawGridLines(false);
+                yAxisLeft.setTextSize(13.0f);
+                yAxisLeft.setValueFormatter(yformatter);
+                LineDataSet dataset = new LineDataSet(entries, "명");
+                dataset.setValueFormatter(iValueFormatter);
+                LineData data = new LineData(dataset);
+                dataset.setColor(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
+                dataset.setCircleColor(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
+                dataset.setValueTextSize(10.0f);
+                dataset.setLineWidth(3);
 
-        lineChart = (LineChart)findViewById(R.id.chart);
+                lineChart.setData(data);
+                lineChart.animateY(1000);
+                SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy/MM/dd(E)");
+                Calendar cal = Calendar.getInstance();
+
+                s_date.setText(Integer.toString(c_date).substring(0,4) + "/" + Integer.toString(c_date).substring(4,6) + "/" +  Integer.toString(c_date).substring(6,8));
+            }
+        });
+        //증가
+        next.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                entries.removeAll(entries);
+                int c_date = Integer.parseInt(s_date.getText().toString().replaceAll("/","").substring(0,8)) +1;
+                Cursor cursor2 = mDBHelper.ChartTicket(Integer.toString(c_date));
+                while(cursor2.moveToNext()){
+                    entries.add(new Entry(Integer.parseInt(cursor2.getString(0)), Integer.parseInt(cursor2.getString(1))));
+                }
+                IAxisValueFormatter xformatter = new IAxisValueFormatter() {
+                    @Override
+                    public String getFormattedValue(float value, AxisBase axis) {
+                        return (int)value + "시";
+                    }
+                };
+                IAxisValueFormatter yformatter = new IAxisValueFormatter() {
+                    @Override
+                    public String getFormattedValue(float value, AxisBase axis) {
+                        return (int)value + "명";
+                    }
+                };
+                IValueFormatter iValueFormatter = new IValueFormatter() {
+                    @Override
+                    public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+                        return (int)value + "명";
+                    }
+                };
+                XAxis xAxis = lineChart.getXAxis();
+                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+                xAxis.setTextSize(13.0f);
+                xAxis.setValueFormatter(xformatter);
+                YAxis yAxisRight = lineChart.getAxisRight();
+                YAxis yAxisLeft = lineChart.getAxisLeft();
+                yAxisRight.setDrawLabels(false);
+                yAxisRight.setDrawAxisLine(false);
+                yAxisRight.setDrawGridLines(false);
+                yAxisLeft.setTextSize(13.0f);
+                yAxisLeft.setValueFormatter(yformatter);
+                LineDataSet dataset = new LineDataSet(entries, "명");
+                dataset.setValueFormatter(iValueFormatter);
+                LineData data = new LineData(dataset);
+                dataset.setColor(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
+                dataset.setCircleColor(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
+                dataset.setValueTextSize(10.0f);
+                dataset.setLineWidth(3);
+                lineChart.setData(data);
+                lineChart.animateY(1000);
 
 
 
+                s_date.setText(Integer.toString(c_date).substring(0,4) + "/" + Integer.toString(c_date).substring(4,6) + "/" +  Integer.toString(c_date).substring(6,8));
+            }
+        });
 
+
+        waitList(); // 고객 대기현황 리스트 가져오기
+        absenceList(); // 번호표 취소, 부재 고객 리스트 가져오기
         waitingTable(); // 고객 대기현황 표 생성
+        absenceTable(); // 고객 대기현황 표 생성
+
+    }
+
+    private void absenceList() {
+        Cursor cursor = mDBHelper.absence_list(license_number);
+        NumberTicketVO numberTicketVO;
+        absenceList = new ArrayList<>();
+
+        while (cursor.moveToNext()) {
+            numberTicketVO = new NumberTicketVO();
+            numberTicketVO.setTicket_code(cursor.getString(0));
+            numberTicketVO.setWait_number(cursor.getInt(1));
+            numberTicketVO.setMember_id(cursor.getString(2));
+            numberTicketVO.setThe_number(cursor.getInt(3));
+            numberTicketVO.setString_status(cursor.getString(4));
+
+            absenceList.add(numberTicketVO);
+        }
+    }
+
+    private void waitList() {
+        Cursor cursor = mDBHelper.wait_list(license_number);
+        NumberTicketVO numberTicketVO;
+        waitList = new ArrayList<>();
+
+        while (cursor.moveToNext()) {
+            numberTicketVO = new NumberTicketVO();
+            numberTicketVO.setTicket_code(cursor.getString(0));
+            numberTicketVO.setWait_number(cursor.getInt(1));
+            numberTicketVO.setMember_id(cursor.getString(2));
+            numberTicketVO.setThe_number(cursor.getInt(3));
+            numberTicketVO.setString_status(cursor.getString(4));
+
+            waitList.add(numberTicketVO);
+        }
+    }
+
+    private void absenceTable() {
+        TableLayout tableLayout = findViewById(R.id.absence_table);
+        TableRow tableRow;
+        TextView wait_num, customer, count, status;
+
+        TableRow.LayoutParams tableRowParams = new TableRow.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ); // table row
+
+        TableRow.LayoutParams cellParams = new TableRow.LayoutParams(
+                0,
+                TableRow.LayoutParams.MATCH_PARENT
+        ); // table cell
+        cellParams.rightMargin=1;
+
+        for ( int i = 0; i < absenceList.size(); i++) {
+            tableRow = new TableRow(this);
+            wait_num = new TextView(this);
+            customer = new TextView(this);
+            count = new TextView(this);
+            status = new TextView(this);
+
+            tableRow.setLayoutParams(tableRowParams);
+            wait_num.setLayoutParams(cellParams);
+            customer.setLayoutParams(cellParams);
+            count.setLayoutParams(cellParams);
+            status.setLayoutParams(cellParams);
+
+            tableRow.setPadding(1,1,1,1);
+
+            wait_num.setBackgroundColor(Color.WHITE);
+            customer.setBackgroundColor(Color.WHITE);
+            count.setBackgroundColor(Color.WHITE);
+            status.setBackgroundColor(Color.WHITE);
+            Log.e("ddd", absenceList.get(i)+"");
+
+            wait_num.setText(absenceList.get(i).getTicket_code());
+            customer.setText(absenceList.get(i).getMember_id());
+            count.setText(absenceList.get(i).getThe_number()+"명");
+            status.setText(absenceList.get(i).getString_status());
+
+            tableRow.addView(wait_num);
+            tableRow.addView(customer);
+            tableRow.addView(count);
+            tableRow.addView(status);
+
+            tableLayout.addView(tableRow);
+        }
     }
 
     private void waitingTable() {
@@ -135,38 +408,46 @@ public class StoreActivity extends AppCompatActivity {
         TableRow.LayoutParams tableRowParams = new TableRow.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
-        );
+        ); // table row
 
         TableRow.LayoutParams cellParams = new TableRow.LayoutParams(
                 0,
                 TableRow.LayoutParams.MATCH_PARENT
-        );
-//        LinearLayout.LayoutParams tableRowParams = new LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.MATCH_PARENT,
-//                LinearLayout.LayoutParams.WRAP_CONTENT
-//        );
+        ); // table cell
+        cellParams.rightMargin=1;
 
-
-        for ( int i = 0; i < 3; i++) {
+        for ( int i = 0; i < waitList.size(); i++) {
             tableRow = new TableRow(this);
-            tableRow.setLayoutParams(tableRowParams);
-
             wait_num = new TextView(this);
-            wait_num.setLayoutParams(cellParams);
-
             customer = new TextView(this);
-            wait_num.setLayoutParams(cellParams);
-
             count = new TextView(this);
-            wait_num.setLayoutParams(cellParams);
-
             status = new TextView(this);
-            wait_num.setLayoutParams(cellParams);
 
-            wait_num.setText(i);
+            tableRow.setLayoutParams(tableRowParams);
+            wait_num.setLayoutParams(cellParams);
+            customer.setLayoutParams(cellParams);
+            count.setLayoutParams(cellParams);
+            status.setLayoutParams(cellParams);
+
+            tableRow.setPadding(1,1,1,1);
+
+            wait_num.setBackgroundColor(Color.WHITE);
+            customer.setBackgroundColor(Color.WHITE);
+            count.setBackgroundColor(Color.WHITE);
+            status.setBackgroundColor(Color.WHITE);
+            Log.e("ddd", waitList.get(i)+"");
+
+
+            wait_num.setText(waitList.get(i).getTicket_code());
+            customer.setText(waitList.get(i).getMember_id());
+            count.setText(waitList.get(i).getThe_number()+"명");
+            status.setText(waitList.get(i).getString_status());
+
+            wait_num.setText("11");
             customer.setText("11");
             count.setText("11");
             status.setText("11");
+
 
             tableRow.addView(wait_num);
             tableRow.addView(customer);

@@ -93,11 +93,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     //카테고리
     private List<CategorieVO> cateList;
     private ImageView cate_img;
-    //
     private int connect = 1;
     private int connect2=2;
     private String Minor = "";
     private SwipeRefreshLayout mSwipeRefreshLayout;
+
     // GPS
     private GpsTracker gpsTracker;
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
@@ -228,6 +228,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         storeAdapter = new CustomAdapter<StoreVO>(storeList) {
             @Override
             public View getView(final int idx, View view, ViewGroup parent) {
+                Log.e("position", idx+"");
                 //notifyDataSetChanged();
                 view = getLayoutInflater().inflate(R.layout.store_list_item, null);
                 String license_number = storeList.get(idx).getLicense_number();
