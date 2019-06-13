@@ -1,0 +1,142 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/* 일별통계 */
+#today_stats {
+	float: right;
+}
+
+/* 매장탭 */
+#store_name {
+	float: left;
+}
+
+#today_stats a {
+	padding: 5px 15px;
+    border: 1px solid #BDBDBD;
+    background-color: #FFFFFF;
+    color: #000000;
+    font-size: 16px;
+}
+
+#today_stats a:hover {
+	text-decoration: none;
+}
+
+.chart_form {
+	/* background-color: #fff; */
+	width: 1200px;
+	height: 100%;
+	margin: 50px auto;
+}
+
+.chart_form h2 {
+	text-align: center;
+	clear: both;
+}
+
+/* 차트 테이블 */
+#chart_table {
+	border-collapse: collapse;
+	border: 1px solid;
+	margin: 0 auto;
+}
+
+#chart_table th {
+	border: 1px solid;
+}
+
+#chart_table td {
+	border: 1px solid;
+}
+
+/* chart */
+#chart_box {
+	margin: 100px auto 180px;
+	width: 1200px;
+	height: 100%;
+	/* border: 1px solid black; */
+}
+
+/* 날짜 글씨 */
+#today {
+	font-size: 18px;
+}
+
+/* 차트 부분 */
+#chart {
+	position:absolute;
+	width:800px;
+	height: 310px;
+	/* border: 1px solid green; */
+	background-color: #ffffff; 
+}
+
+#chart svg {
+	background-color: #fafafa;
+}
+
+/* < 이전버튼 다음버튼 > */ 
+#prev, #next {
+	background: transparent;
+	border: none;
+	color: #718dff;
+}
+
+/* 팀단위 */
+#team {
+	background-color: #fafafa;
+	position:relative;
+  	width:300px;
+  	left:850px;
+  	top: 30px;
+  	height:130px;
+  	border-left: 3px solid #718dff;
+}
+
+#chart_box h4 {
+	font-size: 22px;
+	font-weight: normal;
+	padding: 20px;
+}
+
+/* 대기자 */
+#waiting {
+	background-color: #fafafa;
+	margin-top: 10px;
+	position:relative;
+	width:300px;
+	left:850px;
+	top: 55px;
+	height: 130px;
+	border-left: 3px solid #718dff;
+}
+.divider_sh .line {
+	margin: 30px auto 20px;
+	width: 1200px;
+	border: 1px solid #343a40;
+	clear: both;
+}
+.menu {
+	float: right;
+	list-style: none;
+}
+
+.menu li {
+	float: left;
+}
+
+.menu button {
+	background-color: transparent;
+	border: none;
+	padding: 0 6px;
+}
+
+.menu button:hover{
+	background-color: transparent;
+	border: none;
+	color: #718dff;
+	cursor: pointer;
+}
