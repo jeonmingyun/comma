@@ -1,7 +1,5 @@
 package com.org.ticketzone.domain;
 
-import java.util.List;
-
 import lombok.Data;
 
 @Data
@@ -13,5 +11,6 @@ public class StoreMenuVO {
 	private String store_note;
 	private String license_number;
 	private int count;
-	
+	private String reg_date;
+
 }

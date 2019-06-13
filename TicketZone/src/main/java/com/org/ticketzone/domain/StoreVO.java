@@ -1,5 +1,6 @@
 package com.org.ticketzone.domain;
 
+
 import lombok.Data;
 
 @Data
@@ -22,6 +23,6 @@ public class StoreVO {
 	private String sido;
 	private String sigoon;
 	private String time;
-	private String time2;
-	
+	private String time2;	
+	private String reg_date;
 }

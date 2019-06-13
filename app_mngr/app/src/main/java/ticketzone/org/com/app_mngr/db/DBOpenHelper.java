@@ -155,6 +155,12 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         mngrdb.execSQL(sqlUpdate, new String[] {max_num, license_number});
     }
 
+    public void updateStore_status(String license_number, String store_status){
+        mngrdb = this.getWritableDatabase();
+        String sqlUpdate = "update store set store_status = ? where license_number = ?";
+        mngrdb.execSQL(sqlUpdate, new String[] {store_status, license_number});
+    }
+
 
 
     // StoreMenu
@@ -221,6 +227,13 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         return member_list;
     }
 
+    public Cursor ChartTicket(String C_date){
+        mngrdb = this.getReadableDatabase();
+        Cursor member_list = mngrdb.rawQuery ("select substr(ticket_reg,10,2) as ticket_reg, sum(the_number) as the_number from numberticket where ticket_code like ? ||'1111111112' ||'%' group by substr(ticket_reg,10,2) order by substr(ticket_reg,10,2)", new String[] {C_date});
+
+        return member_list;
+    }
+
     public Cursor selectWating(String license_number){
          mngrdb = this.getWritableDatabase();
         Cursor member_list = mngrdb.rawQuery("select count(ticket_code) || '팀' as ticket_code from numberticket where ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ? and ticket_status = 0", new String[] {license_number});
@@ -268,8 +281,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 "from numberticket\n" +
                 "where ticket_code like strftime('%Y%m%d', 'now') || '%' \n" +
                 "and license_number = ?\n" +
-                "and ticket_status = 2\n" +
-                "or ticket_status = 3\n" +
+                "and ticket_status in (2,3)\n" +
                 "order by ticket_code", new String[] {license_number});
         return member_list;
     }

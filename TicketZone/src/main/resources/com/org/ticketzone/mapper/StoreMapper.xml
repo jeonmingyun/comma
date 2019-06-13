@@ -115,5 +115,38 @@
 		where address_name like #{sido} || ' ' || #{sigoon} || '%'
 		]]>	
 	</select>
-
+	
+	<select id="store_menu" resultType="com.org.ticketzone.domain.StoreMenuVO">
+		<![CDATA[
+		select menu_code, substr(menu_name,0,instr(menu_name,'-')-1) as menu_cate, substr(menu_name,instr(menu_name, '-')+1) as menu_name, menu_price, store_note
+		from store_menu
+		where menu_code like #{license_number} || '%'
+		and substr(menu_name,0,instr(menu_name,'-')-1) = 
+		(select substr(menu_name,0,instr(menu_name,'-')-1) as menu_cate 
+		from store_menu
+		where menu_code like #{license_number} || '%'
+		and rownum <= 1)
+		]]>
+	</select>
+	
+	<select id="store_cate" resultType="com.org.ticketzone.domain.StoreMenuVO">
+		<![CDATA[
+		select substr(menu_name,0,instr(menu_name,'-')-1) as menu_cate, max(rowid), 
+		to_number(max(substr(menu_code,(instr(menu_code,'M')+1)))) as menu_code
+		from store_menu
+		where menu_code like #{license_number} || '%'
+		group by substr(menu_name,0,instr(menu_name,'-')-1)
+		order by menu_code
+		]]>
+	</select>
+	
+	<select id="click_cate" resultType="com.org.ticketzone.domain.StoreMenuVO">
+		<![CDATA[
+			select menu_code, substr(menu_name,0,instr(menu_name,'-')-1) as menu_cate,
+			substr(menu_name,instr(menu_name, '-')+1) as menu_name, menu_price, store_note
+			from store_menu
+			where menu_code like #{license_number} || '%'
+			and substr(menu_name,0,instr(menu_name,'-')-1) like #{menu_cate}
+		]]>
+	</select>
 </mapper>

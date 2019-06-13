@@ -13,7 +13,7 @@ import org.json.JSONObject;
 public class DBOpenHelper extends SQLiteOpenHelper{
 
 
-    private static final int DB_VERSION = 17;
+    private static final int DB_VERSION = 25;
     private static final String DB_NAME = "SQLite.db";
     public static SQLiteDatabase mdb;
 

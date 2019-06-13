@@ -3,6 +3,7 @@ package com.org.ticketzone.mapper;
 import java.util.ArrayList;
 
 import com.org.ticketzone.domain.StoreCriteria;
+import com.org.ticketzone.domain.StoreMenuVO;
 import com.org.ticketzone.domain.StoreVO;
 
 public interface StoreMapper {
@@ -29,4 +30,8 @@ public interface StoreMapper {
 	public int searchTotal(StoreVO store);
 	
 	public ArrayList<StoreVO> getListWithSearchPaging(StoreCriteria cri);
+	
+	public ArrayList<StoreMenuVO> store_menu(String license_number);
+	public ArrayList<StoreMenuVO> store_cate(String license_number);
+	public ArrayList<StoreMenuVO> click_cate(StoreMenuVO menu);
 }
