@@ -24,8 +24,7 @@
 <body>
 	<%@include file="/WEB-INF/views/include/Mngrheader.jsp"%>
 	
-	<div class="chart_form">
-
+<div class="chart_form">
 		<input type="hidden" id="select_license_number"
 			value="${param.license_number}"> <select
 			name="license_number" id="storelist">
@@ -42,7 +41,7 @@
 	<h2>일별 시간대별 인원통계</h2>
 	<div class="divider_1"><div class="line"></div></div>
 	
-	<div id="chart_form">
+	<div id="chart_box">
 		<!-- chart -->
 		<div id="chart">
 			<div id="today" style="text-align: center;"></div>
@@ -59,7 +58,7 @@
 			<h4>대기자</h4> 
 		</div>
 	</div>	<!-- chart_form -->
-
+</div>
 
 	
 
