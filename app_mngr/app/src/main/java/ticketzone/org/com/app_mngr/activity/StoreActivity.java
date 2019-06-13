@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.style.BackgroundColorSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -42,13 +43,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.crypto.BadPaddingException;
+
 import ticketzone.org.com.app_mngr.R;
 import ticketzone.org.com.app_mngr.Task.JsonArrayTask;
 import ticketzone.org.com.app_mngr.db.DBOpenHelper;
+import ticketzone.org.com.app_mngr.db.DBTable;
+import ticketzone.org.com.app_mngr.vo.NumberTicketVO;
 
 public class StoreActivity extends AppCompatActivity {
     private LineChart lineChart;
     private List<Entry> entries;
+    private List<NumberTicketVO> waitList, absenceList;
     private TextView store_name, wait_count, t_wait, t_success, t_absence, t_cancel;
     private DBOpenHelper mDBHelper;
     private ImageView storeimg;
@@ -111,17 +117,114 @@ public class StoreActivity extends AppCompatActivity {
             wait_count.setText(cursor1.getString(0));
         }
         /*테이블 채우는 작업*/
-        Cursor cursor2 = mDBHelper.ticketStatus(license_number);
-        while (cursor2.moveToNext()){
-            t_wait.setText(cursor2.getString(0));
-            t_success.setText(cursor2.getString(1));
-            t_cancel.setText(cursor2.getString(2));
-            t_absence.setText(cursor2.getString(3));
-        }
+        Cursor ticket_wait = mDBHelper.t_wait(license_number);
+        ticket_wait.moveToNext();
+        t_wait.setText(ticket_wait.getString(0));
 
-        lineChart = (LineChart)findViewById(R.id.chart);
+        Cursor ticket_success = mDBHelper.t_success(license_number);
+        ticket_success.moveToNext();
+        t_success.setText(ticket_success.getString(0));
 
+        Cursor ticket_absence = mDBHelper.t_absence(license_number);
+        ticket_absence.moveToNext();
+        t_absence.setText(ticket_absence.getString(0));
+
+        Cursor ticket_cancel = mDBHelper.t_cancel(license_number);
+        ticket_cancel.moveToNext();
+        t_cancel.setText(ticket_cancel.getString(0));
+
+        lineChart = findViewById(R.id.chart);
+
+        waitList(); // 고객 대기현황 리스트 가져오기
+        absenceList(); // 번호표 취소, 부재 고객 리스트 가져오기
         waitingTable(); // 고객 대기현황 표 생성
+        absenceTable(); // 고객 대기현황 표 생성
+
+    }
+
+    private void absenceList() {
+        Cursor cursor = mDBHelper.absence_list(license_number);
+        NumberTicketVO numberTicketVO;
+        absenceList = new ArrayList<>();
+
+        while (cursor.moveToNext()) {
+            numberTicketVO = new NumberTicketVO();
+            numberTicketVO.setTicket_code(cursor.getString(0));
+            numberTicketVO.setWait_number(cursor.getInt(1));
+            numberTicketVO.setMember_id(cursor.getString(2));
+            numberTicketVO.setThe_number(cursor.getInt(3));
+            numberTicketVO.setString_status(cursor.getString(4));
+
+            absenceList.add(numberTicketVO);
+        }
+    }
+
+    private void waitList() {
+        Cursor cursor = mDBHelper.wait_list(license_number);
+        NumberTicketVO numberTicketVO;
+        waitList = new ArrayList<>();
+
+        while (cursor.moveToNext()) {
+            numberTicketVO = new NumberTicketVO();
+            numberTicketVO.setTicket_code(cursor.getString(0));
+            numberTicketVO.setWait_number(cursor.getInt(1));
+            numberTicketVO.setMember_id(cursor.getString(2));
+            numberTicketVO.setThe_number(cursor.getInt(3));
+            numberTicketVO.setString_status(cursor.getString(4));
+
+            waitList.add(numberTicketVO);
+        }
+    }
+
+    private void absenceTable() {
+        TableLayout tableLayout = findViewById(R.id.absence_table);
+        TableRow tableRow;
+        TextView wait_num, customer, count, status;
+
+        TableRow.LayoutParams tableRowParams = new TableRow.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ); // table row
+
+        TableRow.LayoutParams cellParams = new TableRow.LayoutParams(
+                0,
+                TableRow.LayoutParams.MATCH_PARENT
+        ); // table cell
+        cellParams.rightMargin=1;
+
+        for ( int i = 0; i < absenceList.size(); i++) {
+            tableRow = new TableRow(this);
+            wait_num = new TextView(this);
+            customer = new TextView(this);
+            count = new TextView(this);
+            status = new TextView(this);
+
+            tableRow.setLayoutParams(tableRowParams);
+            wait_num.setLayoutParams(cellParams);
+            customer.setLayoutParams(cellParams);
+            count.setLayoutParams(cellParams);
+            status.setLayoutParams(cellParams);
+
+            tableRow.setPadding(1,1,1,1);
+
+            wait_num.setBackgroundColor(Color.WHITE);
+            customer.setBackgroundColor(Color.WHITE);
+            count.setBackgroundColor(Color.WHITE);
+            status.setBackgroundColor(Color.WHITE);
+            Log.e("ddd", absenceList.get(i)+"");
+
+            wait_num.setText(absenceList.get(i).getTicket_code());
+            customer.setText(absenceList.get(i).getMember_id());
+            count.setText(absenceList.get(i).getThe_number()+"명");
+            status.setText(absenceList.get(i).getString_status());
+
+            tableRow.addView(wait_num);
+            tableRow.addView(customer);
+            tableRow.addView(count);
+            tableRow.addView(status);
+
+            tableLayout.addView(tableRow);
+        }
     }
 
     private void waitingTable() {
@@ -132,38 +235,39 @@ public class StoreActivity extends AppCompatActivity {
         TableRow.LayoutParams tableRowParams = new TableRow.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
-        );
+        ); // table row
 
         TableRow.LayoutParams cellParams = new TableRow.LayoutParams(
                 0,
                 TableRow.LayoutParams.MATCH_PARENT
-        );
-//        LinearLayout.LayoutParams tableRowParams = new LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.MATCH_PARENT,
-//                LinearLayout.LayoutParams.WRAP_CONTENT
-//        );
+        ); // table cell
+        cellParams.rightMargin=1;
 
-
-        for ( int i = 0; i < 3; i++) {
+        for ( int i = 0; i < waitList.size(); i++) {
             tableRow = new TableRow(this);
-            tableRow.setLayoutParams(tableRowParams);
-
             wait_num = new TextView(this);
-            wait_num.setLayoutParams(cellParams);
-
             customer = new TextView(this);
-            wait_num.setLayoutParams(cellParams);
-
             count = new TextView(this);
-            wait_num.setLayoutParams(cellParams);
-
             status = new TextView(this);
-            wait_num.setLayoutParams(cellParams);
 
-            wait_num.setText(i);
-            customer.setText("11");
-            count.setText("11");
-            status.setText("11");
+            tableRow.setLayoutParams(tableRowParams);
+            wait_num.setLayoutParams(cellParams);
+            customer.setLayoutParams(cellParams);
+            count.setLayoutParams(cellParams);
+            status.setLayoutParams(cellParams);
+
+            tableRow.setPadding(1,1,1,1);
+
+            wait_num.setBackgroundColor(Color.WHITE);
+            customer.setBackgroundColor(Color.WHITE);
+            count.setBackgroundColor(Color.WHITE);
+            status.setBackgroundColor(Color.WHITE);
+            Log.e("ddd", waitList.get(i)+"");
+
+            wait_num.setText(waitList.get(i).getTicket_code());
+            customer.setText(waitList.get(i).getMember_id());
+            count.setText(waitList.get(i).getThe_number()+"명");
+            status.setText(waitList.get(i).getString_status());
 
             tableRow.addView(wait_num);
             tableRow.addView(customer);
