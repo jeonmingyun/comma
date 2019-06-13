@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 public class DBOpenHelper extends SQLiteOpenHelper {
 
-    private static final int DB_VERSION = 15;
+    private static final int DB_VERSION = 16;
     private static final String DB_NAME = "SQLite.db";
     public static SQLiteDatabase mngrdb;
 
@@ -161,8 +161,6 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         mngrdb.execSQL(sqlUpdate, new String[] {store_status, license_number});
     }
 
-
-
     // StoreMenu
     public Cursor selectAllStoreMenu() {
         mngrdb = this.getWritableDatabase();
@@ -172,6 +170,14 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         return member_list;
     }
 
+    public Cursor selectStoreMenu(String license_number) {
+        mngrdb = this.getWritableDatabase();
+        String menu_code = license_number+'%';
+        String sql = "select * from store_menu where menu_code like \'" + menu_code +"\'";
+        Cursor store_list = mngrdb.rawQuery(sql, null);
+
+        return store_list;
+    }
 
     public void insertStoreMenu(JSONArray menuList) {
         mngrdb = this.getWritableDatabase();
@@ -181,7 +187,6 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 JSONObject jobj = new JSONObject(menuList.get(i).toString());
                 ContentValues values = new ContentValues();
                 values.put("menu_code", jobj.getString("menu_code"));
-                values.put("menu_cate", jobj.getString("menu_cate"));
                 values.put("menu_name", jobj.getString("menu_name"));
                 values.put("menu_price", jobj.getString("menu_price"));
                 values.put("store_note", jobj.getString("store_note"));

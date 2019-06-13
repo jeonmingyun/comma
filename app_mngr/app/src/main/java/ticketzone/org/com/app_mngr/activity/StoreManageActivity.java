@@ -7,7 +7,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -16,11 +19,20 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 import ticketzone.org.com.app_mngr.R;
 import ticketzone.org.com.app_mngr.db.DBOpenHelper;
+import ticketzone.org.com.app_mngr.expandableRecyclerview.StoreMenuAdapter;
+import ticketzone.org.com.app_mngr.expandableRecyclerview.StoreMenuItem;
+import ticketzone.org.com.app_mngr.expandableRecyclerview.StoreMenuTitle;
+import ticketzone.org.com.app_mngr.vo.StoreMenuVO;
 
 public class StoreManageActivity extends AppCompatActivity {
 
@@ -30,6 +42,7 @@ public class StoreManageActivity extends AppCompatActivity {
     private int mHour, mMinute;
     private TimePickerDialog.OnTimeSetListener mTimeSetListener;
     private DBOpenHelper mDBHelper;
+    private ArrayList<StoreMenuVO> menuList;
     private TextView storename;
     private String store_time;
     private String store_time2;
@@ -59,7 +72,67 @@ public class StoreManageActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         TabHost();
         TimeSet();
+        selectStoreMenu(license_number);// 메뉴 정보를 가져옴
+        Log.e("dddd", menuList.toString());
+        setMenuList(); // 메뉴 리스트 화면에 그리기
 
+    }
+
+    private void setMenuList() {
+        RecyclerView recyclerView = findViewById(R.id.menu_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        ArrayList<StoreMenuTitle> menuTitles = new ArrayList<>();
+        ArrayList<StoreMenuItem> menuItems;
+        StoreMenuTitle menuTitle;
+        StoreMenuVO storeMenuVO;
+        Map<String,ArrayList<StoreMenuItem>> menuHash = new HashMap<>();
+        Set set;// hashMap key 가져오기
+        Iterator iterator;
+
+        for (int i = 0; i < menuList.size(); i++) {
+            String[] categorie;
+            storeMenuVO = menuList.get(i);
+            categorie = storeMenuVO.getMenu_name().split("-");
+            Log.e("ddd vo", storeMenuVO.toString());
+
+            if( menuHash.get(categorie[0]) == null) {
+                menuItems = new ArrayList<>();
+                menuHash.put(categorie[0], menuItems); // key : store license number, value : store menu items
+            }
+
+            menuItems = menuHash.get(categorie[0]);
+            menuItems.add(new StoreMenuItem(storeMenuVO));// store menu item 추가
+            menuHash.put(categorie[0], menuItems);
+
+        }
+
+        set = menuHash.keySet();// menuHash key 가져오기
+        iterator = set.iterator();
+
+        while(iterator.hasNext()) {
+            String key = (String) iterator.next();
+            menuTitle = new StoreMenuTitle(key, menuHash.get(key));
+            menuTitles.add(menuTitle);
+        }
+
+        StoreMenuAdapter adapter = new StoreMenuAdapter(menuTitles);
+        recyclerView.setAdapter(adapter);
+    }
+
+    private void selectStoreMenu(String license_number) {
+        menuList = new ArrayList<>();
+        StoreMenuVO storeMenuVO;
+        Cursor cursor = mDBHelper.selectStoreMenu(license_number);
+
+        while(cursor.moveToNext()) {
+            storeMenuVO = new StoreMenuVO();
+            storeMenuVO.setMenu_code(cursor.getString(0));
+            storeMenuVO.setMenu_name(cursor.getString(1));
+            storeMenuVO.setMenu_price(cursor.getString(2));
+            storeMenuVO.setStore_note(cursor.getString(3));
+            menuList.add(storeMenuVO);
+        }
     }
 
     //뒤로가기 기능
@@ -82,7 +155,7 @@ public class StoreManageActivity extends AppCompatActivity {
         TabHost host=(TabHost)findViewById(R.id.storemanage);
         host.setup();
 
-        TabHost.TabSpec spec = host.newTabSpec("매장관리");
+        TabHost.TabSpec spec = host.newTabSpec("store_mngr");
         spec.setIndicator("매장관리", null);
         spec.setContent(R.id.tab_content1);
         host.addTab(spec);
@@ -125,7 +198,7 @@ public class StoreManageActivity extends AppCompatActivity {
             }
         });
 
-        spec = host.newTabSpec("번호표 발급 설정");
+        spec = host.newTabSpec("num_ticket");
         spec.setIndicator("번호표 발급 설정", null);
         spec.setContent(R.id.tab_content2);
         host.addTab(spec);
@@ -159,9 +232,9 @@ public class StoreManageActivity extends AppCompatActivity {
             }
         });
 
-        spec = host.newTabSpec("메뉴설정");
-        spec.setIndicator("메뉴설정",null);
-        spec.setContent(R.id.tab_content3);
+        spec = host.newTabSpec("menu");
+        spec.setIndicator("메뉴",null);
+        spec.setContent(R.id.menu);
         host.addTab(spec);
     }
 
