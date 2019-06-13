@@ -232,6 +232,29 @@ public class MainActivity extends AppCompatActivity {
         storeViewPager = findViewById(R.id.store_view_pager);
         storeAdapter = new StoreItemAdapter(getSupportFragmentManager(), storeList);
         storeViewPager.setAdapter(storeAdapter);
+        storeViewPager.setOffscreenPageLimit(6);
+        storeViewPager.setPageMargin(70);
+        storeViewPager.setPageTransformer(false, new ViewPager.PageTransformer(){
+
+            @Override
+            public void transformPage(View page, float position) {
+                int pageWidth = storeViewPager.getMeasuredWidth() - storeViewPager.getPaddingLeft() - storeViewPager.getPaddingRight();
+                int pageHeight = storeViewPager.getHeight();
+                int paddingLeft = storeViewPager.getPaddingLeft();
+                float transformPos = (float) (page.getLeft() - (storeViewPager.getScrollX() + paddingLeft)) / pageWidth;
+
+                final float normalizedposition = Math.abs(Math.abs(transformPos) - 1);
+                page.setAlpha(normalizedposition + 0.5f);
+
+                if(transformPos < -1){
+                    page.setTranslationY(0);
+                }else if(transformPos <= 1){
+                    page.setTranslationY(-pageHeight / 20);
+                }else {
+                    page.setTranslationY(0);
+                }
+            }
+        });
 
         CircleIndicator indicator = findViewById(R.id.indicator);
         indicator.setViewPager(storeViewPager);

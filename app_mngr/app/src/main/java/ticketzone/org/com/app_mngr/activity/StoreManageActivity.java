@@ -1,6 +1,8 @@
 package ticketzone.org.com.app_mngr.activity;
 
+import android.app.AlertDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -98,9 +100,28 @@ public class StoreManageActivity extends AppCompatActivity {
         TimeUpdate_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                mDBHelper.updateStore_time(license_number,TimeText.getText().toString(),TimeText2.getText().toString());
-                Toast.makeText(StoreManageActivity.this, "수정되었습니다.",Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(StoreManageActivity.this);
+                alertDialogBuilder.setTitle("수정");
+                alertDialogBuilder
+                        .setMessage("수정하시겠습니까?")
+                        .setCancelable(false)
+                        .setPositiveButton("확인",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        mDBHelper.updateStore_time(license_number,TimeText.getText().toString(),TimeText2.getText().toString());
+                                        Toast.makeText(StoreManageActivity.this, "수정되었습니다.",Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                        .setNegativeButton("취소",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
             }
         });
 
@@ -113,8 +134,28 @@ public class StoreManageActivity extends AppCompatActivity {
         MaxnumUpdate_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDBHelper.updateStore_maxnum(license_number,MaxNum.getText().toString());
-                Toast.makeText(StoreManageActivity.this, "수정되었습니다.",Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(StoreManageActivity.this);
+                alertDialogBuilder.setTitle("수정");
+                alertDialogBuilder
+                        .setMessage("수정하시겠습니까?")
+                        .setCancelable(false)
+                        .setPositiveButton("확인",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        mDBHelper.updateStore_maxnum(license_number,MaxNum.getText().toString());
+                                        Toast.makeText(StoreManageActivity.this, "수정되었습니다.",Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                        .setNegativeButton("취소",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
             }
         });
 
