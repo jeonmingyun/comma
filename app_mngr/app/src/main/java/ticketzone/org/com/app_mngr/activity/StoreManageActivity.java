@@ -20,6 +20,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import ticketzone.org.com.app_mngr.R;
+import ticketzone.org.com.app_mngr.Task.NetworkTask;
+import ticketzone.org.com.app_mngr.Task.SendDataSet;
 import ticketzone.org.com.app_mngr.db.DBOpenHelper;
 
 public class StoreManageActivity extends AppCompatActivity {
@@ -109,6 +111,11 @@ public class StoreManageActivity extends AppCompatActivity {
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+                                        NetworkTask networkTask = new NetworkTask("update_time"){
+                                        };
+                                        SendDataSet sds1 = new SendDataSet("license_number", license_number);
+                                        SendDataSet sds2 = new SendDataSet("store_time", TimeText.getText().toString() + '-' + TimeText2.getText().toString());
+                                       networkTask.execute(sds1,sds2);
                                         mDBHelper.updateStore_time(license_number,TimeText.getText().toString(),TimeText2.getText().toString());
                                         Toast.makeText(StoreManageActivity.this, "수정되었습니다.",Toast.LENGTH_SHORT).show();
                                     }
@@ -143,6 +150,11 @@ public class StoreManageActivity extends AppCompatActivity {
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+                                        NetworkTask networkTask = new NetworkTask("store_max"){
+                                        };
+                                        SendDataSet sds1 = new SendDataSet("license_number", license_number);
+                                        SendDataSet sds2 = new SendDataSet("max_number", MaxNum.getText().toString());
+                                        networkTask.execute(sds1,sds2);
                                         mDBHelper.updateStore_maxnum(license_number,MaxNum.getText().toString());
                                         Toast.makeText(StoreManageActivity.this, "수정되었습니다.",Toast.LENGTH_SHORT).show();
                                     }

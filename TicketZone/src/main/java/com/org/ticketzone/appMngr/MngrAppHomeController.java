@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.org.ticketzone.domain.NumberTicketVO;
 import com.org.ticketzone.domain.OwnerVO;
+import com.org.ticketzone.domain.StoreVO;
 import com.org.ticketzone.service.AppMngrService;
 import com.org.ticketzone.service.OwnerService;
 
@@ -88,6 +88,24 @@ public class MngrAppHomeController {
 		arr.add(appMngrService.M_chart());
 		System.out.println("도착");
 		return arr;		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/update_time", method = RequestMethod.POST)
+	public void update_time(@RequestBody StoreVO store) {
+		appMngrService.update_time(store);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/store_max", method = RequestMethod.POST)
+	public void store_max(@RequestBody StoreVO store) {
+		appMngrService.store_max(store);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/store_enable", method = RequestMethod.POST)
+	public void store_enable(@RequestBody StoreVO store) {
+		appMngrService.store_enable(store);
 	}
 
 }

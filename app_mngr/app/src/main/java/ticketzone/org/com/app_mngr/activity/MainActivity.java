@@ -281,12 +281,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.logout) {
-            Intent logoutIntent = new Intent(this, LoginActivity.class);
-            startActivity(logoutIntent);
-        }
+//        int id = item.getItemId();
+//
+//        if (id == R.id.logout) {
+//            Intent logoutIntent = new Intent(this, LoginActivity.class);
+//            startActivity(logoutIntent);
+//        }
         if (dtToggle.onOptionsItemSelected(item)) {
             return true;
         }
