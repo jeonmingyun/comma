@@ -26,10 +26,15 @@ public class AppMemFMService {
 	@ResponseBody
 	@RequestMapping(value = "/mem_set_fcm_token", method = RequestMethod.POST)
 	public String setFCM(HttpServletRequest request) {
-        String token = request.getParameter("Token");
-        // 설치 후 최초 실행시만 접속한 유저 token반환
-        // 최초 실행시 외에는 null반환
-		System.out.println(token);
+        String token_id = request.getParameter("Token");
+        
+        if(token_id != null) { // 설치 후 최초 실행시만 접속한 유저 token반환
+        	memberService.insertToken(token_id);
+        } else { // 최초 실행시 외에는 null반환
+        	System.out.println("~_~");
+        }
+
+		System.out.println(token_id);
 	    return "jsonView";
 	}
 

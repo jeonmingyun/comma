@@ -27,6 +27,7 @@ public interface AppMemMapper {
 	public NumberTicketVO[] MyTicket(NumberTicketVO vo);
 	public void TicketCancel(NumberTicketVO vo);
 	public void SyncTicket(NumberTicketVO vo);
+	public void insertToken(String token_id);
 	
 }
 

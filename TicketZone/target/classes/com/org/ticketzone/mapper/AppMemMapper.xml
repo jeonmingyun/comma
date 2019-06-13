@@ -14,7 +14,10 @@
 		where a.license_number = b.license_number
 		
 	</select>
-	
+	<insert id="insertToken">
+		insert into token(token_id)
+		values(#{token_id})
+	</insert>
 	<!-- 전체 메뉴가져오기 -->
 	<select id="menuList" resultType="com.org.ticketzone.domain.StoreMenuVO">
 		select * from store_menu

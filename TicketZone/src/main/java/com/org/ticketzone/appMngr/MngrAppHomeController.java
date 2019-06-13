@@ -89,5 +89,12 @@ public class MngrAppHomeController {
 		System.out.println("도착");
 		return arr;		
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/success_ticket", method = RequestMethod.POST)
+	public void success_ticket(@RequestBody NumberTicketVO vo) {
+		appMngrService.success_ticket(vo);
+		appMngrService.success_status(vo);
+	}
 
 }

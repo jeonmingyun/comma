@@ -326,7 +326,7 @@ public class StoreActivity extends AppCompatActivity {
             numberTicketVO.setWait_number(cursor.getInt(1));
             numberTicketVO.setMember_id(cursor.getString(2));
             numberTicketVO.setThe_number(cursor.getInt(3));
-            numberTicketVO.setString_status(cursor.getString(4));
+            numberTicketVO.setTicket_status(cursor.getString(4));
 
             absenceList.add(numberTicketVO);
         }
@@ -343,7 +343,7 @@ public class StoreActivity extends AppCompatActivity {
             numberTicketVO.setWait_number(cursor.getInt(1));
             numberTicketVO.setMember_id(cursor.getString(2));
             numberTicketVO.setThe_number(cursor.getInt(3));
-            numberTicketVO.setString_status(cursor.getString(4));
+            numberTicketVO.setTicket_status(cursor.getString(4));
 
             waitList.add(numberTicketVO);
         }
@@ -389,7 +389,13 @@ public class StoreActivity extends AppCompatActivity {
             wait_num.setText(absenceList.get(i).getTicket_code());
             customer.setText(absenceList.get(i).getMember_id());
             count.setText(absenceList.get(i).getThe_number()+"명");
-            status.setText(absenceList.get(i).getString_status());
+            String string_status = "";
+            if(absenceList.get(i).getTicket_status().equals("2")){
+                string_status = "발급취소";
+            } else if(absenceList.get(i).getTicket_status().equals("3")){
+                string_status = "부재";
+            }
+            status.setText(string_status);
 
             tableRow.addView(wait_num);
             tableRow.addView(customer);
@@ -437,17 +443,14 @@ public class StoreActivity extends AppCompatActivity {
             status.setBackgroundColor(Color.WHITE);
             Log.e("ddd", waitList.get(i)+"");
 
-
+            String ticket_status = "";
             wait_num.setText(waitList.get(i).getTicket_code());
             customer.setText(waitList.get(i).getMember_id());
             count.setText(waitList.get(i).getThe_number()+"명");
-            status.setText(waitList.get(i).getString_status());
-
-            wait_num.setText("11");
-            customer.setText("11");
-            count.setText("11");
-            status.setText("11");
-
+            if(waitList.get(i).getTicket_status().equals("0")){
+                ticket_status = "대기";
+            }
+            status.setText(ticket_status);
 
             tableRow.addView(wait_num);
             tableRow.addView(customer);

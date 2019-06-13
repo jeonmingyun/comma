@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Switch;
@@ -46,6 +47,7 @@ public class StoreItemFragment extends Fragment {
         store_name = view.findViewById(R.id.store_name);
         switchView = view.findViewById(R.id.switchView);
         mDBHelper = new DBOpenHelper(getContext());
+
 
         switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

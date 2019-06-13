@@ -80,4 +80,16 @@ public class AppMngrServiceImplement implements AppMngrService {
 		return mapper.M_chart();
 	}
 
+	@Override
+	public void success_ticket(NumberTicketVO vo) {
+		mapper.success_ticket(vo);
+		
+	}
+
+	@Override
+	public void success_status(NumberTicketVO vo) {
+		mapper.success_status(vo);
+		
+	}
+
 }

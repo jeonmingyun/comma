@@ -93,4 +93,10 @@ public class AppMemServiceImplement implements AppMemService {
 
 	}
 
+	@Override
+	public void insertToken(String token_id) {
+		mapper.insertToken(token_id);
+		
+	}
+
 }

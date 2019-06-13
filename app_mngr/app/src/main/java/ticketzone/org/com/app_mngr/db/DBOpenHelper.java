@@ -242,31 +242,31 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
     public Cursor t_wait(String license_number){
         mngrdb = this.getWritableDatabase();
-        Cursor member_list = mngrdb.rawQuery("select count(string_status) as wait from numberticket where string_status = 'wait' and ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ?", new String[] {license_number});
+        Cursor member_list = mngrdb.rawQuery("select count(string_status) as wait from numberticket where ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ? and ticket_status = 0", new String[] {license_number});
         return  member_list;
     }
 
     public Cursor t_success(String license_number){
         mngrdb = this.getWritableDatabase();
-        Cursor member_list = mngrdb.rawQuery("select count(string_status) as success from numberticket where string_status = 'success' and ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ?", new String[] {license_number});
+        Cursor member_list = mngrdb.rawQuery("select count(string_status) as success from numberticket where ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ? and ticket_status = 1", new String[] {license_number});
         return  member_list;
     }
 
     public Cursor t_absence(String license_number){
         mngrdb = this.getWritableDatabase();
-        Cursor member_list = mngrdb.rawQuery("select count(string_status) as absence from numberticket where string_status = 'absence' and ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ?", new String[] {license_number});
+        Cursor member_list = mngrdb.rawQuery("select count(string_status) as absence from numberticket where ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ? and ticket_status = 3", new String[] {license_number});
         return  member_list;
     }
 
     public Cursor t_cancel(String license_number){
         mngrdb = this.getWritableDatabase();
-        Cursor member_list = mngrdb.rawQuery("select count(string_status) as cancel from numberticket where string_status = 'cancel' and ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ?", new String[] {license_number});
+        Cursor member_list = mngrdb.rawQuery("select count(string_status) as cancel from numberticket where ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ? and ticket_status = 2", new String[] {license_number});
         return  member_list;
     }
 
     public Cursor wait_list(String license_number){
         mngrdb = this.getWritableDatabase();
-        Cursor member_list = mngrdb.rawQuery("select substr(ticket_code, 19) as ticket_code, wait_number, substr(member_id,5) as member_id, the_number || '명' as the_number, string_status\n" +
+        Cursor member_list = mngrdb.rawQuery("select substr(ticket_code, 19) as ticket_code, wait_number, substr(member_id,5) as member_id, the_number || '명' as the_number, ticket_status\n" +
                 "from numberticket\n" +
                 "where ticket_code like strftime('%Y%m%d', 'now') || '%' \n" +
                 "and license_number = ?\n" +
@@ -277,7 +277,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
     public Cursor absence_list(String license_number){
         mngrdb = this.getWritableDatabase();
-        Cursor member_list = mngrdb.rawQuery("select substr(ticket_code, 19) as ticket_code, wait_number, substr(member_id,5) as member_id, the_number || '명' as the_number, string_status\n" +
+        Cursor member_list = mngrdb.rawQuery("select substr(ticket_code, 19) as ticket_code, wait_number, substr(member_id,5) as member_id, the_number || '명' as the_number, ticket_status\n" +
                 "from numberticket\n" +
                 "where ticket_code like strftime('%Y%m%d', 'now') || '%' \n" +
                 "and license_number = ?\n" +
@@ -306,6 +306,33 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 e.printStackTrace();
             }
         }
+    }
+    public void successTicket(String license_number){
+        mngrdb = this.getWritableDatabase();
+        String sqlUpdate = "update numberticket\n"
+        + "set wait_number =\n"
+        + "case when wait_number = -1 then 0\n"
+        + "when ticket_status = 0 then (wait_number-1)\n"
+        + "when ticket_status = 1 then wait_number\n"
+        + "when ticket_status = 2 then 0\n"
+        + "when ticket_status = 3 then 0\n"
+        + "else wait_number end\n"
+        + "where ticket_code like strftime('%Y%m%d', 'now') || ? || '%'";
+        mngrdb.execSQL(sqlUpdate, new String[] {license_number});
+    }
+
+    public void successStatus(String license_number){
+        mngrdb = this.getWritableDatabase();
+        String sqlUpdate = "update numberticket\n"
+            +"set ticket_status =\n"
+            +"case when wait_number = -1 then 1\n"
+                +"when wait_number = 0 then 1\n"
+		    +"else ticket_status end, string_status =\n"
+        +"case when ticket_status = 1 then 'success'\n"
+		+"else string_status end\n"
+        +"where ticket_code like strftime('%Y%m%d', 'now') || ? || '%'\n"
+        +"and ticket_status not in(2,3)";
+        mngrdb.execSQL(sqlUpdate, new String[] {license_number});
     }
     public void deleteAllTable(){
         mngrdb = this.getWritableDatabase();
