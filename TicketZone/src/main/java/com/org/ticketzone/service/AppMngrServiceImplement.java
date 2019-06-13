@@ -80,4 +80,21 @@ public class AppMngrServiceImplement implements AppMngrService {
 		return mapper.M_chart();
 	}
 
+	@Override
+	public void update_time(StoreVO store) {
+		mapper.update_time(store);
+	}
+
+	@Override
+	public void store_max(StoreVO store) {
+		mapper.store_max(store);
+		
+	}
+
+	@Override
+	public void store_enable(StoreVO store) {
+		mapper.store_enable(store);
+		
+	}
+
 }

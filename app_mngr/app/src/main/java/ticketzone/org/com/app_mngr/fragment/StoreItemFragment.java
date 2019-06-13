@@ -19,6 +19,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import ticketzone.org.com.app_mngr.R;
+import ticketzone.org.com.app_mngr.Task.NetworkTask;
+import ticketzone.org.com.app_mngr.Task.SendDataSet;
 import ticketzone.org.com.app_mngr.activity.StoreActivity;
 import ticketzone.org.com.app_mngr.db.DBOpenHelper;
 
@@ -58,9 +60,19 @@ public class StoreItemFragment extends Fragment {
                 }
                 if(isChecked){
                     mDBHelper.updateStore_status(license_number,1+"");
+                    NetworkTask networkTask = new NetworkTask("store_enable"){
+                    };
+                    SendDataSet sds1 = new SendDataSet("license_number", license_number);
+                    SendDataSet sds2 = new SendDataSet("store_status", "1");
+                    networkTask.execute(sds1,sds2);
                     Log.e("on", "on");
                 }else {
                     mDBHelper.updateStore_status(license_number,0+"");
+                    NetworkTask networkTask = new NetworkTask("store_enable"){
+                    };
+                    SendDataSet sds1 = new SendDataSet("license_number", license_number);
+                    SendDataSet sds2 = new SendDataSet("store_status", "0");
+                    networkTask.execute(sds1,sds2);
                     Log.e("off", "off");
                 }
             }

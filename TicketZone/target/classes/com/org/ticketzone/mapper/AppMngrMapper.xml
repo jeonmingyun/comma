@@ -22,10 +22,7 @@
 	
 	
 	<select id="menuList" resultType="com.org.ticketzone.domain.StoreMenuVO">
-		<![CDATA[
-		select menu_code, substr(menu_name,0,instr(menu_name,'-')-1) as menu_cate, substr(menu_name,instr(menu_name, '-')+1) as menu_name, menu_price, store_note
-        from store_menu
-		]]>	 
+		select * from store_menu
 	</select>
 	
 	<select id="categorieList" resultType="com.org.ticketzone.domain.CategorieVO">
@@ -139,5 +136,23 @@
 		select a.*, b.today 
 		from chart a, today b
 		]]>
-	</select>	
+	</select>
+	
+	<update id="update_time">
+	 	update store
+	 	set store_time = #{store_time}
+	 	where license_number = #{license_number}
+	</update>	
+	
+	<update id="store_max">
+		update store
+		set max_number = #{max_number}
+		where license_number = #{license_number}
+	</update>
+	
+	<update id="store_enable">
+		update store
+		set store_status = #{store_status}
+		where license_number = #{license_number}
+	</update>
 </mapper>
