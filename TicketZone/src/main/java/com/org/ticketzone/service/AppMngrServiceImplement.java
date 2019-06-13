@@ -50,7 +50,7 @@ public class AppMngrServiceImplement implements AppMngrService {
 	@Override
 	public void M_issue_ticket(NumberTicketVO vo) {
 		mapper.M_issue_ticket(vo);
-		
+
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class AppMngrServiceImplement implements AppMngrService {
 	@Override
 	public void M_firstCode() {
 		mapper.M_firstCode();
-		
+
 	}
 
 	@Override
@@ -81,15 +81,30 @@ public class AppMngrServiceImplement implements AppMngrService {
 	}
 
 	@Override
+
 	public void success_ticket(NumberTicketVO vo) {
 		mapper.success_ticket(vo);
-		
+	}
+
+	public void update_time(StoreVO store) {
+		mapper.update_time(store);
 	}
 
 	@Override
+	public void store_max(StoreVO store) {
+		mapper.store_max(store);
+
+	}
+
+	@Override
+
 	public void success_status(NumberTicketVO vo) {
 		mapper.success_status(vo);
-		
+	}
+
+	public void store_enable(StoreVO store) {
+		mapper.store_enable(store);
+
 	}
 
 }

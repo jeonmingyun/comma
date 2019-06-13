@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         selectAllStore();
         setStoreViewPager(); //Store view pager;
 
+
         success_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -270,8 +271,6 @@ public class MainActivity extends AppCompatActivity {
         storeViewPager.setAdapter(storeAdapter);
         storeViewPager.setOffscreenPageLimit(6);
         storeViewPager.setPageMargin(70);
-
-
         storeViewPager.setPageTransformer(false, new ViewPager.PageTransformer(){
 
             @Override
@@ -318,12 +317,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.logout) {
-            Intent logoutIntent = new Intent(this, LoginActivity.class);
-            startActivity(logoutIntent);
-        }
+//        int id = item.getItemId();
+//
+//        if (id == R.id.logout) {
+//            Intent logoutIntent = new Intent(this, LoginActivity.class);
+//            startActivity(logoutIntent);
+//        }
         if (dtToggle.onOptionsItemSelected(item)) {
             return true;
         }

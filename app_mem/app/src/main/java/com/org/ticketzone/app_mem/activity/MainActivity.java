@@ -2,6 +2,7 @@ package com.org.ticketzone.app_mem.activity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
@@ -446,7 +447,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         // TabWidet의 background 설정
         for (int i = 0; i < host.getTabWidget().getChildCount(); i++) {
             View tabView = host.getTabWidget().getChildAt(i);
-
             tabView.setBackgroundResource(R.drawable.non_selected_border); // unselected
             tabView.getLayoutParams().height = 150; // TabHost 높이
         }
