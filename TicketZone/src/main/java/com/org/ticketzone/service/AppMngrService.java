@@ -20,4 +20,7 @@ public interface AppMngrService {
 	public void M_makeTicket(NumberTicketVO vo);
 	public void M_plusTicket(NumberTicketVO vo);
 	public NumberTicketVO[] M_chart();
+	public void update_time(StoreVO store);
+	public void store_max(StoreVO store);
+	public void store_enable(StoreVO store);
 }
