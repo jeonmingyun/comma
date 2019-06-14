@@ -2,7 +2,10 @@ package ticketzone.org.com.app_mngr.fragment;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -35,6 +39,7 @@ public class StoreItemFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
@@ -47,6 +52,11 @@ public class StoreItemFragment extends Fragment {
         store_img = view.findViewById(R.id.store_img);
         store_name = view.findViewById(R.id.store_name);
         switchView = view.findViewById(R.id.switchView);
+        ImageButton imageButton = view.findViewById(R.id.store_img);
+        GradientDrawable drawable = (GradientDrawable)getContext(). getDrawable(R.drawable.imageview);
+
+        imageButton.setBackground(drawable);
+        imageButton.setClipToOutline(true);
         mDBHelper = new DBOpenHelper(getContext());
 
         switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -94,7 +95,7 @@ public class StoreActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //TabHost
-        TabHost host=(TabHost)findViewById(R.id.store);
+        final TabHost host=(TabHost)findViewById(R.id.store);
         host.setup();
 
         TabHost.TabSpec spec = host.newTabSpec("tab1");
@@ -112,6 +113,38 @@ public class StoreActivity extends AppCompatActivity {
         spec.setContent(R.id.tab_content3);
         host.addTab(spec);
 
+        //tabhost textcolor 변경
+        for(int i = 0; i <host.getTabWidget().getChildCount(); i++){
+            View tabView = host.getTabWidget().getChildAt(i);
+            TextView tv = tabView.findViewById(android.R.id.title);
+            tv.setTextColor(Color.WHITE);
+        }
+        host.getTabWidget().getChildAt(host.getCurrentTab())
+                .setBackgroundResource(R.drawable.selected_border);
+        View tabView = host.getTabWidget().getChildAt(0);
+        TextView tv = tabView.findViewById(android.R.id.title);
+        tv.setTextColor(Color.rgb(113,141,255));
+
+        host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                for(int i = 0; i < host.getTabWidget().getChildCount(); i++){
+                    host.getTabWidget().getChildAt(i)
+                            .setBackgroundResource(R.drawable.non_selected_border);
+                    View tabView = host.getTabWidget().getChildAt(i);
+                    TextView tv = tabView.findViewById(android.R.id.title);
+                    tv.setTextColor(Color.WHITE);
+                }
+
+                host.getTabWidget().getChildAt(host.getCurrentTab())
+                        .setBackgroundResource(R.drawable.selected_border);
+                View tabView = host.getTabWidget().getChildAt(host.getCurrentTab());
+                TextView tv = tabView.findViewById(android.R.id.title);
+                tv.setTextColor(Color.rgb(113,141,255));
+            }
+        });
+
+
         /*이미지 불러오기*/
         Intent intent = getIntent();
         String s_name = intent.getExtras().getString("store_name");
@@ -122,7 +155,7 @@ public class StoreActivity extends AppCompatActivity {
         while(cursor.moveToNext()){
             store_name.setText(cursor.getString(8));
             license_number = cursor.getString(0);
-            Glide.with(this).load(url + cursor.getString(11) + "/" + cursor.getString(10) + "_" + cursor.getString(12)).into(storeimg);
+            Glide.with(this).load(url + cursor.getString(11) + "/" + cursor.getString(10) + "_" + cursor.getString(12)).centerCrop().into(storeimg);
         }
         /*대기인원 확인*/
         Cursor cursor1 = mDBHelper.selectWating(license_number);
@@ -381,9 +414,13 @@ public class StoreActivity extends AppCompatActivity {
             tableRow.setPadding(1,1,1,1);
 
             wait_num.setBackgroundColor(Color.WHITE);
+            wait_num.setGravity(Gravity.CENTER);
             customer.setBackgroundColor(Color.WHITE);
+            customer.setGravity(Gravity.CENTER);
             count.setBackgroundColor(Color.WHITE);
+            count.setGravity(Gravity.CENTER);
             status.setBackgroundColor(Color.WHITE);
+            status.setGravity(Gravity.CENTER);
             Log.e("ddd", absenceList.get(i)+"");
 
             wait_num.setText(absenceList.get(i).getTicket_code());
@@ -432,9 +469,13 @@ public class StoreActivity extends AppCompatActivity {
             tableRow.setPadding(1,1,1,1);
 
             wait_num.setBackgroundColor(Color.WHITE);
+            wait_num.setGravity(Gravity.CENTER);
             customer.setBackgroundColor(Color.WHITE);
+            customer.setGravity(Gravity.CENTER);
             count.setBackgroundColor(Color.WHITE);
+            count.setGravity(Gravity.CENTER);
             status.setBackgroundColor(Color.WHITE);
+            status.setGravity(Gravity.CENTER);
             Log.e("ddd", waitList.get(i)+"");
 
 

@@ -136,6 +136,7 @@
                                     android:id="@+id/prev"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/color"
                                     android:src="@drawable/left"/>
                                 <TextView
                                     android:id="@+id/s_date"
@@ -148,6 +149,7 @@
                                     android:id="@+id/next"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/color"
                                     android:src="@drawable/right"/>
                             </LinearLayout>
 
