@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.org.ticketzone.domain.NumberTicketVO;
 import com.org.ticketzone.domain.OwnerVO;
 import com.org.ticketzone.domain.StoreVO;
 import com.org.ticketzone.service.AppMngrService;
@@ -91,6 +92,11 @@ public class MngrAppHomeController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = "/success_ticket", method = RequestMethod.POST)
+	public void success_ticket(@RequestBody NumberTicketVO vo) {
+		appMngrService.success_ticket(vo);
+		appMngrService.success_status(vo);
+	}
 	@RequestMapping(value = "/update_time", method = RequestMethod.POST)
 	public void update_time(@RequestBody StoreVO store) {
 		appMngrService.update_time(store);

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -58,6 +59,7 @@ public class StoreItemFragment extends Fragment {
         imageButton.setBackground(drawable);
         imageButton.setClipToOutline(true);
         mDBHelper = new DBOpenHelper(getContext());
+
 
         switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

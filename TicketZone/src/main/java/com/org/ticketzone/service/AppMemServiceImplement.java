@@ -1,5 +1,7 @@
 package com.org.ticketzone.service;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Service;
 
 import com.org.ticketzone.domain.BeaconVO;
@@ -9,6 +11,7 @@ import com.org.ticketzone.domain.NumberTicketVO;
 import com.org.ticketzone.domain.OwnerVO;
 import com.org.ticketzone.domain.StoreMenuVO;
 import com.org.ticketzone.domain.StoreVO;
+import com.org.ticketzone.domain.TokenVO;
 import com.org.ticketzone.mapper.AppMemMapper;
 
 import lombok.AllArgsConstructor;
@@ -91,6 +94,24 @@ public class AppMemServiceImplement implements AppMemService {
 	public void SyncTicket(NumberTicketVO vo) {
 		mapper.SyncTicket(vo);		
 
+	}
+
+	@Override
+	public void insertToken(String token_id) {
+		mapper.insertToken(token_id);
+		
+	}
+
+	@Override
+	public ArrayList<TokenVO> tokenList(String token_id) {
+		// TODO Auto-generated method stub
+		return mapper.tokenList(token_id);
+	}
+
+	@Override
+	public void insertId(TokenVO token) {
+			mapper.insertId(token);
+	
 	}
 
 }

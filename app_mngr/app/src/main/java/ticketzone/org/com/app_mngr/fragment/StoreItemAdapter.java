@@ -25,7 +25,6 @@ public class StoreItemAdapter extends FragmentStatePagerAdapter {
 
     public StoreItemAdapter(FragmentManager fm, ArrayList<String> storeList) {
         super(fm);
-        Log.e("aa", storeList + "?");
         this.storeList = storeList;
     }
 

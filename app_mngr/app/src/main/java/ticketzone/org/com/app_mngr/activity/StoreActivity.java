@@ -3,22 +3,18 @@ package ticketzone.org.com.app_mngr.activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.os.Bundle;
+
 import android.provider.CalendarContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.style.BackgroundColorSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,10 +24,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -41,24 +35,14 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Entity;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-
-import javax.crypto.BadPaddingException;
 
 import ticketzone.org.com.app_mngr.R;
-import ticketzone.org.com.app_mngr.Task.JsonArrayTask;
 import ticketzone.org.com.app_mngr.db.DBOpenHelper;
-import ticketzone.org.com.app_mngr.db.DBTable;
 import ticketzone.org.com.app_mngr.vo.NumberTicketVO;
 
 public class StoreActivity extends AppCompatActivity {
@@ -359,7 +343,7 @@ public class StoreActivity extends AppCompatActivity {
             numberTicketVO.setWait_number(cursor.getInt(1));
             numberTicketVO.setMember_id(cursor.getString(2));
             numberTicketVO.setThe_number(cursor.getInt(3));
-            numberTicketVO.setString_status(cursor.getString(4));
+            numberTicketVO.setTicket_status(cursor.getString(4));
 
             absenceList.add(numberTicketVO);
         }
@@ -376,7 +360,7 @@ public class StoreActivity extends AppCompatActivity {
             numberTicketVO.setWait_number(cursor.getInt(1));
             numberTicketVO.setMember_id(cursor.getString(2));
             numberTicketVO.setThe_number(cursor.getInt(3));
-            numberTicketVO.setString_status(cursor.getString(4));
+            numberTicketVO.setTicket_status(cursor.getString(4));
 
             waitList.add(numberTicketVO);
         }
@@ -426,7 +410,13 @@ public class StoreActivity extends AppCompatActivity {
             wait_num.setText(absenceList.get(i).getTicket_code());
             customer.setText(absenceList.get(i).getMember_id());
             count.setText(absenceList.get(i).getThe_number()+"명");
-            status.setText(absenceList.get(i).getString_status());
+            String string_status = "";
+            if(absenceList.get(i).getTicket_status().equals("2")){
+                string_status = "발급취소";
+            } else if(absenceList.get(i).getTicket_status().equals("3")){
+                string_status = "부재";
+            }
+            status.setText(string_status);
 
             tableRow.addView(wait_num);
             tableRow.addView(customer);
@@ -478,17 +468,14 @@ public class StoreActivity extends AppCompatActivity {
             status.setGravity(Gravity.CENTER);
             Log.e("ddd", waitList.get(i)+"");
 
-
+            String ticket_status = "";
             wait_num.setText(waitList.get(i).getTicket_code());
             customer.setText(waitList.get(i).getMember_id());
             count.setText(waitList.get(i).getThe_number()+"명");
-            status.setText(waitList.get(i).getString_status());
-
-            wait_num.setText("11");
-            customer.setText("11");
-            count.setText("11");
-            status.setText("11");
-
+            if(waitList.get(i).getTicket_status().equals("0")){
+                ticket_status = "대기";
+            }
+            status.setText(ticket_status);
 
             tableRow.addView(wait_num);
             tableRow.addView(customer);

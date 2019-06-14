@@ -9,18 +9,37 @@ import com.org.ticketzone.domain.StoreVO;
 
 public interface AppMngrMapper {
 	public OwnerVO[] ownerList();
+
 	public MemberVO[] memberList();
+
 	public StoreVO[] storeList(String owner_id);
+
 	public StoreMenuVO[] menuList();
+
 	public CategorieVO[] categorieList();
+
 	public NumberTicketVO[] NumberTicketList();
+
 	public void M_issue_ticket(NumberTicketVO vo);
+
 	public String M_codeSelect();
+
 	public void M_firstCode();
+
 	public void M_makeTicket(NumberTicketVO vo);
+
 	public void M_plusTicket(NumberTicketVO vo);
+
 	public NumberTicketVO[] M_chart();
+
+	public void success_ticket(NumberTicketVO vo);
+
+	public void success_status(NumberTicketVO vo);
+
 	public void update_time(StoreVO store);
+
 	public void store_max(StoreVO store);
+
 	public void store_enable(StoreVO store);
+
 }

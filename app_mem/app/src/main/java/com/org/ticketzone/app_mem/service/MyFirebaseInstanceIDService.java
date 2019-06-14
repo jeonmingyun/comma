@@ -48,23 +48,24 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
     // server로 token 전달
     private void sendRegistrationToServer(String token) {
         // OKHTTP를 이용해 웹서버로 토큰값을 날려준다.
-        OkHttpClient client = new OkHttpClient();
-        RequestBody body = new FormBody.Builder()
-                .add("Token", token)
-                .build();
+//        if( token != null) {
+            OkHttpClient client = new OkHttpClient();
+            RequestBody body = new FormBody.Builder()
+                    .add("Token", token)
+                    .build();
 
-        //request
-        Request request = new Request.Builder()
-                .url("http://15.164.115.73:8080/mem_set_fcm_token")
-                .post(body)
-                .build();
+            //request
+            Request request = new Request.Builder()
+                    .url("http://39.127.7.41:8080/mem_set_fcm_token")
+                    .post(body)
+                    .build();
 
-        try {
-            client.newCall(request).execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+            try {
+                client.newCall(request).execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+//        }
     }
 
     // [START receive_message]

@@ -3,16 +3,19 @@ package com.org.ticketzone.appMem;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.org.ticketzone.domain.TokenVO;
 import com.org.ticketzone.service.AppMemService;
 
 import lombok.AllArgsConstructor;
@@ -26,13 +29,41 @@ public class AppMemFMService {
 	@ResponseBody
 	@RequestMapping(value = "/mem_set_fcm_token", method = RequestMethod.POST)
 	public String setFCM(HttpServletRequest request) {
-        String token = request.getParameter("Token");
+        String token_id = request.getParameter("Token");
+        
         // 설치 후 최초 실행시만 접속한 유저 token반환
-        // 최초 실행시 외에는 null반환
-		System.out.println(token);
-	    return "jsonView";
+        memberService.insertToken(token_id);
+
+		System.out.println(token_id);
+	    return "success";
 	}
 
+	/* save FCM member_id */
+	@ResponseBody
+	@RequestMapping(value = "/mem_set_member_id", method = RequestMethod.POST)
+	public String setMember_id(@RequestBody TokenVO tokenVO) {
+        String token_id = tokenVO.getToken_id();
+        String member_id = tokenVO.getMember_id();
+        
+
+		System.out.println(token_id + ", " +member_id);
+		
+        ArrayList<TokenVO> arr = new ArrayList<TokenVO>();
+        arr = memberService.tokenList(token_id);
+        if(arr.size() != 0) {
+        	if(arr.get(0).getToken_id().equals(token_id)) {
+        		memberService.insertId(tokenVO);
+        		return "success";
+        	} else {
+        		return "fail";
+        	}
+        } else {
+        	return "fail";
+        }
+       
+	   
+	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/mem_send_fcm", method = RequestMethod.POST)
 	// 구글 인증 서버

@@ -45,6 +45,7 @@
                 android:thumb="@drawable/switch_thumb"
                 android:track="@drawable/switch_track_selector" />
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

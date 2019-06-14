@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -32,8 +33,11 @@ import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator;
 import ticketzone.org.com.app_mngr.R;
+import ticketzone.org.com.app_mngr.Task.NetworkTask;
+import ticketzone.org.com.app_mngr.Task.SendDataSet;
 import ticketzone.org.com.app_mngr.db.DBOpenHelper;
 import ticketzone.org.com.app_mngr.fragment.StoreItemAdapter;
+import ticketzone.org.com.app_mngr.fragment.StoreItemFragment;
 import ticketzone.org.com.app_mngr.vo.StoreVO;
 
 public class MainActivity extends AppCompatActivity {
@@ -47,8 +51,10 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> storeList;
     private StoreVO storeVO;
     private TextView store_name;
-
+    private Button success_btn;
     private Switch switchView;
+    private ArrayList<String> license_number;
+    private int viewPager_position = 0;
 
 //    private FragmentPagerAdapter adapterViewPager;
 
@@ -58,11 +64,39 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mDBHelper = new DBOpenHelper(this);
 
+
+        success_btn = findViewById(R.id.success_btn);
         selectAllStore();
         setStoreViewPager(); //Store view pager;
 
 
+        success_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                storeViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int i, float v, int i1) {
+                    }
 
+                    @Override
+                    public void onPageSelected(int i) {
+                        Log.e("view pager selected", storeViewPager.getCurrentItem()+"");
+                        viewPager_position = i;
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int i) {
+
+                    }
+                });
+                NetworkTask networkTask = new NetworkTask("success_ticket"){
+                };
+                SendDataSet sds = new SendDataSet("license_number", license_number.get(viewPager_position));
+                networkTask.execute(sds);
+                mDBHelper.successTicket(license_number.get(viewPager_position));
+                mDBHelper.successStatus(license_number.get(viewPager_position));
+            }
+        });
 
         //menu toolbar
         toolbar = findViewById(R.id.toolbar);
@@ -193,13 +227,15 @@ public class MainActivity extends AppCompatActivity {
         Cursor cursor = mDBHelper.selectAllStore();
         StoreVO storeVO;
         storeList = new ArrayList<>();
-
+        license_number = new ArrayList<>();
+        int i =0;
         while(cursor.moveToNext()) {
             try {
+
                 ObjectMapper mapper = new ObjectMapper();
                 storeVO = new StoreVO();
-                Log.e("setLicense_number", cursor.getString(0));
 
+                Log.e("setLicense_number", cursor.getString(0));
                 storeVO.setLicense_number(cursor.getString(0));
                 storeVO.setR_name(cursor.getString(1));
                 storeVO.setMax_number(cursor.getString(2));
@@ -215,11 +251,12 @@ public class MainActivity extends AppCompatActivity {
                 storeVO.setImg_filename(cursor.getString(12));
                 storeVO.setAddress_name(cursor.getString(13));
 
-
+                Log.e("ia", i + "늘어남?");
                 String storeJson = mapper.writeValueAsString(storeVO); // jackson : Object to Json
                 Log.e("store", storeJson);
-
+                license_number.add(cursor.getString(0));
                 storeList.add(storeJson);
+                i++;
 //                storeList.add(storeVO);
 
             }catch (IOException e) {
@@ -242,7 +279,6 @@ public class MainActivity extends AppCompatActivity {
                 int pageHeight = storeViewPager.getHeight();
                 int paddingLeft = storeViewPager.getPaddingLeft();
                 float transformPos = (float) (page.getLeft() - (storeViewPager.getScrollX() + paddingLeft)) / pageWidth;
-
                 final float normalizedposition = Math.abs(Math.abs(transformPos) - 1);
                 page.setAlpha(normalizedposition + 0.5f);
 
