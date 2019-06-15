@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -74,13 +75,21 @@ public class NumInfoActivity extends AppCompatActivity {
         int the_number2 = 0;
         String ticket_number = "";
         String ticket_reg = "";
+        String c_enter = "";
         Intent intent = getIntent();
         String storename = intent.getExtras().getString("storename");
         final String member_id = intent.getExtras().getString("member_id");
         final String license = intent.getExtras().getString("license");
 
-        Cursor cursor = mDBHelper.MyTicket(member_id,license);
+        Cursor Now_Enter = mDBHelper.Current_Enter(license);
+        while(Now_Enter.moveToNext()){
+            c_enter = Now_Enter.getString(0);
+        }
+        c_enter = c_enter.substring(18);
+        int current_en = Integer.parseInt(c_enter) -1;
+        Log.e("c_enter", current_en + "번");
 
+        Cursor cursor = mDBHelper.MyTicket(member_id,license);
         while(cursor.moveToNext()) {
             ticket_number = cursor.getString(0);
             code = cursor.getString(0);
@@ -88,7 +97,7 @@ public class NumInfoActivity extends AppCompatActivity {
             the_number2 = cursor.getInt(2);
             ticket_reg = cursor.getString(6);
             ticket_number = ticket_number.substring(18);
-            NowEnter.setText(wait_number + "명");
+            NowEnter.setText("0" + current_en + "번");
             MyNumber.setText(ticket_number + "번");
             Time.setText(ticket_reg);
             the_number.setText(the_number2 + "명");

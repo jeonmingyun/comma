@@ -1,5 +1,7 @@
 package com.org.ticketzone.service;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Service;
 
 import com.org.ticketzone.domain.CategorieVO;
@@ -8,6 +10,7 @@ import com.org.ticketzone.domain.NumberTicketVO;
 import com.org.ticketzone.domain.OwnerVO;
 import com.org.ticketzone.domain.StoreMenuVO;
 import com.org.ticketzone.domain.StoreVO;
+import com.org.ticketzone.domain.TokenVO;
 import com.org.ticketzone.mapper.AppMngrMapper;
 
 import lombok.AllArgsConstructor;
@@ -110,6 +113,17 @@ public class AppMngrServiceImplement implements AppMngrService {
 	@Override
 	public void store_intro(StoreVO store) {
 		mapper.store_intro(store);
+	}
+	
+	public ArrayList<TokenVO> getToken(String member_id) {
+		// TODO Auto-generated method stub
+		return mapper.getToken(member_id);
+	}
+
+	@Override
+	public ArrayList<StoreVO> getStore(String license_number) {
+		// TODO Auto-generated method stub
+		return mapper.getStore(license_number);
 	}
 
 }

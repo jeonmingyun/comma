@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.org.ticketzone.domain.StoreVO;
 import com.org.ticketzone.domain.TokenVO;
 import com.org.ticketzone.service.AppMemService;
+import com.org.ticketzone.service.AppMngrService;
 
 import lombok.AllArgsConstructor;
 
@@ -24,7 +26,7 @@ import lombok.AllArgsConstructor;
 @Controller
 public class AppMemFMService {
 	@Autowired AppMemService memberService;
-	
+	@Autowired AppMngrService mngrService;
 	/* save FCM token */
 	@ResponseBody
 	@RequestMapping(value = "/mem_set_fcm_token", method = RequestMethod.POST)
@@ -67,10 +69,24 @@ public class AppMemFMService {
 	@ResponseBody
 	@RequestMapping(value = "/mem_send_fcm", method = RequestMethod.POST)
 	// 구글 인증 서버
-	public String pushFCMNotification() throws Exception {
+	public String pushFCMNotification(@RequestBody TokenVO tokenvo) throws Exception {
 		String API_KEY = "AAAAmzUb7vI:APA91bGojWKNi-FXv5coHWtMOPz0-Em5c5LomZGDWa54xPy81aoQ7e-1ArcCWh8xQdFcohSRUeXFtSbIpAgAda7LJYCnjodFk5q-jGCsrOsIIEjejNUzUYvkcXjb734RK4GxhdhADeEF";
-		String token = "ft1mhicUqZU:APA91bFxz4KECTQYJ-XL5sRdKgcKouajgAqhc6zzt6HKEhiDcd3e8oy5rm8UO_TmoqHLVO4pFX25MerUaKScBMZ77rAZkh0PEzIaDHUIB6uTab05NmYrauThgUBxKvdmTMaQyla30BSh";
-
+		String token = "";
+		System.out.println("오긴 오냐?");
+		ArrayList<TokenVO> arr = new ArrayList<>();
+		ArrayList<StoreVO> arr2 = new ArrayList<>();
+		arr = mngrService.getToken(tokenvo.getMember_id());
+		arr2 = mngrService.getStore(tokenvo.getLicense_number());
+        if(arr.size() != 0) {
+        	if(arr.get(0).getMember_id().equals(tokenvo.getMember_id())) {
+        		token = arr.get(0).getToken_id();        		
+        	} else {
+        		return "fail";
+        	}
+        } else {
+        	return "fail";
+        }
+				
 		// if(pushKeyAuth()){
 		URL url = new URL("https://fcm.googleapis.com/fcm/send");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -85,8 +101,8 @@ public class AppMemFMService {
 		// 알림 + 데이터 메세지 형태의 전달		
 		JSONObject infoJson = new JSONObject();
 		JSONObject json = new JSONObject();
-		infoJson.put("title", "alert title");
-		infoJson.put("body", "alert body");
+		infoJson.put("title", arr2.get(0).getStore_name());
+		infoJson.put("body", "매장으로 빨리와라");
 		json.put("to", token.trim());
 		json.put("notification", infoJson);
 

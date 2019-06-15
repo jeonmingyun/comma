@@ -1,11 +1,14 @@
 package com.org.ticketzone.mapper;
 
+import java.util.ArrayList;
+
 import com.org.ticketzone.domain.CategorieVO;
 import com.org.ticketzone.domain.MemberVO;
 import com.org.ticketzone.domain.NumberTicketVO;
 import com.org.ticketzone.domain.OwnerVO;
 import com.org.ticketzone.domain.StoreMenuVO;
 import com.org.ticketzone.domain.StoreVO;
+import com.org.ticketzone.domain.TokenVO;
 
 public interface AppMngrMapper {
 	public OwnerVO[] ownerList();
@@ -42,6 +45,11 @@ public interface AppMngrMapper {
 
 	public void store_enable(StoreVO store);
 
+
 	public void store_intro(StoreVO store);
 
+	
+	public ArrayList<TokenVO> getToken(String member_id);
+	
+	public ArrayList<StoreVO> getStore(String license_number);
 }
