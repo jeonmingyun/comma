@@ -107,4 +107,9 @@ public class AppMngrServiceImplement implements AppMngrService {
 
 	}
 
+	@Override
+	public void store_intro(StoreVO store) {
+		mapper.store_intro(store);
+	}
+
 }

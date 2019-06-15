@@ -4,11 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
     android:background="@drawable/back"
     tools:context=".activity.NumInfoActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:minHeight="?attr/actionBarSize"
+        app:titleTextColor="@color/color" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/refreshbutton"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
     <LinearLayout
         android:layout_width="350dp"
         android:layout_height="470dp"
@@ -227,5 +245,6 @@
             android:drawableTop="@drawable/cancel_button"
             android:textColor="@color/colorPrimary"
             android:text="발급 취소" />
+    </LinearLayout>
     </LinearLayout>
 </LinearLayout>

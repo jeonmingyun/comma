@@ -113,5 +113,11 @@ public class MngrAppHomeController {
 	public void store_enable(@RequestBody StoreVO store) {
 		appMngrService.store_enable(store);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/store_intro", method = RequestMethod.POST)
+	public void store_intro(@RequestBody StoreVO store) {
+		appMngrService.store_intro(store);
+	}
 
 }

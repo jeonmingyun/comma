@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import ticketzone.org.com.app_mngr.R;
@@ -16,7 +17,8 @@ import ticketzone.org.com.app_mngr.Task.SendDataSet;
 public class SignUpActivity extends AppCompatActivity {
 
     EditText m_owner_id, m_owner_password, m_owner_password_ck, m_owner_name, m_owner_tel, m_email;
-    Button join, id_check;
+    Button join;
+    ImageButton id_check;
     String owner_id, owner_password, owner_password_ck, owner_name, owner_tel, email;
     boolean checked = false;
 
@@ -32,7 +34,7 @@ public class SignUpActivity extends AppCompatActivity {
         m_owner_tel = (EditText) findViewById(R.id.owner_tel);
         m_email = (EditText) findViewById(R.id.email);
         join = (Button) findViewById(R.id.join);
-        id_check = (Button)findViewById(R.id.id_check);
+        id_check = (ImageButton)findViewById(R.id.id_check);
 
 
         m_owner_id.requestFocus();

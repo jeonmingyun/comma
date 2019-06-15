@@ -4,10 +4,14 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +31,8 @@ public class NumInfoActivity extends AppCompatActivity {
     private TextView storeName;
     private TextView Time;
     private TextView the_number;
+    private ImageButton refreshbutton;
+
     String code;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,7 @@ public class NumInfoActivity extends AppCompatActivity {
         mDBHelper = new DBOpenHelper(this);
 
         selectAllTicket(); // Ticket 정보
+        TicketInfo();
 
         CancelButton = findViewById(R.id.CancelButton);
         NowEnter = findViewById(R.id.nowEnter);
@@ -42,6 +49,27 @@ public class NumInfoActivity extends AppCompatActivity {
         MyNumber = findViewById(R.id.myNumber);
         storeName = findViewById(R.id.storeName);
         the_number = findViewById(R.id.the_number);
+        refreshbutton = findViewById(R.id.refreshbutton);
+
+        //toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0x00FFFFFF));
+        getSupportActionBar().setTitle("번호요");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        refreshbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TicketInfo();
+            }
+        });
+
+
+
+    }
+
+    private void TicketInfo(){
         int wait_number = 0;
         int the_number2 = 0;
         String ticket_number = "";
@@ -64,6 +92,8 @@ public class NumInfoActivity extends AppCompatActivity {
             MyNumber.setText(ticket_number + "번");
             Time.setText(ticket_reg);
             the_number.setText(the_number2 + "명");
+
+
         }
 
 
@@ -105,9 +135,7 @@ public class NumInfoActivity extends AppCompatActivity {
 
             }
         });
-
     }
-
 
     private void selectAllTicket(){
         Cursor cursor = mDBHelper.selectAllTicket();
@@ -125,6 +153,17 @@ public class NumInfoActivity extends AppCompatActivity {
         numberTicketVO.setLicense_number(cursor.getString(3));
         numberTicketVO.setMember_id(cursor.getString(4));
         numberTicketVO.setTicket_status(cursor.getString(5));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case android.R.id.home:{
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

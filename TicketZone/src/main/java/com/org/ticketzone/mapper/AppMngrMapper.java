@@ -42,4 +42,6 @@ public interface AppMngrMapper {
 
 	public void store_enable(StoreVO store);
 
+	public void store_intro(StoreVO store);
+
 }

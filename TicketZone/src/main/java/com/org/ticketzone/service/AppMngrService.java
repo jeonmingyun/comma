@@ -41,6 +41,8 @@ public interface AppMngrService {
 	public void store_max(StoreVO store);
 
 	public void store_enable(StoreVO store);
+
+	public void store_intro(StoreVO store);
 	
 	
 }
