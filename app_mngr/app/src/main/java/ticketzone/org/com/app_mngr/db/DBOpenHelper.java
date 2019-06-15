@@ -161,6 +161,12 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         mngrdb.execSQL(sqlUpdate, new String[] {store_status, license_number});
     }
 
+    public void updateStore_intro(String license_number, String store_intro){
+        mngrdb = this.getWritableDatabase();
+        String sqlUpdate = "update store set store_intro = ? where license_number = ?";
+        mngrdb.execSQL(sqlUpdate, new String[] {store_intro, license_number});
+    }
+
     // StoreMenu
     public Cursor selectAllStoreMenu() {
         mngrdb = this.getWritableDatabase();

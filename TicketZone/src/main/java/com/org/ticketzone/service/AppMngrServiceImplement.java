@@ -111,6 +111,10 @@ public class AppMngrServiceImplement implements AppMngrService {
 	}
 
 	@Override
+	public void store_intro(StoreVO store) {
+		mapper.store_intro(store);
+	}
+	
 	public ArrayList<TokenVO> getToken(String member_id) {
 		// TODO Auto-generated method stub
 		return mapper.getToken(member_id);

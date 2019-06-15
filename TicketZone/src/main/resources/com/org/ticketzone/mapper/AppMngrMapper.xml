@@ -192,4 +192,10 @@
 		set store_status = #{store_status}
 		where license_number = #{license_number}
 	</update>
+	
+	<update id="store_intro">
+		update store
+		set store_intro = #{store_intro}
+		where license_number = #{license_number}
+	</update>
 </mapper>
