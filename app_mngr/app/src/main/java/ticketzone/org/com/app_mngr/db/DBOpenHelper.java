@@ -161,6 +161,12 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         mngrdb.execSQL(sqlUpdate, new String[] {store_status, license_number});
     }
 
+    public void updateStore_intro(String license_number, String store_intro){
+        mngrdb = this.getWritableDatabase();
+        String sqlUpdate = "update store set store_intro = ? where license_number = ?";
+        mngrdb.execSQL(sqlUpdate, new String[] {store_intro, license_number});
+    }
+
     // StoreMenu
     public Cursor selectAllStoreMenu() {
         mngrdb = this.getWritableDatabase();
@@ -235,6 +241,13 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     public Cursor ChartTicket(String C_date){
         mngrdb = this.getReadableDatabase();
         Cursor member_list = mngrdb.rawQuery ("select substr(ticket_reg,10,2) as ticket_reg, sum(the_number) as the_number from numberticket where ticket_code like ? ||'1111111112' ||'%' group by substr(ticket_reg,10,2) order by substr(ticket_reg,10,2)", new String[] {C_date});
+
+        return member_list;
+    }
+
+    public Cursor FCM_list(String license_number){
+        mngrdb = this.getWritableDatabase();
+        Cursor member_list = mngrdb.rawQuery("select member_id as wait from numberticket where ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ? and ticket_status = 0 and wait_number = 1", new String[] {license_number});
 
         return member_list;
     }

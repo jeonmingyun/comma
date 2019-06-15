@@ -8,6 +8,17 @@
 		select * from owner
 	</select>
 	
+	<select id="tokenList" resultType="com.org.ticketzone.domain.TokenVO">
+		select * from token where token_id = #{token_id}
+	</select>
+	
+	<update id="insertId">
+		update token
+		set member_id = #{member_id}
+		where token_id = #{token_id}
+	</update>
+	
+	
 	<select id="storeList" resultType="com.org.ticketzone.domain.StoreVO">
 		select a.*, b.img_uuid, b.img_uploadpath, b.img_filename
 		from store a, store_attach b

@@ -113,10 +113,13 @@
 #store_info h4{
 	vertical-align: middle;
 	text-align: center;
+	font-size: 20px;
+	margin: 5px 0; 
 }
 
 #store_info p {
 	color: #888888;
+	font-size: 14px;
 }
 
 /* Pagination */

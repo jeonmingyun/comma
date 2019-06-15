@@ -19,6 +19,13 @@
 		and a.license_number = b.license_number
 	</select>
 	
+	<select id="getStore" resultType="com.org.ticketzone.domain.StoreVO">
+		select * from store where license_number = #{license_number}
+	</select>
+	
+	<select id="getToken" resultType="com.org.ticketzone.domain.TokenVO">
+		select token_id, member_id from token where member_id = #{member_id}
+	</select>
 	
 	
 	<select id="menuList" resultType="com.org.ticketzone.domain.StoreMenuVO">
@@ -183,6 +190,12 @@
 	<update id="store_enable">
 		update store
 		set store_status = #{store_status}
+		where license_number = #{license_number}
+	</update>
+	
+	<update id="store_intro">
+		update store
+		set store_intro = #{store_intro}
 		where license_number = #{license_number}
 	</update>
 </mapper>

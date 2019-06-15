@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private Switch switchView;
     private ArrayList<String> license_number;
     private int viewPager_position = 0;
-
+    private String member_id;
 //    private FragmentPagerAdapter adapterViewPager;
 
     @Override
@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
         selectAllStore();
         setStoreViewPager(); //Store view pager;
 
-
         success_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,7 +80,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onPageSelected(int i) {
                         Log.e("view pager selected", storeViewPager.getCurrentItem()+"");
+
                         viewPager_position = i;
+
                     }
 
                     @Override
@@ -89,12 +90,24 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
+                Cursor cursor = mDBHelper.FCM_list(license_number.get(viewPager_position));
+                while (cursor.moveToNext()){
+                    member_id = cursor.getString(0);
+                }
                 NetworkTask networkTask = new NetworkTask("success_ticket"){
                 };
                 SendDataSet sds = new SendDataSet("license_number", license_number.get(viewPager_position));
+
                 networkTask.execute(sds);
                 mDBHelper.successTicket(license_number.get(viewPager_position));
                 mDBHelper.successStatus(license_number.get(viewPager_position));
+                Log.e("2",license_number.get(viewPager_position));
+
+                networkTask = new NetworkTask("/mem_send_fcm") {
+                };
+
+                SendDataSet sds2 = new SendDataSet("member_id", member_id);
+                networkTask.execute(sds2,sds);
             }
         });
 
@@ -223,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 
+
     private void selectAllStore() {
         Cursor cursor = mDBHelper.selectAllStore();
         StoreVO storeVO;
@@ -258,7 +272,6 @@ public class MainActivity extends AppCompatActivity {
                 storeList.add(storeJson);
                 i++;
 //                storeList.add(storeVO);
-
             }catch (IOException e) {
                 e.printStackTrace();
             }
@@ -300,7 +313,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         getMenuInflater().inflate(R.menu.main_navigation_menu, menu);
         return true;
-    }
+}
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

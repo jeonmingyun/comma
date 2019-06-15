@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,7 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -38,21 +39,14 @@ import ticketzone.org.com.app_mngr.vo.StoreMenuVO;
 
 public class StoreManageActivity extends AppCompatActivity {
 
-    private TextView TimeText;
-    private TextView TimeText2;
+    private TextView TimeText, TimeText2, store_intro_text, MaxNum;
     private int T;
     private int mHour, mMinute;
     private TimePickerDialog.OnTimeSetListener mTimeSetListener;
     private DBOpenHelper mDBHelper;
     private ArrayList<StoreMenuVO> menuList;
-    private TextView storename;
-    private String store_time;
-    private String store_time2;
-    private Button TimeUpdate_button;
-    private Button MaxnumUpdate_button;
-    private TextView MaxNum;
-    private String license_number;
-    private String max_number;
+    private String store_time, store_time2, license_number, max_number, title, store_intro;
+    private ImageButton TimeUpdate_button, MaxnumUpdate_button, IntroUpdate_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,22 +56,24 @@ public class StoreManageActivity extends AppCompatActivity {
         //TabHost 매장관리
         TimeText = findViewById(R.id.TimeText);
         TimeText2 = findViewById(R.id.TimeText2);
+        store_intro_text = findViewById(R.id.store_intro_text);
+        IntroUpdate_button = findViewById(R.id.IntroUpdate_button);
         TimeUpdate_button = findViewById(R.id.TimeUpdate_button);
         //TabHost 번호표 발급 설정
         MaxnumUpdate_button = findViewById(R.id.MaxnumUpdate_button);
         MaxNum = findViewById(R.id.MaxNum);
-        //toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0x00FFFFFF));
-        getSupportActionBar().setTitle("번호요");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         TabHost();
         TimeSet();
         selectStoreMenu(license_number);// 메뉴 정보를 가져옴
         Log.e("dddd", menuList.toString());
         setMenuList(); // 메뉴 리스트 화면에 그리기
-
+        //toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0x00FFFFFF));
+        getSupportActionBar().setTitle(title);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void setMenuList() {
@@ -152,9 +148,8 @@ public class StoreManageActivity extends AppCompatActivity {
     private void TabHost(){
         Intent intent = getIntent();
         String s_name = intent.getExtras().getString("store_name");
-        storename = findViewById(R.id.storename);
         //TabHost
-        TabHost host=(TabHost)findViewById(R.id.storemanage);
+        final TabHost host=(TabHost)findViewById(R.id.storemanage);
         host.setup();
 
         TabHost.TabSpec spec = host.newTabSpec("store_mngr");
@@ -163,14 +158,56 @@ public class StoreManageActivity extends AppCompatActivity {
         host.addTab(spec);
         Cursor cursor = mDBHelper.selectStore(s_name);
         while (cursor.moveToNext()){
-            storename.setText(cursor.getString(8));
+            title = cursor.getString(8);
+            store_intro = cursor.getString(9);
             license_number = cursor.getString(0);
             max_number = cursor.getString(2);
             store_time = cursor.getString(7).substring(0,5);//6,11
             store_time2 = cursor.getString(7).substring(6,11);
             TimeText.setText(store_time);
             TimeText2.setText(store_time2);
+            store_intro_text.setText(store_intro);
         }
+
+        IntroUpdate_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(StoreManageActivity.this);
+                alertDialogBuilder.setTitle("수정");
+                alertDialogBuilder
+                        .setMessage("수정하시겠습니까?")
+                        .setCancelable(false)
+                        .setPositiveButton("확인",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        NetworkTask networkTask = new NetworkTask("store_intro"){
+                                        };
+                                        SendDataSet sds1 = new SendDataSet("license_number", license_number);
+                                        SendDataSet sds2 = new SendDataSet("store_intro", store_intro_text.getText().toString());
+                                        networkTask.execute(sds1,sds2);
+                                        mDBHelper.updateStore_intro(license_number,store_intro_text.getText().toString());
+                                        Toast.makeText(StoreManageActivity.this, "수정되었습니다.",Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                        .setNegativeButton("취소",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+                final AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialog) {
+                        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
+                        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+                    }
+                });
+                alertDialog.show();
+            }
+        });
         //Task 동기화 해야함
         TimeUpdate_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,7 +237,14 @@ public class StoreManageActivity extends AppCompatActivity {
                                         dialog.cancel();
                                     }
                                 });
-                AlertDialog alertDialog = alertDialogBuilder.create();
+                final AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialog) {
+                        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
+                        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+                    }
+                });
                 alertDialog.show();
             }
         });
@@ -239,7 +283,14 @@ public class StoreManageActivity extends AppCompatActivity {
                                         dialog.cancel();
                                     }
                                 });
-                AlertDialog alertDialog = alertDialogBuilder.create();
+                final AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialog) {
+                        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
+                        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+                    }
+                });
                 alertDialog.show();
             }
         });
@@ -248,6 +299,36 @@ public class StoreManageActivity extends AppCompatActivity {
         spec.setIndicator("메뉴",null);
         spec.setContent(R.id.menu);
         host.addTab(spec);
+        //tabhost textcolor 변경
+        for(int i = 0; i <host.getTabWidget().getChildCount(); i++){
+            View tabView = host.getTabWidget().getChildAt(i);
+            TextView tv = tabView.findViewById(android.R.id.title);
+            tv.setTextColor(Color.WHITE);
+        }
+        host.getTabWidget().getChildAt(host.getCurrentTab())
+                .setBackgroundResource(R.drawable.selected_border);
+        View tabView = host.getTabWidget().getChildAt(0);
+        TextView tv = tabView.findViewById(android.R.id.title);
+        tv.setTextColor(Color.rgb(113,141,255));
+
+        host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                for(int i = 0; i < host.getTabWidget().getChildCount(); i++){
+                    host.getTabWidget().getChildAt(i)
+                            .setBackgroundResource(R.drawable.non_selected_border);
+                    View tabView = host.getTabWidget().getChildAt(i);
+                    TextView tv = tabView.findViewById(android.R.id.title);
+                    tv.setTextColor(Color.WHITE);
+                }
+
+                host.getTabWidget().getChildAt(host.getCurrentTab())
+                        .setBackgroundResource(R.drawable.selected_border);
+                View tabView = host.getTabWidget().getChildAt(host.getCurrentTab());
+                TextView tv = tabView.findViewById(android.R.id.title);
+                tv.setTextColor(Color.rgb(113,141,255));
+            }
+        });
     }
 
     private void TimeSet(){

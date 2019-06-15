@@ -67,20 +67,6 @@
 			where						
 		]]>
 		  
-		<!-- 	<trim prefix="(" suffix=") AND " prefixOverrides="OR">
-			<foreach item='type' collection="typeArr">
-				<trim prefix="OR">
-					<choose>
-						<when test="type == 'A'.toString()">
-							address_name like '%'||#{keyword}||'%'
-						</when>
-						<when test="type == 'B'.toString()">
-							address_name like '%'||#{keyword}||'%'
-						</when>
-					</choose>
-				</trim>
-			</foreach>
-		</trim> --> 
 		<![CDATA[	
 			rownum <= #{pageNum} * #{amount}
 			) a, store_attach b
@@ -97,11 +83,11 @@
 			from
 			(select rownum rn, license_number, store_name, address_name, store_time, store_tel
 			from store
-			where address_name like #{sido} || '%' 
-			or address_name like '%' || #{sigoon} || '%'											
+			where address_name like #{sido} || '%' 													
 			and rownum <= #{pageNum} * #{amount}
 			) a, store_attach b
 			where rn > (#{pageNum} -1) * #{amount}
+			and address_name like '%' || #{sigoon} || '%'
 			and a.license_number = b.license_number
 		]]>
 	</select>

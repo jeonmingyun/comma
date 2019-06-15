@@ -5,11 +5,17 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.database.Cursor;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
@@ -21,6 +27,7 @@ import com.kakao.util.helper.log.Logger;
 import com.org.ticketzone.app_mem.R;
 import com.org.ticketzone.app_mem.db.DBOpenHelper;
 import com.org.ticketzone.app_mem.task.JsonArrayTask;
+import com.org.ticketzone.app_mem.task.NetworkTask;
 import com.org.ticketzone.app_mem.task.SendDataSet;
 
 import org.json.JSONArray;
@@ -33,7 +40,7 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
     private SessionCallback callback;
     private DBOpenHelper mDBHelper;
-
+    private String TOKEN;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +106,30 @@ public class LoginActivity extends AppCompatActivity {
                 final String BIRTH = response.getKakaoAccount().getBirthday()+"";
                 final String GENDER = response.getKakaoAccount().getGender()+"";
                 final String APP_RANGE = response.getKakaoAccount().getAgeRange()+"";
+
+                FirebaseInstanceId.getInstance().getInstanceId() // 현재 기기의 token
+                        .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                                if (!task.isSuccessful()) {
+                                    return;
+                                }
+                                TOKEN = task.getResult().getToken();
+                                NetworkTask networkTask = new NetworkTask("mem_set_member_id") {
+
+                                };
+                                Log.e("12121212121212212", TOKEN+ " // " + ID);
+                                SendDataSet token_id = new SendDataSet("token_id", TOKEN);
+                                SendDataSet member_id = new SendDataSet("member_id", ID);
+                                networkTask.execute(token_id, member_id);
+
+                                Log.e("MAIN-TOKEN-ligin", TOKEN);
+                            }
+                        });
+
+
                 mDBHelper.deleteAllTable();
+
                 Intent loadingintent = new Intent(LoginActivity.this, LoadingActivity.class);
                 startActivity(loadingintent);
                 JsonArrayTask jat = new JsonArrayTask("mem_db_login"){

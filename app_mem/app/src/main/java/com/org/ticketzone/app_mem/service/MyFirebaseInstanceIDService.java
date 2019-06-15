@@ -56,7 +56,7 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
 
             //request
             Request request = new Request.Builder()
-                    .url("http://15.164.115.73:8080/mem_set_fcm_token")
+                    .url("http://39.127.7.41:8080/mem_set_fcm_token")
                     .post(body)
                     .build();
 

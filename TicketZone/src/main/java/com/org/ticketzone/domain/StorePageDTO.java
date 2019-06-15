@@ -11,6 +11,8 @@ public class StorePageDTO {
 	private int endPage;
 	private boolean prev, next;
 	private int total;
+	private String keyword;
+	private String type;
 	private StoreCriteria cri;
 	
 	public StorePageDTO(StoreCriteria cri, int total) {
@@ -28,5 +30,8 @@ public class StorePageDTO {
 		
 		this.prev = this.startPage > 1;
 		this.next = this.endPage < realEnd;
+	}
+	public String[] getTypeArr() {
+		return type == null? new String[] {}: type.split("");
 	}
 }
