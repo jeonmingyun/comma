@@ -239,6 +239,13 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         return member_list;
     }
 
+    public Cursor FCM_list(String license_number){
+        mngrdb = this.getWritableDatabase();
+        Cursor member_list = mngrdb.rawQuery("select member_id as wait from numberticket where ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ? and ticket_status = 0 and wait_number = 1", new String[] {license_number});
+
+        return member_list;
+    }
+
     public Cursor selectWating(String license_number){
          mngrdb = this.getWritableDatabase();
         Cursor member_list = mngrdb.rawQuery("select count(ticket_code) || '팀' as ticket_code from numberticket where ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ? and ticket_status = 0", new String[] {license_number});
