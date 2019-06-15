@@ -34,6 +34,11 @@ $(document).ready(function() {
 			} else {
 				a = a;
 			}
+		var c = "선택";
+		if(b == c){			
+			b = "";
+			console.log(b);
+		}
 		var pageNum = $("#efg").val();
 		var amount = $("#abcd").val();
 		var query = {
@@ -48,7 +53,9 @@ $(document).ready(function() {
 			dataType : 'text',
 			type : 'POST',
 			success:function(data){
+					
 				$(location).attr("href", "store?sido="+a+"&sigoon="+b);
+				
 			}
 		});
 	});	
