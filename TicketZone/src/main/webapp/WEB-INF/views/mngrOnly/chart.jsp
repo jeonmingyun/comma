@@ -35,7 +35,7 @@
 		</select>
 	
 	<div id="today_stats">
-		<a href="/mCustomer">현황판</a>&nbsp&nbsp&nbsp&nbsp<a href="/chart2">일별 통계</a>
+		<a class="goChart">현황판</a>&nbsp&nbsp&nbsp&nbsp<a href="/chart2">일별 통계</a>
 	</div>
 	
 	<h2>일별 시간대별 인원통계</h2>

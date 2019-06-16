@@ -1,4 +1,7 @@
 $(document).ready(function(){	
+	var license = $(".storeList_option").val();
+	var appendUri = "/mCustomer?license_number="+license;
+	$(".goChart").attr("href", "/mCustomer?license_number="+license);
 	var today = new Date();
 	var dd = today.getDate()-1;	
 	var mm = today.getMonth()+1;
@@ -70,6 +73,10 @@ $(document).ready(function(){
 		} 
 	});
 	var query = {owner_id : $("#onwer_id").val()};
+	
+	$(".goCustomer").click(function(){
+		alter("클릭");
+	});
 	
 	
 	$(document).on("click", '#prev', function(){
