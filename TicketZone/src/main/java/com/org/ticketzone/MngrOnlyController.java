@@ -61,6 +61,7 @@ public class MngrOnlyController {
 	@RequestMapping(value = "mTicketSet")
 	public String mTicketSet(Model model, StoreVO store) {		
 		model.addAttribute("license_number", store.getLicense_number());
+		model.addAttribute("store_name", storeService.getStore(store.getLicense_number()));
 		return "/mngrOnly/mStoreAdmin/mTicketSet";
 	}
 	
@@ -71,6 +72,7 @@ public class MngrOnlyController {
 		String license_number = request.getParameter("license_number");
 
 		String checkMenu = storeMenuService.checkMenu(license_number);
+		model.addAttribute("store_name", storeService.getStore(license_number));
 		System.out.println(menu);
 		if(checkMenu.equals("not")) {
 			System.out.println("메뉴가없음");
@@ -210,6 +212,7 @@ public class MngrOnlyController {
 	@RequestMapping(value = "/updmStore_Register", method = RequestMethod.GET)
 	public String updmStore_Register(StoreVO storeVO, Model model, CoordinatesVO coor, StoreAttachVO vo) {
 		String license = storeVO.getLicense_number();
+		model.addAttribute("store_name", storeService.getStore(license));
 		model.addAttribute("license_number", storeVO.getLicense_number());
 		model.addAttribute("coor", coordinatesService.XYList(license));
 		model.addAttribute("updmStore", storeService.storeUpdate(license));

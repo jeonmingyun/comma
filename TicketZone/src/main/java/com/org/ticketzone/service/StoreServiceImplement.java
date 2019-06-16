@@ -102,4 +102,10 @@ public class StoreServiceImplement implements StoreService{
 		return mapper.click_cate(menu);
 	}
 
+	@Override
+	public ArrayList<StoreVO> getStore(String license_number) {
+		// TODO Auto-generated method stub
+		return mapper.getStore(license_number);
+	}
+
 }
