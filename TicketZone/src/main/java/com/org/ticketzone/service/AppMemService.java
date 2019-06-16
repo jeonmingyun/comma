@@ -18,6 +18,7 @@ public interface AppMemService {
 	public CategorieVO[] categorieList();
 	public CoordinatesVO[] coordinatesList();
 	public NumberTicketVO[] NumberTicketList();
+	public NumberTicketVO[] numberTicketToDayList(String license_number);
 	public BeaconVO[] BeaconList();
 	public void insertId(TokenVO token);
 	public CoordinatesVO[] gpsTest(CoordinatesVO vo);

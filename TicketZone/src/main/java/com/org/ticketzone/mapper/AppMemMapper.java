@@ -19,6 +19,7 @@ public interface AppMemMapper {
 	public CategorieVO[] categorieList();
 	public CoordinatesVO[] coordinatesList();
 	public NumberTicketVO[] NumberTicketList();
+	public NumberTicketVO[] numberTicketToDayList(String license_number);
 	public BeaconVO[] BeaconList();
 	public ArrayList<TokenVO> tokenList(String token_id);
 	public CoordinatesVO[] gpsTest(CoordinatesVO vo);
