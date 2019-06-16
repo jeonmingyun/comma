@@ -82,8 +82,7 @@ $(function() {
 			"#deleteFile",
 			function() {
 				console.log("click");
-				var board_no = $("input[name='board_no'").val();
-				console.log(notice_no);
+				var board_no = $("input[name='board_no'").val();				
 				var inq_filename = $("#inq_filename").val();
 				var inq_uploadpath = $("#inq_uploadpath").val();
 				var inq_uuid = $("#inq_uuid").val();

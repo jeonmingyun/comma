@@ -223,12 +223,18 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 TextView waiting = view.findViewById(R.id.waiting);
                 final Button tagBtn = view.findViewById(R.id.tag_btn);
                 String imageUrl = "http://15.164.115.73:8080/resources/img/" + storeList.get(idx).getImg_uploadpath() + "/" + storeList.get(idx).getImg_uuid() + "_" + storeList.get(idx).getImg_filename();
-
+                String store_enable = "";
+                if(storeList.get(idx).getStore_status() == 0){
+                    store_enable = "disable";
+                } else {
+                    store_enable = "enable";
+                }
                 Glide.with(view).load(imageUrl).centerCrop().into(storeImg);
                 storeImg.setAlpha(130);
 
                 storeName.setText(storeList.get(idx).getStore_name());
                 store_address.setText(storeList.get(idx).getAddress_name());
+
                 waiting.setText(count + "팀");
                 view.setTag(idx);   // 인덱스 저장
                 tagBtn.setTag(idx);
@@ -244,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 }
 
                 for(int i =0; i<B_name.length; i++) {
-                    if (storeName.getText().equals(B_name[i]) && Minor.equals(B_id[i])) {
+                    if (storeName.getText().equals(B_name[i]) && Minor.equals(B_id[i]) && store_enable.equals("enable")) {
                         tagBtn.setEnabled(true);
                         tagBtn.setText("");
                     }

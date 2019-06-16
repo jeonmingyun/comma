@@ -28,7 +28,8 @@ button:hover {
 	display: flex;
 	flex-direction: row;
 	white-space: nowrap;
-	margin-left: 20px;
+	justify-content : center;
+	align-items : center;
 }
 
 .mngrStore {
