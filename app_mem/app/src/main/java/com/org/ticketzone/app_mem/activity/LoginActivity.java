@@ -148,9 +148,11 @@ public class LoginActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        if(false) {
-                            redirectNumInfoActivity();
-                        } else {
+                        Cursor myTicket = mDBHelper.selectMyTicket(ID);
+
+                        if(myTicket.moveToNext()) { // 본인의 발급 받은 번호표가 있을 경우
+                            redirectNumInfoActivity(ID, myTicket.getString(0), myTicket.getString(1));
+                        } else { // 발급 받은 번호표가 없을 경우
                             redirectMainActivity();
                         }
                     }
@@ -178,11 +180,16 @@ public class LoginActivity extends AppCompatActivity {
 //            }
         });
     }
-    protected void redirectNumInfoActivity() {
+
+    protected void redirectNumInfoActivity(String member_id, String license_number, String store_name) {
         final Intent intent = new Intent(this, NumInfoActivity.class);
+        intent.putExtra("member_id", member_id);
+        intent.putExtra("storename",store_name);
+        intent.putExtra("license", license_number);
         startActivity(intent);
         finish();
     }
+
     protected void redirectMainActivity() {
         final Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
