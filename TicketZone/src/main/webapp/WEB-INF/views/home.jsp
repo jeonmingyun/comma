@@ -66,7 +66,7 @@
 					</div>
 					
 					<div class="main_down">
-						<button on>DOWNLOAD</button>
+						<button>DOWNLOAD</button>
 					</div>
 					
 					<!-- style="background-image: url('http://placehold.it/1900x1080')" -->

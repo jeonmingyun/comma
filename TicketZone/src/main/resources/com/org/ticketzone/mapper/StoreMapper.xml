@@ -135,4 +135,8 @@
 			and substr(menu_name,0,instr(menu_name,'-')-1) like #{menu_cate}
 		]]>
 	</select>
+	
+	<select id="getStore" resultType="com.org.ticketzone.domain.StoreVO">
+		select * from store where license_number = #{license_number}
+	</select>
 </mapper>

@@ -16,6 +16,11 @@
     <!--//android:background="@color/colorPrimary"
     //android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     //app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/swipe_layout">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -131,7 +136,8 @@
                         <LinearLayout
                             android:layout_width="296dp"
                             android:layout_height="match_parent"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:layout_marginBottom="20dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -193,7 +199,7 @@
                         </LinearLayout>
 
                     </LinearLayout>
-
+                    
                     <LinearLayout
                         android:id="@+id/tab_content1"
                         android:layout_width="match_parent"
@@ -202,9 +208,10 @@
 
 
                         <LinearLayout
-                            android:layout_width="340dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="32dp"
+                            android:paddingLeft="32dp"
+                            android:paddingRight="32dp"
                             android:orientation="vertical">
 
                             <TextView
@@ -250,6 +257,10 @@
                                 android:background="#FF000000" />
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -260,9 +271,10 @@
                             android:textSize="14dp" />
 
                         <LinearLayout
-                            android:layout_width="340dp"
+                            android:layout_width="match_parent"
                             android:layout_height="52dp"
-                            android:layout_marginLeft="32dp"
+                            android:paddingLeft="32dp"
+                            android:paddingRight="32dp"
                             android:gravity="center">
 
                             <LinearLayout
@@ -280,7 +292,7 @@
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
-                                    android:layout_height="30dp"
+                                    android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:orientation="vertical">
 
@@ -319,7 +331,7 @@
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
-                                    android:layout_height="30dp"
+                                    android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:orientation="vertical">
 
@@ -345,9 +357,10 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="340dp"
+                            android:layout_width="match_parent"
                             android:layout_height="52dp"
-                            android:layout_marginLeft="32dp"
+                            android:paddingLeft="32dp"
+                            android:paddingRight="32dp"
                             android:gravity="center">
 
                             <LinearLayout
@@ -364,7 +377,7 @@
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
-                                    android:layout_height="30dp"
+                                    android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:orientation="vertical">
 
@@ -403,7 +416,7 @@
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
-                                    android:layout_height="30dp"
+                                    android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:orientation="vertical">
 
@@ -427,7 +440,9 @@
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
+                        </LinearLayout>
                     </LinearLayout>
+
 
                     <LinearLayout
                         android:id="@+id/tab_content3"
@@ -475,4 +490,5 @@
             </LinearLayout>
         </TabHost>
     </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

@@ -35,7 +35,7 @@
 		<nav id="sidebar">
 			<div class="sidebar-header">
 				<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M20 4H4v2h16V4zm1 10v-2l-1-5H4l-1 5v2h1v6h10v-6h4v6h2v-6h1zm-9 4H6v-4h6v4z"/></svg>
-				<h3>${updmStore.store_name}</h3>
+				<h3>${store_name[0].store_name}</h3>
 			</div>
 
 			<ul class="list-unstyled components">

@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
-        fcmTocken(); // FCM tocken 발급
+//        fcmTocken(); // FCM tocken 발급
         toolbar(); // menu toolbar
         tabHost(); // LinearLayout 페이지 바꿔끼우기
         selectAllStore(); // storeList = store table data select
@@ -134,25 +134,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         beaconConnection();
         storeList(); // store tab에서 store list를 보여줌
         cateList();
-
-//        fcm_btn = findViewById(R.id.fcm_btn);
-//        fcm_btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(MainActivity.this, "dfdf", Toast.LENGTH_SHORT).show();
-//                NetworkTask task = new NetworkTask("mem_send_fcm") {
-//                    @Override
-//                    protected void onPostExecute(String s) {
-//                        super.onPostExecute(s);
-//                        Log.e("ddd", s);
-//                    }
-//
-//                };
-//
-//                SendDataSet sds = new SendDataSet("token", "dfdfdfdfdf");
-//                task.execute(sds);
-//            }
-//        });
 
         //gps
         if (!checkLocationServicesStatus()) {
@@ -164,7 +145,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         gpsTracker = new GpsTracker(MainActivity.this);
         my_x = gpsTracker.getLatitude();
         my_y = gpsTracker.getLongitude();
-        Log.e("xx", my_x.toString());
         String address = getCurrentAddress(my_x, my_y);
         addressWindow = findViewById(R.id.addressWindow);
         addressWindow.setText(addr);
@@ -175,7 +155,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 startActivity(mapintent);
             }
         });
-
 
     }
 
@@ -191,11 +170,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                         String token = task.getResult().getToken();
 
                         Log.e("MAIN-TOKEN", token);
-                        Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
-
 
     // select categorie table data from SQLite
     private void selectAllCate() {
@@ -246,19 +223,23 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 TextView waiting = view.findViewById(R.id.waiting);
                 final Button tagBtn = view.findViewById(R.id.tag_btn);
                 String imageUrl = "http://15.164.115.73:8080/resources/img/" + storeList.get(idx).getImg_uploadpath() + "/" + storeList.get(idx).getImg_uuid() + "_" + storeList.get(idx).getImg_filename();
-
+                String store_enable = "";
+                if(storeList.get(idx).getStore_status() == 0){
+                    store_enable = "disable";
+                } else {
+                    store_enable = "enable";
+                }
                 Glide.with(view).load(imageUrl).centerCrop().into(storeImg);
                 storeImg.setAlpha(130);
 
                 storeName.setText(storeList.get(idx).getStore_name());
                 store_address.setText(storeList.get(idx).getAddress_name());
+
                 waiting.setText(count + "팀");
                 view.setTag(idx);   // 인덱스 저장
                 tagBtn.setTag(idx);
 //                tagBtn.setText("발급불가");
                 tagBtn.setEnabled(false);
-
-
 
                 String B_name[] =  new String[beaconList.size()];
                 String B_id[] = new String[beaconList.size()];
@@ -269,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 }
 
                 for(int i =0; i<B_name.length; i++) {
-                    if (storeName.getText().equals(B_name[i]) && Minor.equals(B_id[i])) {
+                    if (storeName.getText().equals(B_name[i]) && Minor.equals(B_id[i]) && store_enable.equals("enable")) {
                         tagBtn.setEnabled(true);
                         tagBtn.setText("");
                     }
@@ -310,10 +291,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                                 SendDataSet sds1 = new SendDataSet("member_id", member_id);
                                 SendDataSet sds2 = new SendDataSet("the_number", inputValue);
                                 SendDataSet sds3 = new SendDataSet("license_number", LICENSE);
-                                Log.e("111", member_id+", "+ inputValue + ", " + LICENSE);
                                 networkTask.execute(sds1, sds2, sds3);
                                 Toast.makeText(MainActivity.this, inputValue + "명 입력되었습니다.", Toast.LENGTH_SHORT).show();
-
 
                                 JsonArrayTask jat = new JsonArrayTask("MyTicket"){
                                     @Override
@@ -368,10 +347,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         gpsTracker = new GpsTracker(MainActivity.this);
         my_x = gpsTracker.getLatitude();
         my_y = gpsTracker.getLongitude();
-        Log.e("my_x", my_x.toString());
-        if(cursor.getCount() == 0) { // not found data
-            Toast.makeText(this, "not found data", Toast.LENGTH_SHORT).show();
-        }
 
         while(cursor.moveToNext()) {
             storeVO = new StoreVO();
@@ -566,7 +541,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     Beacon nearestBeacon = list.get(0);
                     Log.e("Airport", "Nearest places: " + nearestBeacon.getRssi());
 
-
                     if (nearestBeacon.getRssi() >  -90) {
                         Toast.makeText(MainActivity.this, "버튼활성화", Toast.LENGTH_LONG);
                         //tagBtn.setEnabled(true);
@@ -575,13 +549,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
 
                         Minor = String.valueOf(connect);
-                        Log.e("test", "dddd");
                         Log.e("mino2", Minor);
 
                     } else if (nearestBeacon.getRssi() < -90) {
                         Toast.makeText(MainActivity.this, "연결이 끊어졌습니다.", Toast.LENGTH_SHORT);
                         connect = 0;
-                        Log.e("test", "ddff");
                     }
                 }
 
@@ -664,15 +636,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         SendDataSet sds1 = new SendDataSet("my_x", my_x.toString());
         SendDataSet sds2 = new SendDataSet("my_y", my_y.toString());
-        Log.e("loca", my_y.toString() + ", " + my_x.toString());
-
         jat.execute(sds1, sds2);
+
         gpsTracker = new GpsTracker(MainActivity.this);
         my_x = gpsTracker.getLatitude();
         my_y = gpsTracker.getLongitude();
         getCurrentAddress(my_x,my_y);
-        Toast.makeText(MainActivity.this, "현재위치 \n위도 " + my_x + "\n경도 " + my_y, Toast.LENGTH_LONG).show();
-        Log.e("test1",addr);
 
         addressWindow=findViewById(R.id.addressWindow);
         addressWindow.setText(addr);
@@ -686,14 +655,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                                            @NonNull int[] grandResults) {
 
         if ( permsRequestCode == PERMISSIONS_REQUEST_CODE && grandResults.length == REQUIRED_PERMISSIONS.length) {
-
             // 요청 코드가 PERMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
-
             boolean check_result = true;
 
-
             // 모든 퍼미션을 허용했는지 체크합니다.
-
             for (int result : grandResults) {
                 if (result != PackageManager.PERMISSION_GRANTED) {
                     check_result = false;
@@ -701,13 +666,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 }
             }
 
-
             if ( check_result ) {
-
                 //위치 값을 가져올 수 있음
-
-            }
-            else {
+            } else {
                 // 거부한 퍼미션이 있다면 앱을 사용할 수 없는 이유를 설명해주고 앱을 종료합니다.2 가지 경우가 있습니다.
 
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])
@@ -715,8 +676,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
                     Toast.makeText(MainActivity.this, "퍼미션이 거부되었습니다. 앱을 다시 실행하여 퍼미션을 허용해주세요.", Toast.LENGTH_LONG).show();
                     finish();
-
-
                 }else {
 
                     Toast.makeText(MainActivity.this, "퍼미션이 거부되었습니다. 설정(앱 정보)에서 퍼미션을 허용해야 합니다. ", Toast.LENGTH_LONG).show();
