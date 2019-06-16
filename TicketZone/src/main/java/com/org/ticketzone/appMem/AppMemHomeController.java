@@ -29,7 +29,18 @@ public class AppMemHomeController {
 
       return o.getOwner_id() +"app";
    }
-
+   
+   @ResponseBody
+   @RequestMapping(value = "/my_ticket_refresh", method = RequestMethod.POST)
+   public JSONArray my_ticket_refresh(@RequestBody NumberTicketVO numberTicketvo ) {
+      JSONArray arr = new JSONArray();
+      String license_number = numberTicketvo.getLicense_number();
+      
+      arr.add(appMemService.numberTicketToDayList(license_number));
+      System.out.println(arr);
+      return arr;
+   }
+   
    @ResponseBody
    @RequestMapping(value = "/mem_db_login", method = RequestMethod.POST)
    public JSONArray mem_db_login(@RequestBody MemberVO mvo ) {

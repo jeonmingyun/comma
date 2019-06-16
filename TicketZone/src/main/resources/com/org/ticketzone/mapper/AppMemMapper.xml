@@ -56,6 +56,11 @@
 		select * from number_ticket
 	</select>
 	
+	<select id="numberTicketToDayList" resultType="com.org.ticketzone.domain.NumberTicketVO">
+		select * from number_ticket
+		where ticket_code like to_char(sysdate, 'yyyymmdd') || '%' and license_number = #{license_number}
+	</select>
+	
 	<insert id="Mem_issue_ticket">
 		insert into number_ticket(ticket_code, wait_number, the_number, license_number, member_id, ticket_status, ticket_reg)
 		values(201905201234578910001, 1, #{the_number}, 1234578910, #{member_id}, 0, sysdate)

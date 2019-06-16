@@ -123,8 +123,6 @@ public class StoreDetailActivity extends AppCompatActivity {
         setMenuList();// 메뉴 리스트 화면에 그리기
         selectAllBeacon(); // beaconList
 
-        Log.e("menu", menuList.toString());
-
         //서버 이미지 불러오기
         imageUrl = "http://15.164.115.73:8080/resources/img/" + storeVO.getImg_uploadpath() + "/" + storeVO.getImg_uuid() + "_" + storeVO.getImg_filename();
         Glide.with(this).load(imageUrl).centerCrop().into(store_img);

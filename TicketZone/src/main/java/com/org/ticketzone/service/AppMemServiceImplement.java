@@ -110,8 +110,14 @@ public class AppMemServiceImplement implements AppMemService {
 
 	@Override
 	public void insertId(TokenVO token) {
-			mapper.insertId(token);
+		mapper.insertId(token);
 	
+	}
+
+	@Override
+	public NumberTicketVO[] numberTicketToDayList(String license_number) {
+		mapper.numberTicketToDayList(license_number);
+		return null;
 	}
 
 }

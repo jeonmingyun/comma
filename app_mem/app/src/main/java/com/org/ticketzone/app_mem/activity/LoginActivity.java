@@ -118,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                                 NetworkTask networkTask = new NetworkTask("mem_set_member_id") {
 
                                 };
-                                Log.e("12121212121212212", TOKEN+ " // " + ID);
+
                                 SendDataSet token_id = new SendDataSet("token_id", TOKEN);
                                 SendDataSet member_id = new SendDataSet("member_id", ID);
                                 networkTask.execute(token_id, member_id);
@@ -126,7 +126,6 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.e("MAIN-TOKEN-ligin", TOKEN);
                             }
                         });
-
 
                 mDBHelper.deleteAllTable();
 
@@ -137,8 +136,6 @@ public class LoginActivity extends AppCompatActivity {
                     protected void onPostExecute(JSONArray jsonArray) {
                         super.onPostExecute(jsonArray);
                         try {
-//                            Log.e("idx 3", jsonArray.get(5).toString());
-
                             mDBHelper.insertMember(ID, NICKNAME, BIRTH, GENDER, APP_RANGE);
                             mDBHelper.insertOwner(new JSONArray(jsonArray.get(0).toString()));
                             mDBHelper.insertCategorie(new JSONArray(jsonArray.get(1).toString()));
