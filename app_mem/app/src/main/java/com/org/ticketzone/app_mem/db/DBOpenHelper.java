@@ -340,7 +340,6 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         return member_list;
     }
 
-
     public void insertTicket(JSONArray NumberTicketList) {
         mdb = this.getWritableDatabase();
 
@@ -385,23 +384,26 @@ public class DBOpenHelper extends SQLiteOpenHelper{
     }
 
     public void updateTicket(JSONArray jarr ) {
-        try {
-            mdb = this.getWritableDatabase();
-            JSONObject jobj = new JSONObject(jarr.get(0).toString());
-            ContentValues values = new ContentValues();
+        mdb = this.getWritableDatabase();
 
-            values.put("ticket_code", jobj.getString("ticket_code"));
-            values.put("wait_number", jobj.getString("wait_number"));
-            values.put("the_number", jobj.getString("the_number"));
-            values.put("license_number", jobj.getString("license_number"));
-            values.put("member_id", jobj.getString("member_id"));
-            values.put("ticket_status", jobj.getString("ticket_status"));
-            values.put("ticket_reg", jobj.getString("ticket_reg"));
+        for ( int i = 0; i < jarr.length(); i++) {
+            try {
+                JSONObject jobj = new JSONObject(jarr.get(i).toString());
+                ContentValues values = new ContentValues();
 
-            String sqlUpdate = "update numberticket set wait_number = ? where ticket_code > ? and ticket_status = ? and license_number = ?";
-            mdb.execSQL(sqlUpdate, new String[]{values.get("wait_number").toString(), values.get("ticket_code").toString(), values.get("ticket_status").toString(), values.get("license_number").toString() });
-        } catch (JSONException e) {
-            e.printStackTrace();
+                values.put("ticket_code", jobj.getString("ticket_code"));
+                values.put("wait_number", jobj.getString("wait_number"));
+                values.put("the_number", jobj.getString("the_number"));
+                values.put("license_number", jobj.getString("license_number"));
+                values.put("member_id", jobj.getString("member_id"));
+                values.put("ticket_status", jobj.getString("ticket_status"));
+                values.put("ticket_reg", jobj.getString("ticket_reg"));
+
+                String sqlUpdate = "update numberticket set wait_number = ? where ticket_code = ? and ticket_status = ? and license_number = ?";
+                mdb.execSQL(sqlUpdate, new String[]{values.get("wait_number").toString(), values.get("ticket_code").toString(), values.get("ticket_status").toString(), values.get("license_number").toString()});
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 

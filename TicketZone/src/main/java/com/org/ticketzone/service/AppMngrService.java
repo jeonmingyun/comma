@@ -22,6 +22,8 @@ public interface AppMngrService {
 	public CategorieVO[] categorieList();
 
 	public NumberTicketVO[] NumberTicketList();
+	
+	public NumberTicketVO[] RefreshList(NumberTicketVO vo);
 
 	public void M_issue_ticket(NumberTicketVO vo);
 

@@ -37,6 +37,7 @@ public class NumInfoActivity extends AppCompatActivity implements SwipeRefreshLa
     private TextView Time;
     private TextView the_number;
     private SwipeRefreshLayout mSwipeRefreshLayout;
+    private String license;
 
     String code;
     @Override
@@ -73,7 +74,7 @@ public class NumInfoActivity extends AppCompatActivity implements SwipeRefreshLa
         Intent intent = getIntent();
         String storename = intent.getExtras().getString("storename");
         final String member_id = intent.getExtras().getString("member_id");
-        final String license = intent.getExtras().getString("license");
+        license = intent.getExtras().getString("license");
 
         Cursor Now_Enter = mDBHelper.Current_Enter(license);
         while(Now_Enter.moveToNext()){
@@ -262,7 +263,7 @@ public class NumInfoActivity extends AppCompatActivity implements SwipeRefreshLa
             }
         };
 
-        SendDataSet license_number = new SendDataSet("license_number", numberTicketVO.getLicense_number());
+        SendDataSet license_number = new SendDataSet("license_number", license);
         task.execute(license_number);
 
 

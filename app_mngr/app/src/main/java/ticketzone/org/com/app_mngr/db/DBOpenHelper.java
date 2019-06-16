@@ -270,6 +270,12 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         return  member_list;
     }
 
+    public Cursor ToastTicket(String license_number){
+        mngrdb = this.getWritableDatabase();
+        Cursor member_list = mngrdb.rawQuery("select max(substr(ticket_code,19)) as ticket_code from numberticket where ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ? and ticket_status = 1", new String[] {license_number});
+       return member_list;
+    }
+
     public Cursor t_absence(String license_number){
         mngrdb = this.getWritableDatabase();
         Cursor member_list = mngrdb.rawQuery("select count(string_status) as absence from numberticket where ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ? and ticket_status = 3", new String[] {license_number});
@@ -325,6 +331,37 @@ public class DBOpenHelper extends SQLiteOpenHelper {
             }
         }
     }
+
+    public void updateTicket(JSONArray jarr ) {
+        mngrdb = this.getWritableDatabase();
+
+        for ( int i = 0; i < jarr.length(); i++) {
+            try {
+                JSONObject jobj = new JSONObject(jarr.get(i).toString());
+                ContentValues values = new ContentValues();
+
+                values.put("ticket_code", jobj.getString("ticket_code"));
+                values.put("wait_number", jobj.getString("wait_number"));
+                values.put("the_number", jobj.getString("the_number"));
+                values.put("license_number", jobj.getString("license_number"));
+                values.put("member_id", jobj.getString("member_id"));
+                values.put("ticket_status", jobj.getString("ticket_status"));
+                values.put("ticket_reg", jobj.getString("ticket_reg"));
+
+                String sqlUpdate = "update numberticket set wait_number = ? where ticket_code = ? and ticket_status = ? and license_number = ?";
+                mngrdb.execSQL(sqlUpdate, new String[]{values.get("wait_number").toString(), values.get("ticket_code").toString(), values.get("ticket_status").toString(), values.get("license_number").toString()});
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void refesh_ticket(String license_number){
+        mngrdb = this.getWritableDatabase();
+        mngrdb.delete(DBTable.NumberTicket.TABLENAME, "license_number=? and ticket_code like strftime('%Y%m%d', 'now') || '%'", new String[] {license_number} );
+
+    }
+
     public void successTicket(String license_number){
         mngrdb = this.getWritableDatabase();
         String sqlUpdate = "update numberticket\n"

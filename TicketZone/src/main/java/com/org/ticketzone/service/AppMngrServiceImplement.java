@@ -126,4 +126,10 @@ public class AppMngrServiceImplement implements AppMngrService {
 		return mapper.getStore(license_number);
 	}
 
+	@Override
+	public NumberTicketVO[] RefreshList(NumberTicketVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.RefreshList(vo);
+	}
+
 }

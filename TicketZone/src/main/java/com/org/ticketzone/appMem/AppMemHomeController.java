@@ -35,7 +35,7 @@ public class AppMemHomeController {
    public JSONArray my_ticket_refresh(@RequestBody NumberTicketVO numberTicketvo ) {
       JSONArray arr = new JSONArray();
       String license_number = numberTicketvo.getLicense_number();
-      
+      System.out.println(numberTicketvo);
       arr.add(appMemService.numberTicketToDayList(license_number));
       System.out.println(arr);
       return arr;

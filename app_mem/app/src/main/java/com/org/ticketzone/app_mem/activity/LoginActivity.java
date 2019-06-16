@@ -148,7 +148,11 @@ public class LoginActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        redirectMainActivity();
+                        if(false) {
+                            redirectNumInfoActivity();
+                        } else {
+                            redirectMainActivity();
+                        }
                     }
                 };
 
@@ -174,7 +178,11 @@ public class LoginActivity extends AppCompatActivity {
 //            }
         });
     }
-
+    protected void redirectNumInfoActivity() {
+        final Intent intent = new Intent(this, NumInfoActivity.class);
+        startActivity(intent);
+        finish();
+    }
     protected void redirectMainActivity() {
         final Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
