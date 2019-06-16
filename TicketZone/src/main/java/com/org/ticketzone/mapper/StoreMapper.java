@@ -31,6 +31,8 @@ public interface StoreMapper {
 	
 	public ArrayList<StoreVO> getListWithSearchPaging(StoreCriteria cri);
 	
+	public ArrayList<StoreVO> getStore(String license_number);
+	
 	public ArrayList<StoreMenuVO> store_menu(String license_number);
 	public ArrayList<StoreMenuVO> store_cate(String license_number);
 	public ArrayList<StoreMenuVO> click_cate(StoreMenuVO menu);

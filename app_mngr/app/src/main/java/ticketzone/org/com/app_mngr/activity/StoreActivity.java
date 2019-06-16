@@ -9,6 +9,7 @@ import android.provider.CalendarContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -45,7 +46,7 @@ import ticketzone.org.com.app_mngr.R;
 import ticketzone.org.com.app_mngr.db.DBOpenHelper;
 import ticketzone.org.com.app_mngr.vo.NumberTicketVO;
 
-public class StoreActivity extends AppCompatActivity {
+public class StoreActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     private LineChart lineChart;
     private List<Entry> entries;
     private List<NumberTicketVO> waitList, absenceList;
@@ -54,6 +55,7 @@ public class StoreActivity extends AppCompatActivity {
     private ImageView storeimg;
     private String license_number;
     private ImageButton prev, next;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,10 @@ public class StoreActivity extends AppCompatActivity {
         prev = findViewById(R.id.prev);
         next = findViewById(R.id.next);
         s_date = findViewById(R.id.s_date);
+
+        mSwipeRefreshLayout = findViewById(R.id.swipe_layout);
+
+        mSwipeRefreshLayout.setOnRefreshListener(this);
 
         //toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -498,4 +504,9 @@ public class StoreActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onRefresh() {
+
+        mSwipeRefreshLayout.setRefreshing(false);
+    }
 }

@@ -71,7 +71,6 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
     // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, remoteMessage.getData()+"");
 
