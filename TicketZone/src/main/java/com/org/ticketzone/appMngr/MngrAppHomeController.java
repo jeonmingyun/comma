@@ -42,6 +42,18 @@ public class MngrAppHomeController {
 		}
 
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/wait_refresh", method = RequestMethod.POST)
+	public JSONArray wait_refresh(@RequestBody NumberTicketVO numberTicketvo) {
+		JSONArray arr = new JSONArray();
+//		String license_number = storevo.getLicense_number();
+//		System.out.println(license_number);
+		
+		arr.add(appMngrService.RefreshList(numberTicketvo));
+		System.out.println(arr);
+		return arr;
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/id_check", method = RequestMethod.POST)

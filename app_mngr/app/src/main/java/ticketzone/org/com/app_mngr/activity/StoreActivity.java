@@ -36,6 +36,9 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -43,6 +46,8 @@ import java.util.Date;
 import java.util.List;
 
 import ticketzone.org.com.app_mngr.R;
+import ticketzone.org.com.app_mngr.Task.JsonArrayTask;
+import ticketzone.org.com.app_mngr.Task.SendDataSet;
 import ticketzone.org.com.app_mngr.db.DBOpenHelper;
 import ticketzone.org.com.app_mngr.vo.NumberTicketVO;
 
@@ -53,7 +58,7 @@ public class StoreActivity extends AppCompatActivity implements SwipeRefreshLayo
     private TextView store_name, wait_count, t_wait, t_success, t_absence, t_cancel, s_date;
     private DBOpenHelper mDBHelper;
     private ImageView storeimg;
-    private String license_number;
+    private String license_number = "";
     private ImageButton prev, next;
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -324,8 +329,6 @@ public class StoreActivity extends AppCompatActivity implements SwipeRefreshLayo
                 lineChart.setData(data);
                 lineChart.animateY(1000);
 
-
-
                 s_date.setText(Integer.toString(c_date).substring(0,4) + "/" + Integer.toString(c_date).substring(4,6) + "/" +  Integer.toString(c_date).substring(6,8));
             }
         });
@@ -506,6 +509,42 @@ public class StoreActivity extends AppCompatActivity implements SwipeRefreshLayo
 
     @Override
     public void onRefresh() {
+        mDBHelper.refesh_ticket(license_number);
+        JsonArrayTask jTask = new JsonArrayTask("wait_refresh") {
+            @Override
+            protected void onPostExecute(JSONArray jsonArray) {
+                super.onPostExecute(jsonArray);
+                try {
+                    mDBHelper.insertTicket(new JSONArray(jsonArray.get(0).toString()));
+
+                    /*대기인원 확인*/
+                    Cursor cursor1 = mDBHelper.selectWating(license_number);
+                    while (cursor1.moveToNext()) {
+                        wait_count.setText(cursor1.getString(0));
+                    }
+                    Cursor ticket_wait = mDBHelper.t_wait(license_number);
+                    ticket_wait.moveToNext();
+                    t_wait.setText(ticket_wait.getString(0));
+
+                    Cursor ticket_success = mDBHelper.t_success(license_number);
+                    ticket_success.moveToNext();
+                    t_success.setText(ticket_success.getString(0));
+
+                    Cursor ticket_absence = mDBHelper.t_absence(license_number);
+                    ticket_absence.moveToNext();
+                    t_absence.setText(ticket_absence.getString(0));
+
+                    Cursor ticket_cancel = mDBHelper.t_cancel(license_number);
+                    ticket_cancel.moveToNext();
+                    t_cancel.setText(ticket_cancel.getString(0));
+                } catch(JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        SendDataSet sds = new SendDataSet("license_number", license_number);
+        jTask.execute(sds);
 
         mSwipeRefreshLayout.setRefreshing(false);
     }

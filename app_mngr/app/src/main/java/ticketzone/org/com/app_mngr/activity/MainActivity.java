@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> license_number;
     private int viewPager_position = 0;
     private String member_id;
+    private String toast_message;
 //    private FragmentPagerAdapter adapterViewPager;
 
     @Override
@@ -102,12 +104,13 @@ public class MainActivity extends AppCompatActivity {
                 mDBHelper.successTicket(license_number.get(viewPager_position));
                 mDBHelper.successStatus(license_number.get(viewPager_position));
                 Log.e("2",license_number.get(viewPager_position));
-
-                networkTask = new NetworkTask("/mem_send_fcm") {
+                Toast.makeText(MainActivity.this, "다음고객님을 호출했습니다.", Toast.LENGTH_SHORT).show();
+                networkTask = new NetworkTask("mem_send_fcm") {
                 };
 
                 SendDataSet sds2 = new SendDataSet("member_id", member_id);
                 networkTask.execute(sds2,sds);
+
             }
         });
 

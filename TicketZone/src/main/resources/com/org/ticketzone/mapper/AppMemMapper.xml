@@ -96,7 +96,7 @@
 	<insert id="Mem_makeTicket">
 		<![CDATA[
 		insert into number_ticket
-		(ticket_code, wait_number, the_number, license_number, member_id, ticket_status)
+		(ticket_code, wait_number, the_number, license_number, member_id, ticket_status, ticket_reg)
 		values(
 		(select (code1 || code2) + 1 as code
 		from make_code
@@ -107,14 +107,14 @@
 		#{the_number}, 
 		#{license_number}, 
 		#{member_id}, 
-		0)
+		0, to_char(sysdate, 'yy/mm/dd hh24'))
 		]]>
 	</insert>
 	
 	<insert id="Mem_plusTicket">
 		<![CDATA[
 		insert into number_ticket
-		(ticket_code, wait_number, the_number, license_number, member_id, ticket_status)
+		(ticket_code, wait_number, the_number, license_number, member_id, ticket_status, ticket_reg)
 		values(
 		(select (ticket_code + 1) as ticket_code
 		from (select ticket_code from number_ticket 
@@ -135,7 +135,7 @@
 		#{the_number}, 
 		#{license_number}, 
 		#{member_id}, 
-		0)
+		0, to_char(sysdate, 'yy/mm/dd hh24'))
 		]]>
 	</insert>
 	

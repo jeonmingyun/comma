@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -132,7 +133,7 @@ public class DBOpenHelper extends SQLiteOpenHelper{
     // Store
     public Cursor selectAllStore() {
         mdb = this.getWritableDatabase();
-        String sql = "select * from store";
+        String sql = "select * from store a, coordinates b where a.license_number = b.license_number";
         Cursor store_list = mdb.rawQuery(sql, null);
 
         return store_list;
@@ -181,10 +182,10 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         }
     }
 
-    public boolean deleteStore(String license_number) {
+    public boolean deleteStore() {
         mdb = this.getWritableDatabase();
 
-        int result = mdb.delete(DBTable.Store.TABLENAME, "license_number=?", new String[] {license_number} );
+        int result = mdb.delete(DBTable.Store.TABLENAME, null,null);
 
         if( result == 0)
             return false; // error
@@ -312,6 +313,15 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         return member_list;
     }
 
+    public Cursor selectMyTicket(String member_id) {
+        mdb = this.getReadableDatabase();
+
+        String sql = "select license_number,  (select store_name from store where license_number = n.license_number) store_name from numberticket n where ticket_status = 0 and member_id = "+ member_id;
+        Cursor member_list = mdb.rawQuery(sql, null);
+
+        return member_list;
+    }
+
     public Cursor countTeam(String license_number) { //select 에 매개변수 받아서 쓰는SQL
         mdb = this.getReadableDatabase();
         Cursor member_list = mdb.rawQuery("select count(*) from numberticket where license_number=? and ticket_status = 0", new String[] {license_number});
@@ -339,7 +349,6 @@ public class DBOpenHelper extends SQLiteOpenHelper{
 
         return member_list;
     }
-
 
     public void insertTicket(JSONArray NumberTicketList) {
         mdb = this.getWritableDatabase();
@@ -385,23 +394,26 @@ public class DBOpenHelper extends SQLiteOpenHelper{
     }
 
     public void updateTicket(JSONArray jarr ) {
-        try {
-            mdb = this.getWritableDatabase();
-            JSONObject jobj = new JSONObject(jarr.get(0).toString());
-            ContentValues values = new ContentValues();
+        mdb = this.getWritableDatabase();
 
-            values.put("ticket_code", jobj.getString("ticket_code"));
-            values.put("wait_number", jobj.getString("wait_number"));
-            values.put("the_number", jobj.getString("the_number"));
-            values.put("license_number", jobj.getString("license_number"));
-            values.put("member_id", jobj.getString("member_id"));
-            values.put("ticket_status", jobj.getString("ticket_status"));
-            values.put("ticket_reg", jobj.getString("ticket_reg"));
+        for ( int i = 0; i < jarr.length(); i++) {
+            try {
+                JSONObject jobj = new JSONObject(jarr.get(i).toString());
+                ContentValues values = new ContentValues();
 
-            String sqlUpdate = "update numberticket set wait_number = ? where ticket_code > ? and ticket_status = ? and license_number = ?";
-            mdb.execSQL(sqlUpdate, new String[]{values.get("wait_number").toString(), values.get("ticket_code").toString(), values.get("ticket_status").toString(), values.get("license_number").toString() });
-        } catch (JSONException e) {
-            e.printStackTrace();
+                values.put("ticket_code", jobj.getString("ticket_code"));
+                values.put("wait_number", jobj.getString("wait_number"));
+                values.put("the_number", jobj.getString("the_number"));
+                values.put("license_number", jobj.getString("license_number"));
+                values.put("member_id", jobj.getString("member_id"));
+                values.put("ticket_status", jobj.getString("ticket_status"));
+                values.put("ticket_reg", jobj.getString("ticket_reg"));
+
+                String sqlUpdate = "update numberticket set wait_number = ? where ticket_code = ? and ticket_status = ? and license_number = ?";
+                mdb.execSQL(sqlUpdate, new String[]{values.get("wait_number").toString(), values.get("ticket_code").toString(), values.get("ticket_status").toString(), values.get("license_number").toString()});
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -470,6 +482,7 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         mdb.delete(DBTable.NumberTicket.TABLENAME,null,null);
         mdb.delete(DBTable.Beacon.TABLENAME,null,null);
         mdb.delete(DBTable.GpsTest.TABLENAME,null,null);
+        mdb.delete(DBTable.Coordinates.TABLENAME,null,null);
 
     }
 

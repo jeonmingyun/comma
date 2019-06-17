@@ -35,7 +35,7 @@ public class AppMemHomeController {
    public JSONArray my_ticket_refresh(@RequestBody NumberTicketVO numberTicketvo ) {
       JSONArray arr = new JSONArray();
       String license_number = numberTicketvo.getLicense_number();
-      
+      System.out.println(numberTicketvo);
       arr.add(appMemService.numberTicketToDayList(license_number));
       System.out.println(arr);
       return arr;
@@ -96,6 +96,16 @@ public class AppMemHomeController {
      arr.add(appMemService.MyTicket(vo));
      
      return arr;
+  }
+  
+  @ResponseBody
+  @RequestMapping(value = "RefreshMain", method = RequestMethod.POST)
+  public JSONArray RefreshMain() {
+	  
+	  JSONArray arr = new JSONArray();
+	  arr.add(appMemService.storeList());
+	  
+	  return arr;
   }
   
   

@@ -62,8 +62,8 @@
 .main_info {
 	color: #fff;
 	position: relative;
-	top: 200px;
-	left: 350px;
+	top: 25%;
+	left: 15%;
 }
 
 .main_info h3 {
@@ -80,8 +80,8 @@
 
 .main_down {
 	position: relative;
-	top: 300px;
-	left: 350px;
+	top: 35%;
+	left: 15%;
 }
 
 .main_down button{

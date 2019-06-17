@@ -116,8 +116,8 @@ public class AppMemServiceImplement implements AppMemService {
 
 	@Override
 	public NumberTicketVO[] numberTicketToDayList(String license_number) {
-		mapper.numberTicketToDayList(license_number);
-		return null;
+		
+		return mapper.numberTicketToDayList(license_number);
 	}
 
 }

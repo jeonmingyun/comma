@@ -48,7 +48,7 @@ public interface AppMngrMapper {
 
 	public void store_intro(StoreVO store);
 
-	
+	public NumberTicketVO[] RefreshList(NumberTicketVO vo);
 	public ArrayList<TokenVO> getToken(String member_id);
 	
 	public ArrayList<StoreVO> getStore(String license_number);
