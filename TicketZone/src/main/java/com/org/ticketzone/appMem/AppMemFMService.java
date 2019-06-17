@@ -102,7 +102,7 @@ public class AppMemFMService {
 		JSONObject infoJson = new JSONObject();
 		JSONObject json = new JSONObject();
 		infoJson.put("title", arr2.get(0).getStore_name());
-		infoJson.put("body", "고객님 고객님의 순번이 다가왔습니다. 시간내에 못 올 시 번호표는 자동 취소되므로 늦지 않게 입장해 주세요.");
+		infoJson.put("body", "고객님의 순번이 다가왔습니다. 시간내에 매장으로 와주시기바랍니다.");
 		json.put("to", token.trim());
 		json.put("notification", infoJson);
 

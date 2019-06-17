@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private DBOpenHelper mDBHelper;
     private ArrayList<StoreVO> storeList;
     private ArrayList<BeaconVO> beaconList;
+    private static final int DISTANCE = 500;
     // 비콘
     private BeaconManager beaconManager;
     private BeaconManager beaconManager2;
@@ -279,7 +280,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                                 String inputValue = ET.getText().toString();
                                 Cursor cursor = mDBHelper.selectAllMember();
                                 TextView storeName = findViewById(R.id.storeName);
-                                 String member_id = "";
+                                String member_id = "";
 
                                 while(cursor.moveToNext()){
                                     member_id = cursor.getString(0);
@@ -350,6 +351,14 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         while(cursor.moveToNext()) {
             storeVO = new StoreVO();
+            storeVO.setCoor_x(cursor.getString(15));
+            storeVO.setCoor_y(cursor.getString(14));
+            storeVO.setDistance(my_x, my_y);
+//            Log.e("xxx", storeVO.getDistance() + "dist");
+            if( !(storeVO.getDistance() <= DISTANCE) ) {
+                continue;
+            }
+
             storeVO.setLicense_number(cursor.getString(0));
             storeVO.setR_name(cursor.getString(1));
             storeVO.setMax_number(cursor.getString(2));
@@ -364,7 +373,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             storeVO.setImg_uploadpath(cursor.getString(11));
             storeVO.setImg_filename(cursor.getString(12));
             storeVO.setAddress_name(cursor.getString(13));
-
             storeList.add(storeVO);
         }
     }
@@ -372,18 +380,18 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
 
     private void selectAllBeacon(){
-            Cursor cursor = mDBHelper.selectAllBeacon();
-            beaconList = new ArrayList<>();
-            BeaconVO beaconVO;
+        Cursor cursor = mDBHelper.selectAllBeacon();
+        beaconList = new ArrayList<>();
+        BeaconVO beaconVO;
 
-            while (cursor.moveToNext()){
-                beaconVO = new BeaconVO();
-                beaconVO.setB_code(cursor.getString(0));
-                beaconVO.setStore_name(cursor.getString(1));
-                beaconVO.setLicense_number(cursor.getString(2));
+        while (cursor.moveToNext()){
+            beaconVO = new BeaconVO();
+            beaconVO.setB_code(cursor.getString(0));
+            beaconVO.setStore_name(cursor.getString(1));
+            beaconVO.setLicense_number(cursor.getString(2));
 
-                beaconList.add(beaconVO);
-            }
+            beaconList.add(beaconVO);
+        }
 
     }
 
@@ -587,60 +595,24 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     public void onRefresh() {
         storeList.removeAll(storeList);
 
-        if(connect == 1){
-            connect2 = 1;
-        }else if(connect == 2){
-            connect2 = 2;
-        }
-        JsonArrayTask jat = new JsonArrayTask("gpsTest"){
+        JsonArrayTask jat = new JsonArrayTask("RefreshMain"){
             @Override
             protected void onPostExecute(JSONArray jsonArray) {
                 super.onPostExecute(jsonArray);
-                try {
+                try{
+                    mDBHelper.deleteStore();
+                    mDBHelper.insertStore(new JSONArray(jsonArray.get(0).toString()));
 
-                    mDBHelper.insertGpsTest(new JSONArray(jsonArray.get(0).toString()));
-                    JSONArray jarr;
-                    JSONObject jobj;
-                    StoreVO storeVO;
-                    jarr = new JSONArray(jsonArray.get(0).toString());
-                    for(int i=0; i<jarr.length(); i++){
-                        Log.e("test", jarr.get(i).toString());
-                        jobj = new JSONObject(jarr.get(i).toString());
-                        Cursor cursor = mDBHelper.selectGpsStore(jobj.getString("store_name"));
-                        while(cursor.moveToNext()){
-                            storeVO = new StoreVO();
-                            storeVO.setLicense_number(cursor.getString(0));
-                            storeVO.setR_name(cursor.getString(1));
-                            storeVO.setMax_number(cursor.getString(2));
-                            storeVO.setStore_status(cursor.getInt(3));
-                            storeVO.setCate_code(cursor.getString(4));
-                            storeVO.setOwner_id(cursor.getString(5));
-                            storeVO.setStore_tel(cursor.getString(6));
-                            storeVO.setStore_time(cursor.getString(7));
-                            storeVO.setStore_name(cursor.getString(8));
-                            storeVO.setStore_intro(cursor.getString(9));
-                            storeVO.setImg_uuid(cursor.getString(10));
-                            storeVO.setImg_uploadpath(cursor.getString(11));
-                            storeVO.setImg_filename(cursor.getString(12));
-                            storeVO.setAddress_name(cursor.getString(13));
-
-                            storeList.add(storeVO);
-                        }
-                        storeList();
-                    }
-                } catch (JSONException e) {
+                    selectAllStore();
+                    storeList();
+                } catch (JSONException e){
                     e.printStackTrace();
                 }
             }
         };
 
-        SendDataSet sds1 = new SendDataSet("my_x", my_x.toString());
-        SendDataSet sds2 = new SendDataSet("my_y", my_y.toString());
-        jat.execute(sds1, sds2);
+        jat.execute();
 
-        gpsTracker = new GpsTracker(MainActivity.this);
-        my_x = gpsTracker.getLatitude();
-        my_y = gpsTracker.getLongitude();
         getCurrentAddress(my_x,my_y);
 
         addressWindow=findViewById(R.id.addressWindow);
