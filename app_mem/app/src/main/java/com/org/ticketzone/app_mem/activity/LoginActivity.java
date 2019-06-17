@@ -1,5 +1,6 @@
 package com.org.ticketzone.app_mem.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -129,9 +130,18 @@ public class LoginActivity extends AppCompatActivity {
 
                 mDBHelper.deleteAllTable();
 
-                Intent loadingintent = new Intent(LoginActivity.this, LoadingActivity.class);
-                startActivity(loadingintent);
                 JsonArrayTask jat = new JsonArrayTask("mem_db_login"){
+                    ProgressDialog asyncDialog;
+
+                    @Override
+                    protected void onPreExecute() {
+                        super.onPreExecute();
+                        asyncDialog = new ProgressDialog(LoginActivity.this);
+                        asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                        asyncDialog.setMessage("로딩중입니다..");
+                        asyncDialog.show();
+                    }
+
                     @Override
                     protected void onPostExecute(JSONArray jsonArray) {
                         super.onPostExecute(jsonArray);
@@ -155,6 +165,8 @@ public class LoginActivity extends AppCompatActivity {
                         } else { // 발급 받은 번호표가 없을 경우
                             redirectMainActivity();
                         }
+
+                        asyncDialog.dismiss(); // loading dialog 닫기
                     }
                 };
 
