@@ -1,6 +1,8 @@
 package ticketzone.org.com.app_mngr.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,8 +26,6 @@ public class LoginActivity extends AppCompatActivity {
     EditText et_owner_id, et_owner_password;
     Button login, sign_up;
     String owner_id, owner_password;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +52,6 @@ public class LoginActivity extends AppCompatActivity {
         sign_up = (Button)findViewById(R.id.sign_up);
         et_owner_id.requestFocus();
 
-
-
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,11 +59,22 @@ public class LoginActivity extends AppCompatActivity {
                 owner_password = et_owner_password.getText().toString();
 
                 NetworkTask networkTask = new NetworkTask("login") {
+                    ProgressDialog asyncDialog;
+
+                    @Override
+                    protected void onPreExecute() {
+                        super.onPreExecute();
+                        asyncDialog = new ProgressDialog(LoginActivity.this);
+                        asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                        asyncDialog.setMessage("로딩중입니다..");
+                        asyncDialog.show();
+                    }
+
                     @Override
                     protected void onPostExecute(String data) {
                         super.onPostExecute(data);
                         mDBHelper.deleteAllTable();
-                        Log.d(getClass().getName(), data);
+
                         if( data.equals("1")) { // login success
                             JsonArrayTask jat = new JsonArrayTask("mngr_db_login"){
                                 @Override
@@ -92,6 +100,9 @@ public class LoginActivity extends AppCompatActivity {
                                     } catch (JSONException e){
                                         e.printStackTrace();
                                     }
+
+                                    asyncDialog.dismiss(); // loading dialog 닫기
+
                                 }
                             };
                             SendDataSet sds = new SendDataSet("owner_id", owner_id);
@@ -107,14 +118,17 @@ public class LoginActivity extends AppCompatActivity {
                             et_owner_password.setText("");
                             et_owner_id.requestFocus();
                         }
+
                     }
                 };
-
 
                 SendDataSet sds1 = new SendDataSet("owner_id", owner_id);
                 SendDataSet sds2 = new SendDataSet("owner_password", owner_password);
 
                 networkTask.execute(sds1, sds2);
+
+//                LoadingTask load = new LoadingTask();
+//                load.execute();
             }
         });
 
@@ -125,6 +139,39 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private class LoadingTask extends AsyncTask<Void, Void, Void> {
+
+        ProgressDialog asyncDialog;
+
+        @Override
+        protected void onPreExecute() {
+            asyncDialog = new ProgressDialog(LoginActivity.this);
+            asyncDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            asyncDialog.setMessage("로딩중입니다..");
+            asyncDialog.show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+//            try {
+//                for (int i = 0; i < 20; i++) {
+//                    asyncDialog.setProgress(i * 5);
+//                    Thread.sleep(1000);
+//                }
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            asyncDialog.dismiss();
+            super.onPostExecute(result);
+        }
     }
 
 }

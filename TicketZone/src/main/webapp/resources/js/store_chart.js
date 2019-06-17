@@ -19,11 +19,12 @@ $(document).ready(function(){
 	var t_sum = 0;
 	var w_sum = 0;
 	console.log(today);
+	var query = {today:today};
 	$.ajax({
 		type: "post",
 		url : "chart",
 		dataType : "json",
-		data : {today},
+		data : query,
 		success : function(data) {			
 			for(i=0; i<data.length; i++){
 				test[i] = {
@@ -33,7 +34,7 @@ $(document).ready(function(){
 				t_sum += data[i].team;
 				w_sum += data[i].the_number;				
 			}
-
+			console.log(test);
 			str += "<button id='prev'><</button>&nbsp&nbsp";
 			str += today;
 			str += "&nbsp&nbsp<button id='next'>></button>";

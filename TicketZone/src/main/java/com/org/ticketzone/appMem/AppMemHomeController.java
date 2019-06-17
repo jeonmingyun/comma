@@ -98,6 +98,16 @@ public class AppMemHomeController {
      return arr;
   }
   
+  @ResponseBody
+  @RequestMapping(value = "RefreshMain", method = RequestMethod.POST)
+  public JSONArray RefreshMain() {
+	  
+	  JSONArray arr = new JSONArray();
+	  arr.add(appMemService.storeList());
+	  
+	  return arr;
+  }
+  
   
   @ResponseBody
   @RequestMapping(value ="/TicketCancel", method = RequestMethod.POST)

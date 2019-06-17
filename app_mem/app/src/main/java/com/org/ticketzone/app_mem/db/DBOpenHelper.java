@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -132,7 +133,7 @@ public class DBOpenHelper extends SQLiteOpenHelper{
     // Store
     public Cursor selectAllStore() {
         mdb = this.getWritableDatabase();
-        String sql = "select * from store";
+        String sql = "select * from store a, coordinates b where a.license_number = b.license_number";
         Cursor store_list = mdb.rawQuery(sql, null);
 
         return store_list;
@@ -181,10 +182,10 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         }
     }
 
-    public boolean deleteStore(String license_number) {
+    public boolean deleteStore() {
         mdb = this.getWritableDatabase();
 
-        int result = mdb.delete(DBTable.Store.TABLENAME, "license_number=?", new String[] {license_number} );
+        int result = mdb.delete(DBTable.Store.TABLENAME, null,null);
 
         if( result == 0)
             return false; // error
@@ -481,6 +482,7 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         mdb.delete(DBTable.NumberTicket.TABLENAME,null,null);
         mdb.delete(DBTable.Beacon.TABLENAME,null,null);
         mdb.delete(DBTable.GpsTest.TABLENAME,null,null);
+        mdb.delete(DBTable.Coordinates.TABLENAME,null,null);
 
     }
 

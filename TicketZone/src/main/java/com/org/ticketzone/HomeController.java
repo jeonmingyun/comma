@@ -155,11 +155,11 @@ public class HomeController {
 	// 테스트용
 
 	@ResponseBody
-	@RequestMapping(value = "/chart")
+	@RequestMapping(value = "/chart", method = RequestMethod.POST)
 	public ArrayList<NumberTicketVO> test(Model model, HttpServletRequest request) {
 		String today = request.getParameter("today");
 		
-				
+		System.out.println(numberTicketService.getTotal());		
 		 
 		return numberTicketService.getTotal();
 	}
