@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.org.ticketzone.mapper.StoreMenuMapper">
+	<select id="menuList" resultType="com.org.ticketzone.domain.StoreMenuVO">
+		<![CDATA[
+		select menu_code, substr(menu_name,0,instr(menu_name,'-')-1) as menu_cate, substr(menu_name,instr(menu_name, '-')+1) as menu_name, menu_price, store_note
+		from store_menu
+		where menu_code like #{license_number} || '%'
+		and substr(menu_name,0,instr(menu_name,'-')-1) = 
+		(select substr(menu_name,0,instr(menu_name,'-')-1) as menu_cate 
+		from store_menu
+		where menu_code like #{license_number} || '%'
+		and rownum <= 1)
+		]]>
+	</select>
+	
+	<select id="getCate" resultType="com.org.ticketzone.domain.StoreMenuVO">
+		<![CDATA[
+		select substr(menu_name,0,instr(menu_name,'-')-1) as menu_cate, max(rowid), 
+		to_number(max(substr(menu_code,(instr(menu_code,'M')+1)))) as menu_code
+		from store_menu
+		where menu_code like #{license_number} || '%'
+		group by substr(menu_name,0,instr(menu_name,'-')-1)
+		order by menu_code
+		]]>
+	</select>
+	
+	<select id="getListTocate" resultType="com.org.ticketzone.domain.StoreMenuVO">
+		<![CDATA[
+			select menu_code, substr(menu_name,0,instr(menu_name,'-')-1) as menu_cate,
+			substr(menu_name,instr(menu_name, '-')+1) as menu_name, menu_price, store_note
+			from store_menu
+			where menu_code like #{license_number} || '%'
+			and substr(menu_name,0,instr(menu_name,'-')-1) like #{menu_cate}
+		]]>
+	</select>
+	<select id="checkMenu" resultType="String">
+		<![CDATA[
+		select nvl(max(menu_name),'not') as menu_name 
+		from store_menu 
+		where menu_code like #{license_number} || '%'
+		]]>
+	</select>
+	
+	<insert id="firstMenu">
+		<![CDATA[
+		insert into store_menu
+		values(#{license_number} || 'M' || #{count} , #{menu_cate} || '-' || #{menu_name}, #{menu_price}, #{store_note}) 
+		]]>
+	</insert>
+	
+	<insert id="addMenu">
+		<![CDATA[
+		insert into store_menu
+		values(#{license_number} || 'M' || 
+		(select max(to_number(substr(menu_code,(instr(menu_code,'M'))+1),9999))+1 as menu_code 
+		from store_menu
+		where menu_code like #{license_number} || '%'), #{menu_cate} || '-' || #{menu_name}, #{menu_price}, #{store_note})
+		]]>
+	</insert>
+	
+	<update id="updateMenu">
+		<![CDATA[
+			update store_menu
+			set menu_name = #{menu_cate} || '-' || #{menu_name},
+			menu_price = #{menu_price},
+			store_note = #{store_note}
+			where menu_code = #{menu_code}
+		]]>
+	</update>
+	<delete id="deleteMenu">
+		delete from store_menu where menu_code = #{menu_code}
+	</delete>
+		
+</mapper>
