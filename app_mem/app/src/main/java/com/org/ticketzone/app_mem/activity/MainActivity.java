@@ -123,10 +123,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         mDBHelper = new DBOpenHelper(this);
 
         mSwipeRefreshLayout = findViewById(R.id.swipe_layout);
-
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
-//        fcmTocken(); // FCM tocken 발급
         toolbar(); // menu toolbar
         tabHost(); // LinearLayout 페이지 바꿔끼우기
         selectAllStore(); // storeList = store table data select
@@ -159,22 +157,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     }
 
-    private void fcmTocken() {
-        FirebaseInstanceId.getInstance().getInstanceId() // 현재 기기의 아이디
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (!task.isSuccessful()) {
-                            Log.e("MAIN", "getInstanceId failed", task.getException());
-                            return;
-                        }
-                        String token = task.getResult().getToken();
-
-                        Log.e("MAIN-TOKEN", token);
-                    }
-                });
-    }
-
     // select categorie table data from SQLite
     private void selectAllCate() {
         Cursor cursor = mDBHelper.selectAllCategorie();
@@ -196,7 +178,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         RecyclerViewAdapter recyclerAdapter = new RecyclerViewAdapter(cateList);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         recyclerView.setAdapter(recyclerAdapter);
-
     }
 
     // store list 생성
@@ -307,6 +288,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                                             numInfoIntent.putExtra("storename",STORE_NAME);
                                             numInfoIntent.putExtra("license", LICENSE);
                                             startActivity(numInfoIntent);
+                                            finish();
                                         } catch (JSONException e){
                                             e.printStackTrace();
                                         }
@@ -704,11 +686,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
 
     public String getCurrentAddress( double latitude, double longitude) {
-
         //지오코더... GPS를 주소로 변환
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-
-
 
         try {
 
@@ -732,15 +711,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         } catch (IllegalArgumentException illegalArgumentException) {
             Toast.makeText(this, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
             return "잘못된 GPS 좌표";
-
         }
-
-
 
         if (addresses == null || addresses.size() == 0) {
             Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
             return "주소 미발견";
-
         }
 
         Address address = addresses.get(0);

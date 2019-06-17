@@ -1,5 +1,6 @@
 package ticketzone.org.com.app_mngr.Task;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 
 import org.json.JSONException;
@@ -14,9 +15,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import ticketzone.org.com.app_mngr.activity.LoginActivity;
+
 public class NetworkTask extends AsyncTask<SendDataSet, Void, String> {
 
 //    private String ip = "15.164.115.73"; // 서버 IP
+
 
     String ip ="39.127.7.45"; //학교 IP번호
 

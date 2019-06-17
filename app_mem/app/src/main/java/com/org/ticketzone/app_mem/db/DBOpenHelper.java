@@ -313,6 +313,15 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         return member_list;
     }
 
+    public Cursor selectMyTicket(String member_id) {
+        mdb = this.getReadableDatabase();
+
+        String sql = "select license_number,  (select store_name from store where license_number = n.license_number) store_name from numberticket n where ticket_status = 0 and member_id = "+ member_id;
+        Cursor member_list = mdb.rawQuery(sql, null);
+
+        return member_list;
+    }
+
     public Cursor countTeam(String license_number) { //select 에 매개변수 받아서 쓰는SQL
         mdb = this.getReadableDatabase();
         Cursor member_list = mdb.rawQuery("select count(*) from numberticket where license_number=? and ticket_status = 0", new String[] {license_number});
