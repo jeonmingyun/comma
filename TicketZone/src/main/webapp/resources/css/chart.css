@@ -3,6 +3,12 @@
 	padding: 0;
 }
 
+#storelist {
+	width: 200px;
+	height: 32px;
+	font-size: 14px;
+}
+
 /* 일별통계 */
 #today_stats {
 	float: right;

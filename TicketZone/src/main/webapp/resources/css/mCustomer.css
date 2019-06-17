@@ -58,7 +58,6 @@
 }
 
 #storelist{
-	float: left;
 	width: 200px;
 	height: 32px;
 	font-size: 14px;
@@ -84,13 +83,11 @@
 
 #today {
 	position: relative;
-	top: 110px;
 }
 
 #waiting {
 	position: relative;
-	top: 180px;
-	margin-bottom: 200px; 
+/* 	margin-bottom: 200px;  */
 }
 /* 게시글 제목 클릭했을 때 */
 /* #customAdmin tr:hover td{
