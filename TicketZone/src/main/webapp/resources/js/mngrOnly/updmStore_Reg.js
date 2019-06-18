@@ -1,4 +1,9 @@
 $(document).ready(function() {
+	
+	var categorie = $("#categorie").val();
+	$('option[value='+categorie+']').attr('selected', 'selected');
+	
+	
 	var mapContainer = document.getElementById('map') // 지도를 표시할 div
 	var coor_x = document.getElementById("coor_x").value
 	var coor_y = document.getElementById("coor_y").value

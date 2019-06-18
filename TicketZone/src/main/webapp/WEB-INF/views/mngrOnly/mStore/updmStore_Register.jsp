@@ -29,6 +29,7 @@
 		<h1>매장 수정</h1>
 		<input type="hidden" id="license_number" name="license_number"
 			value="${updmStore.license_number}">
+		<input type="hidden" id="categorie" value="${updmStore.cate_code}">
 		<table class="mngr_show">
 			<tbody>
 				<tr>
@@ -39,8 +40,8 @@
 				<tr>
 					<th><label for="cate">업종</label></th>
 					<td><select name="cate_code" id="cate">
-							<c:forEach var="c" items="${cate}">
-								<option value="${c.cate_code}">${c.cate_name}</option>
+							<c:forEach var="c" items="${cate}">														
+								<option class="cateoption" value="${c.cate_code}">${c.cate_name}</option>
 							</c:forEach>
 					</select></td>
 				</tr>

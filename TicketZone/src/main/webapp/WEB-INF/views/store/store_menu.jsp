@@ -25,8 +25,8 @@
 			<nav>
 				<ul class="menu">
 					<li><button id="goInfo">매장정보</button></li>
-					<li><button id="goMenu">메뉴</button></li>
 					<li><button id="goChart">통계</button></li>
+					<li><button id="goMenu">메뉴</button></li>
 				</ul>
 			</nav>
 		</div>
