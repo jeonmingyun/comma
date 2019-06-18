@@ -120,4 +120,10 @@ public class AppMemServiceImplement implements AppMemService {
 		return mapper.numberTicketToDayList(license_number);
 	}
 
+	@Override
+	public NumberTicketVO[] RefreshTicket() {
+		// TODO Auto-generated method stub
+		return mapper.RefreshTicket();
+	}
+
 }

@@ -104,7 +104,8 @@ public class AppMemHomeController {
 	  
 	  JSONArray arr = new JSONArray();
 	  arr.add(appMemService.storeList());
-	  
+	  arr.add(appMemService.RefreshTicket());
+	  System.out.println("hi");
 	  return arr;
   }
   

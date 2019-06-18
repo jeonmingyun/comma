@@ -2,6 +2,7 @@ package com.org.ticketzone.app_mem.activity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
@@ -116,6 +117,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     private Button fcm_btn;
 
+    private String[] cate_icon = {"cate_korean_food", "cate_chinese_food", "cate_japanese_food", "cate_western_food", "cate_else", "cate_flour_based_food", "cate_bakery", "cate_cafe"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -167,6 +170,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         while(cursor.moveToNext()) {
             categorieVO = new CategorieVO();
             categorieVO.setCate_name(cursor.getString(1));
+            categorieVO.setCate_icon(cate_icon[cursor.getPosition()]);
 
             cateList.add(categorieVO);
         }
@@ -175,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     // categorie list 생성
     private void cateList() {
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        RecyclerViewAdapter recyclerAdapter = new RecyclerViewAdapter(cateList);
+        RecyclerViewAdapter recyclerAdapter = new RecyclerViewAdapter(this, cateList);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         recyclerView.setAdapter(recyclerAdapter);
     }
@@ -583,8 +587,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 super.onPostExecute(jsonArray);
                 try{
                     mDBHelper.deleteStore();
+                    mDBHelper.deleteTodayTicket();
                     mDBHelper.insertStore(new JSONArray(jsonArray.get(0).toString()));
-
+                    mDBHelper.insertTicket(new JSONArray(jsonArray.get(1).toString()));
                     selectAllStore();
                     storeList();
                 } catch (JSONException e){
