@@ -254,12 +254,12 @@ public class NumInfoActivity extends AppCompatActivity implements SwipeRefreshLa
                         the_number.setText(the_number2 + "명");
                     }
 
-                    Cursor Now_Enter = mDBHelper.Current_Enter(license, send_ticket);
-                    while(Now_Enter.moveToNext()){
-                        c_enter = Now_Enter.getString(0);
+                    Cursor Now_Enter2 = mDBHelper.Current_Refresh(license,send_ticket);
+                    while(Now_Enter2.moveToNext()){
+                        c_enter = Now_Enter2.getString(0);
                     }
-                    NowEnter.setText(c_enter + "팀");
-                    Log.e("aaaa", send_ticket);
+                    NowEnter.setText(0 + "팀");
+                    Log.e("aaaa", c_enter);
                     storeName.setText(storename);
                 } catch (JSONException e ) {
                     e.printStackTrace();

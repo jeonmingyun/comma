@@ -172,6 +172,13 @@
 		when ticket_status = 2 then 0
 		when ticket_status = 3 then 0
 		else wait_number
+		end,
+		ticket_status = 
+		case
+		when ticket_status = 0 then 1
+		when ticket_status = 1 then 1
+		when ticket_Status = 2 then 2
+		when ticket_status = 3 then 3
 		end
 		where ticket_code like to_char(sysdate,'yyyymmdd') || #{license_number} || '%'
 		]]>
