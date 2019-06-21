@@ -354,6 +354,13 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         return member_list;
     }
 
+    public Cursor Current_Refresh(String license, String ticket_code){
+        mdb = this.getReadableDatabase();
+        Cursor member_list = mdb.rawQuery("select count(*) from numberticket where strftime('%Y/%m/%d', 'now') || '%' and ticket_status = 0 and license_number = ?  and ticket_code < ?", new String[] {license, ticket_code});
+
+        return member_list;
+    }
+
     public Cursor ChartTicket(String C_date){
         mdb = this.getReadableDatabase();
         Cursor member_list = mdb.rawQuery ("select substr(ticket_reg,10,2) as ticket_reg, sum(the_number) as the_number from numberticket where ticket_code like ? ||'1111111112' ||'%' group by substr(ticket_reg,10,2) order by substr(ticket_reg,10,2)", new String[] {C_date});
