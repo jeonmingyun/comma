@@ -33,5 +33,7 @@ public interface AppMemMapper {
 	public void SyncTicket(NumberTicketVO vo);
 	public void insertToken(String token_id);
 	
+	public NumberTicketVO[] RefreshTicket();
+	
 }
 

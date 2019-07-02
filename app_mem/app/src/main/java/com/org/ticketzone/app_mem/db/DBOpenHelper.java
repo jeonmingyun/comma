@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -132,7 +133,7 @@ public class DBOpenHelper extends SQLiteOpenHelper{
     // Store
     public Cursor selectAllStore() {
         mdb = this.getWritableDatabase();
-        String sql = "select * from store";
+        String sql = "select * from store a, coordinates b where a.license_number = b.license_number";
         Cursor store_list = mdb.rawQuery(sql, null);
 
         return store_list;
@@ -181,10 +182,20 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         }
     }
 
-    public boolean deleteStore(String license_number) {
+    public boolean deleteTodayTicket(){
         mdb = this.getWritableDatabase();
 
-        int result = mdb.delete(DBTable.Store.TABLENAME, "license_number=?", new String[] {license_number} );
+        int result = mdb.delete(DBTable.NumberTicket.TABLENAME, "strftime('%Y/%m/%d', 'now') || '%'", null);
+        if( result == 0)
+            return false; // error
+        else
+            return true; // success
+    }
+
+    public boolean deleteStore() {
+        mdb = this.getWritableDatabase();
+
+        int result = mdb.delete(DBTable.Store.TABLENAME, null,null);
 
         if( result == 0)
             return false; // error
@@ -335,9 +346,17 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         return member_list;
     }
 
-    public Cursor Current_Enter(String license){
+
+    public Cursor Current_Enter(String license, String ticket_code){
         mdb = this.getReadableDatabase();
-        Cursor member_list = mdb.rawQuery("select ticket_code from numberticket where strftime('%Y/%m/%d', 'now') || '%' and wait_number = 1 and license_number = ?", new String[] {license});
+        Cursor member_list = mdb.rawQuery("select count(*) from numberticket where strftime('%Y/%m/%d', 'now') || '%' and ticket_status = 0 and license_number = ? and ticket_code < ?", new String[] {license, ticket_code});
+
+        return member_list;
+    }
+
+    public Cursor Current_Refresh(String license, String ticket_code){
+        mdb = this.getReadableDatabase();
+        Cursor member_list = mdb.rawQuery("select count(*) from numberticket where strftime('%Y/%m/%d', 'now') || '%' and ticket_status = 0 and license_number = ?  and ticket_code < ?", new String[] {license, ticket_code});
 
         return member_list;
     }
@@ -348,6 +367,7 @@ public class DBOpenHelper extends SQLiteOpenHelper{
 
         return member_list;
     }
+
 
     public void insertTicket(JSONArray NumberTicketList) {
         mdb = this.getWritableDatabase();
@@ -481,6 +501,7 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         mdb.delete(DBTable.NumberTicket.TABLENAME,null,null);
         mdb.delete(DBTable.Beacon.TABLENAME,null,null);
         mdb.delete(DBTable.GpsTest.TABLENAME,null,null);
+        mdb.delete(DBTable.Coordinates.TABLENAME,null,null);
 
     }
 

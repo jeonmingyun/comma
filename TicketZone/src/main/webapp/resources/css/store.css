@@ -120,6 +120,9 @@
 #store_info p {
 	color: #888888;
 	font-size: 14px;
+	width: 245px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 /* Pagination */

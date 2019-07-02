@@ -129,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:padding="10dp"
-                    android:text="현재입장"
+                    android:text="대기팀수"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 

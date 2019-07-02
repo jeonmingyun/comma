@@ -100,7 +100,7 @@
 	<insert id="M_makeTicket">
 		<![CDATA[
 		insert into number_ticket
-		(ticket_code, wait_number, the_number, license_number, member_id, ticket_status)
+		(ticket_code, wait_number, the_number, license_number, member_id, ticket_status, ticket_reg)
 		values(
 		(select (code1 || code2) + 1 as code
 		from make_code
@@ -111,14 +111,14 @@
 		#{the_number}, 
 		'1234578910', 
 		#{member_id}, 
-		0)
+		0, to_char(sysdate, 'yy/mm/dd hh24'))
 		]]>
 	</insert>
 	
 	<insert id="M_plusTicket">
 		<![CDATA[
 		insert into number_ticket
-		(ticket_code, wait_number, the_number, license_number, member_id, ticket_status)
+		(ticket_code, wait_number, the_number, license_number, member_id, ticket_status, ticket_reg)
 		values(
 		(select (ticket_code + 1) as ticket_code
 		from (select ticket_code from number_ticket 
@@ -139,14 +139,14 @@
 		#{the_number}, 
 		'1234578910', 
 		#{member_id}, 
-		0)
+		0, to_char(sysdate, 'yy/mm/dd hh24'))
 		]]>
 	</insert>
 	<select id="M_chart" resultType="com.org.ticketzone.domain.NumberTicketVO">
 		<![CDATA[
 		with
 		chart as (
-		select substr(ticket_reg,10,2) as ticket_reg, sum(the_number) as the_number, count(ticket_code) as team
+		select substr(ticket_reg,9,2) as ticket_reg, sum(the_number) as the_number, count(ticket_code) as team
 		from number_ticket
 		where license_number = '1597530000' and
 		ticket_reg like to_char(to_date('19/04/30', 'yy/mm/dd')+1, 'yy/mm/dd') || '%'
@@ -172,6 +172,13 @@
 		when ticket_status = 2 then 0
 		when ticket_status = 3 then 0
 		else wait_number
+		end,
+		ticket_status = 
+		case
+		when ticket_status = 0 then 1
+		when ticket_status = 1 then 1
+		when ticket_Status = 2 then 2
+		when ticket_status = 3 then 3
 		end
 		where ticket_code like to_char(sysdate,'yyyymmdd') || #{license_number} || '%'
 		]]>
