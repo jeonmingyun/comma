@@ -17,7 +17,7 @@ import java.net.URL;
 
 public class JsonArrayTask extends AsyncTask<SendDataSet, Void, JSONArray> {
 
-    String ip ="39.127.7.41";
+    String ip ="39.127.7.46";
 //    String ip = "15.164.115.73"; // 서버 IP
     String path = "http://"+ip+":8080/"; // 연결할 jsp주소
 
