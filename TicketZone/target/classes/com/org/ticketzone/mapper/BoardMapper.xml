@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.org.ticketzone.mapper.BoardMapper">
+
+	<!-- 문의사항 -->	
+	<select id="boardList" resultType="com.org.ticketzone.domain.BoardVO">
+		select * from board where board_status= 0 order by board_reg desc
+	</select>
+	
+	<!-- 문의사항 글쓰기 처리 -->
+	<!-- <insert id="boardInsert">
+		insert into board(board_no, board_title, board_content, board_password, cate_code)
+		values(board_seq.nextval, #{board_title}, #{board_content}, #{board_password}, #{cate_code})
+	</insert> -->	
+	<insert id="boardInsert">
+		<selectKey keyProperty="board_no" order="BEFORE" resultType="int">
+			select board_seq.nextval from dual
+		</selectKey>		
+		insert into board(board_no, board_title, board_content, board_password, cate_code)
+		values(#{board_no}, #{board_title}, #{board_content}, #{board_password}, #{cate_code})		
+	</insert>
+	
+	<!-- 문의사항 수정페이지-->	
+	<select id="boardUpdInfo" resultType="com.org.ticketzone.domain.BoardVO">
+		select * from board where board_no= #{board_no}
+	</select>
+
+	<!-- 문의사항 수정처리 -->
+	<update id="boardUpd">
+		update board
+		set board_title = #{board_title},
+		board_content = #{board_content}		
+		where board_no = #{board_no}
+	</update>
+	
+	<!-- 문의사항 삭제 -->
+	<delete id="boardDel">
+		delete from board where board_no = #{board_no}
+	</delete>
+	
+	<!-- 공지사항 검색 -->
+<!--  <select id="noticeSearch" resultType="com.org.ticketzone.domain.NoticeBoardVO">
+	<![CDATA[
+		select notice_no, notice_title, notice_content, notice_reg
+		from notice_board
+		where notice_title like '%'||#{keyword}||'%'
+		OR notice_content like '%'||#{keyword}||'%'
+		OR notice_no like '%'||#{keyword}||'%'
+	]]>	
+	</select> -->
+	<!-- 동적 SQL -->
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							board_title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							board_content like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	<!-- 게시판 페이징<검색> -->
+	<select id="getListWithPaging"
+		resultType="com.org.ticketzone.domain.BoardVO">
+		<![CDATA[
+			select board_no, board_title, board_content, board_reg, board_password, cate_name
+			from
+			(select rownum rn, a.board_no, a.board_title, a.board_content, a.board_reg, a.board_password, b.cate_name
+			from board a, categorie b
+			where 	
+		]]>
+			<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							board_title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							board_content like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+		<![CDATA[
+			a.cate_code = b.cate_code
+			and rownum <= #{pageNum} * #{amount}
+			order by board_reg desc)										
+			where rn > (#{pageNum} -1) * #{amount}			
+		]]>
+	</select>
+	
+	<select id="total" resultType="int">
+		select count(*) from board where board_no > 0
+	</select>
+	
+	<!-- 문의사항 상세보기 intercepter-->	
+	<select id="board_pass" resultType="com.org.ticketzone.domain.BoardVO">
+		select * from board where board_no= #{board_no} and board_password = #{board_password}
+	</select>
+	
+</mapper>
