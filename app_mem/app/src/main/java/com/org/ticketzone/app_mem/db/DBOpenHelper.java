@@ -182,6 +182,16 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         }
     }
 
+    public boolean deleteTodayTicket(){
+        mdb = this.getWritableDatabase();
+
+        int result = mdb.delete(DBTable.NumberTicket.TABLENAME, "strftime('%Y/%m/%d', 'now') || '%'", null);
+        if( result == 0)
+            return false; // error
+        else
+            return true; // success
+    }
+
     public boolean deleteStore() {
         mdb = this.getWritableDatabase();
 
@@ -336,9 +346,17 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         return member_list;
     }
 
-    public Cursor Current_Enter(String license){
+
+    public Cursor Current_Enter(String license, String ticket_code){
         mdb = this.getReadableDatabase();
-        Cursor member_list = mdb.rawQuery("select ticket_code from numberticket where strftime('%Y/%m/%d', 'now') || '%' and wait_number = 1 and license_number = ?", new String[] {license});
+        Cursor member_list = mdb.rawQuery("select count(*) from numberticket where strftime('%Y/%m/%d', 'now') || '%' and ticket_status = 0 and license_number = ? and ticket_code < ?", new String[] {license, ticket_code});
+
+        return member_list;
+    }
+
+    public Cursor Current_Refresh(String license, String ticket_code){
+        mdb = this.getReadableDatabase();
+        Cursor member_list = mdb.rawQuery("select count(*) from numberticket where strftime('%Y/%m/%d', 'now') || '%' and ticket_status = 0 and license_number = ?  and ticket_code < ?", new String[] {license, ticket_code});
 
         return member_list;
     }
@@ -349,6 +367,7 @@ public class DBOpenHelper extends SQLiteOpenHelper{
 
         return member_list;
     }
+
 
     public void insertTicket(JSONArray NumberTicketList) {
         mdb = this.getWritableDatabase();

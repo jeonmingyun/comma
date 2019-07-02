@@ -18,6 +18,11 @@
 		where token_id = #{token_id}
 	</update>
 	
+	<select id="RefreshTicket" resultType="com.org.ticketzone.domain.NumberTicketVO">
+		<![CDATA[
+			select * from number_ticket where ticket_code like to_char(sysdate, 'yyyymmdd') || '%'
+		]]>	
+	</select>
 	
 	<select id="storeList" resultType="com.org.ticketzone.domain.StoreVO">
 		select a.*, b.img_uuid, b.img_uploadpath, b.img_filename

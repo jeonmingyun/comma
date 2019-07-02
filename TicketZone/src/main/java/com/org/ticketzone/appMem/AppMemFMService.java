@@ -103,7 +103,8 @@ public class AppMemFMService {
 		JSONObject json = new JSONObject();
 		infoJson.put("title", arr2.get(0).getStore_name());
 		infoJson.put("body", "고객님의 순번이 다가왔습니다. 시간내에 매장으로 와주시기바랍니다.");
-		json.put("to", token.trim());
+		json.put("to", token.trim()); // 개인별 fcm전송
+//		json.put("registration_ids", token.trim()); // 여러벙에게 fcm전송
 		json.put("notification", infoJson);
 
         // 서버에서 날려서 한글 깨지는 사람은 아래처럼  UTF-8로 인코딩해서 날려주자

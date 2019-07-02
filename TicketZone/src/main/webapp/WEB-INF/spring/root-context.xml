@@ -9,8 +9,6 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
-
-
 	<bean destroy-method="close"
 		class="org.apache.commons.dbcp2.BasicDataSource" id="dataSource">
 

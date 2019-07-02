@@ -45,7 +45,7 @@
 <![CDATA[
 	update store
 	set store_name = #{store_name},
-	cate_code = 'F1',
+	cate_code = #{cate_code},
 	r_name = #{r_name},
 	store_tel = #{store_tel},
 	store_time = #{time} || '-' || #{time2},
