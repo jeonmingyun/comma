@@ -333,10 +333,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         storeList = new ArrayList<>();
         StoreVO storeVO;
         gpsTracker = new GpsTracker(MainActivity.this);
-//        my_x = gpsTracker.getLatitude();
-//        my_y = gpsTracker.getLongitude();
-          my_x =  35.89234359816278;
-          my_y = 128.6230699996115;
+        my_x = gpsTracker.getLatitude();
+        my_y = gpsTracker.getLongitude();
+//          my_x =  35.89234359816278;
+//          my_y = 128.6230699996115;
 
         while(cursor.moveToNext()) {
             storeVO = new StoreVO();
