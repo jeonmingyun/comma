@@ -153,6 +153,13 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         return store_list;
     }
 
+    //메장 검색
+    public Cursor SearchStore(String store_name){
+        mdb = this.getWritableDatabase();
+        Cursor store_list = mdb.rawQuery("select * from store where store_name like '%' || ? || '%'", new String[] {store_name});
+        return store_list;
+    }
+
     public void insertStore(JSONArray storeList) {
         mdb = this.getWritableDatabase();
 
@@ -230,6 +237,8 @@ public class DBOpenHelper extends SQLiteOpenHelper{
 
         return member_list;
     }
+
+
 
     public Cursor selectStoreMenu(String license_number) {
         mdb = this.getWritableDatabase();
