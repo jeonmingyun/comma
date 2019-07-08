@@ -17,8 +17,8 @@
 
     <ImageView
         android:id="@+id/imageView9"
-        android:layout_width="90dp"
-        android:layout_height="58dp"
+        android:layout_width="115dp"
+        android:layout_height="77dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView6"
         app:layout_constraintEnd_toEndOf="@+id/imageView6"
@@ -30,8 +30,8 @@
 
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="79dp"
-        android:layout_height="37dp"
+        android:layout_width="125dp"
+        android:layout_height="57dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
@@ -65,10 +65,10 @@
     <TextView
         android:id="@+id/teltext"
         android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:gravity="center"
         android:textColor="@color/color"
-        android:textSize="40sp"
+        android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView6"

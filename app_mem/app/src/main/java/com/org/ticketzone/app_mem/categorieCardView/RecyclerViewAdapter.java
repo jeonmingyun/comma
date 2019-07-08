@@ -28,6 +28,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<CateItemViewHolder
     public CateItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.categorie_list_item, viewGroup, false);
 
+
+
         return new CateItemViewHolder(v);
     }
 
