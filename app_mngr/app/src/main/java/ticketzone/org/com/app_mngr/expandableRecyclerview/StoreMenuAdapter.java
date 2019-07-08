@@ -40,5 +40,4 @@ public class StoreMenuAdapter extends ExpandableRecyclerViewAdapter<MenuTitleVie
         holder.bind(menuTitle);
     }
 
-
 }
