@@ -6,4 +6,6 @@
 	<select id="adminLogin" resultType="com.org.ticketzone.domain.AdminVO">
 		select * from admin where admin_id = #{admin_id}
 	</select>
+	
+	
 </mapper>
