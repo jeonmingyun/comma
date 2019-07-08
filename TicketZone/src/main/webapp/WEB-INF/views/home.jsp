@@ -28,10 +28,10 @@
 
 </head>
 <body>
-
+	
 	<!-- header -->
 	<%@include file="include/header.jsp"%>
-
+		
 	<!-- Page Header -->
 	<!-- <header class="masthead" style="background-image: url('resources/bootstrap/img/home-bg.jpg')">
     <div class="overlay"></div>
