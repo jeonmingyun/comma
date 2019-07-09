@@ -58,7 +58,7 @@ public abstract class RecyclerViewAdapter extends RecyclerView.Adapter<CateItemV
             public void onClick(View v) {
                 Context context = v.getContext();
                 Log.e("context", i+"");
-                Toast.makeText(context,i +"",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context,i +"",Toast.LENGTH_SHORT).show();
                 mDBHelper = new DBOpenHelper(context);
                 Cursor cursor = mDBHelper.selectCategorie();
                 CategorieVO categorieVO;
@@ -67,21 +67,30 @@ public abstract class RecyclerViewAdapter extends RecyclerView.Adapter<CateItemV
                 while(cursor.moveToNext()) {
                     categorieVO = new CategorieVO();
                     categorieVO.setCate_code(cursor.getString(0));
-                    categorieVO.setCate_name(cursor.getString(1));
 
                     cateList.add(categorieVO);
                 }
                 Log.e("ddd",cateList.get(0)+"");
                 switch (i){
                     case 0:
-                        Log.e("dddd",cateList.get(i)+"");
-                        Intent intent = new Intent(context, MainActivity.class);
-                        context.startActivity(intent);
+                        cate(i);
                         break;
                     case 1:
+                        cate(i);
                         break;
                     case 2:
+                        cate(i);
                         break;
+                    case 3:
+                        cate(i);
+                    case 4:
+                        cate(i);
+                    case 5:
+                        cate(i);
+                    case 6:
+                        cate(i);
+                    case 7:
+                        cate(i);
                 }
 
 
@@ -93,6 +102,13 @@ public abstract class RecyclerViewAdapter extends RecyclerView.Adapter<CateItemV
     @Override
     public int getItemCount() {
         return cateList.size();
+    }
+
+    private void cate(int i){
+        Log.e("dddd",cateList.get(i).getCate_code()+"");
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra("cate",cateList.get(i).getCate_code());
+        context.startActivity(intent);
     }
 
 

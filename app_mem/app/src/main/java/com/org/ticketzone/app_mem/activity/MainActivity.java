@@ -120,6 +120,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     private String[] cate_icon = {"cate_korean_food", "cate_chinese_food", "cate_japanese_food", "cate_western_food", "cate_else", "cate_flour_based_food", "cate_bakery", "cate_cafe"};
 
+    private String cate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,6 +131,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         mSwipeRefreshLayout = findViewById(R.id.swipe_layout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
+        Intent intent = getIntent();
+        cate = intent.getStringExtra("cate");
+
         toolbar(); // menu toolbar
         tabHost(); // LinearLayout 페이지 바꿔끼우기
         selectAllStore(); // storeList = store table data select
@@ -137,6 +142,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         beaconConnection();
         storeList(); // store tab에서 store list를 보여줌
         cateList();
+        if(intent.hasExtra("cate")) {
+            cateStore();
+        }
 
         //gps
         if (!checkLocationServicesStatus()) {
@@ -159,6 +167,169 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             }
         });
 
+    }
+
+    private void cateStore(){
+        storeList.removeAll(storeList);
+        StoreVO storeVO;
+        Cursor cursor = mDBHelper.selectCateSearch(cate);
+        while(cursor.moveToNext()){
+            storeVO = new StoreVO();
+            storeVO.setLicense_number(cursor.getString(0));
+            storeVO.setR_name(cursor.getString(1));
+            storeVO.setMax_number(cursor.getString(2));
+            storeVO.setStore_status(cursor.getInt(3));
+            storeVO.setCate_code(cursor.getString(4));
+            storeVO.setOwner_id(cursor.getString(5));
+            storeVO.setStore_tel(cursor.getString(6));
+            storeVO.setStore_time(cursor.getString(7));
+            storeVO.setStore_name(cursor.getString(8));
+            storeVO.setStore_intro(cursor.getString(9));
+            storeVO.setImg_uuid(cursor.getString(10));
+            storeVO.setImg_uploadpath(cursor.getString(11));
+            storeVO.setImg_filename(cursor.getString(12));
+            storeVO.setAddress_name(cursor.getString(13));
+            storeList.add(storeVO);
+        }
+        storeListView = findViewById(R.id.store_list_view);
+        CustomAdapter<StoreVO> storeAdapter;
+
+        storeAdapter = new CustomAdapter<StoreVO>(storeList) {
+            @Override
+            public View getView(final int idx, View view, ViewGroup parent) {
+                Log.e("position", idx+"");
+                //notifyDataSetChanged();
+                view = getLayoutInflater().inflate(R.layout.store_list_item, null);
+                String license_number = storeList.get(idx).getLicense_number();
+                Cursor cursor = mDBHelper.countTeam(license_number);
+                String count = "";
+
+                while(cursor.moveToNext()){
+                    count = cursor.getString(0);
+                }
+
+                ImageView storeImg = view.findViewById(R.id.store_img);
+                TextView storeName = view.findViewById(R.id.store_name);
+                TextView store_address = view.findViewById(R.id.store_address);
+                TextView waiting = view.findViewById(R.id.waiting);
+                final Button tagBtn = view.findViewById(R.id.tag_btn);
+                String imageUrl = "http://15.164.115.73:8080/resources/img/" + storeList.get(idx).getImg_uploadpath() + "/" + storeList.get(idx).getImg_uuid() + "_" + storeList.get(idx).getImg_filename();
+                String store_enable = "";
+                if(storeList.get(idx).getStore_status() == 0){
+                    store_enable = "disable";
+                } else {
+                    store_enable = "enable";
+                }
+                Glide.with(view).load(imageUrl).centerCrop().into(storeImg);
+                storeImg.setAlpha(130);
+
+                storeName.setText(storeList.get(idx).getStore_name());
+                store_address.setText(storeList.get(idx).getAddress_name());
+
+                waiting.setText(count + "팀");
+                view.setTag(idx);   // 인덱스 저장
+                tagBtn.setTag(idx);
+//                tagBtn.setText("발급불가");
+                tagBtn.setEnabled(false);
+
+                String B_name[] =  new String[beaconList.size()];
+                String B_id[] = new String[beaconList.size()];
+
+                for(int i =0; i<beaconList.size(); i++){
+                    B_name[i] = beaconList.get(i).getStore_name();
+                    B_id[i] = beaconList.get(i).getB_code().substring(41);
+                }
+
+                for(int i =0; i<B_name.length; i++) {
+                    if (storeName.getText().equals(B_name[i]) && Minor.equals(B_id[i]) && store_enable.equals("enable")) {
+                        tagBtn.setEnabled(true);
+                        tagBtn.setText("");
+                    }
+                }
+
+                // 발급 버튼 클릭
+                tagBtn.setOnClickListener(new View.OnClickListener(){
+
+                    @Override
+                    public void onClick(View v) {
+                        v.setTag(tagBtn.getTag());
+                        int btnIndex = (Integer)tagBtn.getTag();  //인덱스 변수 선언
+                        final String LICENSE = storeList.get(btnIndex).getLicense_number();
+                        final String STORE_NAME = storeList.get(btnIndex).getStore_name(); // 변수 설정 하는 법
+
+                        final EditText ET = new EditText(MainActivity.this);
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                        dialog.setTitle("인원 수 설정");
+                        dialog.setMessage("인원 수");
+                        dialog.setView(ET);
+
+                        // 확인 버튼 이벤트
+                        dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String inputValue = ET.getText().toString();
+                                Cursor cursor = mDBHelper.selectAllMember();
+                                TextView storeName = findViewById(R.id.storeName);
+                                String member_id = "";
+
+                                while(cursor.moveToNext()){
+                                    member_id = cursor.getString(0);
+                                }
+                                final String MEMBER = member_id;
+                                NetworkTask networkTask = new NetworkTask("Mem_issue_ticket") {
+
+                                };
+                                SendDataSet sds1 = new SendDataSet("member_id", member_id);
+                                SendDataSet sds2 = new SendDataSet("the_number", inputValue);
+                                SendDataSet sds3 = new SendDataSet("license_number", LICENSE);
+                                networkTask.execute(sds1, sds2, sds3);
+                                Toast.makeText(MainActivity.this, inputValue + "명 입력되었습니다.", Toast.LENGTH_SHORT).show();
+
+                                JsonArrayTask jat = new JsonArrayTask("MyTicket"){
+                                    @Override
+                                    protected void onPostExecute(JSONArray jsonArray) {
+                                        super.onPostExecute(jsonArray);
+                                        try{
+                                            mDBHelper.insertTicket(new JSONArray(jsonArray.get(0).toString()));
+                                            Log.e("myTicket", jsonArray.get(0).toString());
+                                            Intent numInfoIntent = new Intent(MainActivity.this, NumInfoActivity.class);
+                                            numInfoIntent.putExtra("member_id", MEMBER);
+                                            numInfoIntent.putExtra("storename",STORE_NAME);
+                                            numInfoIntent.putExtra("license", LICENSE);
+                                            startActivity(numInfoIntent);
+                                            finish();
+                                        } catch (JSONException e){
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                };
+                                SendDataSet sds5 = new SendDataSet("member_id", member_id);
+                                SendDataSet sds6 = new SendDataSet("license_number", LICENSE);
+                                jat.execute(sds5,sds6);
+
+
+                            }
+                        });
+
+                        //취소 버튼 이벤트
+                        dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        dialog.show();
+
+                    }
+                });
+
+                storeItemClicked(idx, view);
+
+                return view;
+            }
+        };
+
+        storeListView.setAdapter(storeAdapter);
     }
 
     // select categorie table data from SQLite
@@ -339,8 +510,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         my_x = 35.89234359816278;
         my_y = 128.6230699996115;
-        my_x = gpsTracker.getLatitude();
-        my_y = gpsTracker.getLongitude();
+//        my_x = gpsTracker.getLatitude();
+//        my_y = gpsTracker.getLongitude();
 //          my_x =  35.89234359816278;
 //          my_y = 128.6230699996115;
 
@@ -522,149 +693,149 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     storeList.add(storeVO);
                 }
                 storeListView = findViewById(R.id.store_list_view);
-                CustomAdapter<StoreVO> storeAdapter;
+        CustomAdapter<StoreVO> storeAdapter;
 
-                storeAdapter = new CustomAdapter<StoreVO>(storeList) {
-                    @Override
-                    public View getView(final int idx, View view, ViewGroup parent) {
-                        Log.e("position", idx+"");
-                        //notifyDataSetChanged();
-                        view = getLayoutInflater().inflate(R.layout.store_list_item, null);
-                        String license_number = storeList.get(idx).getLicense_number();
-                        Cursor cursor = mDBHelper.countTeam(license_number);
-                        String count = "";
+        storeAdapter = new CustomAdapter<StoreVO>(storeList) {
+            @Override
+            public View getView(final int idx, View view, ViewGroup parent) {
+                Log.e("position", idx+"");
+                //notifyDataSetChanged();
+                view = getLayoutInflater().inflate(R.layout.store_list_item, null);
+                String license_number = storeList.get(idx).getLicense_number();
+                Cursor cursor = mDBHelper.countTeam(license_number);
+                String count = "";
 
-                        while(cursor.moveToNext()){
-                            count = cursor.getString(0);
-                        }
+                while(cursor.moveToNext()){
+                    count = cursor.getString(0);
+                }
 
-                        ImageView storeImg = view.findViewById(R.id.store_img);
-                        TextView storeName = view.findViewById(R.id.store_name);
-                        TextView store_address = view.findViewById(R.id.store_address);
-                        TextView waiting = view.findViewById(R.id.waiting);
-                        final Button tagBtn = view.findViewById(R.id.tag_btn);
-                        String imageUrl = "http://15.164.115.73:8080/resources/img/" + storeList.get(idx).getImg_uploadpath() + "/" + storeList.get(idx).getImg_uuid() + "_" + storeList.get(idx).getImg_filename();
-                        String store_enable = "";
-                        if(storeList.get(idx).getStore_status() == 0){
-                            store_enable = "disable";
-                        } else {
-                            store_enable = "enable";
-                        }
-                        Glide.with(view).load(imageUrl).centerCrop().into(storeImg);
-                        storeImg.setAlpha(130);
+                ImageView storeImg = view.findViewById(R.id.store_img);
+                TextView storeName = view.findViewById(R.id.store_name);
+                TextView store_address = view.findViewById(R.id.store_address);
+                TextView waiting = view.findViewById(R.id.waiting);
+                final Button tagBtn = view.findViewById(R.id.tag_btn);
+                String imageUrl = "http://15.164.115.73:8080/resources/img/" + storeList.get(idx).getImg_uploadpath() + "/" + storeList.get(idx).getImg_uuid() + "_" + storeList.get(idx).getImg_filename();
+                String store_enable = "";
+                if(storeList.get(idx).getStore_status() == 0){
+                    store_enable = "disable";
+                } else {
+                    store_enable = "enable";
+                }
+                Glide.with(view).load(imageUrl).centerCrop().into(storeImg);
+                storeImg.setAlpha(130);
 
-                        storeName.setText(storeList.get(idx).getStore_name());
-                        store_address.setText(storeList.get(idx).getAddress_name());
+                storeName.setText(storeList.get(idx).getStore_name());
+                store_address.setText(storeList.get(idx).getAddress_name());
 
-                        waiting.setText(count + "팀");
-                        view.setTag(idx);   // 인덱스 저장
-                        tagBtn.setTag(idx);
+                waiting.setText(count + "팀");
+                view.setTag(idx);   // 인덱스 저장
+                tagBtn.setTag(idx);
 //                tagBtn.setText("발급불가");
-                        tagBtn.setEnabled(false);
+                tagBtn.setEnabled(false);
 
-                        String B_name[] =  new String[beaconList.size()];
-                        String B_id[] = new String[beaconList.size()];
+                String B_name[] =  new String[beaconList.size()];
+                String B_id[] = new String[beaconList.size()];
 
-                        for(int i =0; i<beaconList.size(); i++){
-                            B_name[i] = beaconList.get(i).getStore_name();
-                            B_id[i] = beaconList.get(i).getB_code().substring(41);
-                        }
+                for(int i =0; i<beaconList.size(); i++){
+                    B_name[i] = beaconList.get(i).getStore_name();
+                    B_id[i] = beaconList.get(i).getB_code().substring(41);
+                }
 
-                        for(int i =0; i<B_name.length; i++) {
-                            if (storeName.getText().equals(B_name[i]) && Minor.equals(B_id[i]) && store_enable.equals("enable")) {
-                                tagBtn.setEnabled(true);
-                                tagBtn.setText("");
-                            }
-                        }
+                for(int i =0; i<B_name.length; i++) {
+                    if (storeName.getText().equals(B_name[i]) && Minor.equals(B_id[i]) && store_enable.equals("enable")) {
+                        tagBtn.setEnabled(true);
+                        tagBtn.setText("");
+                    }
+                }
 
-                        // 발급 버튼 클릭
-                        tagBtn.setOnClickListener(new View.OnClickListener(){
+                // 발급 버튼 클릭
+                tagBtn.setOnClickListener(new View.OnClickListener(){
 
+                    @Override
+                    public void onClick(View v) {
+                        v.setTag(tagBtn.getTag());
+                        int btnIndex = (Integer)tagBtn.getTag();  //인덱스 변수 선언
+                        final String LICENSE = storeList.get(btnIndex).getLicense_number();
+                        final String STORE_NAME = storeList.get(btnIndex).getStore_name(); // 변수 설정 하는 법
+
+                        final EditText ET = new EditText(MainActivity.this);
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                        dialog.setTitle("인원 수 설정");
+                        dialog.setMessage("인원 수");
+                        dialog.setView(ET);
+
+                        // 확인 버튼 이벤트
+                        dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(View v) {
-                                v.setTag(tagBtn.getTag());
-                                int btnIndex = (Integer)tagBtn.getTag();  //인덱스 변수 선언
-                                final String LICENSE = storeList.get(btnIndex).getLicense_number();
-                                final String STORE_NAME = storeList.get(btnIndex).getStore_name(); // 변수 설정 하는 법
+                            public void onClick(DialogInterface dialog, int which) {
+                                String inputValue = ET.getText().toString();
+                                Cursor cursor = mDBHelper.selectAllMember();
+                                TextView storeName = findViewById(R.id.storeName);
+                                String member_id = "";
 
-                                final EditText ET = new EditText(MainActivity.this);
-                                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-                                dialog.setTitle("인원 수 설정");
-                                dialog.setMessage("인원 수");
-                                dialog.setView(ET);
+                                while(cursor.moveToNext()){
+                                    member_id = cursor.getString(0);
+                                }
+                                final String MEMBER = member_id;
+                                NetworkTask networkTask = new NetworkTask("Mem_issue_ticket") {
 
-                                // 확인 버튼 이벤트
-                                dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                };
+                                SendDataSet sds1 = new SendDataSet("member_id", member_id);
+                                SendDataSet sds2 = new SendDataSet("the_number", inputValue);
+                                SendDataSet sds3 = new SendDataSet("license_number", LICENSE);
+                                networkTask.execute(sds1, sds2, sds3);
+                                Toast.makeText(MainActivity.this, inputValue + "명 입력되었습니다.", Toast.LENGTH_SHORT).show();
+
+                                JsonArrayTask jat = new JsonArrayTask("MyTicket"){
                                     @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        String inputValue = ET.getText().toString();
-                                        Cursor cursor = mDBHelper.selectAllMember();
-                                        TextView storeName = findViewById(R.id.storeName);
-                                        String member_id = "";
-
-                                        while(cursor.moveToNext()){
-                                            member_id = cursor.getString(0);
+                                    protected void onPostExecute(JSONArray jsonArray) {
+                                        super.onPostExecute(jsonArray);
+                                        try{
+                                            mDBHelper.insertTicket(new JSONArray(jsonArray.get(0).toString()));
+                                            Log.e("myTicket", jsonArray.get(0).toString());
+                                            Intent numInfoIntent = new Intent(MainActivity.this, NumInfoActivity.class);
+                                            numInfoIntent.putExtra("member_id", MEMBER);
+                                            numInfoIntent.putExtra("storename",STORE_NAME);
+                                            numInfoIntent.putExtra("license", LICENSE);
+                                            startActivity(numInfoIntent);
+                                            finish();
+                                        } catch (JSONException e){
+                                            e.printStackTrace();
                                         }
-                                        final String MEMBER = member_id;
-                                        NetworkTask networkTask = new NetworkTask("Mem_issue_ticket") {
-
-                                        };
-                                        SendDataSet sds1 = new SendDataSet("member_id", member_id);
-                                        SendDataSet sds2 = new SendDataSet("the_number", inputValue);
-                                        SendDataSet sds3 = new SendDataSet("license_number", LICENSE);
-                                        networkTask.execute(sds1, sds2, sds3);
-                                        Toast.makeText(MainActivity.this, inputValue + "명 입력되었습니다.", Toast.LENGTH_SHORT).show();
-
-                                        JsonArrayTask jat = new JsonArrayTask("MyTicket"){
-                                            @Override
-                                            protected void onPostExecute(JSONArray jsonArray) {
-                                                super.onPostExecute(jsonArray);
-                                                try{
-                                                    mDBHelper.insertTicket(new JSONArray(jsonArray.get(0).toString()));
-                                                    Log.e("myTicket", jsonArray.get(0).toString());
-                                                    Intent numInfoIntent = new Intent(MainActivity.this, NumInfoActivity.class);
-                                                    numInfoIntent.putExtra("member_id", MEMBER);
-                                                    numInfoIntent.putExtra("storename",STORE_NAME);
-                                                    numInfoIntent.putExtra("license", LICENSE);
-                                                    startActivity(numInfoIntent);
-                                                    finish();
-                                                } catch (JSONException e){
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                        };
-                                        SendDataSet sds5 = new SendDataSet("member_id", member_id);
-                                        SendDataSet sds6 = new SendDataSet("license_number", LICENSE);
-                                        jat.execute(sds5,sds6);
-
-
                                     }
-                                });
+                                };
+                                SendDataSet sds5 = new SendDataSet("member_id", member_id);
+                                SendDataSet sds6 = new SendDataSet("license_number", LICENSE);
+                                jat.execute(sds5,sds6);
 
-                                //취소 버튼 이벤트
-                                dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.cancel();
-                                    }
-                                });
-                                dialog.show();
 
                             }
                         });
 
-                        storeItemClicked(idx, view);
+                        //취소 버튼 이벤트
+                        dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        dialog.show();
 
-                        return view;
                     }
-                };
+                });
 
-                storeListView.setAdapter(storeAdapter);
+                storeItemClicked(idx, view);
 
-                return true;
+                return view;
             }
+        };
 
-        });
+        storeListView.setAdapter(storeAdapter);
+
+        return true;
+    }
+
+});
         return true;
     }
 
