@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -46,7 +47,8 @@ public class StoreManageActivity extends AppCompatActivity {
     private DBOpenHelper mDBHelper;
     private ArrayList<StoreMenuVO> menuList;
     private String store_time, store_time2, license_number, max_number, title, store_intro;
-    private ImageButton TimeUpdate_button, MaxnumUpdate_button, IntroUpdate_button;
+    private ImageButton TimeUpdate_button, MaxnumUpdate_button, IntroUpdate_button, menu_update;
+    private StoreMenuAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +68,6 @@ public class StoreManageActivity extends AppCompatActivity {
         TabHost();
         TimeSet();
         selectStoreMenu(license_number);// 메뉴 정보를 가져옴
-        Log.e("dddd", menuList.toString());
         setMenuList(); // 메뉴 리스트 화면에 그리기
         //toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -74,6 +75,28 @@ public class StoreManageActivity extends AppCompatActivity {
         //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0x00FFFFFF));
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        menuUpdClicked();
+    }
+
+    private void menuUpdClicked() {
+        RecyclerView rv = findViewById(R.id.menu_list);
+        rv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("ddd", "dfdf");
+            }
+        });
+//        menu_update = findViewById(R.id.menu_update);
+//        Log.e("ddd1", menu_update.getHeight()+"");
+//
+//        menu_update.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.e("ddd2", "2");
+////                Map<String, String> childmap = adapter.getChildItem();
+////                Log.e("ddd", childmap.get("menu_code") + ", " + childmap.get("menu_name"));
+//            }
+//        });
     }
 
     private void setMenuList() {
@@ -81,7 +104,7 @@ public class StoreManageActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ArrayList<StoreMenuTitle> menuTitles = new ArrayList<>();
-        ArrayList<StoreMenuItem> menuItems;
+        ArrayList<StoreMenuItem> menuItems = null;
         StoreMenuTitle menuTitle;
         StoreMenuVO storeMenuVO;
         Map<String,ArrayList<StoreMenuItem>> menuHash = new HashMap<>();
@@ -92,7 +115,6 @@ public class StoreManageActivity extends AppCompatActivity {
             String[] categorie;
             storeMenuVO = menuList.get(i);
             categorie = storeMenuVO.getMenu_name().split("-");
-            Log.e("ddd vo", storeMenuVO.toString());
 
             if( menuHash.get(categorie[0]) == null) {
                 menuItems = new ArrayList<>();
@@ -100,13 +122,12 @@ public class StoreManageActivity extends AppCompatActivity {
             }
 
             menuItems = menuHash.get(categorie[0]);
-            menuItems.add(new StoreMenuItem(storeMenuVO));// store menu item 추가
+            menuItems.add(new StoreMenuItem(storeMenuVO, this));// store menu item 추가
             menuHash.put(categorie[0], menuItems);
-
         }
 
         set = menuHash.keySet();// menuHash key 가져오기
-        iterator = set.iterator();
+        iterator = set.iterator(); // 반복문에서 set.size()와 비슷한 이유로 사용
 
         while(iterator.hasNext()) {
             String key = (String) iterator.next();
@@ -116,6 +137,7 @@ public class StoreManageActivity extends AppCompatActivity {
 
         StoreMenuAdapter adapter = new StoreMenuAdapter(menuTitles);
         recyclerView.setAdapter(adapter);
+
     }
 
     private void selectStoreMenu(String license_number) {

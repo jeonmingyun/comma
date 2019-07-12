@@ -1,5 +1,6 @@
 package com.org.ticketzone.app_mem.expandableRecyclerview;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -21,4 +22,5 @@ public class MenuItemViewHolder extends ChildViewHolder {
         menu_name.setText(item.menu_name);
         menu_price.setText(item.menu_price);
     }
+
 }
