@@ -16,14 +16,14 @@ public class MenuTitleViewHolder extends GroupViewHolder {
 
     private TextView title;
     private ImageView arrow;
-    private ImageButton menu_insert;
+//    private ImageButton menu_insert;
 
     public MenuTitleViewHolder(View itemView) {
         super(itemView);
 
         title = itemView.findViewById(R.id.title);
         arrow = itemView.findViewById(R.id.arrow);
-        menu_insert = itemView.findViewById(R.id.menu_insert);
+//        menu_insert = itemView.findViewById(R.id.menu_insert);
     }
 
     public void bind(StoreMenuTitle menuTitle) {
