@@ -277,6 +277,21 @@ public class DBOpenHelper extends SQLiteOpenHelper{
         return member_list;
     }
 
+    public Cursor selectCategorie() {
+        mdb = this.getReadableDatabase();
+        String sql = "select * from categorie where cate_code like 'F' || '%'";
+        Cursor member_list = mdb.rawQuery(sql, null);
+
+        return member_list;
+    }
+
+    public Cursor selectCateSearch(String cate_code){
+        mdb = this.getReadableDatabase();
+        Cursor store_list = mdb.rawQuery("select * from store where cate_code = ?", new String[] {cate_code});
+
+        return store_list;
+    }
+
     public void insertCategorie(JSONArray categorieList) {
         mdb = this.getWritableDatabase();
 
