@@ -1,6 +1,7 @@
-package com.org.ticketzone.app_mem.task;
+package noneMem.ticketzone.org.com.task;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,7 +34,7 @@ public class NetworkTask extends AsyncTask<SendDataSet, Void, String> {
             for (int i = 0; i < strings.length; i++) {
                 jobj.put(strings[i].key, strings[i].value);
             }
-
+            Log.e("ddd",path);
             /* 서버연결 */
             URL url = new URL(path);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
