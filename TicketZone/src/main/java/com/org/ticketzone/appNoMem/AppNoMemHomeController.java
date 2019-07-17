@@ -15,11 +15,11 @@ import lombok.AllArgsConstructor;
 public class AppNoMemHomeController {
    
    @ResponseBody
-   @RequestMapping(value = "/test9", method = RequestMethod.POST)
-   public String test(@RequestBody OwnerVO o ) {
-      System.out.println(o.getOwner_id());
+   @RequestMapping(value = "/nomemTicket", method = RequestMethod.POST)
+   public String nomemTicket(@RequestBody OwnerVO o ) {
+      System.out.println("dddddd");
 
-      return o.getOwner_id() +"app";
+      return "³Ñ¾î¿Í";
    }
    
 }
