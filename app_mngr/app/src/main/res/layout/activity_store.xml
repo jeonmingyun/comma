@@ -477,18 +477,51 @@
                                 android:background="@color/white"
                                 android:src="@drawable/right" />
                         </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp"
+                            android:background="@drawable/textlines3"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="방문자수"
+                                android:textSize="20dp"/>
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/lineChart"
                             android:layout_width="match_parent"
                             android:layout_height="250dp"/>
-                        <com.github.mikephil.charting.charts.BarChart
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp"
+                            android:background="@drawable/textlines3"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="부재자수"
+                                android:textSize="20dp"/>
+                            <com.github.mikephil.charting.charts.BarChart
                             android:id="@+id/chart"
                             android:layout_width="match_parent"
                             android:layout_height="250dp" />
-                        <com.github.mikephil.charting.charts.PieChart
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp"
+                            android:background="@drawable/textlines3"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="연령대별"
+                                android:textSize="20dp"/>
+                            <com.github.mikephil.charting.charts.PieChart
                             android:id="@+id/piechart"
                             android:layout_width="match_parent"
                             android:layout_height="250dp"/>
+                        </LinearLayout>
                     </LinearLayout>
                 </FrameLayout>
             </LinearLayout>
