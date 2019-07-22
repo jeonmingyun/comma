@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,11 +37,13 @@ public class MainActivity extends AppCompatActivity {
     private Button tel7;
     private Button tel8;
     private Button tel9;
-    private Button del;
+    private ImageButton del;
     private Button tel0;
-    private Button send;
+    private ImageButton send;
     private TextView teltext, textview4;
     private String txt;
+    private String wait_number = "";
+    private String returnTeam = "";
 
     private class CallButtonClick implements View.OnClickListener{
 
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         textview4 = findViewById(R.id.textView4);
         tel0 = findViewById(R.id.tel0);
         tel1 = findViewById(R.id.tel1);
@@ -193,7 +197,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
+        NetworkTask networkTask2 = new NetworkTask("waitTeam"){
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                wait_number = s;
+                textview4.setText(wait_number + "팀");
+            }
+        };
+        networkTask2.execute();
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -212,18 +224,29 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         teltext.setText("");
                         String textTxt = textview4.getText().toString().replaceAll("팀", "");
-                        textview4.setText(Integer.parseInt(textTxt)+1 + "팀");
-                        Toast.makeText(MainActivity.this, teltext_full + "님 번호표가 발급되었습니다.", Toast.LENGTH_SHORT).show();
+//                        textview4.setText(Integer.parseInt(textTxt)+1 + "팀");
+
                         NetworkTask net = new NetworkTask("nomemTicket"){
                             @Override
                             protected void onPostExecute(String s) {
                                 super.onPostExecute(s);
-                                Toast.makeText(MainActivity.this, "df"+s, Toast.LENGTH_SHORT).show();
+                                String tel = teltext_full.replaceAll("[^0-9]", "");
+                                returnTeam = s;
+                                textview4.setText(s + "팀");
+                                Toast.makeText(MainActivity.this, teltext_full + "님 번호표가 발급되었습니다.", Toast.LENGTH_SHORT).show();
+
+                                NetworkTask send_message_task = new NetworkTask("SMS_Service") {
+
+                                };
+                                SendDataSet alarm_content = new SendDataSet("alarm_content", "고객님의 번호표가 정상적으로 발급되었습니다.");
+                                SendDataSet order_ph = new SendDataSet("order_ph", tel);
+                                send_message_task.execute(alarm_content, order_ph);
                             }
                         };
-                        SendDataSet sds1 = new SendDataSet("num",ET.getText().toString());
-                        SendDataSet sds2 = new SendDataSet("phone_number", teltext_full);
-                        net.execute(sds1);
+                        SendDataSet sds1 = new SendDataSet("the_number",ET.getText().toString());
+                        SendDataSet sds2 = new SendDataSet("member_id", teltext_full);
+                        SendDataSet sds3 = new SendDataSet("license_number", "1112244444");
+                        net.execute(sds1,sds2, sds3);
                     }
                 });
                 dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {

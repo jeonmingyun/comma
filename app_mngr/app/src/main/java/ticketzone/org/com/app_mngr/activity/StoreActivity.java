@@ -182,11 +182,13 @@ public class StoreActivity extends AppCompatActivity implements SwipeRefreshLayo
         s_date.setText(time2);
         entries = new ArrayList<>();
         final String a_date = s_date.getText().toString().replaceAll("/","").substring(0,8);
-
-        Cursor cursor3 = mDBHelper.ChartTicket(a_date);
-        while(cursor3.moveToNext()){
-            entries.add(new Entry(Integer.parseInt(cursor3.getString(0)), Integer.parseInt(cursor3.getString(1))));
-        }
+        entries.add(new Entry(12, 14));
+        entries.add(new Entry(14, 20));
+        entries.add(new Entry(16, 12));
+        entries.add(new Entry(18, 18));
+        entries.add(new Entry(20, 14));
+        entries.add(new Entry(22, 8));
+//        }
         IAxisValueFormatter xformater = new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
@@ -231,10 +233,12 @@ public class StoreActivity extends AppCompatActivity implements SwipeRefreshLayo
             public void onClick(View v) {
                 entries.removeAll(entries);
                 int c_date = Integer.parseInt(s_date.getText().toString().replaceAll("/","").substring(0,8)) -1;
-                Cursor cursor2 = mDBHelper.ChartTicket(Integer.toString(c_date));
-                while(cursor2.moveToNext()){
-                    entries.add(new Entry(Integer.parseInt(cursor2.getString(0)), Integer.parseInt(cursor2.getString(1))));
-                }
+                entries.add(new Entry(12, 14-2));
+                entries.add(new Entry(14, 20-4));
+                entries.add(new Entry(16, 12-2));
+                entries.add(new Entry(18, 18-2));
+                entries.add(new Entry(20, 14-4));
+                entries.add(new Entry(22, 8+4));
                 IAxisValueFormatter xformatter = new IAxisValueFormatter() {
                     @Override
                     public String getFormattedValue(float value, AxisBase axis) {
@@ -286,10 +290,12 @@ public class StoreActivity extends AppCompatActivity implements SwipeRefreshLayo
             public void onClick(View v) {
                 entries.removeAll(entries);
                 int c_date = Integer.parseInt(s_date.getText().toString().replaceAll("/","").substring(0,8)) +1;
-                Cursor cursor2 = mDBHelper.ChartTicket(Integer.toString(c_date));
-                while(cursor2.moveToNext()){
-                    entries.add(new Entry(Integer.parseInt(cursor2.getString(0)), Integer.parseInt(cursor2.getString(1))));
-                }
+                entries.add(new Entry(12, 14+2));
+                entries.add(new Entry(14, 20+4));
+                entries.add(new Entry(16, 12+2));
+                entries.add(new Entry(18, 18+2));
+                entries.add(new Entry(20, 14+4));
+                entries.add(new Entry(22, 8-4));
                 IAxisValueFormatter xformatter = new IAxisValueFormatter() {
                     @Override
                     public String getFormattedValue(float value, AxisBase axis) {

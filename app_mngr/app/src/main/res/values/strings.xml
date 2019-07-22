@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">번호요</string>
+    <string name="app_name">번호요-관리자</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_maps2">Map</string>
     <string name="title_activity_store">StoreActivity</string>

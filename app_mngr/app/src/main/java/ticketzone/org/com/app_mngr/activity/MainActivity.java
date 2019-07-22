@@ -96,20 +96,20 @@ public class MainActivity extends AppCompatActivity {
                 while (cursor.moveToNext()){
                     member_id = cursor.getString(0);
                 }
-                NetworkTask networkTask = new NetworkTask("success_ticket"){
+                NetworkTask networkTask = new NetworkTask("mem_send_fcm") {
                 };
-                SendDataSet sds = new SendDataSet("license_number", license_number.get(viewPager_position));
 
-                networkTask.execute(sds);
+                SendDataSet sds = new SendDataSet("license_number", license_number.get(viewPager_position));
+                SendDataSet sds2 = new SendDataSet("member_id", member_id);
+                networkTask.execute(sds2,sds);
+
                 mDBHelper.successTicket(license_number.get(viewPager_position));
                 mDBHelper.successStatus(license_number.get(viewPager_position));
                 Log.e("2",license_number.get(viewPager_position));
                 Toast.makeText(MainActivity.this, "다음고객님을 호출했습니다.", Toast.LENGTH_SHORT).show();
-                networkTask = new NetworkTask("mem_send_fcm") {
+                networkTask = new NetworkTask("success_ticket"){
                 };
-
-                SendDataSet sds2 = new SendDataSet("member_id", member_id);
-                networkTask.execute(sds2,sds);
+                networkTask.execute(sds);
 
             }
         });

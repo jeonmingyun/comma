@@ -254,19 +254,19 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
     public Cursor selectWating(String license_number){
          mngrdb = this.getWritableDatabase();
-        Cursor member_list = mngrdb.rawQuery("select count(ticket_code) || '팀' as ticket_code from numberticket where ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ? and ticket_status = 0", new String[] {license_number});
+        Cursor member_list = mngrdb.rawQuery("select count(ticket_code) || '팀' as ticket_code from numberticket where ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ? and ticket_status in(0,4)", new String[] {license_number});
         return member_list;
     }
 
     public Cursor t_wait(String license_number){
         mngrdb = this.getWritableDatabase();
-        Cursor member_list = mngrdb.rawQuery("select count(string_status) as wait from numberticket where ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ? and ticket_status = 0", new String[] {license_number});
+        Cursor member_list = mngrdb.rawQuery("select count(string_status) as wait from numberticket where ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ? and ticket_status in (0, 4)", new String[] {license_number});
         return  member_list;
     }
 
     public Cursor t_success(String license_number){
         mngrdb = this.getWritableDatabase();
-        Cursor member_list = mngrdb.rawQuery("select count(string_status) as success from numberticket where ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ? and ticket_status = 1", new String[] {license_number});
+        Cursor member_list = mngrdb.rawQuery("select count(string_status) as success from numberticket where ticket_code like strftime('%Y%m%d', 'now') || '%' and license_number = ? and ticket_status = 1 ", new String[] {license_number});
         return  member_list;
     }
 
@@ -294,7 +294,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 "from numberticket\n" +
                 "where ticket_code like strftime('%Y%m%d', 'now') || '%' \n" +
                 "and license_number = ?\n" +
-                "and ticket_status = 0\n" +
+                "and ticket_status in(0,4)\n" +
                 "order by ticket_code", new String[] {license_number});
         return member_list;
     }
@@ -371,6 +371,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         + "when ticket_status = 1 then wait_number\n"
         + "when ticket_status = 2 then 0\n"
         + "when ticket_status = 3 then 0\n"
+                + "when ticket_status = 4 then 0\n"
         + "else wait_number end\n"
         + "where ticket_code like strftime('%Y%m%d', 'now') || ? || '%'";
         mngrdb.execSQL(sqlUpdate, new String[] {license_number});
@@ -384,6 +385,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 +"when wait_number = 0 then 1\n"
 		    +"else ticket_status end, string_status =\n"
         +"case when ticket_status = 1 then 'success'\n"
+                +"when ticket_status = 4 then 'success'\n"
 		+"else string_status end\n"
         +"where ticket_code like strftime('%Y%m%d', 'now') || ? || '%'\n"
         +"and ticket_status not in(2,3)";
