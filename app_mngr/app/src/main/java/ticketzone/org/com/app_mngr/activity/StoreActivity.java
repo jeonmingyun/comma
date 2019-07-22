@@ -4,11 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
-
-import android.provider.CalendarContract;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,24 +20,28 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.IValueFormatter;
-import com.github.mikephil.charting.utils.ViewPortHandler;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import ticketzone.org.com.app_mngr.R;
@@ -53,6 +52,8 @@ import ticketzone.org.com.app_mngr.vo.NumberTicketVO;
 
 public class StoreActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     private LineChart lineChart;
+    private BarChart chart;
+    private PieChart pieChart;
     private List<Entry> entries;
     private List<NumberTicketVO> waitList, absenceList;
     private TextView store_name, wait_count, t_wait, t_success, t_absence, t_cancel, s_date;
@@ -174,164 +175,258 @@ public class StoreActivity extends AppCompatActivity implements SwipeRefreshLayo
         ticket_cancel.moveToNext();
         t_cancel.setText(ticket_cancel.getString(0));
 
-        lineChart = findViewById(R.id.chart);
-        /* 라인차트 */
-        SimpleDateFormat format2 = new SimpleDateFormat ( "yyyy/MM/dd");
-        Date time = new Date();
-        String time2 = format2.format(time);
-        s_date.setText(time2);
-        entries = new ArrayList<>();
-        final String a_date = s_date.getText().toString().replaceAll("/","").substring(0,8);
+        chart = (BarChart) findViewById(R.id.chart);
 
-        Cursor cursor3 = mDBHelper.ChartTicket(a_date);
-        while(cursor3.moveToNext()){
-            entries.add(new Entry(Integer.parseInt(cursor3.getString(0)), Integer.parseInt(cursor3.getString(1))));
-        }
-        IAxisValueFormatter xformater = new IAxisValueFormatter() {
+        ArrayList<BarEntry> bargroup1 = new ArrayList<>();
+            bargroup1.add(new BarEntry(0f, 8f));
+            bargroup1.add(new BarEntry(1f, 2f));
+            bargroup1.add(new BarEntry(2f, 5f));
+            bargroup1.add(new BarEntry(3f, 20f));
+            bargroup1.add(new BarEntry(4f, 15f));
+            bargroup1.add(new BarEntry(5f, 19f));
+
+        ArrayList<BarEntry> bargroup2 = new ArrayList<>();
+        bargroup2.add(new BarEntry(0f, 6f));
+        bargroup2.add(new BarEntry(1f, 10f));
+        bargroup2.add(new BarEntry(2f, 5f));
+        bargroup2.add(new BarEntry(3f, 25f));
+        bargroup2.add(new BarEntry(4f, 4f));
+        bargroup2.add(new BarEntry(5f, 17f));
+
+        BarDataSet barDataSet1 = new BarDataSet(bargroup1,"Bar Group 1");
+        barDataSet1.setColors(ColorTemplate.COLORFUL_COLORS);
+
+        BarDataSet barDataSet2 = new BarDataSet(bargroup2,"Bar Group 2");
+        barDataSet2.setColors(ColorTemplate.COLORFUL_COLORS);
+
+
+        final ArrayList<String> labels = new ArrayList<String>();
+            labels.add("2011");
+            labels.add("2012");
+            labels.add("2013");
+            labels.add("2014");
+            labels.add("2015");
+            labels.add("2016");
+
+
+        ArrayList<IBarDataSet> dataSets = new ArrayList<>();
+            dataSets.add(barDataSet1);
+            dataSets.add(barDataSet2);
+
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setGranularity(1f);
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                return (int)value + "시";
+                return labels.get((int) value);
             }
-        };
-        IAxisValueFormatter yformatter = new IAxisValueFormatter() {
-            @Override
-            public String getFormattedValue(float value, AxisBase axis) {
-                return (int)value + "명";
-            }
-        };
-        IValueFormatter iValueFormatter = new IValueFormatter() {
-            @Override
-            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
-                return (int)value + "명";
-            }
-        };
-        XAxis xAxis = lineChart.getXAxis();
+        });
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setTextSize(13.0f);
-        xAxis.setValueFormatter(xformater);
-        YAxis yAxisRight = lineChart.getAxisRight();
-        YAxis yAxisLeft = lineChart.getAxisLeft();
-        yAxisRight.setDrawLabels(false);
-        yAxisRight.setDrawAxisLine(false);
-        yAxisRight.setDrawGridLines(false);
-        yAxisLeft.setTextSize(13.0f);
-        yAxisLeft.setValueFormatter(yformatter);
-        LineDataSet dataset = new LineDataSet(entries, "명");
-        dataset.setValueFormatter(iValueFormatter);
-        LineData data = new LineData(dataset);
-        dataset.setColor(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
-        dataset.setCircleColor(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
-        dataset.setValueTextSize(10.0f);
-        dataset.setLineWidth(3);
-        lineChart.setData(data);
-        lineChart.animateY(1000);
-        //감소
-        prev.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                entries.removeAll(entries);
-                int c_date = Integer.parseInt(s_date.getText().toString().replaceAll("/","").substring(0,8)) -1;
-                Cursor cursor2 = mDBHelper.ChartTicket(Integer.toString(c_date));
-                while(cursor2.moveToNext()){
-                    entries.add(new Entry(Integer.parseInt(cursor2.getString(0)), Integer.parseInt(cursor2.getString(1))));
-                }
-                IAxisValueFormatter xformatter = new IAxisValueFormatter() {
-                    @Override
-                    public String getFormattedValue(float value, AxisBase axis) {
-                        return (int)value + "시";
-                    }
-                };
-                IAxisValueFormatter yformatter = new IAxisValueFormatter() {
-                    @Override
-                    public String getFormattedValue(float value, AxisBase axis) {
-                        return (int)value + "명";
-                    }
-                };
-                IValueFormatter iValueFormatter = new IValueFormatter() {
-                    @Override
-                    public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
-                        return (int)value + "명";
-                    }
-                };
-                XAxis xAxis = lineChart.getXAxis();
-                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-                xAxis.setTextSize(13.0f);
-                xAxis.setValueFormatter(xformatter);
-                YAxis yAxisRight = lineChart.getAxisRight();
-                YAxis yAxisLeft = lineChart.getAxisLeft();
-                yAxisRight.setDrawLabels(false);
-                yAxisRight.setDrawAxisLine(false);
-                yAxisRight.setDrawGridLines(false);
-                yAxisLeft.setTextSize(13.0f);
-                yAxisLeft.setValueFormatter(yformatter);
-                LineDataSet dataset = new LineDataSet(entries, "명");
-                dataset.setValueFormatter(iValueFormatter);
-                LineData data = new LineData(dataset);
-                dataset.setColor(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
-                dataset.setCircleColor(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
-                dataset.setValueTextSize(10.0f);
-                dataset.setLineWidth(3);
 
-                lineChart.setData(data);
-                lineChart.animateY(1000);
-                SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy/MM/dd(E)");
-                Calendar cal = Calendar.getInstance();
+        BarData data = new BarData(barDataSet1, barDataSet2);
+        data.setBarWidth(0.9f); // set custom bar width
+        chart.setData(data);
+        chart.getLegend().setEnabled(false);
+        chart.setFitBars(true); // make the x-axis fit exactly all bars
+        chart.invalidate(); // refresh
 
-                s_date.setText(Integer.toString(c_date).substring(0,4) + "/" + Integer.toString(c_date).substring(4,6) + "/" +  Integer.toString(c_date).substring(6,8));
-            }
-        });
-        //증가
-        next.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                entries.removeAll(entries);
-                int c_date = Integer.parseInt(s_date.getText().toString().replaceAll("/","").substring(0,8)) +1;
-                Cursor cursor2 = mDBHelper.ChartTicket(Integer.toString(c_date));
-                while(cursor2.moveToNext()){
-                    entries.add(new Entry(Integer.parseInt(cursor2.getString(0)), Integer.parseInt(cursor2.getString(1))));
-                }
-                IAxisValueFormatter xformatter = new IAxisValueFormatter() {
-                    @Override
-                    public String getFormattedValue(float value, AxisBase axis) {
-                        return (int)value + "시";
-                    }
-                };
-                IAxisValueFormatter yformatter = new IAxisValueFormatter() {
-                    @Override
-                    public String getFormattedValue(float value, AxisBase axis) {
-                        return (int)value + "명";
-                    }
-                };
-                IValueFormatter iValueFormatter = new IValueFormatter() {
-                    @Override
-                    public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
-                        return (int)value + "명";
-                    }
-                };
-                XAxis xAxis = lineChart.getXAxis();
-                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-                xAxis.setTextSize(13.0f);
-                xAxis.setValueFormatter(xformatter);
-                YAxis yAxisRight = lineChart.getAxisRight();
-                YAxis yAxisLeft = lineChart.getAxisLeft();
-                yAxisRight.setDrawLabels(false);
-                yAxisRight.setDrawAxisLine(false);
-                yAxisRight.setDrawGridLines(false);
-                yAxisLeft.setTextSize(13.0f);
-                yAxisLeft.setValueFormatter(yformatter);
-                LineDataSet dataset = new LineDataSet(entries, "명");
-                dataset.setValueFormatter(iValueFormatter);
-                LineData data = new LineData(dataset);
-                dataset.setColor(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
-                dataset.setCircleColor(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
-                dataset.setValueTextSize(10.0f);
-                dataset.setLineWidth(3);
-                lineChart.setData(data);
-                lineChart.animateY(1000);
+        pieChart = findViewById(R.id.piechart);
 
-                s_date.setText(Integer.toString(c_date).substring(0,4) + "/" + Integer.toString(c_date).substring(4,6) + "/" +  Integer.toString(c_date).substring(6,8));
-            }
-        });
+        pieChart.setUsePercentValues(true);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setExtraOffsets(5,10,5,5);
+
+        pieChart.setDragDecelerationFrictionCoef(0.95f);
+
+        pieChart.setDrawHoleEnabled(false);
+        pieChart.setHoleColor(Color.WHITE);
+        pieChart.setTransparentCircleRadius(61f);
+
+        ArrayList<PieEntry> yValues = new ArrayList<PieEntry>();
+
+        yValues.add(new PieEntry(34f,"dd"));
+        yValues.add(new PieEntry(23f,"dw"));
+        yValues.add(new PieEntry(14f,"de"));
+        yValues.add(new PieEntry(35f,"ds"));
+        yValues.add(new PieEntry(40f,"da"));
+        yValues.add(new PieEntry(40f,"df"));
+
+        Description description = new Description();
+        description.setText("네넵");
+        description.setTextSize(15);
+        pieChart.setDescription(description);
+
+        pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
+
+        PieDataSet dataSet = new PieDataSet(yValues, "ddddd");
+        dataSet.setSliceSpace(3f);
+        dataSet.setSelectionShift(5f);
+        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+
+        PieData data1 = new PieData((dataSet));
+        data1.setValueTextSize(10f);
+        data1.setValueTextColor(Color.YELLOW);
+
+        pieChart.setData(data1);
+//        lineChart = findViewById(R.id.chart);
+//        /* 라인차트 */
+//        SimpleDateFormat format2 = new SimpleDateFormat ( "yyyy/MM/dd");
+//        Date time = new Date();
+//        String time2 = format2.format(time);
+//        s_date.setText(time2);
+//        entries = new ArrayList<>();
+//        final String a_date = s_date.getText().toString().replaceAll("/","").substring(0,8);
+//
+//        Cursor cursor3 = mDBHelper.ChartTicket(a_date);
+//        while(cursor3.moveToNext()){
+//            entries.add(new Entry(Integer.parseInt(cursor3.getString(0)), Integer.parseInt(cursor3.getString(1))));
+//        }
+//        IAxisValueFormatter xformater = new IAxisValueFormatter() {
+//            @Override
+//            public String getFormattedValue(float value, AxisBase axis) {
+//                return (int)value + "시";
+//            }
+//        };
+//        IAxisValueFormatter yformatter = new IAxisValueFormatter() {
+//            @Override
+//            public String getFormattedValue(float value, AxisBase axis) {
+//                return (int)value + "명";
+//            }
+//        };
+//        IValueFormatter iValueFormatter = new IValueFormatter() {
+//            @Override
+//            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+//                return (int)value + "명";
+//            }
+//        };
+//        XAxis xAxis = lineChart.getXAxis();
+//        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+//        xAxis.setTextSize(13.0f);
+//        xAxis.setValueFormatter(xformater);
+//        YAxis yAxisRight = lineChart.getAxisRight();
+//        YAxis yAxisLeft = lineChart.getAxisLeft();
+//        yAxisRight.setDrawLabels(false);
+//        yAxisRight.setDrawAxisLine(false);
+//        yAxisRight.setDrawGridLines(false);
+//        yAxisLeft.setTextSize(13.0f);
+//        yAxisLeft.setValueFormatter(yformatter);
+//        LineDataSet dataset = new LineDataSet(entries, "명");
+//        dataset.setValueFormatter(iValueFormatter);
+//        LineData data = new LineData(dataset);
+//        dataset.setColor(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
+//        dataset.setCircleColor(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
+//        dataset.setValueTextSize(10.0f);
+//        dataset.setLineWidth(3);
+//        lineChart.setData(data);
+//        lineChart.animateY(1000);
+//        //감소
+//        prev.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                entries.removeAll(entries);
+//                int c_date = Integer.parseInt(s_date.getText().toString().replaceAll("/","").substring(0,8)) -1;
+//                Cursor cursor2 = mDBHelper.ChartTicket(Integer.toString(c_date));
+//                while(cursor2.moveToNext()){
+//                    entries.add(new Entry(Integer.parseInt(cursor2.getString(0)), Integer.parseInt(cursor2.getString(1))));
+//                }
+//                IAxisValueFormatter xformatter = new IAxisValueFormatter() {
+//                    @Override
+//                    public String getFormattedValue(float value, AxisBase axis) {
+//                        return (int)value + "시";
+//                    }
+//                };
+//                IAxisValueFormatter yformatter = new IAxisValueFormatter() {
+//                    @Override
+//                    public String getFormattedValue(float value, AxisBase axis) {
+//                        return (int)value + "명";
+//                    }
+//                };
+//                IValueFormatter iValueFormatter = new IValueFormatter() {
+//                    @Override
+//                    public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+//                        return (int)value + "명";
+//                    }
+//                };
+//                XAxis xAxis = lineChart.getXAxis();
+//                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+//                xAxis.setTextSize(13.0f);
+//                xAxis.setValueFormatter(xformatter);
+//                YAxis yAxisRight = lineChart.getAxisRight();
+//                YAxis yAxisLeft = lineChart.getAxisLeft();
+//                yAxisRight.setDrawLabels(false);
+//                yAxisRight.setDrawAxisLine(false);
+//                yAxisRight.setDrawGridLines(false);
+//                yAxisLeft.setTextSize(13.0f);
+//                yAxisLeft.setValueFormatter(yformatter);
+//                LineDataSet dataset = new LineDataSet(entries, "명");
+//                dataset.setValueFormatter(iValueFormatter);
+//                LineData data = new LineData(dataset);
+//                dataset.setColor(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
+//                dataset.setCircleColor(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
+//                dataset.setValueTextSize(10.0f);
+//                dataset.setLineWidth(3);
+//
+//                lineChart.setData(data);
+//                lineChart.animateY(1000);
+//                SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy/MM/dd(E)");
+//                Calendar cal = Calendar.getInstance();
+//
+//                s_date.setText(Integer.toString(c_date).substring(0,4) + "/" + Integer.toString(c_date).substring(4,6) + "/" +  Integer.toString(c_date).substring(6,8));
+//            }
+//        });
+//        //증가
+//        next.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                entries.removeAll(entries);
+//                int c_date = Integer.parseInt(s_date.getText().toString().replaceAll("/","").substring(0,8)) +1;
+//                Cursor cursor2 = mDBHelper.ChartTicket(Integer.toString(c_date));
+//                while(cursor2.moveToNext()){
+//                    entries.add(new Entry(Integer.parseInt(cursor2.getString(0)), Integer.parseInt(cursor2.getString(1))));
+//                }
+//                IAxisValueFormatter xformatter = new IAxisValueFormatter() {
+//                    @Override
+//                    public String getFormattedValue(float value, AxisBase axis) {
+//                        return (int)value + "시";
+//                    }
+//                };
+//                IAxisValueFormatter yformatter = new IAxisValueFormatter() {
+//                    @Override
+//                    public String getFormattedValue(float value, AxisBase axis) {
+//                        return (int)value + "명";
+//                    }
+//                };
+//                IValueFormatter iValueFormatter = new IValueFormatter() {
+//                    @Override
+//                    public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+//                        return (int)value + "명";
+//                    }
+//                };
+//                XAxis xAxis = lineChart.getXAxis();
+//                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+//                xAxis.setTextSize(13.0f);
+//                xAxis.setValueFormatter(xformatter);
+//                YAxis yAxisRight = lineChart.getAxisRight();
+//                YAxis yAxisLeft = lineChart.getAxisLeft();
+//                yAxisRight.setDrawLabels(false);
+//                yAxisRight.setDrawAxisLine(false);
+//                yAxisRight.setDrawGridLines(false);
+//                yAxisLeft.setTextSize(13.0f);
+//                yAxisLeft.setValueFormatter(yformatter);
+//                LineDataSet dataset = new LineDataSet(entries, "명");
+//                dataset.setValueFormatter(iValueFormatter);
+//                LineData data = new LineData(dataset);
+//                dataset.setColor(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
+//                dataset.setCircleColor(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
+//                dataset.setValueTextSize(10.0f);
+//                dataset.setLineWidth(3);
+//                lineChart.setData(data);
+//                lineChart.animateY(1000);
+//
+//                s_date.setText(Integer.toString(c_date).substring(0,4) + "/" + Integer.toString(c_date).substring(4,6) + "/" +  Integer.toString(c_date).substring(6,8));
+//            }
+//        });
 
 
         waitList(); // 고객 대기현황 리스트 가져오기
