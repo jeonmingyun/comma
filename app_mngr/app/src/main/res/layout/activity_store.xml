@@ -477,12 +477,18 @@
                                 android:background="@color/white"
                                 android:src="@drawable/right" />
                         </LinearLayout>
-
-
                         <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/lineChart"
+                            android:layout_width="match_parent"
+                            android:layout_height="250dp"/>
+                        <com.github.mikephil.charting.charts.BarChart
                             android:id="@+id/chart"
                             android:layout_width="match_parent"
                             android:layout_height="250dp" />
+                        <com.github.mikephil.charting.charts.PieChart
+                            android:id="@+id/piechart"
+                            android:layout_width="match_parent"
+                            android:layout_height="250dp"/>
                     </LinearLayout>
                 </FrameLayout>
             </LinearLayout>
