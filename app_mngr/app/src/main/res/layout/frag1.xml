@@ -15,8 +15,7 @@
             android:id="@+id/imagebutton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#00FFFFFF"
-            android:src="@drawable/house" />
+            android:background="#00FFFFFF"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

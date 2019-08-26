@@ -590,7 +590,7 @@ public class StoreActivity extends AppCompatActivity implements SwipeRefreshLayo
             wait_num.setText(waitList.get(i).getTicket_code());
             customer.setText(waitList.get(i).getMember_id());
             count.setText(waitList.get(i).getThe_number()+"명");
-            if(waitList.get(i).getTicket_status().equals("0")){
+            if(waitList.get(i).getTicket_status().equals("0") || waitList.get(i).getTicket_status().equals("4")){
                 ticket_status = "대기";
             }
             status.setText(ticket_status);

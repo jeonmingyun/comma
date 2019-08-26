@@ -16,8 +16,8 @@ import java.net.URL;
 
 public class NetworkTask extends AsyncTask<SendDataSet, Void, String> {
 
-//    private String ip = "15.164.115.73"; // 서버 IP
-    private String ip ="39.127.7.45"; //학교 IP번호
+    private String ip = "15.164.115.73"; // 서버 IP
+//    private String ip ="39.127.7.45"; //학교 IP번호
     private String path = "http://"+ip+":8080/"; // 연결할 jsp주소
 
     protected NetworkTask(String url) { this.path += url; }
