@@ -26,7 +26,6 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -219,52 +218,60 @@ public class StoreActivity extends AppCompatActivity implements SwipeRefreshLayo
             }
         };
 
+        /* BarChart */
         chart = (BarChart) findViewById(R.id.chart);
 
-        ArrayList<BarEntry> bargroup1 = new ArrayList<>();
-            bargroup1.add(new BarEntry(0f, 8f));
-            bargroup1.add(new BarEntry(1f, 2f));
-            bargroup1.add(new BarEntry(2f, 5f));
-            bargroup1.add(new BarEntry(3f, 20f));
-            bargroup1.add(new BarEntry(4f, 15f));
-            bargroup1.add(new BarEntry(5f, 19f));
+        ArrayList<BarEntry> bargroup = new ArrayList<>();
+            bargroup.add(new BarEntry(12, 8));
+            bargroup.add(new BarEntry(14, 2));
+            bargroup.add(new BarEntry(16, 5));
+            bargroup.add(new BarEntry(18, 4));
+            bargroup.add(new BarEntry(20, 6));
+            bargroup.add(new BarEntry(22, 4));
 
-        ArrayList<BarEntry> bargroup2 = new ArrayList<>();
-        bargroup2.add(new BarEntry(0f, 6f));
-        bargroup2.add(new BarEntry(1f, 10f));
-        bargroup2.add(new BarEntry(2f, 5f));
-        bargroup2.add(new BarEntry(3f, 25f));
-        bargroup2.add(new BarEntry(4f, 4f));
-        bargroup2.add(new BarEntry(5f, 17f));
-
-        BarDataSet barDataSet1 = new BarDataSet(bargroup1,"Bar Group 1");
-        barDataSet1.setColors(ColorTemplate.COLORFUL_COLORS);
-
-        BarDataSet barDataSet2 = new BarDataSet(bargroup2,"Bar Group 2");
-        barDataSet2.setColors(ColorTemplate.COLORFUL_COLORS);
-
-
-        final ArrayList<String> labels = new ArrayList<String>();
-            labels.add("2011");
-            labels.add("2012");
-            labels.add("2013");
-            labels.add("2014");
-            labels.add("2015");
-            labels.add("2016");
-
+        BarDataSet barDataSet = new BarDataSet(bargroup,"Bar Group 1");
+        barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
 
         ArrayList<IBarDataSet> dataSets = new ArrayList<>();
-            dataSets.add(barDataSet1);
-            dataSets.add(barDataSet2);
+            dataSets.add(barDataSet);
 
-        XAxis xAxis = chart.getXAxis();
-        xAxis.setGranularity(1f);
-        xAxis.setValueFormatter(new IAxisValueFormatter() {
+        XAxis BarxAxis = chart.getXAxis();
+        YAxis BarleftyAxis = chart.getAxisLeft();
+        YAxis BarRightAxis = chart.getAxisRight();
+        BarxAxis.setGranularity(1f);
+        BarxAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                return labels.get((int) value);
+                return (int)value + "시";
             }
         });
+
+        BarleftyAxis.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return (int)value + "명";
+            }
+        });
+
+        BarxAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        BarxAxis.setTextSize(12.0f);
+        BarleftyAxis.setTextSize(13.0f);
+//        BarxAxis.setValueFormatter(xformater);
+        BarRightAxis.setDrawLabels(false);
+        BarRightAxis.setDrawAxisLine(false);
+        BarRightAxis.setDrawGridLines(false);
+        barDataSet.setValueFormatter(iValueFormatter);
+        BarData barData = new BarData(barDataSet);
+        barDataSet.setColor(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
+        barDataSet.setValueTextSize(10.0f);
+        barData.setBarWidth(0.9f); // set custom bar width
+        chart.setData(barData);
+        chart.getLegend().setEnabled(false);
+        chart.setFitBars(true); // make the x-axis fit exactly all bars?
+        chart.invalidate(); // refresh
+        chart.getDescription().setEnabled(false);
+
+        XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setTextSize(13.0f);
         xAxis.setValueFormatter(xformater);
@@ -284,6 +291,7 @@ public class StoreActivity extends AppCompatActivity implements SwipeRefreshLayo
         dataset.setLineWidth(3);
         lineChart.setData(data);
         lineChart.animateY(1000);
+        lineChart.getDescription().setEnabled(false);
         //감소
         prev.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -396,12 +404,7 @@ public class StoreActivity extends AppCompatActivity implements SwipeRefreshLayo
             }
         });
 
-        BarData data2 = new BarData(barDataSet1, barDataSet2);
-        data2.setBarWidth(0.9f); // set custom bar width
-        chart.setData(data2);
-        chart.getLegend().setEnabled(false);
-        chart.setFitBars(true); // make the x-axis fit exactly all bars
-        chart.invalidate(); // refresh
+
 
         pieChart = findViewById(R.id.piechart);
 
@@ -417,24 +420,22 @@ public class StoreActivity extends AppCompatActivity implements SwipeRefreshLayo
 
         ArrayList<PieEntry> yValues = new ArrayList<PieEntry>();
 
-        yValues.add(new PieEntry(34f,"dd"));
-        yValues.add(new PieEntry(23f,"dw"));
-        yValues.add(new PieEntry(14f,"de"));
-        yValues.add(new PieEntry(35f,"ds"));
-        yValues.add(new PieEntry(40f,"da"));
-        yValues.add(new PieEntry(40f,"df"));
+        yValues.add(new PieEntry(20f,"10대"));
+        yValues.add(new PieEntry(30f,"20대"));
+        yValues.add(new PieEntry(30f,"30대"));
+        yValues.add(new PieEntry(10f,"40대"));
+        yValues.add(new PieEntry(10f,"50대"));
 
-        Description description = new Description();
-        description.setText("네넵");
-        description.setTextSize(15);
-        pieChart.setDescription(description);
+//        Description description = new Description();
+//        description.setTextSize(15);
+//        pieChart.setDescription(description);
 
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
 
-        PieDataSet dataSet = new PieDataSet(yValues, "ddddd");
+        PieDataSet dataSet = new PieDataSet(yValues, "");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
-        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
 
         PieData data1 = new PieData((dataSet));
         data1.setValueTextSize(10f);
